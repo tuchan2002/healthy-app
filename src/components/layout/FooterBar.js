@@ -1,20 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import CustomText from "../CustomText";
 
 export default function FooterBar({ activeMenu = "healthy" }) {
   return (
     <View style={styles.container}>
       <View style={styles.option}>
         <AntDesign name="star" size={30} color={activeMenu === "practice" ? "#FFA239" : "#848484"} />
-        <Text style={[styles.text, activeMenu === "practice" && styles.activeText]}>Tập luyện</Text>
+        <CustomText style={[styles.text, activeMenu === "practice" && styles.activeText]}>Tập luyện</CustomText>
       </View>
       <View style={styles.option}>
         <AntDesign name="heart" size={30} color={activeMenu === "healthy" ? "#FFA239" : "#848484"} />
-        <Text style={[styles.text, activeMenu === "healthy" && styles.activeText]}>Sức khỏe</Text>
+        <CustomText style={[styles.text, activeMenu === "healthy" && styles.activeText]}>Sức khỏe</CustomText>
       </View>
       <View style={styles.option}>
         <AntDesign name="user" size={30} color={activeMenu === "user" ? "#FFA239" : "#848484"} />
-        <Text style={[styles.text, activeMenu === "practice" && styles.activeText]}>Người dùng</Text>
+        <CustomText style={[styles.text, activeMenu === "practice" && styles.activeText]}>Người dùng</CustomText>
       </View>
     </View>
   );

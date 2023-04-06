@@ -4,7 +4,7 @@ import HealthyHeaderBar from "../../components/layout/HeathyHeaderBar";
 export default function TargetsSetting() {
     return (
         <Layout>
-            <HealthyHeaderBar title="Cài đặt mục tiêu" />git
+            <HealthyHeaderBar title="Cài đặt mục tiêu" />
         </Layout>
     )
 }
