@@ -6,6 +6,6 @@ export default function CustomText({
   fontFamily = "NunitoSans-Regular",
 }) {
   return (
-      <Text style={[{ fontFamily, }, ...style]}>{ children }</Text>
+    <Text style={[{ fontFamily, fontSize: 16 }, ...style]}>{children}</Text>
   );
 }
