@@ -24,7 +24,7 @@ export default function FooterBar({ activeMenu = "healthy" }) {
           </CustomText>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push("Home")}>
         <View style={styles.option}>
           <AntDesign
             name="heart"
