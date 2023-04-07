@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import MenuIcon from "./MenuIcon";
-import { Ionicons } from "@expo/vector-icons";
 import CustomText from "../CustomText";
+import BackButton from "./BackButton";
 
 export default function HealthyHeaderBar({ title }) {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Ionicons name="chevron-back" size={32} color="black" />
+        <BackButton />
         <CustomText style={[styles.text]} fontFamily="NunitoSans-SemiBold">
           {title}
         </CustomText>
