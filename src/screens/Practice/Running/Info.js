@@ -1,12 +1,15 @@
-import { StyleSheet, View } from "react-native";
+import { PermissionsAndroid, StyleSheet, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import { convertDateToString1 } from "../../../utils/datetime";
+import { useState } from "react";
 
 export default function Info({ info }) {
+  const [todayStepCount, setTodayStepCount] = useState(info.distance);
+
   return (
     <View style={styles.container}>
       <CustomText style={[styles.distanceText]}>
-        {info.distance.toFixed(2)}/
+        {todayStepCount.toFixed(2)}/
         <CustomText style={[{ fontSize: 32, fontFamily: "NunitoSans-Bold" }]}>
           {info.target || "--"}km
         </CustomText>

@@ -1,9 +1,13 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import CustomText from "../../../CustomText";
 
-export default function StartBtn() {
+export default function StartBtn({ disabled, onPress }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      disabled={disabled}
+      onPress={onPress}
+    >
       <CustomText
         style={[{ fontSize: 20, color: "white", textAlign: "center" }]}
       >

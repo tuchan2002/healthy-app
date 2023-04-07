@@ -5,4 +5,5 @@ export default runningInfo = {
   calo: 188,
   createdAt: new Date(2023, 7, 4, 0, 0, 0),
   target: null,
+  isStarted: false,
 };

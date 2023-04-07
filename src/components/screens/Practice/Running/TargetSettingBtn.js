@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import CustomText from "../../../CustomText";
 
-export default function TargetSettingBtn() {
+export default function TargetSettingBtn({ onPress }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <CustomText>Đặt mục tiêu</CustomText>
     </TouchableOpacity>
   );

@@ -9,6 +9,7 @@ import Dialog, {
 } from "react-native-popup-dialog";
 import Input from "../../../Input";
 import TimePicker from "../../../TimePicker";
+import CustomDialog from "../../../CustomDialog";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -55,50 +56,16 @@ function StateDetailBox({
           )}
         </View>
       </View>
-      <Dialog
-        ref={dialogRef}
-        visible={dialogVisibale}
-        dialogAnimation={
-          new SlideAnimation({
-            slideFrom: "bottom",
-          })
-        }
-        dialogTitle={
-          <CustomText
-            fontFamily="NunitoSans-SemiBold"
-            style={[{ fontSize: 20, paddingHorizontal: 24 }]}
-          >
-            {title}
-          </CustomText>
-        }
-        dialogStyle={{
-          backgroundColor: "white",
-          width: (SCREEN_WIDTH / 4) * 3,
-          border: 10,
-          paddingTop: 20,
-        }}
+      <CustomDialog
+        title={title}
+        childrenProps={{ setValue }}
+        visibale={dialogVisibale}
         onTouchOutside={handleCancel}
+        onCancel={handleCancel}
+        onSave={handleSave}
       >
-        <DialogContent style={{ paddingVertical: 12, paddingHorizontal: 24 }}>
-          {cloneElement(children, { setValue })}
-        </DialogContent>
-        <DialogFooter style={styles.dialogFooter}>
-          <TouchableOpacity onPress={handleSave} style={styles.button}>
-            <CustomText style={[styles.buttonText]}>Lưu</CustomText>
-          </TouchableOpacity>
-          <View
-            style={{
-              width: 2,
-              height: 32,
-              backgroundColor: "white",
-              borderRadius: 8,
-            }}
-          ></View>
-          <TouchableOpacity onPress={handleCancel} style={styles.button}>
-            <CustomText style={[styles.buttonText]}>Bỏ qua</CustomText>
-          </TouchableOpacity>
-        </DialogFooter>
-      </Dialog>
+        {children}
+      </CustomDialog>
     </>
   );
 }
@@ -155,22 +122,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     marginHorizontal: 8,
-  },
-  dialogFooter: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: 48,
-    backgroundColor: "rgba(255, 162, 57, 1)",
-  },
-  button: {
-    width: "48%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
   },
 });

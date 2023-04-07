@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import FooterBar from "../components/layout/FooterBar";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,7 +22,6 @@ export default function Layout({ children, activeMenu }) {
   if (!fontsLoaded) {
     return null;
   }
-
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       {children}
