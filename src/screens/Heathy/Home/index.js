@@ -2,19 +2,12 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
-import { FlatGrid } from "react-native-super-grid";
 import styles from "./styles";
 import WorkoutRecord from "./NavigationItem/WorkoutRecord";
 import Target from "./NavigationItem/Target";
 import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 
-const navigationItemList = [
-  <WorkoutRecord distance={2.86} />,
-  <Target />,
-  <Sleep />,
-  <IBMIndex IBMValue={32.25} IBMDescription="Hơi béo" />,
-];
 export default function Home() {
   return (
     <Layout>
@@ -45,17 +38,23 @@ export default function Home() {
 
         <ScrollView
           style={{
-            marginHorizontal: -10,
-            marginTop: -10,
             marginBottom: 60,
           }}
           showsVerticalScrollIndicator={false}
         >
-          <FlatGrid
-            itemDimension={130}
-            data={navigationItemList}
-            renderItem={({ item }) => item}
-          />
+          <View
+            style={{
+              marginBottom: 10,
+              flexDirection: "row",
+            }}
+          >
+            <WorkoutRecord distance={2.86} />
+            <Target />
+          </View>
+          <View style={{ marginBottom: 10, flexDirection: "row" }}>
+            <Sleep />
+            <IBMIndex IBMValue={32.25} IBMDescription="Hơi béo" />
+          </View>
         </ScrollView>
       </View>
     </Layout>

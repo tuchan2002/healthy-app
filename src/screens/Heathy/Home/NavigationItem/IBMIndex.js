@@ -10,7 +10,7 @@ const IBMIndex = ({ IBMValue, IBMDescription }) => {
 
   return (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={[styles.itemContainer, { marginLeft: 5 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("TargetsSetting")}
     >

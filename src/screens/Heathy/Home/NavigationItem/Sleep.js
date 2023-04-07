@@ -10,7 +10,7 @@ const Sleep = () => {
 
   return (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={[styles.itemContainer, { marginRight: 5 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("TargetsSetting")}
     >

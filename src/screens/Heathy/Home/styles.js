@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import color from "../../../constants/color";
 
 const styles = StyleSheet.create({
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 18,
     flexGrow: 1,
+    width: Dimensions.get("window").width / 2 - 18 - 5,
   },
 });
 
