@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import FooterBar from "../components/layout/FooterBar";
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
 
@@ -9,7 +9,8 @@ SplashScreen.preventAutoHideAsync();
 export default function Layout({ children, activeMenu }) {
   const [fontsLoaded] = useFonts({
     "NunitoSans-Regular": require("../assets/fonts/NunitoSans-Regular.ttf"),
-    "NunitoSans-SemiBold": require("../assets/fonts/NunitoSans-SemiBold.ttf")
+    "NunitoSans-SemiBold": require("../assets/fonts/NunitoSans-SemiBold.ttf"),
+    "NunitoSans-Bold": require("../assets/fonts/NunitoSans-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
