@@ -5,6 +5,7 @@ import TargetsSetting from "./src/screens/Heathy/TargetsSetting";
 import WorkoutRecord from "./src/screens/Heathy/WorkoutRecord";
 import Practice from "./src/screens/Practice";
 import User from "./src/screens/User";
+import Login from "./src/screens/Auth/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,12 +16,14 @@ export default function App() {
         screenOptions={{
           headerShown: false,
         }}
+        initialRouteName="Login"
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
         <Stack.Screen name="TargetsSetting" component={TargetsSetting} />
         <Stack.Screen name="Practice" component={Practice} />
         <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
