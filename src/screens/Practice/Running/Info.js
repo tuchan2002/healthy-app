@@ -1,11 +1,29 @@
 import { PermissionsAndroid, StyleSheet, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import { convertDateToString1 } from "../../../utils/datetime";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Pedometer } from "expo-sensors";
 
 export default function Info({ info }) {
   const [todayStepCount, setTodayStepCount] = useState(info.distance);
 
+  subscribe = (setStepCount) => {
+    Pedometer.isAvailableAsync().then(
+      (result) => {
+        const subsription = Pedometer.watchStepCount((results) => {
+          console.log(results);
+          setTodayStepCount(results.steps);
+        });
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  };
+
+  useEffect(() => {
+    subscribe();
+  }, []);
   return (
     <View style={styles.container}>
       <CustomText style={[styles.distanceText]}>

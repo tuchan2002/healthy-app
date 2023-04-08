@@ -4,6 +4,7 @@ import Home from "./src/screens/Heathy/Home";
 import TargetsSetting from "./src/screens/Heathy/TargetsSetting";
 import WorkoutRecord from "./src/screens/Heathy/WorkoutRecord";
 import Practice from "./src/screens/Practice";
+import User from "./src/screens/User";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
         <Stack.Screen name="TargetsSetting" component={TargetsSetting} />
         <Stack.Screen name="Practice" component={Practice} />
+        <Stack.Screen name="User" component={User} />
       </Stack.Navigator>
     </NavigationContainer>
   );
