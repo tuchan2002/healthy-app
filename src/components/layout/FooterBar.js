@@ -38,7 +38,7 @@ export default function FooterBar({ activeMenu = "healthy" }) {
           </CustomText>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push("User")}>
         <View style={styles.option}>
           <AntDesign
             name="user"
