@@ -12,7 +12,7 @@ const WorkoutRecord = ({ distance }) => {
     <TouchableOpacity
       style={[styles.itemContainer, { marginRight: 5 }]}
       activeOpacity={0.5}
-      onPress={() => navigation.navigate("TargetsSetting")}
+      onPress={() => navigation.navigate("WorkoutRecord")}
     >
       <CustomText style={[{ fontSize: 14 }]}>Hồ sơ tập luyện</CustomText>
       <CustomText style={[{ fontSize: 20 }]}>{`${distance}km`}</CustomText>
