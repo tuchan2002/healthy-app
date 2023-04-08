@@ -1,17 +1,10 @@
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../CustomText";
 import { Feather } from "@expo/vector-icons";
-import { cloneElement, useEffect, useRef, useState } from "react";
-import Dialog, {
-  DialogContent,
-  DialogFooter,
-  SlideAnimation,
-} from "react-native-popup-dialog";
+import { useRef, useState } from "react";
 import Input from "../../../Input";
-import TimePicker from "../../../TimePicker";
 import CustomDialog from "../../../CustomDialog";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import TimePicker from "./TimePicker";
 
 function StateDetailBox({
   icon,

@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "./CustomText";
 import { useState } from "react";
 import { convertDate } from "../utils/datetime";
+import { SCREEN_WIDTH } from "../constants/size";
 
 export default function TabsBar({ defaultTab, tabs, onChangeTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab);
@@ -56,11 +57,15 @@ export default function TabsBar({ defaultTab, tabs, onChangeTab }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    display: "flex",
+    alignItems: "center",
+  },
   bar: {
     marginTop: 8,
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
   },
 
   text: {
