@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ScrollView, View } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
@@ -7,8 +7,11 @@ import WorkoutRecord from "./NavigationItem/WorkoutRecord";
 import Target from "./NavigationItem/Target";
 import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
+  const navigation = useNavigation();
+
   return (
     <Layout>
       <View style={styles.container}>
@@ -18,20 +21,28 @@ export default function Home() {
 
         <View style={styles.topContainer}>
           <View>
-            <View style={styles.topCircle}>
+            <TouchableOpacity
+              style={styles.topCircle}
+              onPress={() => navigation.navigate("Footsteps")}
+              activeOpacity={1}
+            >
               <CustomText style={[{ color: "white" }]}>--</CustomText>
               <CustomText style={[{ color: "white" }]}>bước</CustomText>
-            </View>
+            </TouchableOpacity>
 
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
               100 bước
             </CustomText>
           </View>
           <View>
-            <View style={styles.topCircle}>
+            <TouchableOpacity
+              style={styles.topCircle}
+              onPress={() => {}}
+              activeOpacity={1}
+            >
               <CustomText style={[{ color: "white" }]}>--</CustomText>
               <CustomText style={[{ color: "white" }]}>phút</CustomText>
-            </View>
+            </TouchableOpacity>
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
               0 kcal
             </CustomText>

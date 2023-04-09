@@ -7,25 +7,35 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 
 const actions = [
   {
-    text: "Số bước",
-    name: "TargetsSetting1",
+    text: "Số bước 0/10000 bước",
+    name: "TargetsSetting_1",
     color: "#fff",
     buttonSize: 30,
     icon: (
       <MaterialCommunityIcons name="foot-print" size={21} color="#FFBC39" />
     ),
-    textStyle: { fontFamily: "NunitoSans-Regular" },
+    textStyle: {
+      fontFamily: "NunitoSans-Regular",
+      fontSize: 14,
+      lineHeight: 14,
+      paddingVertical: 5,
+    },
     position: 1,
   },
   {
-    text: "Thức dậy",
-    name: "TargetsSetting2",
+    text: "Thức dậy --/7:00",
+    name: "TargetsSetting_2",
     color: "#fff",
     buttonSize: 30,
     icon: (
       <MaterialCommunityIcons name="human-handsup" size={21} color="#FF00D6" />
     ),
-    textStyle: { fontFamily: "NunitoSans-Regular" },
+    textStyle: {
+      fontFamily: "NunitoSans-Regular",
+      fontSize: 14,
+      lineHeight: 14,
+      paddingVertical: 5,
+    },
     position: 2,
   },
 ];
@@ -41,7 +51,8 @@ const CustomFloatingAction = () => {
     <FloatingAction
       actions={actions}
       onPressItem={(name) => {
-        navigation.navigate(name);
+        const routeName = name.split("_")[0];
+        navigation.navigate(routeName);
       }}
       onOpen={() => {
         setIsShowFloatingAction(true);
