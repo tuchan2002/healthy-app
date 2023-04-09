@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     marginVertical: 18,
-    paddingHorizontal: 36,
-    paddingVertical: 18,
+    padding: 18,
     backgroundColor: color.primary,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     borderRadius: 10,
+    elevation: 6,
   },
   topCircle: {
     borderWidth: 12,
@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 18,
     flexGrow: 1,
-    width: Dimensions.get("window").width / 2 - 18 - 5,
+    elevation: 6,
+    width: Dimensions.get("window").width / 2 - 18 - 8,
+    minHeight: Dimensions.get("window").width / 2,
   },
 });
 

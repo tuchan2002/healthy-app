@@ -10,7 +10,7 @@ const IBMIndex = ({ IBMValue, IBMDescription }) => {
 
   return (
     <TouchableOpacity
-      style={[styles.itemContainer, { marginLeft: 5 }]}
+      style={[styles.itemContainer, { marginLeft: 8 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("TargetsSetting")}
     >
@@ -23,16 +23,6 @@ const IBMIndex = ({ IBMValue, IBMDescription }) => {
       <CustomText style={[{ fontSize: 20, textAlign: "center" }]}>
         {IBMDescription}
       </CustomText>
-      <Image
-        style={{
-          width: 45,
-          height: 45,
-          resizeMode: "contain",
-          marginLeft: "auto",
-          marginTop: 10,
-        }}
-        source={homeScreenImages["home4"]}
-      />
     </TouchableOpacity>
   );
 };

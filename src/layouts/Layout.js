@@ -3,10 +3,14 @@ import FooterBar from "../components/layout/FooterBar";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { useCallback, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import CustomFloatingAction from "../components/screens/Healthy/Home/CustomFloatingAction";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout({ children, activeMenu }) {
+  const { name } = useRoute();
+
   const [fontsLoaded] = useFonts({
     "NunitoSans-Regular": require("../assets/fonts/NunitoSans-Regular.ttf"),
     "NunitoSans-SemiBold": require("../assets/fonts/NunitoSans-SemiBold.ttf"),
@@ -26,6 +30,7 @@ export default function Layout({ children, activeMenu }) {
     <View style={styles.container} onLayout={onLayoutRootView}>
       {children}
       <FooterBar activeMenu={activeMenu} />
+      {name === "Home" && <CustomFloatingAction />}
     </View>
   );
 }
