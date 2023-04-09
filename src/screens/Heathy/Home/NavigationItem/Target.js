@@ -10,7 +10,7 @@ const Target = () => {
 
   return (
     <TouchableOpacity
-      style={[styles.itemContainer, { marginLeft: 5 }]}
+      style={[styles.itemContainer, { marginLeft: 8 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("TargetsSetting")}
     >
@@ -18,7 +18,6 @@ const Target = () => {
       <Image
         style={{
           width: "100%",
-          height: 100,
           resizeMode: "contain",
         }}
         source={homeScreenImages["home2"]}

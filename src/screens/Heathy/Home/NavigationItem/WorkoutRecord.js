@@ -10,7 +10,7 @@ const WorkoutRecord = ({ distance }) => {
 
   return (
     <TouchableOpacity
-      style={[styles.itemContainer, { marginRight: 5 }]}
+      style={[styles.itemContainer, { marginRight: 8 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("WorkoutRecord")}
     >
@@ -19,7 +19,6 @@ const WorkoutRecord = ({ distance }) => {
       <Image
         style={{
           width: "100%",
-          height: 100,
           resizeMode: "contain",
         }}
         source={homeScreenImages["home1"]}

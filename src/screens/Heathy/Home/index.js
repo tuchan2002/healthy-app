@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { Image, ScrollView, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
@@ -23,7 +23,7 @@ export default function Home() {
               <CustomText style={[{ color: "white" }]}>bước</CustomText>
             </View>
 
-            <CustomText style={[{ marginLeft: "auto", color: "white" }]}>
+            <CustomText style={[{ color: "white", textAlign: "center" }]}>
               100 bước
             </CustomText>
           </View>
@@ -32,26 +32,25 @@ export default function Home() {
               <CustomText style={[{ color: "white" }]}>--</CustomText>
               <CustomText style={[{ color: "white" }]}>phút</CustomText>
             </View>
-            <CustomText style={[{ color: "white" }]}>0 kcal</CustomText>
+            <CustomText style={[{ color: "white", textAlign: "center" }]}>
+              0 kcal
+            </CustomText>
           </View>
         </View>
 
         <ScrollView
           style={{
-            marginBottom: 60,
+            margin: -16,
+            marginBottom: 76,
           }}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ padding: 16 }}
         >
-          <View
-            style={{
-              marginBottom: 10,
-              flexDirection: "row",
-            }}
-          >
+          <View style={{ marginBottom: 16, flexDirection: "row" }}>
             <WorkoutRecord distance={2.86} />
             <Target />
           </View>
-          <View style={{ marginBottom: 10, flexDirection: "row" }}>
+          <View style={{ marginBottom: 16, flexDirection: "row" }}>
             <Sleep />
             <IBMIndex IBMValue={32.25} IBMDescription="Hơi béo" />
           </View>

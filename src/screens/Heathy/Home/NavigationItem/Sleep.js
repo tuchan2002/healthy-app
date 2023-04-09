@@ -10,7 +10,7 @@ const Sleep = () => {
 
   return (
     <TouchableOpacity
-      style={[styles.itemContainer, { marginRight: 5 }]}
+      style={[styles.itemContainer, { marginRight: 8 }]}
       activeOpacity={0.5}
       onPress={() => navigation.navigate("TargetsSetting")}
     >
@@ -18,7 +18,6 @@ const Sleep = () => {
       <Image
         style={{
           width: "100%",
-          height: 100,
           resizeMode: "contain",
         }}
         source={homeScreenImages["home3"]}
