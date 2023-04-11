@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import CustomText from "../../components/CustomText";
 import UserButton from "../../components/UserButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
+import Layout from "../../layouts/Layout";
 
 export default function Login({ navigation }) {
   const handleLoginViaFacebook = () => {
@@ -12,24 +13,26 @@ export default function Login({ navigation }) {
     navigation.push("Home");
   };
   return (
-    <View style={styles.container}>
-      <CustomText
-        fontFamily="NunitoSans-Bold"
-        style={[{ fontSize: 36, marginBottom: 100 }]}
-      >
-        ĐĂNG NHẬP
-      </CustomText>
-      <View style={styles.actions}>
-        <UserButton
-          onPress={handleLoginViaFacebook}
-          content={"Đăng nhập bằng Facebooke"}
-        />
-        <UserButton
-          onPress={handleLoginViaGoogle}
-          content={"Đăng nhập bằng Google"}
-        />
+    <Layout isAuth={false}>
+      <View style={styles.container}>
+        <CustomText
+          fontFamily="NunitoSans-Bold"
+          style={[{ fontSize: 36, marginBottom: 100 }]}
+        >
+          ĐĂNG NHẬP
+        </CustomText>
+        <View style={styles.actions}>
+          <UserButton
+            onPress={handleLoginViaFacebook}
+            content={"Đăng nhập bằng Facebooke"}
+          />
+          <UserButton
+            onPress={handleLoginViaGoogle}
+            content={"Đăng nhập bằng Google"}
+          />
+        </View>
       </View>
-    </View>
+    </Layout>
   );
 }
 

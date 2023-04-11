@@ -8,7 +8,7 @@ import CustomFloatingAction from "../components/screens/Healthy/Home/CustomFloat
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Layout({ children, activeMenu }) {
+export default function Layout({ children, activeMenu, isAuth = true }) {
   const { name } = useRoute();
 
   const [fontsLoaded] = useFonts({
@@ -29,7 +29,7 @@ export default function Layout({ children, activeMenu }) {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       {children}
-      <FooterBar activeMenu={activeMenu} />
+      {isAuth && <FooterBar activeMenu={activeMenu} />}
       {name === "Home" && <CustomFloatingAction />}
     </View>
   );

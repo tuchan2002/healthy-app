@@ -17,7 +17,7 @@ export default function App() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Footsteps"
+        initialRouteName="Login"
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
