@@ -27,10 +27,9 @@ export default Fillter;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 7,
     marginVertical: 6,
     display: "flex",
     flexDirection: "row",
-    //justifyContent: 'center'
   },
 });
