@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { useCallback, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import CustomFloatingAction from "../components/screens/Healthy/Home/CustomFloatingAction";
+import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from "../constants/size"
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,7 +29,9 @@ export default function Layout({ children, activeMenu, isAuth = true }) {
   }
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {children}
+      <View style={styles.content}>
+        {children}
+      </View>
       {isAuth && <FooterBar activeMenu={activeMenu} />}
       {name === "Home" && <CustomFloatingAction />}
     </View>
@@ -37,7 +40,10 @@ export default function Layout({ children, activeMenu, isAuth = true }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    paddingTop: STATUSBAR_HEIGHT,
     height: "100%",
   },
+  content: {
+    height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - STATUSBAR_HEIGHT,
+  }
 });

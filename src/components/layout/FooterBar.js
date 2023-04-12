@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import CustomText from "../CustomText";
 import { useNavigation } from "@react-navigation/core";
+import { FOOTERBAR_HEIGHT } from "../../constants/size";
 
 export default function FooterBar({ activeMenu = "healthy" }) {
   const navigation = useNavigation();
@@ -59,7 +60,7 @@ export default function FooterBar({ activeMenu = "healthy" }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#E6E6E6",
-    height: 60,
+    height: FOOTERBAR_HEIGHT,
     width: "100%",
     position: "absolute",
     bottom: 0,

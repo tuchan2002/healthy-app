@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   list : {
-    height: 460,
     borderRadius: 10,
     paddingHorizontal: 10,
     marginVertical: 20,

@@ -36,7 +36,6 @@ const WorkoutRecord = () => {
         </View>
 
         <ScrollView
-          style={{ marginBottom: 60 }}
           showsVerticalScrollIndicator={false}
         >
           {workoutRecords.map((wkRecord) => (
