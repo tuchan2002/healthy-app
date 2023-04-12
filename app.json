@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F0EFEF"
-      }
+      },
+      "permissions": ["com.google.android.gms.permission.ACTIVITY_RECOGNITION","ACTIVITY_RECOGNITION", "VIBRATE"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
