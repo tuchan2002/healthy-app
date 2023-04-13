@@ -9,6 +9,7 @@ import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useNavigation } from "@react-navigation/native";
 import { Accelerometer } from 'expo-sensors';
+import { FOOTERBAR_HEIGHT } from "../../../constants/size";
 export default function Home() {
   const navigation = useNavigation();
   const [magnitudePrev, setMagnitudePrev] = useState(9)
@@ -48,10 +49,10 @@ export default function Home() {
     setSubscription(null);
   };
 
-  useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   _subscribe();
+  //   return () => _unsubscribe();
+  // }, []);
 
 
 
@@ -92,7 +93,7 @@ export default function Home() {
             </CustomText>
           </View>
         </View>
-        <View>
+        {/* <View>
           <CustomText>
             Vui lòng cấp quyền đếm bước chân
           </CustomText>
@@ -100,12 +101,11 @@ export default function Home() {
           <CustomText style={styles.text}>x: {x}</CustomText>
           <CustomText style={styles.text}>y: {y}</CustomText>
           <CustomText style={styles.text}>z: {z}</CustomText>
-        </View>
+        </View> */}
 
         <ScrollView
           style={{
             margin: -16,
-            marginBottom: 76,
           }}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ padding: 16 }}

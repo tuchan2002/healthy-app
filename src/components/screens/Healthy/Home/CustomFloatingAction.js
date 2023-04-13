@@ -18,7 +18,7 @@ const actions = [
       fontFamily: "NunitoSans-Regular",
       fontSize: 14,
       lineHeight: 14,
-      paddingVertical: 5,
+      paddingTop: 5,
     },
     position: 1,
   },
@@ -34,14 +34,13 @@ const actions = [
       fontFamily: "NunitoSans-Regular",
       fontSize: 14,
       lineHeight: 14,
-      paddingVertical: 5,
+      paddingTop: 5,
     },
     position: 2,
   },
 ];
 const CustomFloatingAction = () => {
   const route = useRoute();
-  console.log("route", route.name);
 
   const navigation = useNavigation();
 
