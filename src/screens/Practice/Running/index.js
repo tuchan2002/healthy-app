@@ -5,7 +5,7 @@ import runningInfo from "../../../assets/fakeDatas/runningInfo";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../../constants/size";
+import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH, STATUSBAR_HEIGHT } from "../../../constants/size";
 
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
@@ -89,7 +89,7 @@ export default function Running() {
 
 const styles = StyleSheet.create({
   content: {
-    height: SCREEN_HEIGHT - 50 - 48 - 20 - 60,
+    height: SCREEN_HEIGHT - STATUSBAR_HEIGHT - 48 - 20 - FOOTERBAR_HEIGHT,
     display: "flex",
     flexDirection: "column",
     marginTop: 20,

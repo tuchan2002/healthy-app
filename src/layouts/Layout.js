@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   content: {
-    height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - STATUSBAR_HEIGHT,
+    height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT,
   }
 });
