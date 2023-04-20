@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, TextInput } from "react-native";
 import { View } from "react-native";
-
-const Item = () => {
+import CustomText from "../../../../components/CustomText";
+const Item = ({data}) => {
   return (
     <View style={styles.container}>
       <Image
@@ -12,10 +12,10 @@ const Item = () => {
         }}
       />
       <View>
-        <Text style={styles.title}>Title</Text>
-        <Text style={{ fontSize: 14 }}>
-          Thời gian: 15 phút, Tiêu thụ: 30kalo
-        </Text>
+        <Text numberOfLines={1} style={[styles.title]}>{data.title}</Text>
+        <CustomText style={[{ fontSize: 12 }]}>
+          {`Thời gian: ${data.duration}, Tiêu thụ: ${data.kalo} kalo`}
+        </CustomText>
       </View>
     </View>
   );
@@ -32,17 +32,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 60,
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   image: {
     height: "100%",
-    width: 100,
+    width: "30%"
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 500,
+    width: 265,
+    fontFamily: "NunitoSans-Regular"
   },
 });

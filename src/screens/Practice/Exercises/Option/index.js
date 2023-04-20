@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Pressable, Text } from "react-native";
 import { memo } from "react";
+import CustomText from "../../../../components/CustomText";
 
 const Option = ({ label }) => {
   const [pressed, setPressed] = useState(false);
@@ -26,9 +27,9 @@ const Option = ({ label }) => {
         });
       }}
     >
-      <Text style={{ textAlign: "center", fontSize: 14, color: pressed
+      <CustomText style={[{ textAlign: "center", fontSize: 14, color: pressed
           ? "rgba(255, 255, 255, 1)"
-          : "rgba(132, 132, 132, 1)"}}>{label}</Text>
+          : "rgba(132, 132, 132, 1)"}]}>{label}</CustomText>
     </Pressable>
   );
 };
