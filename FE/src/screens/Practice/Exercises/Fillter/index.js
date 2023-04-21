@@ -9,14 +9,14 @@ const prop = {
   data: ["Giảm mỡ", "Tăng cơ", "Định hình", "Dãn cơ"],
 };
 
-const Fillter = ({data}) => {
+const Fillter = ({data, setSelected, selected}) => {
   return (
     <View style={styles.container}>
       <CustomText style={[{marginRight: 5}]}>{`${prop.label} :`}</CustomText>
       <View style={[{ display: "flex", flexDirection: "row" }]}>
         {data.map((element, index) => {
           return (
-            <Option key={index} label={element.content} />
+            <Option key={index} data={element} setSelected={setSelected} selected={selected}/>
           );
         })}
       </View>

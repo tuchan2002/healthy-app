@@ -21,7 +21,7 @@ router.get("/info/:id", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    console.log(req.body.targets);
+    //console.log(JSON.parse(req.query.targets), JSON.parse(req.query.bodyparts));
     const videos = await Video.findAll({
       where: req.query.input
         ? {
@@ -37,7 +37,7 @@ router.get("/all", async (req, res) => {
           through: {
             attributes: [],
           },
-          where: req.body.targets ? { id: req.body.targets } : {},
+          where: req.query.targets != '[]' && req.query.targets ? { id: JSON.parse(req.query.targets) } : {},
         },
         {
           model: Bodypart,
@@ -47,10 +47,11 @@ router.get("/all", async (req, res) => {
           through: {
             attributes: [],
           },
-          where: req.body.bodyparts ? { id: req.body.bodyparts } : {},
+          where: req.query.bodyparts != '[]' && req.query.bodyparts ? { id: JSON.parse(req.query.bodyparts) } : {},
         },
       ],
     });
+    console.log(videos.length);
     res.json({ data: videos, success: 1, message: "get all videos" });
   } catch (err) {
     console.log(err);
