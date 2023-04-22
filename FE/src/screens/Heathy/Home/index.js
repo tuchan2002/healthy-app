@@ -9,7 +9,14 @@ import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useNavigation } from "@react-navigation/native";
 import { Accelerometer } from "expo-sensors";
-import { FOOTERBAR_HEIGHT } from "../../../constants/size";
+import {
+  createTableSteps,
+  insertStep,
+  getSteps,
+  droptTable,
+  countStepOfDay,
+} from "../../../data/stepCounter";
+import * as SQLite from "expo-sqlite";
 
 export default Home = memo(() => {
   const navigation = useNavigation();
@@ -24,7 +31,7 @@ export default Home = memo(() => {
   const steps = useRef(0);
 
   const _slow = () => {
-    Accelerometer.setUpdateInterval(100);
+    Accelerometer.setUpdateInterval(40);
   };
 
   _slow();
@@ -45,7 +52,6 @@ export default Home = memo(() => {
 
         if (start === false) {
           if (magnitudePrev + 0.5 < magnitudeMiddle) {
-            console.log("Start.................");
             start = true;
             mArray.push(magnitudePrev);
             mArray.push(magnitudeMiddle);
@@ -67,14 +73,19 @@ export default Home = memo(() => {
             start = false;
             peak = false;
             if (valuePeak - mArray[0] > 3.5) {
+              console.log(mArray);
               steps.current += 1;
+              insertStep(valuePeak - mArray[0]);
+              magnitudePrev = magnitudeMiddle;
+              magnitudeMiddle = magnitude;
+              mArray = [];
+              forceUpdate();
+            } else {
+              start = false;
+              peak = false;
+              valuePeak = 9.81;
+              mArray = [];
             }
-            console.log(steps.current);
-            console.log(mArray);
-            console.log("speed, ", valuePeak - mArray[0]);
-            console.log("End.................");
-            mArray = [];
-            forceUpdate();
           }
         }
         magnitudePrev = magnitudeMiddle;
@@ -89,8 +100,20 @@ export default Home = memo(() => {
   };
 
   useEffect(() => {
+    const getResult = async () => {
+      const count = await countStepOfDay();
+      steps.current = count;
+      forceUpdate();
+    };
+    getResult();
+  });
+
+  useEffect(() => {
+    //createTableSteps();
     _subscribe();
     return () => _unsubscribe();
+    //getSteps();
+    // droptTable("steps");
   }, []);
 
   return (
