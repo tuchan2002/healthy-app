@@ -1,28 +1,28 @@
 import React from "react";
-import { Image, StyleSheet, Text, TextInput } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableHighlight } from "react-native";
 import { View } from "react-native";
 import CustomText from "../../../../components/CustomText";
-const Item = ({ data }) => {
+const Item = ({ data, navigation }) => {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: "https://cdn-icons-png.flaticon.com/512/2554/2554042.png",
-        }}
-      />
-      <View>
-        <Text numberOfLines={1} style={[styles.title]}>
-          {data.title}
-        </Text>
-        <CustomText style={[{ fontSize: 14 }]}>
-          {`Thời gian: ${data.duration}`}
-        </CustomText>
-        <CustomText style={[{ fontSize: 14 }]}>
-          {`Tiêu thụ: ${data.kalo} kalo`}
-        </CustomText>
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: "https://cdn-icons-png.flaticon.com/512/2554/2554042.png",
+          }}
+        />
+        <View>
+          <Text numberOfLines={1} style={[styles.title]}>
+            {data.title}
+          </Text>
+          <CustomText style={[{ fontSize: 14 }]}>
+            {`Thời gian: ${data.duration}`}
+          </CustomText>
+          <CustomText style={[{ fontSize: 14 }]}>
+            {`Tiêu thụ: ${data.kalo} kalo`}
+          </CustomText>
+        </View>
       </View>
-    </View>
   );
 };
 
