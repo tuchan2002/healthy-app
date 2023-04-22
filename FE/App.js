@@ -7,6 +7,7 @@ import Practice from "./src/screens/Practice";
 import User from "./src/screens/User";
 import Login from "./src/screens/Auth/Login";
 import Footsteps from "./src/screens/Heathy/Footsteps";
+import ExerciseDetail from "./src/screens/Practice/Exercises/Detail";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,7 @@ export default function App() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Login"
+        initialRouteName="Video"
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Practice" component={Practice} />
         <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Video" component={ExerciseDetail}/>
         <Stack.Screen name="Footsteps" component={Footsteps} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native";
 import CustomFloatingAction from "../components/screens/Healthy/Home/CustomFloatingAction";
 import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from "../constants/size"
 
-SplashScreen.preventAutoHideAsync();
+//SplashScreen.preventAutoHideAsync();
 
 export default function Layout({ children, activeMenu, isAuth = true }) {
   const { name } = useRoute();

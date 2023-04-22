@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Button, TextInput, ScrollView, TouchableOpacity } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { View, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import {closeCircle} from "react-native-vector-icons/AntDesign";
 import Fillter from "./Fillter";
 import Item from "./Item";
 import { SCREEN_HEIGHT } from "../../../constants/size";
@@ -11,6 +9,7 @@ import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { AntDesign } from "@expo/vector-icons";
 import { useRef } from 'react';
+import CustomText from "../../../components/CustomText";
 
 export default function Exercises() {
   const [exercises, setExercises] = useState(null);
@@ -51,6 +50,7 @@ export default function Exercises() {
   }, [])
 
   const handleSearch = async () => {
+    console.log(input);
     let results = await axios.get('http://10.0.2.2:5000/videos/all', {
         headers: {
           Accept: 'application/json',
@@ -80,13 +80,12 @@ export default function Exercises() {
           style = {styles.input}
           placeholder = "Search"
           placeholderTextColor = "rgba(255, 162, 57, 1)"
-          defaultValue={input}
-          onChangeText={newText => setInput(newText)}
+          value={input}
+          onChangeText={(newText) => {setInput(newText)}}
           />
           <TouchableOpacity style={styles.button} onPress={(e) => {
-            if(targets.length == 0 && bodyparts.length == 0 && input=="") {
-              return
-            } else {
+            console.log(input);
+            if(!(targets.length === 0 && bodyparts.length === 0 && input === '')) {
               handleSearch();
             }
           }}>
@@ -101,12 +100,17 @@ export default function Exercises() {
           <Fillter data={targets} setSelected={setSelectedTargets} selected={selectedTargets}/>
           <Fillter data={bodyparts} setSelected={setSelectedBodyparts} selected={selectedBodyparts}/>
         </View>
-        <ScrollView style={styles.list} disableScrollViewPanResponder={true}
+        {
+          exercises.length > 0 ? (
+            <ScrollView style={styles.list} disableScrollViewPanResponder={true}
         showsVerticalScrollIndicator={false} ref={scrollRef}>
           {exercises.map((element, index) => (
             <Item key={index} data={element}/>
           ))}
         </ScrollView>
+          ) : 
+          <CustomText style={[{marginVertical: 40, textAlign: "center", fontSize: 30, color: "rgba(255, 162, 57, 1)"}]}>Không Có Bài Tập Phù Hợp</CustomText>
+        }
       </View>
   );
   } else {
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
   fillters : {
     borderRadius: 10,
     paddingHorizontal: 10,
-    marginVertical: 15,
+    marginTop: 15,
   },
   list : {
     height: SCREEN_HEIGHT - 50 - 48 - 20 - 60 - 140,
