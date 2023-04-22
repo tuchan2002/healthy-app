@@ -21,11 +21,11 @@ router.get("/info/:id", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    //console.log(JSON.parse(req.query.targets), JSON.parse(req.query.bodyparts));
+    //console.log(req.query.input);
     const videos = await Video.findAll({
       where: req.query.input
         ? {
-            title: { [Op.like]: `%${input}%` },
+            title: { [Op.like]: `%${req.query.input}%` },
           }
         : {},
       include: [

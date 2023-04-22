@@ -45,7 +45,7 @@ fs.readdirSync("public/uivideos").forEach(async (folder, index) => {
           video_bodypart = JSON.parse(lineContent[1]);
         }
     }
-    data["link"] = `http://localhost:5000/uivideos/${folder}/${folder}.mp4`;
+    data["link"] = `http://10.0.2.2:5000/uivideos/${folder}/${folder}.mp4`;
     await ffprobe(path.join('public/uivideos/', folder) + "/" + folderContent[0], { path: ffprobeStatic.path })
     .then((info) => {
     // get the duration of the video in seconds
@@ -62,12 +62,5 @@ fs.readdirSync("public/uivideos").forEach(async (folder, index) => {
     const video = await Video.create(data);
     await video.addBodyparts(video_bodypart);
     await video.addTargets(video_target);
-    /*fs.readFile(path.join('public/uivideos/', folder) + "/" + folderContent[1], 'utf8', function (err, result) {
-            if (err) {
-              console.error(err);
-            } else {
-              console.log(result);
-            }
-        });
-        */
   });
+  
