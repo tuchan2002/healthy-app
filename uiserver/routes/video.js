@@ -12,12 +12,40 @@ router.get("/info/:id", async (req, res) => {
     const video = await Video.findByPk(req.params.id, {
       include: ["targets", "bodyparts"],
     });
-    res.json({ data: video, success: 1, message: "get video info" });
+    const targets = video.get({plain : true}).targets;
+    const bodyparts = video.get({plain : true}).bodyparts;
+    const recommend = await Video.findAll({
+      include: [
+        {
+          model: Target,
+          as: "targets",
+          required: true,
+          attributes: ["id", "content"],
+          through: {
+            attributes: [],
+          },
+          where: { id: targets.map((element) => {return element.id}) }
+        },
+        {
+          model: Bodypart,
+          as: "bodyparts",
+          required: true,
+          attributes: ["id", "content"],
+          through: {
+            attributes: [],
+          },
+          where: { id: bodyparts.map((element) => {return element.id}) }
+        },
+      ],
+      limit: 10
+    });
+    console.log(targets.map((element) => {return element.id}));
+    res.json({ data: {video: video, recommend: recommend}, success: 1, message: "get video info" });
   } catch (err) {
     console.log(err);
     res.json({ success: 0, message: "error" });
   }
-});
+  });
 
 router.get("/all", async (req, res) => {
   try {

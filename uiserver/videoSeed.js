@@ -35,7 +35,7 @@ fs.readdirSync("public/uivideos").forEach(async (folder, index) => {
     for await (const line of rl) {
         // Each line in input.txt will be successively available here as `line`.
         const lineContent = line.split(": ");
-        if(lineContent[0] == "kalo" || lineContent[0] == "title") {
+        if(lineContent[0] == "kalo" || lineContent[0] == "title" || lineContent[0] == "link") {
           data[lineContent[0]] =  lineContent[1];
         }
         else if (lineContent[0] == "goal") {
@@ -45,7 +45,7 @@ fs.readdirSync("public/uivideos").forEach(async (folder, index) => {
           video_bodypart = JSON.parse(lineContent[1]);
         }
     }
-    data["link"] = `http://10.0.2.2:5000/uivideos/${folder}/${folder}.mp4`;
+    //data["link"] = `http://10.0.2.2:5000/uivideos/${folder}/${folder}.mp4`;
     await ffprobe(path.join('public/uivideos/', folder) + "/" + folderContent[0], { path: ffprobeStatic.path })
     .then((info) => {
     // get the duration of the video in seconds

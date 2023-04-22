@@ -9,10 +9,10 @@ const prop = {
   data: ["Giảm mỡ", "Tăng cơ", "Định hình", "Dãn cơ"],
 };
 
-const Fillter = ({data, setSelected, selected}) => {
+const Fillter = ({data, setSelected, selected, label}) => {
   return (
     <View style={styles.container}>
-      <CustomText style={[{marginRight: 5}]}>{`${prop.label} :`}</CustomText>
+      <CustomText style={[{marginRight: 5}]}>{`${label} :`}</CustomText>
       <View style={[{ display: "flex", flexDirection: "row" }]}>
         {data.map((element, index) => {
           return (

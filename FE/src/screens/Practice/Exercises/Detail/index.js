@@ -1,52 +1,162 @@
 import * as React from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Video, ResizeMode } from "expo-av";
+import CustomText from "../../../../components/CustomText";
+import { useEffect, useState } from "react";
+import Spinner from "react-native-loading-spinner-overlay";
+import axios from "axios";
+import { AntDesign } from "@expo/vector-icons";
 
-export default function App() {
+export default function Detail({ route }) {
   const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
-  return (
-    <View style={styles.container}>
-      <Video
-        ref={video}
-        style={styles.video}
-        source={{
-          //uri: 192.168.222.106 'http://rr5---sn-npoldn7s.googlevideo.com/videoplayback?expire=1682155099&ei=-1FDZJ7LB6PmrtoP2pyyyAo&ip=2400:8901::f03c:93ff:fee4:7f9a&id=o-ALtChVNLRyeF6BVDyQbTdYXkzEwfngcZwBaybbDejJ9p&itag=22&source=youtube&requiressl=yes&mh=J_&mm=32&mn=sn-npoldn7s&ms=su&mv=m&mvi=5&pl=58&sc=yes&initcwndbps=237500&vprv=1&prv=1&mime=video/mp4&cnr=14&ratebypass=yes&dur=9593.370&lmt=1681707011111816&mt=1682133172&fexp=24007246&txp=6218224&sparams=expire,ei,ip,id,itag,source,requiressl,vprv,prv,mime,cnr,ratebypass,dur,lmt&sig=AOq0QJ8wRgIhAPEuLzfi6Rlaa9HElX2uPGS52aC-n1dcP7b0NYqcD3axAiEAtcwDzH6dvT9KvSjFtqzAtuBiMulZPrIWMVR2dM0b_MU=&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc,initcwndbps&lsig=AG3C_xAwRQIgZshCR016Iff8AfCc9q0D77Kl8qCEdtRp-4QcBnxgJQsCIQCxAUAwyY_B4FKUuyQQVuu3SUk9oI_UmgecArXJVznTJw==',
-          uri: "https://cdn.cnbj1.fds.api.mi-img.com/course-video/fit/1.mp4",
-        }}
-        useNativeControls
-        resizeMode={ResizeMode.CONTAIN}
-        isLooping
-        onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-      />
-      <View style={styles.buttons}>
-        <Button
-          title={status.isPlaying ? "Pause" : "Play"}
-          onPress={() =>
-            status.isPlaying
-              ? video.current.pauseAsync()
-              : video.current.playAsync()
-          }
+  const [data, setData] = useState();
+  const [recommend, setRecommend] = useState();
+
+  useEffect(() => {
+    const getData = async () => {
+      let exercise = await axios.get(
+        `http://10.0.2.2:5000/videos/info/${route.params.id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setData(exercise.data.data.video);
+      setRecommend(exercise.data.data.recommend);
+    };
+    getData();
+  }, [route.params.id]);
+  if (data && recommend) {
+    console.log(data.targets);
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.back}>
+          <AntDesign name="leftsquare" size={40} color={"rgba(255, 162, 57, 1)"} />
+        </TouchableOpacity>
+
+        <CustomText
+          style={[
+            {
+              fontSize: 25,
+              marginBottom: "5%",
+              fontWeight: "bold",
+              marginHorizontal: "5%",
+              color: "rgba(255, 162, 57, 1)",
+            },
+          ]}
+        >
+          {data.title}
+        </CustomText>
+        <View
+          style={{ width: "90%", marginHorizontal: "5%", marginVertical: "5%" }}
+        >
+          <Video
+            style={styles.video}
+            source={{
+              uri: data.link,
+            }}
+            useNativeControls
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping
+          />
+        </View>
+        <CustomText style={[styles.header]}>Mục tiêu :</CustomText>
+        <View style={styles.buttons}>
+          {data.targets.map((element, index) => {
+            return (
+              <View key={index} style={styles.button}>
+                <CustomText
+                  style={[
+                    {
+                      textAlign: "center",
+                      fontSize: 16,
+                      color: "rgba(255, 255, 255, 1)",
+                    },
+                  ]}
+                >
+                  {element.content}
+                </CustomText>
+              </View>
+            );
+          })}
+        </View>
+        <CustomText style={[styles.header]}>Nhóm cơ tác động:</CustomText>
+        <View style={styles.buttons}>
+          {data.bodyparts.map((element, index) => {
+            return (
+              <View key={index} style={styles.button}>
+                <CustomText
+                  style={[
+                    {
+                      textAlign: "center",
+                      fontSize: 16,
+                      color: "rgba(255, 255, 255, 1)",
+                    },
+                  ]}
+                >
+                  {element.content}
+                </CustomText>
+              </View>
+            );
+          })}
+        </View>
+        <CustomText
+          style={[styles.header, ]}
+        >{`Tiêu Hao: ${data.kalo} kalories`}</CustomText>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Spinner
+          //visibility of Overlay Loading Spinner
+          visible={true}
+          //Text with the Spinner
+          textContent={"Loading..."}
+          //Text style of the Spinner Text
+          textStyle={styles.spinnerTextStyle}
         />
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
     backgroundColor: "#ecf0f1",
   },
   video: {
     alignSelf: "center",
-    width: 320,
-    height: 200,
+    width: "100%",
+    height: 220,
+  },
+  header: {
+    fontSize: 20,
+    marginHorizontal: "5%",
   },
   buttons: {
+    marginHorizontal: "5%",
+    display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
+    heigth: 90,
+    marginVertical: 6,
+  },
+  button: {
+    marginHorizontal: 2,
+    padding: 6,
+    color: "rgba(255, 255, 255, 1)",
+    backgroundColor: "rgba(255, 162, 57, 1)",
+    borderRadius: 20,
+  },
+  back: {
+    marginTop: "10%",
+    marginBottom: "8%",
+    marginHorizontal: "3%",
+    padding: 6,
+    color: "rgba(255, 162, 57, 1)",
+    //backgroundColor: "rgba(255, 162, 57, 1)",
   },
 });
