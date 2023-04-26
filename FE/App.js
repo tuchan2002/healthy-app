@@ -9,6 +9,7 @@ import Login from "./src/screens/Auth/Login";
 import Footsteps from "./src/screens/Heathy/Footsteps";
 import Exercises from "./src/screens/Practice/Exercises";
 import Detail from "./src/screens/Practice/Exercises/Detail"
+import BMISetting from "./src/screens/Auth/BMISetting";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         }}
         initialRouteName="Login"
       >
+        <Stack.Screen name="BMISetting" component={BMISetting} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
         <Stack.Screen name="TargetsSetting" component={TargetsSetting} />

@@ -6,7 +6,7 @@ import Layout from "../../layouts/Layout";
 
 export default function Login({ navigation }) {
   const handleLoginViaFacebook = () => {
-    navigation.push("Home");
+    navigation.push("BMISetting");
   };
 
   const handleLoginViaGoogle = () => {
