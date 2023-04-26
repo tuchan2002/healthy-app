@@ -6,6 +6,8 @@ export default function Input({
   keyboardType,
   autoFocus = true,
   onChange,
+  style,
+  defaultValue
 }) {
   const handleChangeInput = (newValue) => {
     onChange(newValue);
@@ -17,22 +19,26 @@ export default function Input({
       keyboardType={keyboardType}
       placeholder={placeholder}
       onChangeText={handleChangeInput}
-      style={{
-        height: 48,
-        width: "100%",
-        backgroundColor: "white",
-        borderRadius: 8,
-        paddingHorizontal: 12,
-        fontFamily: "NunitoSans-Regular",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
+      defaultValue={defaultValue}
+      style={[
+        {
+          height: 48,
+          width: "100%",
+          backgroundColor: "white",
+          borderRadius: 8,
+          paddingHorizontal: 12,
+          fontFamily: "NunitoSans-Regular",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
+        style,
+      ]}
     />
   );
 }

@@ -4,17 +4,41 @@ import Input from "../../components/Input";
 import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import UserButton from "../../components/UserButton";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import bmiValues from "../../constants/bmiValues";
 import { SCREEN_HEIGHT } from "../../constants/size";
+import { handleGetBMI, handlePostBMI } from "../../services/bmi";
+import NotiDialog from "../../components/NotiDialog";
 
 export default function BMISetting({ navigation }) {
   const [bmi, setBmi] = useState({
-    weight: null,
-    height: null,
+    weight: "",
+    height: "",
   });
   const [error, setError] = useState("");
   const [bmiValue, setBmiValue] = useState("---");
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const [openFailDialog, setOpenFailDialog] = useState(false);
+  const navigateHistory = useMemo(() => navigation.getState()?.routes);
+  const previousScreen = useMemo(
+    () => navigateHistory[navigateHistory.length - 2],
+  );
+
+  useEffect(() => {
+    getBMI();
+  }, []);
+
+  const getBMI = async () => {
+    const bmiRes = await handleGetBMI(1);
+    if (bmiRes.success) {
+      const weight = bmiRes.data?.weight == "null" ? "" : bmiRes.data?.weight;
+      const height = bmiRes.data?.height == "null" ? "" : bmiRes.data?.height;
+      setBmi({
+        weight,
+        height,
+      });
+    }
+  };
 
   useEffect(() => {
     if (error) {
@@ -34,14 +58,23 @@ export default function BMISetting({ navigation }) {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!bmi.weight) {
       setError("Bạn phải nhập cân nặng!");
     } else if (!bmi.height) {
       setError("Bạn phải nhập chiều cao!");
     } else {
-      console.log(bmi);
-      navigation.push("Home");
+      const data = {
+        user_id: 1,
+        ...bmi,
+        value: bmiValue,
+      };
+      const res = await handlePostBMI(data);
+      if (res.success) {
+        setOpenSuccessDialog(true);
+      } else {
+        setOpenFailDialog(res.message);
+      }
     }
   };
 
@@ -67,8 +100,16 @@ export default function BMISetting({ navigation }) {
     }
   };
 
+  const handleCancel = () => {
+    if ((previousScreen.name = "Login")) {
+      navigation.push("DefaultTargetSetting");
+    } else {
+      navigation.push(previousScreen.name);
+    }
+  };
+
   return (
-    <Layout isAuth={false}>
+    <Layout isAuth={previousScreen.name !== "Login"}>
       <View style={styles.container}>
         <CustomText fontFamily="NunitoSans-Bold" style={[styles.title]}>
           Chỉ số BMI
@@ -82,6 +123,7 @@ export default function BMISetting({ navigation }) {
                 keyboardType="numeric"
                 style={styles.customInput}
                 onChange={(value) => handleChange({ weight: value })}
+                defaultValue={String(bmi.weight)}
               />
               <CustomText>kg</CustomText>
             </View>
@@ -94,6 +136,7 @@ export default function BMISetting({ navigation }) {
                 keyboardType="numeric"
                 style={styles.customInput}
                 onChange={(value) => handleChange({ height: value })}
+                defaultValue={String(bmi.height)}
               />
               <CustomText>cm</CustomText>
             </View>
@@ -104,12 +147,44 @@ export default function BMISetting({ navigation }) {
           <CustomText style={[styles.error]}>{error}</CustomText>
           <View style={styles.buttons}>
             <UserButton onPress={handleSubmit} content={"Lưu"} />
-            <TouchableOpacity style={styles.cancelButton}>
+            <TouchableOpacity
+              onPress={handleCancel}
+              style={styles.cancelButton}
+            >
               <CustomText style={[{ textAlign: "center" }]}>Bỏ qua</CustomText>
             </TouchableOpacity>
           </View>
         </View>
       </View>
+      <NotiDialog
+        visibale={openSuccessDialog}
+        onTouchOutside={() => {
+          if (openSuccessDialog) setOpenFailDialog(false);
+          if (openFailDialog) setOpenFailDialog(false);
+        }}
+        onOk={() => {
+          if (openSuccessDialog) {
+            setOpenSuccessDialog(false);
+            if (previousScreen.name === "Login") {
+              navigation.push("DefaultTargetSetting");
+            }
+          }
+          if (openFailDialog) {
+            setOpenFailDialog(false);
+          }
+        }}
+        title={
+          openSuccessDialog
+            ? "Cập nhật thành công!"
+            : openFailDialog
+            ? "Cập nhật thất bại!"
+            : ""
+        }
+      >
+        <CustomText>
+          {openSuccessDialog && `Chỉ số BMI của bạn là ${bmiValue}`}
+        </CustomText>
+      </NotiDialog>
     </Layout>
   );
 }
@@ -144,7 +219,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   customInput: {
-    width: "92%",
+    width: "90%",
   },
   cancelButton: {
     paddingVertical: 16,

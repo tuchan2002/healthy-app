@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var videoRouter = require("./routes/video");
 var targetRouter = require("./routes/target");
 var bodyartRouter = require("./routes/bodypart");
+var bmiRouter = require("./routes/bmi");
 var db = require('./models');
 
 var app = express();
@@ -28,6 +29,7 @@ app.use('/users', usersRouter);
 app.use('/videos', videoRouter);
 app.use('/targets', targetRouter);
 app.use('/bodyparts', bodyartRouter);
+app.use('/bmi', bmiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
