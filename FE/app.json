@@ -17,23 +17,50 @@
         {
           "microphonePermission": "Allow AwesomeProjectUI to access your microphone."
         }
+      ],
+      [
+        "@react-native-google-signin/google-signin"
       ]
     ],
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F0EFEF"
       },
-      "permissions": ["com.google.android.gms.permission.ACTIVITY_RECOGNITION","ACTIVITY_RECOGNITION", "VIBRATE"]
+      "permissions": [
+        "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
+        "ACTIVITY_RECOGNITION",
+        "VIBRATE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.INTERNET"
+      ],
+      "googleServicesFile": "./google-services.json",
+      "package": "com.Ui.healthy_app123"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3f4bc570-0daa-4d45-9745-0c99b51329bf"
+      }
     }
   }
 }
