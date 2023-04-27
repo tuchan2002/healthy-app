@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "398419276498",
+    "project_id": "ui-auth-fd914",
+    "storage_bucket": "ui-auth-fd914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398419276498:android:ee2752f23d39661d86330b",
+        "android_client_info": {
+          "package_name": "com.Ui.healthy_app123"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398419276498-i184pgvavmbh6upi4qmdodva10i206fb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Ui.healthy_app123",
+            "certificate_hash": "bf2aae246e0b363dde0b89862a840b9a97f63096"
+          }
+        },
+        {
+          "client_id": "398419276498-tke0i4ntcmu5uj8qk6cq4ppocar8mjlc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Ui.healthy_app123",
+            "certificate_hash": "5eccf32beed14f66ff2ca913f58a0dd298764c2a"
+          }
+        },
+        {
+          "client_id": "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtw2Ue-_gyML1QhI_7RG-e_9Vv60X5qNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
