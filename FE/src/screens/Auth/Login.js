@@ -3,14 +3,35 @@ import CustomText from "../../components/CustomText";
 import UserButton from "../../components/UserButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
 import Layout from "../../layouts/Layout";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from "@react-native-google-signin/google-signin";
+import auth from "@react-native-firebase/auth";
+import { useEffect } from "react";
 
 export default function Login({ navigation }) {
   const handleLoginViaFacebook = () => {
     navigation.push("BMISetting");
   };
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
+    });
+  }, []);
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    //await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // Get the users ID token
+    const user = await GoogleSignin.signIn();
+    console.log(user);
+    // Create a Google credential with the token
+  }
 
-  const handleLoginViaGoogle = () => {
-    navigation.push("Home");
+  const handleLoginViaGoogle = async () => {
+    //navigation.push("Home");
+    await onGoogleButtonPress();
   };
   return (
     <Layout isAuth={false}>
