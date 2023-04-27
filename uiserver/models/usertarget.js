@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserTarget.init(
     {
+      user_id: DataTypes.INTEGER,
       getUpAt: DataTypes.DATE,
       sleepAt: DataTypes.DATE,
       kcal: DataTypes.INTEGER,

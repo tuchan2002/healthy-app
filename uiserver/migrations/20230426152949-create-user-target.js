@@ -10,6 +10,10 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       getUpAt: {
         type: Sequelize.DATE,
         defaultValue: new Date(2023, 4, 26, 6, 0),
@@ -38,6 +42,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('usertargets');
+    await queryInterface.dropTable("usertargets");
   },
 };

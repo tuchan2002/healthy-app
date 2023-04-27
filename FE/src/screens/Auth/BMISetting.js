@@ -157,9 +157,9 @@ export default function BMISetting({ navigation }) {
         </View>
       </View>
       <NotiDialog
-        visibale={openSuccessDialog}
+        visibale={openSuccessDialog || openFailDialog}
         onTouchOutside={() => {
-          if (openSuccessDialog) setOpenFailDialog(false);
+          if (openSuccessDialog) setOpenSuccessDialog(false);
           if (openFailDialog) setOpenFailDialog(false);
         }}
         onOk={() => {
@@ -183,6 +183,7 @@ export default function BMISetting({ navigation }) {
       >
         <CustomText>
           {openSuccessDialog && `Chỉ số BMI của bạn là ${bmiValue}`}
+          {openFailDialog}
         </CustomText>
       </NotiDialog>
     </Layout>
