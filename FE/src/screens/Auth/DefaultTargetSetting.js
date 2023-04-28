@@ -2,13 +2,54 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Layout from "../../layouts/Layout";
 import CustomText from "../../components/CustomText";
 import UserButton from "../../components/UserButton";
-import NotiDialog from "../../components/NotiDialog";
 import { SCREEN_HEIGHT } from "../../constants/size";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Input from "../../components/Input";
+import TimePicker from "../../components/screens/Healthy/TargetsSetting/TimePicker";
+import {
+  handleGetUserTarget,
+  handlePostUserTarget,
+} from "../../services/userTarget";
+import defaultUserTarget from "../../assets/fakeDatas/defaultUserTarget";
+import NotiDialog from "../../components/NotiDialog";
 
-export default function DefaultTargetSetting() {
+export default function DefaultTargetSetting({ navigation }) {
+  const [userTarget, setUserTarget] = useState({});
   const [error, setError] = useState("");
-  const handleSubmit = () => {};
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const [openFailDialog, setOpenFailDialog] = useState(false);
+
+  useEffect(() => {
+    getUserTarget();
+  }, []);
+
+  const getUserTarget = async () => {
+    const res = await handleGetUserTarget(1);
+    if (res.success) {
+      setUserTarget(res.data ? res.data : defaultUserTarget);
+    }
+  };
+
+  const handleChange = (value) => {
+    setUserTarget({
+      ...userTarget,
+      ...value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const res = await handlePostUserTarget({ ...userTarget, user_id: 1 });
+
+    if (res.success) {
+      setOpenSuccessDialog(res.message);
+    } else {
+      setOpenFailDialog(res.message);
+    }
+  };
+
+  const handleCancel = () => {
+    navigation.push("Home");
+  };
   return (
     <Layout isAuth={false}>
       <View style={styles.container}>
@@ -23,22 +64,105 @@ export default function DefaultTargetSetting() {
         </View>
         <View style={styles.form}>
           <View style={styles.field}>
-            <CustomText style={[styles.label]}>Thức dậy lúc</CustomText>
-            <View style={styles.input}></View>
+            <CustomText style={[styles.label]}>
+              Lượng calo muốn tiêu hao mỗi ngày
+            </CustomText>
+            <View style={styles.input}>
+              <Input
+                placeholder="Nhập calo"
+                keyboardType="numeric"
+                style={styles.customInput}
+                onChange={(value) => handleChange({ kcal: value })}
+                defaultValue={String(userTarget.kcal)}
+              />
+              <CustomText>kcal</CustomText>
+            </View>
           </View>
           <View style={styles.field}>
-            <CustomText style={[styles.label]}>Đi ngủ lúc</CustomText>
-            <View style={styles.input}></View>
+            <CustomText style={[styles.label]}>
+              Số bước chân muốn đi mỗi ngày
+            </CustomText>
+            <View style={styles.input}>
+              <Input
+                placeholder="Nhập số bước chân"
+                keyboardType="numeric"
+                style={styles.customInput}
+                onChange={(value) => handleChange({ footsteps_amount: value })}
+                defaultValue={String(userTarget.footsteps_amount)}
+              />
+              <CustomText>bước</CustomText>
+            </View>
+          </View>
+          <View
+            style={[
+              styles.field,
+              { flexDirection: "row", alignItems: "center" },
+            ]}
+          >
+            <CustomText style={[styles.label]}>
+              Thức dậy mỗi ngày lúc
+            </CustomText>
+            <View style={[styles.input, { marginLeft: 16 }]}>
+              <TimePicker
+                onChange={(value) => handleChange({ getUpAt: value })}
+                defaultValue={userTarget.getUpAt}
+              />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.field,
+              { flexDirection: "row", alignItems: "center" },
+            ]}
+          >
+            <CustomText style={[styles.label]}>Đi ngủ mỗi ngày lúc</CustomText>
+            <View style={[styles.input, { marginLeft: 16 }]}>
+              <TimePicker
+                onChange={(value) => handleChange({ sleepAt: value })}
+                defaultValue={userTarget.sleepAt}
+              />
+            </View>
           </View>
           <CustomText style={[styles.error]}>{error}</CustomText>
           <View style={styles.buttons}>
             <UserButton onPress={handleSubmit} content={"Lưu"} />
-            <TouchableOpacity style={styles.cancelButton}>
+            <TouchableOpacity
+              onPress={handleCancel}
+              style={styles.cancelButton}
+            >
               <CustomText style={[{ textAlign: "center" }]}>Bỏ qua</CustomText>
             </TouchableOpacity>
           </View>
         </View>
       </View>
+      <NotiDialog
+        visibale={openSuccessDialog || openFailDialog}
+        onTouchOutside={() => {
+          if (openSuccessDialog) setOpenSuccessDialog(false);
+          if (openFailDialog) setOpenFailDialog(false);
+        }}
+        onOk={() => {
+          if (openSuccessDialog) {
+            setOpenSuccessDialog(false);
+            navigation.push("Home");
+          }
+          if (openFailDialog) {
+            setOpenFailDialog(false);
+          }
+        }}
+        title={
+          openSuccessDialog
+            ? "Cập nhật thành công!"
+            : openFailDialog
+            ? "Cập nhật thất bại!"
+            : ""
+        }
+      >
+        <CustomText>
+          {openSuccessDialog}
+          {openFailDialog}
+        </CustomText>
+      </NotiDialog>
     </Layout>
   );
 }
@@ -52,8 +176,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
   },
   form: {
-    paddingBottom: (SCREEN_HEIGHT / 100) * 8,
-    marginTop: (SCREEN_HEIGHT / 100) * 16,
+    marginTop: (SCREEN_HEIGHT / 100) * 4,
   },
   field: {
     marginBottom: 32,
@@ -84,6 +207,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   buttons: {
-    marginTop: (SCREEN_HEIGHT / 100) * 12,
+    marginTop: (SCREEN_HEIGHT / 100) * 2,
   },
 });

@@ -1,5 +1,5 @@
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../CustomText";
 import { convertDateToString2 } from "../../../../utils/datetime";
@@ -12,13 +12,18 @@ export default function TimePicker({
 }) {
   const [value, setValue] = useState(defaultValue);
   const [clockVisible, setClockVisible] = useState(false);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
   const handlePick = () => {
     setClockVisible(true);
   };
 
   const handleChange = (event, time) => {
-    setValue(time);
     setClockVisible(false);
+    setValue(time);
     onChange(time);
   };
   return (
