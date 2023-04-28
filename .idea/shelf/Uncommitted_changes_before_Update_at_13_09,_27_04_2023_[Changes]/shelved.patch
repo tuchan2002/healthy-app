@@ -1,0 +1,62 @@
+Index: uiserver/config/config.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"development\": {\n    \"username\": \"root\",\n    \"password\": \"root\",\n    \"database\": \"ui\",\n    \"host\": \"127.0.0.1\",\n    \"port\": \"3307\",\n    \"dialect\": \"mysql\"\n  },\n  \"test\": {\n    \"username\": \"root\",\n    \"password\": null,\n    \"database\": \"database_test\",\n    \"host\": \"127.0.0.1\",\n    \"dialect\": \"mysql\"\n  },\n  \"production\": {\n    \"username\": \"root\",\n    \"password\": null,\n    \"database\": \"database_production\",\n    \"host\": \"127.0.0.1\",\n    \"dialect\": \"mysql\"\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/uiserver/config/config.json b/uiserver/config/config.json
+--- a/uiserver/config/config.json	(revision f851a47159df9a331fc315a50bab4a60f2abfc7c)
++++ b/uiserver/config/config.json	(date 1682572592168)
+@@ -1,7 +1,7 @@
+ {
+   "development": {
+     "username": "root",
+-    "password": "root",
++    "password": "chungtrinh1904",
+     "database": "ui",
+     "host": "127.0.0.1",
+     "port": "3307",
+@@ -9,14 +9,14 @@
+   },
+   "test": {
+     "username": "root",
+-    "password": null,
++    "password": "chungtrinh1904",
+     "database": "database_test",
+     "host": "127.0.0.1",
+     "dialect": "mysql"
+   },
+   "production": {
+     "username": "root",
+-    "password": null,
++    "password": "chungtrinh1904",
+     "database": "database_production",
+     "host": "127.0.0.1",
+     "dialect": "mysql"
+Index: FE/package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/package-lock.json b/FE/package-lock.json
+--- a/FE/package-lock.json	(revision f851a47159df9a331fc315a50bab4a60f2abfc7c)
++++ b/FE/package-lock.json	(date 1682572219928)
+@@ -7672,6 +7672,17 @@
+         "expo": "*"
+       }
+     },
++    "node_modules/expo-sqlite": {
++      "version": "11.1.1",
++      "resolved": "https://registry.npmjs.org/expo-sqlite/-/expo-sqlite-11.1.1.tgz",
++      "integrity": "sha512-93KQ4Bc4+xQF2nOZC2jcJ+d0K1ooQSEYganLukw4Sp2LuxUtBsPXYTyOeisSxQSMMaz9nHiTqag8DEC1MiB7Xw==",
++      "dependencies": {
++        "@expo/websql": "^1.0.1"
++      },
++      "peerDependencies": {
++        "expo": "*"
++      }
++    },
+     "node_modules/expo-status-bar": {
+       "version": "1.4.4",
+       "resolved": "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.4.4.tgz",

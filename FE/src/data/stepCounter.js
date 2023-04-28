@@ -1,19 +1,22 @@
 import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase("ui.db");
-
+const startDay = new Date().setUTCHours(0, 0, 0, 0);
 export const createTableSteps = () => {
   try {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE table if not EXISTS steps (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            value int not NULL
-        )`,
+        	id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date date NOT NULL DEFAULT CURRENT_DATE,
+          value int not NULL,
+          type int not null default 0)`,
         [],
         () => console.log("create success"),
-        (error) => console.log(error)
+        (error) => {
+          console.log("create error: ");
+          console.log(error);
+        }
       );
     });
   } catch (error) {
@@ -22,12 +25,14 @@ export const createTableSteps = () => {
 };
 
 export const insertStep = (value) => {
+  const time = new Date().getTime();
+  const type = Math.floor((time - startDay) / (1000 * 60 * 15));
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          `INSERT INTO steps (value)
-        VALUES (${value});`
+          `INSERT INTO steps (value,type)
+            VALUES (${value},${type});`
         );
       },
       [],
@@ -76,7 +81,7 @@ export const countStepOfDay = () => {
     db.transaction((tx) => {
       tx.executeSql(
         `SELECT count(*) as count from steps
-        WHERE date(time) = date(CURRENT_DATE);`,
+        WHERE date = CURRENT_DATE`,
         [],
         (tx, result) => {
           resolve(result?.rows?._array[0]?.count);

@@ -98,22 +98,21 @@ export default Home = memo(() => {
     subscription && subscription.remove();
     setSubscription(null);
   };
-
   useEffect(() => {
+    createTableSteps();
     const getResult = async () => {
       const count = await countStepOfDay();
       steps.current = count;
       forceUpdate();
     };
     getResult();
-  });
+  }, []);
 
   useEffect(() => {
-    //createTableSteps();
     _subscribe();
     return () => _unsubscribe();
-    //getSteps();
-    // droptTable("steps");
+    // getSteps();
+    //droptTable("steps");
   }, []);
 
   return (
