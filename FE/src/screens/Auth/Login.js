@@ -10,7 +10,10 @@ import {
 import auth from "@react-native-firebase/auth";
 import { useEffect } from "react";
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-
+import { NativeModules } from 'react-native';
+import { Settings } from 'react-native-fbsdk-next';
+Settings.initializeSDK();
+console.log(LoginManager)
 async function onFacebookButtonPress() {
   // Attempt login with permissions
   const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
