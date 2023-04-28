@@ -18,13 +18,19 @@
           "microphonePermission": "Allow AwesomeProjectUI to access your microphone."
         }
       ],
-      [
-        "@react-native-google-signin/google-signin"
-      ]
+      ["@react-native-google-signin/google-signin"],
+      ["react-native-fbsdk-next",
+      {
+        "appID": "571327921863104",
+        "clientToken": "124031ad3c5823165463a4298d521388",
+        "displayName": "reactnative_ui",
+        "advertiserIDCollectionEnabled": false,
+        "autoLogAppEventsEnabled": false,
+        "isAutoInitEnabled": true,
+        "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+      }]
     ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {

@@ -9,17 +9,40 @@ import {
 } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
 import { useEffect } from "react";
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+
+async function onFacebookButtonPress() {
+  // Attempt login with permissions
+  const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+  if (result.isCancelled) {
+    throw 'User cancelled the login process';
+  }
+
+  // Once signed in, get the users AccesToken
+  const data = await AccessToken.getCurrentAccessToken();
+
+  if (!data) {
+    throw 'Something went wrong obtaining access token';
+  }
+  console.log(data, result);
+
+  // Create a Firebase credential with the AccessToken
+}
 
 export default function Login({ navigation }) {
-  const handleLoginViaFacebook = () => {
-    navigation.push("BMISetting");
-  };
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
         "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
     });
   }, []);
+
+  const handleLoginViaFacebook = async() => {
+    await onFacebookButtonPress();
+    navigation.push("BMISetting");
+  };
+
   async function onGoogleButtonPress() {
     // Check if your device supports Google Play
     //await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
