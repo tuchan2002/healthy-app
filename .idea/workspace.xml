@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="save steps current day sqlite">
-      <change beforePath="$PROJECT_DIR$/FE/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uiserver/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/uiserver/config/config.json" afterDir="false" />
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="metro conflict">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/data/stepCounter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/stepCounter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +72,7 @@
       <workItem from="1682188888863" duration="342000" />
       <workItem from="1682220199084" duration="23000" />
       <workItem from="1682572013791" duration="1487000" />
+      <workItem from="1682652510382" duration="3046000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>

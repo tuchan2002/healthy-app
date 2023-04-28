@@ -2,6 +2,7 @@
   "expo": {
     "name": "AwesomeProjectUI",
     "slug": "AwesomeProjectUI",
+    "owner": "bach1912",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,13 +19,9 @@
           "microphonePermission": "Allow AwesomeProjectUI to access your microphone."
         }
       ],
-      [
-        "@react-native-google-signin/google-signin"
-      ]
+      ["@react-native-google-signin/google-signin"]
     ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -44,8 +41,6 @@
         "backgroundColor": "#F0EFEF"
       },
       "permissions": [
-        "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
-        "ACTIVITY_RECOGNITION",
         "VIBRATE",
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS",
