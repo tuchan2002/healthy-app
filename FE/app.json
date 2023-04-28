@@ -23,12 +23,9 @@
       ["react-native-fbsdk-next",
       {
         "appID": "571327921863104",
-        "clientToken": "124031ad3c5823165463a4298d521388",
+        "clientToken": "34ebea7fbca814debd88c4a2a3293de3",
         "displayName": "reactnative_ui",
-        "advertiserIDCollectionEnabled": false,
-        "autoLogAppEventsEnabled": false,
-        "isAutoInitEnabled": true,
-        "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        "scheme": "fb571327921863104"
       }]
     ],
     "assetBundlePatterns": ["**/*"],
