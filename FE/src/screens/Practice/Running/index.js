@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import Actions from "./Actions";
 import Info from "./Info";
 import runningInfo from "../../../assets/fakeDatas/runningInfo";
-import MapView, { Marker, Polyline } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from "react-native-maps";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH, STATUSBAR_HEIGHT } from "../../../constants/size";
@@ -57,6 +57,7 @@ export default function Running() {
             latitudeDelta: 0,
             longitudeDelta: 3,
           }}
+          provider={ PROVIDER_GOOGLE }
         >
           <Marker
             title="Xuất phát"
