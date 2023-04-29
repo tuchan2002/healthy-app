@@ -9,12 +9,14 @@ import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useNavigation } from "@react-navigation/native";
 import { Accelerometer } from "expo-sensors";
+import moment from "moment";
 import {
   createTableSteps,
   insertStep,
   getSteps,
   droptTable,
   countStepOfDay,
+  getStepByDate,
 } from "../../../data/stepCounter";
 import * as SQLite from "expo-sqlite";
 
@@ -109,10 +111,12 @@ export default Home = memo(() => {
   }, []);
 
   useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
-    // getSteps();
+    // _subscribe();
+    // return () => _unsubscribe();
+    //getSteps();
     //droptTable("steps");
+    const date = new Date(new Date().getTime() + 7 * 60 * 60 * 1000);
+    getStepByDate(moment(date).format("YYYY-MM-DD"));
   }, []);
 
   return (
