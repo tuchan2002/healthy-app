@@ -111,12 +111,10 @@ export default Home = memo(() => {
   }, []);
 
   useEffect(() => {
-    // _subscribe();
-    // return () => _unsubscribe();
+    _subscribe();
+    return () => _unsubscribe();
     //getSteps();
     //droptTable("steps");
-    const date = new Date(new Date().getTime() + 7 * 60 * 60 * 1000);
-    getStepByDate(moment(date).format("YYYY-MM-DD"));
   }, []);
 
   return (

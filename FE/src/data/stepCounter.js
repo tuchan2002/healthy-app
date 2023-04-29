@@ -48,6 +48,21 @@ export const insertStep = (value) => {
   });
 };
 
+export const getSteps = () => {
+  try {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(`select * from  steps;`, [], (transact, resultset) => {
+          console.log(resultset?.rows?._array);
+        });
+      },
+      (error) => console.log(error)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const droptTable = (nameTable) => {
   try {
     db.transaction((tx) => {
@@ -82,22 +97,20 @@ export const countStepOfDay = () => {
 };
 
 export const getStepByDate = (date = "2023-04-28") => {
-  try {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `SELECT type,count(*)  as stepsCount,date from steps
-        WHERE date =${date}
+        `SELECT type,count(*) as stepsCount from steps
+        WHERE date = ?
         GROUP BY type;`,
-        [],
+        [date],
         (transact, resultset) => {
-          console.log(resultset);
+          resolve(resultset?.rows?._array);
         },
         (error) => {
-          console.log(error);
+          reject(error);
         }
       );
     });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
