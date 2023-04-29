@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="metro conflict">
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="set timezone table step">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_48,_28_04_2023_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_48__28_04_2023__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FE/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/src/data/stepCounter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/stepCounter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/index.js" afterDir="false" />
     </list>
@@ -72,7 +74,8 @@
       <workItem from="1682188888863" duration="342000" />
       <workItem from="1682220199084" duration="23000" />
       <workItem from="1682572013791" duration="1487000" />
-      <workItem from="1682652510382" duration="3046000" />
+      <workItem from="1682652510382" duration="4373000" />
+      <workItem from="1682740327166" duration="669000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -102,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682188941857</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactor struct table step sqlite">
+      <created>1682699935358</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682699935358</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +133,8 @@
     <MESSAGE value="particle speed machine" />
     <MESSAGE value="step counter v1.1" />
     <MESSAGE value="save steps current day sqlite" />
-    <option name="LAST_COMMIT_MESSAGE" value="save steps current day sqlite" />
+    <MESSAGE value="refactor struct table step sqlite" />
+    <MESSAGE value="set timezone table step" />
+    <option name="LAST_COMMIT_MESSAGE" value="set timezone table step" />
   </component>
 </project>
