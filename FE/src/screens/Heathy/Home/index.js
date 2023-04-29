@@ -9,12 +9,14 @@ import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useNavigation } from "@react-navigation/native";
 import { Accelerometer } from "expo-sensors";
+import moment from "moment";
 import {
   createTableSteps,
   insertStep,
   getSteps,
   droptTable,
   countStepOfDay,
+  getStepByDate,
 } from "../../../data/stepCounter";
 import * as SQLite from "expo-sqlite";
 
@@ -98,22 +100,21 @@ export default Home = memo(() => {
     subscription && subscription.remove();
     setSubscription(null);
   };
-
   useEffect(() => {
+    createTableSteps();
     const getResult = async () => {
       const count = await countStepOfDay();
       steps.current = count;
       forceUpdate();
     };
     getResult();
-  });
+  }, []);
 
   useEffect(() => {
-    //createTableSteps();
     _subscribe();
     return () => _unsubscribe();
     //getSteps();
-    // droptTable("steps");
+    //droptTable("steps");
   }, []);
 
   return (
