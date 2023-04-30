@@ -1,22 +1,30 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "./CustomText";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { convertDate } from "../utils/datetime";
-import { SCREEN_WIDTH } from "../constants/size";
 
 export default function TabsBar({ defaultTab, tabs, onChangeTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab);
+
+  const scrollViewRef = useRef(null);
 
   const handleChangeTab = (tabKey) => {
     setActiveTab(tabKey);
     onChangeTab(tabKey);
   };
+
+  useEffect(() => {
+    if (activeTab >= 5) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.bar}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
+        ref={scrollViewRef}
       >
         {tabs.map((tab, index) => {
           return (
