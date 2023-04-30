@@ -105,6 +105,47 @@ export const getStepByDate = (date = "2023-04-28") => {
         GROUP BY type;`,
         [date],
         (transact, resultset) => {
+          console.log("getStepByDate success");
+          resolve(resultset?.rows?._array);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const getStepByMonth = (month = "2023-04-28") => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT count(*) as stepsCount,strftime('%d', "date") as type from steps
+        WHERE strftime('%Y-%m', "date") = strftime('%Y-%m', ?)
+        GROUP BY strftime('%d', "date");`,
+        [month],
+        (transact, resultset) => {
+          console.log("getStepByMonth success");
+          resolve(resultset?.rows?._array);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const getStepByYear = (month = "2023-04-28") => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT count(*) as stepsCount,strftime('%m', "date") as type from steps
+        WHERE strftime('%Y', "date") = strftime('%Y', ?)
+        GROUP BY strftime('%m', "date");`,
+        [month],
+        (transact, resultset) => {
+          console.log("getStepByYear success");
           resolve(resultset?.rows?._array);
         },
         (error) => {

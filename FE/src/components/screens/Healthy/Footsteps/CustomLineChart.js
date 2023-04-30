@@ -1,11 +1,9 @@
 import { LineChart } from "react-native-chart-kit";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../../../constants/size";
 import color from "../../../../constants/color";
+import { labelExample } from "../../../../constants/lablesChart";
 
-export default function CustomLineChart({
-  data,
-  labels = ["0:00", "6:00", "12:00", "18:00", "24:00"],
-}) {
+export default function CustomLineChart({ data, labels = labelExample }) {
   return (
     <LineChart
       data={{
