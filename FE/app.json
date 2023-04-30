@@ -47,6 +47,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F0EFEF"
       },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBI2OsKhOCAWtd9BLkaU2FhapVCkqNCmsQ"
+        }
+      },
       "permissions": [
         "VIBRATE",
         "android.permission.RECORD_AUDIO",
