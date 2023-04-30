@@ -8,4 +8,8 @@ const handlePostUserTarget = (data) => {
   return instance.post("/user-targets", data);
 };
 
-export { handleGetUserTarget, handlePostUserTarget };
+const handlePutUserTarget = (data) => {
+  return instance.put("/user-targets/edit", data);
+};
+
+export { handleGetUserTarget, handlePostUserTarget, handlePutUserTarget };

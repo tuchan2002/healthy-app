@@ -12,9 +12,9 @@ const IBMIndex = ({ IBMValue, IBMDescription }) => {
     <TouchableOpacity
       style={[styles.itemContainer, { marginLeft: 8 }]}
       activeOpacity={0.5}
-      onPress={() => navigation.navigate("TargetsSetting")}
+      onPress={() => navigation.navigate("BMISetting")}
     >
-      <CustomText style={[{ fontSize: 14 }]}>IBM</CustomText>
+      <CustomText style={[{ fontSize: 14 }]}>BMI</CustomText>
       <CustomText
         style={[{ fontSize: 20, textAlign: "center", marginVertical: 10 }]}
       >

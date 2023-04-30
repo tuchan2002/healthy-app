@@ -11,6 +11,7 @@ var targetRouter = require("./routes/target");
 var bodyartRouter = require("./routes/bodypart");
 var bmiRouter = require("./routes/bmi");
 var userTargetRouter = require("./routes/usertarget");
+var userTargetStateRouter = require("./routes/usertarget_state");
 var db = require('./models');
 
 var app = express();
@@ -32,6 +33,7 @@ app.use('/targets', targetRouter);
 app.use('/bodyparts', bodyartRouter);
 app.use('/bmi', bmiRouter);
 app.use('/user-targets', userTargetRouter);
+app.use('/user-target-states', userTargetStateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

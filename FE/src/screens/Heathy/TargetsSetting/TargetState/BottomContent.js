@@ -5,30 +5,42 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { convertDate, convertDateToString2 } from "../../../../utils/datetime";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import StateDetailBox from "../../../../components/screens/Healthy/TargetsSetting/StateDetailBox";
+import { handlePutUserTarget } from "../../../../services/userTarget";
+import { AuthContext } from "../../../../providers/AuthProvider";
+import NotiDialog from "../../../../components/NotiDialog";
 
-export default function BottomContent({
-  targetState,
-  targetDetail: tD,
-  onChange,
-}) {
+export default function BottomContent({ targetState, targetDetail: tD }) {
   const [isNow, setIsNow] = useState(false);
   const [targetDetail, setTargetDetail] = useState(tD);
+  const { authUser } = useContext(AuthContext);
+  const [openSuccessDialog, setOpenSuccessDialog] = useState("");
+  const [openFailDialog, setOpenFailDialog] = useState("");
 
   useEffect(() => {
     setIsNow(
-      convertDate(targetState.createdAt).date === convertDate(new Date()).date,
+      convertDate(targetState?.createdAt)?.date ===
+        convertDate(new Date()).date,
     );
   }, [targetState]);
 
-  const handleChangeState = (value) => {
+  const handleChangeState = async (value) => {
     const newTargetDetail = {
       ...targetDetail,
       ...value,
     };
     setTargetDetail(newTargetDetail);
-    onChange(newTargetDetail);
+    const res = await handlePutUserTarget({
+      ...newTargetDetail,
+      user_id: authUser.user_id,
+    });
+
+    if (res.success) {
+      setOpenSuccessDialog(res.message);
+    } else {
+      setOpenFailDialog(res.message);
+    }
   };
 
   return (
@@ -44,14 +56,16 @@ export default function BottomContent({
           content={
             (convertDateToString2(targetState?.gotUpAt) || "--") +
             "/" +
-            convertDateToString2(targetDetail.getUpAt) +
+            convertDateToString2(targetDetail?.getUpAt) +
             " SA"
           }
           icon={<Ionicons name="sunny" size={24} color="black" />}
           editable={isNow}
           onChange={(value) => handleChangeState({ getUpAt: value })}
         >
-          <StateDetailBox.TimePickerInput defaultValue={targetDetail.getUpAt} />
+          <StateDetailBox.TimePickerInput
+            defaultValue={targetDetail?.getUpAt}
+          />
         </StateDetailBox>
         <StateDetailBox
           title="Hoạt động"
@@ -66,34 +80,61 @@ export default function BottomContent({
           content={
             <CustomText>
               <CustomText style={[{ fontSize: 20 }]}>
-                {targetState?.stepsNumber || "0"}
+                {targetState?.footsteps_amount || "0"}
               </CustomText>
-              /{targetDetail.stepsNumber} bước
+              /{targetDetail?.footsteps_amount} bước
             </CustomText>
           }
           icon={
             <MaterialCommunityIcons name="foot-print" size={24} color="black" />
           }
           editable={isNow}
-          onChange={(value) => handleChangeState({ stepsNumber: value })}
+          onChange={(value) => handleChangeState({ footsteps_amount: value })}
         >
-          <StateDetailBox.FootStepsInput />
+          <StateDetailBox.FootStepsInput
+            defaultValue={targetDetail?.footsteps_amount}
+          />
         </StateDetailBox>
         <StateDetailBox
           title="Đi ngủ"
           content={
             (convertDateToString2(targetState?.sleepedAt) || "--") +
             "/" +
-            convertDateToString2(targetDetail.sleepAt) +
+            convertDateToString2(targetDetail?.sleepAt) +
             " SA"
           }
           icon={<Ionicons name="moon" size={24} color="black" />}
           editable={isNow}
           onChange={(value) => handleChangeState({ sleepAt: value })}
         >
-          <StateDetailBox.TimePickerInput defaultValue={targetDetail.sleepAt} />
+          <StateDetailBox.TimePickerInput
+            defaultValue={targetDetail?.sleepAt}
+          />
         </StateDetailBox>
       </View>
+      <NotiDialog
+        title={
+          openSuccessDialog
+            ? "Cập nhật thành công"
+            : openFailDialog
+            ? "Cập nhật thất bại"
+            : ""
+        }
+        visibale={openSuccessDialog || openFailDialog ? true : false}
+        onTouchOutside={() => {
+          if (openSuccessDialog) setOpenSuccessDialog("");
+          if (openFailDialog) setOpenFailDialog("");
+        }}
+        onOk={() => {
+          if (openSuccessDialog) setOpenSuccessDialog("");
+          if (openFailDialog) setOpenFailDialog("");
+        }}
+      >
+        <CustomText>
+          {openSuccessDialog}
+          {openFailDialog}
+        </CustomText>
+      </NotiDialog>
     </View>
   );
 }

@@ -7,14 +7,15 @@ export const createTableAuthUsers = () => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE table if not EXISTS auth_users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            username VARCHAR(100),
-            avatar VARCHAR(100),
-        )`,
+        	id INTEGER PRIMARY KEY AUTOINCREMENT,
+          token text not null,
+          user_id int not null,
+          username text not null,
+          avatar text not null
+        );`,
         [],
         () => console.log("create success"),
-        (error) => console.log(error)
+        (error) => console.log("Error create table user: ", error),
       );
     });
   } catch (error) {
@@ -27,8 +28,8 @@ export const insertUser = (authUser) => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          `INSERT INTO auth_users (user_id, username, avatar)
-        VALUES (${authUser.id}, ${authUser.username}, ${authUser.avatar});`
+          `INSERT INTO auth_users (token, user_id, username, avatar)
+              VALUES ("${authUser.token}", ${authUser.id}, "${authUser.username}", "${authUser.avatar}");`,
         );
       },
       [],
@@ -36,25 +37,27 @@ export const insertUser = (authUser) => {
         resolve("insert success");
       },
       (error) => {
-        reject(error);
-      }
+        reject("Error insert user:" + error.message);
+      },
     );
   });
 };
 
-export const getAuthUserId = () => {
-  try {
+export const getAuthUserProperty = (property) => {
+  return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql(`select user_id from auth_users limit 1;`, [], (transact, resultset) => {
-          console.log(resultset?.rows?._array);
-        });
+        tx.executeSql(
+          `select ${property} from auth_users limit 1;`,
+          [],
+          (transact, resultset) => {
+            resolve(resultset?.rows?._array);
+          },
+        );
       },
-      (error) => console.log(error)
+      (error) => reject(error),
     );
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const droptTable = (nameTable) => {
@@ -64,7 +67,7 @@ export const droptTable = (nameTable) => {
         `DROP TABLE ${nameTable}`,
         [],
         () => console.log("drop success"),
-        (error) => console.log(error)
+        (error) => console.log(error),
       );
     });
   } catch (error) {

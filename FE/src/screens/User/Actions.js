@@ -1,12 +1,20 @@
 import { StyleSheet, View } from "react-native";
 import UserButton from "../../components/UserButton";
 import { useNavigation } from "@react-navigation/native";
+import { droptTable } from "../../data/user";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export default function Actions() {
   const navigation = useNavigation();
+  const { setAuthUser } = useContext(AuthContext);
   const handleSync = () => {};
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    droptTable("auth_users");
+    setAuthUser(null);
+    await GoogleSignin.signOut();
     navigation.push("Login");
   };
   return (

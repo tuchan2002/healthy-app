@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../CustomText";
 import { Feather } from "@expo/vector-icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../../../Input";
 import CustomDialog from "../../../CustomDialog";
 import TimePicker from "./TimePicker";
@@ -30,7 +30,6 @@ function StateDetailBox({
     onChange(value);
     handleCancel();
   };
-
   return (
     <>
       <View style={styles.box}>
@@ -63,11 +62,12 @@ function StateDetailBox({
   );
 }
 
-function FootStepsInput({ setValue }) {
+function FootStepsInput({ setValue, defaultValue }) {
   return (
     <Input
       placeholder="Nhập số bước chân"
       keyboardType="numeric"
+      defaultValue={String(defaultValue)}
       onChange={(value) => {
         setValue(value);
       }}
@@ -76,12 +76,16 @@ function FootStepsInput({ setValue }) {
 }
 
 function TimePickerInput({ defaultValue, minimumDate, maximumDate, setValue }) {
+  const [timeValue, setTimeValue] = useState(new Date(defaultValue));
   return (
     <TimePicker
-      defaultValue={defaultValue}
+      defaultValue={timeValue}
       minimumDate={minimumDate}
       maximumDate={maximumDate}
-      onChange={(value) => setValue(value)}
+      onChange={(value) => {
+        setTimeValue(value);
+        setValue(value);
+      }}
     />
   );
 }

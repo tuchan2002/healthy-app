@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ BMI, UserTarget, UserTargetState, FootStep }) {
       this.hasOne(BMI, { foreignKey: "user_id" });
-      this.hasOne(UserTarget, { foreignKey: "user_id" });
+      this.hasMany(UserTarget, { foreignKey: "user_id" });
       this.hasMany(UserTargetState, { foreignKey: "user_id" });
       this.hasMany(FootStep, { foreignKey: "user_id" });
     }

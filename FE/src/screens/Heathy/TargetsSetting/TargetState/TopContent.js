@@ -16,7 +16,7 @@ export default function TopContent({ targetState, targetDetail }) {
   });
 
   useEffect(() => {
-    if (targetState) {
+    if (targetState && targetDetail) {
       let timeProgress = 0;
       if (targetState.gotUpAt) {
         timeProgress +=
@@ -32,12 +32,12 @@ export default function TopContent({ targetState, targetDetail }) {
       }
       const data = [
         timeProgress,
-        targetState.stepsNumber / targetDetail.stepsNumber,
-        targetState.calo / targetDetail.calo,
+        targetState.footsteps_amount / targetDetail.footsteps_amount,
+        targetState.kcal / targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
     }
-  }, [targetState]);
+  }, [targetState, targetDetail]);
   return (
     <View style={styles.container}>
       <View>
@@ -65,7 +65,7 @@ export default function TopContent({ targetState, targetDetail }) {
             <CustomText style={[styles.text]}>
               Số bước:{" "}
               <CustomText style={[{ fontSize: 14 }]}>
-                {targetState?.stepsNumber || 0}
+                {targetState?.footsteps_amount || 0}
               </CustomText>{" "}
               bước
             </CustomText>
@@ -77,7 +77,7 @@ export default function TopContent({ targetState, targetDetail }) {
           </View>
           <View style={styles.textBox}>
             <CustomText style={[styles.text]}>
-              Calo: {targetState?.calo || "--"} calo
+              Calo: {targetState?.kcal || "--"} calo
             </CustomText>
           </View>
         </View>

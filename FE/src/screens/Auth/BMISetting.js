@@ -6,15 +6,21 @@ import { StyleSheet } from "react-native";
 import UserButton from "../../components/UserButton";
 import { useEffect, useMemo, useState } from "react";
 import bmiValues from "../../constants/bmiValues";
-import { SCREEN_HEIGHT } from "../../constants/size";
+import {
+  FOOTERBAR_HEIGHT,
+  SCREEN_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from "../../constants/size";
 import { handleGetBMI, handlePostBMI } from "../../services/bmi";
 import NotiDialog from "../../components/NotiDialog";
+import { getAuthUserProperty } from "../../data/user";
 
 export default function BMISetting({ navigation }) {
   const [bmi, setBmi] = useState({
     weight: "",
     height: "",
   });
+  const [userId, setUserId] = useState(null);
   const [error, setError] = useState("");
   const [bmiValue, setBmiValue] = useState("---");
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
@@ -24,12 +30,24 @@ export default function BMISetting({ navigation }) {
     () => navigateHistory[navigateHistory.length - 2],
   );
 
+  console.log(previousScreen);
+
   useEffect(() => {
-    getBMI();
+    const getUserId = async () => {
+      const ui = await getAuthUserProperty("user_id");
+      setUserId(ui[0].user_id);
+    };
+    getUserId();
   }, []);
 
+  useEffect(() => {
+    if (userId) {
+      getBMI();
+    }
+  }, [userId]);
+
   const getBMI = async () => {
-    const bmiRes = await handleGetBMI(1);
+    const bmiRes = await handleGetBMI(userId);
     if (bmiRes.success) {
       const weight = bmiRes.data?.weight == "null" ? "" : bmiRes.data?.weight;
       const height = bmiRes.data?.height == "null" ? "" : bmiRes.data?.height;
@@ -65,7 +83,7 @@ export default function BMISetting({ navigation }) {
       setError("Bạn phải nhập chiều cao!");
     } else {
       const data = {
-        user_id: 1,
+        user_id: userId,
         ...bmi,
         value: bmiValue,
       };
@@ -101,7 +119,7 @@ export default function BMISetting({ navigation }) {
   };
 
   const handleCancel = () => {
-    if ((previousScreen.name = "Login")) {
+    if ((previousScreen.name === "Login")) {
       navigation.push("DefaultTargetSetting");
     } else {
       navigation.push(previousScreen.name);
@@ -192,11 +210,11 @@ export default function BMISetting({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: "4%",
-    marginTop: (SCREEN_HEIGHT / 100) * 12,
+    paddingHorizontal: "4%",
     display: "flex",
     flexDirection: "column",
-    height: SCREEN_HEIGHT,
+    paddingTop: "8%",
+    height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - STATUSBAR_HEIGHT,
   },
   form: {
     paddingBottom: (SCREEN_HEIGHT / 100) * 8,
