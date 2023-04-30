@@ -72,5 +72,6 @@ const styles = StyleSheet.create({
   date: {
     textAlign: "center",
     fontSize: 12,
+    marginVertical: 16,
   },
 });

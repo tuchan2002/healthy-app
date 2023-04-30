@@ -40,7 +40,7 @@ export default function Layout({ children, activeMenu, isAuth = true }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: STATUSBAR_HEIGHT,
+    paddingTop: 0,
     height: "100%",
   },
   content: {

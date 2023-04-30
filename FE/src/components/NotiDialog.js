@@ -47,6 +47,7 @@ export default function NotiDialog({
         <TouchableOpacity onPress={onOk} style={styles.button}>
           <CustomText style={[styles.buttonText]}>OK</CustomText>
         </TouchableOpacity>
+        <></>
       </DialogFooter>
     </Dialog>
   );
