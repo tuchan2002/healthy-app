@@ -18,10 +18,49 @@ export const buildLabelsSteps = () => {
   return arr;
 };
 
-export const buildSteps = (arr) => {
-  const arrSteps = new Array(96).fill(0);
+export const buildSteps = (arr, arrLabels) => {
+  // console.log("------------------------------------");
+  // console.log(arr);
+  // console.log(arrLabels);
+  // console.log("------------------------------------");
+
+  const arrSteps = new Array(arrLabels.length).fill(0);
   for (let i = 0; i < arr.length; i++) {
-    arrSteps[arr[i].type] = arr[i].stepsCount;
+    if (Number(arr[i].type) < arrSteps.length) {
+      arrSteps[Number(arr[i].type)] = arr[i].stepsCount;
+    }
   }
   return arrSteps;
+};
+
+export const buildDayOfMonth = (month) => {
+  const arr = [];
+  const arr31 = [1, 3, 5, 7, 8, 10, 12];
+  const arr30 = [4, 6, 9, 11];
+  if (arr31.includes(month)) {
+    for (let i = 1; i <= 31; i++) {
+      if (i === 1 || i % 5 === 0 || i === 31) {
+        arr.push(i.toString());
+      } else {
+        arr.push(" ");
+      }
+    }
+  } else if (arr30.includes(month)) {
+    for (let i = 1; i <= 30; i++) {
+      if (i % 5 === 0 || i === 1) {
+        arr.push(i.toString());
+      } else {
+        arr.push(" ");
+      }
+    }
+  } else {
+    for (let i = 1; i <= 28; i++) {
+      if (i === 1 || i % 5 === 0 || i === 28) {
+        arr.push(i.toString());
+      } else {
+        arr.push(" ");
+      }
+    }
+  }
+  return arr;
 };
