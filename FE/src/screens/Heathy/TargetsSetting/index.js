@@ -52,7 +52,7 @@ export default function TargetsSetting() {
       <HealthyHeaderBar title="Cài đặt mục tiêu" />
       <View style={styles.container}>
         <CustomText style={[styles.date]}>
-          {DateTime.convertDateToString1(Date.now())}
+          {DateTime.convertDateToString1(new Date().setDate(new Date().getDate() - (activeTab - 2)))}
         </CustomText>
         <TabsBar
           tabs={tabs}
