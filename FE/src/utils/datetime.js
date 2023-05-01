@@ -7,7 +7,7 @@ export function convertDate(date) {
       minute: newDate.getMinutes(),
       day: newDate.getDay() + 1 === 1 ? 8 : newDate.getDay() + 1,
       date: newDate.getDate(),
-      month: newDate.getMonth(),
+      month: newDate.getMonth() + 1,
       year: newDate.getFullYear(),
     };
   }

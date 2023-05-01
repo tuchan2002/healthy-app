@@ -58,6 +58,7 @@ export default function TargetsSetting() {
           tabs={tabs}
           defaultTab={activeTab}
           onChangeTab={handleChangeTab}
+          type={"day"}
         />
         <TargetState day={activeTab} />
       </View>

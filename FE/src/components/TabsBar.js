@@ -3,7 +3,7 @@ import CustomText from "./CustomText";
 import { useEffect, useRef, useState } from "react";
 import { convertDate } from "../utils/datetime";
 
-export default function TabsBar({ defaultTab, tabs, onChangeTab }) {
+export default function TabsBar({ type, defaultTab, tabs, onChangeTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab);
 
   const scrollViewRef = useRef(null);
@@ -36,13 +36,13 @@ export default function TabsBar({ defaultTab, tabs, onChangeTab }) {
                 index === tabs.length - 1 && { paddingRight: 0 },
               ]}
               onPress={() => handleChangeTab(tab.key)}
-              disabled={tab.key > convertDate(Date.now()).day}
+              disabled={type === "day" && tab.key > convertDate(Date.now()).day}
             >
               <CustomText
                 style={[
                   styles.text,
                   activeTab === tab.key && styles.activeText,
-                  tab.key > convertDate(Date.now()).day && styles.disabledText,
+                  type === "day" && tab.key > convertDate(Date.now()).day && styles.disabledText,
                 ]}
               >
                 {tab.name}
