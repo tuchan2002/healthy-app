@@ -4,6 +4,7 @@ const db = SQLite.openDatabase("ui.db");
 const startDay = new Date(
   new Date().getTime() + 7 * 60 * 60 * 1000
 ).setUTCHours(0, 0, 0, 0);
+
 export const createTableSteps = () => {
   try {
     db.transaction((tx) => {
@@ -14,9 +15,9 @@ export const createTableSteps = () => {
           value int not NULL,
           type int not null default 0);`,
         [],
-        () => console.log("create success"),
+        () => console.log("create table step success"),
         (error) => {
-          console.log("create error: ");
+          console.log("create table step error: ");
           console.log(error);
         }
       );
@@ -39,7 +40,7 @@ export const insertStep = (value) => {
       },
       [],
       () => {
-        resolve("insert success");
+        resolve("insert steps success");
       },
       (error) => {
         reject(error);
@@ -109,6 +110,7 @@ export const getStepByDate = (date = "2023-04-28") => {
           resolve(resultset?.rows?._array);
         },
         (error) => {
+          console.log("getStepByDate error");
           reject(error);
         }
       );
@@ -129,6 +131,7 @@ export const getStepByMonth = (month = "2023-04-28") => {
           resolve(resultset?.rows?._array);
         },
         (error) => {
+          console.log("getStepByMonth error");
           reject(error);
         }
       );
