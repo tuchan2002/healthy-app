@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="set timezone table step">
-      <change beforePath="$PROJECT_DIR$/FE/src/components/screens/Healthy/Footsteps/CustomLineChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/components/screens/Healthy/Footsteps/CustomLineChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/stepCounter.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/stepCounter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/screens/Heathy/Footsteps/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Heathy/Footsteps/index.js" afterDir="false" />
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="analyst steps by month and year">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +71,8 @@
       <workItem from="1682652510382" duration="4373000" />
       <workItem from="1682740327166" duration="1894000" />
       <workItem from="1682760079980" duration="1152000" />
+      <workItem from="1682829626902" duration="676000" />
+      <workItem from="1682939524165" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -123,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682760625503</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="analyst steps by month and year">
+      <created>1682829651678</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682829651678</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +153,7 @@
     <MESSAGE value="save steps current day sqlite" />
     <MESSAGE value="refactor struct table step sqlite" />
     <MESSAGE value="set timezone table step" />
-    <option name="LAST_COMMIT_MESSAGE" value="set timezone table step" />
+    <MESSAGE value="analyst steps by month and year" />
+    <option name="LAST_COMMIT_MESSAGE" value="analyst steps by month and year" />
   </component>
 </project>
