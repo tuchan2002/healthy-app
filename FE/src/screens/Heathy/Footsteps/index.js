@@ -16,31 +16,28 @@ import {
   buildLabelsSteps,
   buildDayOfMonth,
 } from "../../../constants/step";
-import { labelExample, labelsMonth } from "../../../constants/lablesChart";
-
-const tabs = [
-  {
-    key: 1,
-    name: "NGÀY",
-  },
-  {
-    key: 2,
-    name: "THÁNG",
-  },
-  {
-    key: 3,
-    name: "NĂM",
-  },
-];
+import { labelsMonth } from "../../../constants/lablesChart";
 
 function Footsteps() {
+  const [keyTab, setKeyTab] = useState(1);
   const [chartData, setChartData] = useState(new Array(96).fill(0));
   const [labels, setLabels] = useState(buildLabelsSteps());
-  const [date, setDate] = useState(
-    new Date(new Date().getTime() + 7 * 60 * 60 * 1000)
-  );
+  const [date, setDate] = useState(new Date());
 
-  const [keyTab, setKeyTab] = useState(1);
+  const tabs = [
+    {
+      key: 1,
+      name: "NGÀY",
+    },
+    {
+      key: 2,
+      name: "THÁNG",
+    },
+    {
+      key: 3,
+      name: "NĂM",
+    },
+  ];
 
   const fetchStepsByDate = async (date) => {
     const dateBuild = moment(date).format("YYYY-MM-DD");
@@ -67,25 +64,26 @@ function Footsteps() {
     let labelSet = [];
     if (keyTab === 1) {
       labelSet = buildLabelsSteps();
-    } else if (keyTab === 3) {
-      labelSet = labelsMonth;
     } else if (keyTab === 2) {
       labelSet = buildDayOfMonth(date.getMonth());
+    } else if (keyTab === 3) {
+      labelSet = labelsMonth;
     }
     setLabels(labelSet);
   }, [keyTab]);
 
   useEffect(() => {
+    console.log("Fetching steps");
     fetchDataChart();
   }, [date, labels]);
 
-  const fetchDataChart = () => {
+  const fetchDataChart = async () => {
     if (keyTab === 1) {
-      fetchStepsByDate(date);
+      await fetchStepsByDate(date);
     } else if (keyTab === 2) {
-      fetchStepsByMonth(date);
+      await fetchStepsByMonth(date);
     } else if (keyTab === 3) {
-      fetchStepsByYear(date);
+      await fetchStepsByYear(date);
     } else {
       setLabels([]);
       setChartData([]);
