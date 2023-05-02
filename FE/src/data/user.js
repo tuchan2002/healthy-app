@@ -14,8 +14,8 @@ export const createTableAuthUsers = () => {
           avatar text not null
         );`,
         [],
-        () => console.log("create success"),
-        (error) => console.log("Error create table user: ", error),
+        () => console.log("create table auth_users success"),
+        (error) => console.log("Error create table user: ", error)
       );
     });
   } catch (error) {
@@ -29,7 +29,7 @@ export const insertUser = (authUser) => {
       (tx) => {
         tx.executeSql(
           `INSERT INTO auth_users (token, user_id, username, avatar)
-              VALUES ("${authUser.token}", ${authUser.id}, "${authUser.username}", "${authUser.avatar}");`,
+              VALUES ("${authUser.token}", ${authUser.id}, "${authUser.username}", "${authUser.avatar}");`
         );
       },
       [],
@@ -38,7 +38,7 @@ export const insertUser = (authUser) => {
       },
       (error) => {
         reject("Error insert user:" + error.message);
-      },
+      }
     );
   });
 };
@@ -52,10 +52,10 @@ export const getAuthUserProperty = (property) => {
           [],
           (transact, resultset) => {
             resolve(resultset?.rows?._array);
-          },
+          }
         );
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -67,7 +67,7 @@ export const droptTable = (nameTable) => {
         `DROP TABLE ${nameTable}`,
         [],
         () => console.log("drop success"),
-        (error) => console.log(error),
+        (error) => console.log(error)
       );
     });
   } catch (error) {

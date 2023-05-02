@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, memo, useMemo } from "react";
-import { Image, ScrollView, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
@@ -33,7 +33,7 @@ export default Home = memo(() => {
   const steps = useRef(0);
 
   const _slow = () => {
-    Accelerometer.setUpdateInterval(40);
+    Accelerometer.setUpdateInterval(30);
   };
 
   _slow();
@@ -46,7 +46,7 @@ export default Home = memo(() => {
     let magnitudePrev = 9.81;
     let magnitudeMiddle = 9.81;
     setSubscription(
-      Accelerometer.addListener(async (data) => {
+      Accelerometer.addListener((data) => {
         const x = data.x;
         const y = data.y;
         const z = data.z;
@@ -74,7 +74,7 @@ export default Home = memo(() => {
           if (peak === true && magnitudeMiddle > magnitude) {
             start = false;
             peak = false;
-            if (valuePeak - mArray[0] > 3.5) {
+            if (valuePeak - mArray[0] > 4) {
               console.log(mArray);
               steps.current += 1;
               insertStep(valuePeak - mArray[0]);
