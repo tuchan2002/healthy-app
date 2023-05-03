@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import { View, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import Fillter from "./Fillter";
@@ -138,14 +132,14 @@ export default function Exercises() {
             ref={scrollRef}
           >
             {exercises.map((element, index) => (
-              <TouchableHighlight
+              <TouchableOpacity
                 key={index}
                 onPress={() => {
                   navigation.push("Video", { id: element.id });
                 }}
               >
                 <Item data={element} navigation={navigation} />
-              </TouchableHighlight>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         ) : (
