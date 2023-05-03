@@ -26,7 +26,13 @@
         "clientToken": "34ebea7fbca814debd88c4a2a3293de3",
         "displayName": "reactnative_ui",
         "scheme": "fb571327921863104"
-      }]
+      }],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow AwesomeProjectUI to use your location."
+        }
+      ]
     ],
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -56,7 +62,8 @@
         "VIBRATE",
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS",
-        "android.permission.INTERNET"
+        "android.permission.INTERNET",
+        "ACCESS_BACKGROUND_LOCATION"
       ],
       "googleServicesFile": "./google-services.json",
       "package": "com.Ui.healthy_app123"

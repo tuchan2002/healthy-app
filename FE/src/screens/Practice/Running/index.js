@@ -4,11 +4,75 @@ import Info from "./Info";
 import runningInfo from "../../../assets/fakeDatas/runningInfo";
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from "react-native-maps";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
-import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH, STATUSBAR_HEIGHT } from "../../../constants/size";
+import { useEffect, useState } from "react";
+import {
+  FOOTERBAR_HEIGHT,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  STATUSBAR_HEIGHT,
+} from "../../../constants/size";
+import * as Location from "expo-location";
+import {
+  LOCATION_TASK_NAME,
+  registerLocationTask,
+} from "../../../utils/locationTask";
+import { createTableLocations, getTheLocation } from "../../../data/locations";
 
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
+  const [path, setPath] = useState([]);
+  const [nowLocation, setNowLocation] = useState();
+
+  useEffect(() => {
+    createTableLocations();
+    getPath();
+    getNowLocation();
+  }, []);
+
+  setInterval(() => {
+    getPath();
+  }, 10000);
+
+  const getPath = async () => {
+    const theLocation = await getTheLocation();
+    setPath(theLocation);
+  };
+
+  const getNowLocation = async () => {
+    const location = await Location.getCurrentPositionAsync();
+    setNowLocation(location.coords);
+  };
+
+  useEffect(() => {
+    if (defaultRunningInfo.isStarted) {
+      startBackgroundTracking();
+      registerLocationTask();
+    }
+  }, [defaultRunningInfo]);
+
+  const startBackgroundTracking = async () => {
+    await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+      accuracy: Location.LocationAccuracy.BestForNavigation,
+      timeInterval: 10000,
+      showsBackgroundLocationIndicator: true,
+      foregroundService: {
+        notificationTitle: "Title",
+        notificationBody: "This is body!",
+        notificationColor: "#AA1111",
+      },
+      deferredUpdatesInterval: 100,
+      activityType: Location.ActivityType.AutomotiveNavigation,
+    });
+  };
+
+  const getPermissions = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== "granted") {
+      console.log("Hãy cho phép ứng dụng lấy thông tin vị trí của bạn!");
+      return;
+    }
+  };
 
   const handleChangeTarget = (newTarget) => {
     setDefaultRunningInfo({
@@ -17,11 +81,14 @@ export default function Running() {
     });
   };
 
-  const handleStartRunning = () => {
-    setDefaultRunningInfo({
-      ...defaultRunningInfo,
-      isStarted: true,
-    });
+  const handleStartRunning = async () => {
+    if (!defaultRunningInfo.isStarted) {
+      getPermissions();
+      setDefaultRunningInfo({
+        ...defaultRunningInfo,
+        isStarted: true,
+      });
+    }
   };
 
   return (
@@ -49,40 +116,43 @@ export default function Running() {
         </View>
       </View>
       <View style={[styles.content, styles.mapContainer]}>
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 21.0292,
-            longitude: 105.8526,
-            latitudeDelta: 0,
-            longitudeDelta: 3,
-          }}
-          provider={ PROVIDER_GOOGLE }
-        >
-          <Marker
-            title="Xuất phát"
-            coordinate={{ latitude: 21.0292, longitude: 105.8526 }}
-          />
-          <Polyline
-            coordinates={[
-              { latitude: 21.0292, longitude: 105.8526 },
-              { latitude: 21.03, longitude: 105.8526 },
-              { latitude: 21.033, longitude: 105.853 },
-              { latitude: 21.034, longitude: 105.854 },
-              { latitude: 21.02, longitude: 105.855 },
-              { latitude: 20.02, longitude: 105.855 },
-              { latitude: 20.02, longitude: 105.9 },
-              { latitude: 21.0292, longitude: 106.8526 },
-            ]}
-            strokeWidth={4}
-            strokeColor="violet"
-          />
-          <Marker
-            title="Hiện tại"
-            pinColor="blue"
-            coordinate={{ latitude: 21.0292, longitude: 106.8526 }}
-          />
-        </MapView>
+        {nowLocation && (
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: nowLocation.latitude,
+              longitude: nowLocation.longitude,
+              latitudeDelta: 0,
+              longitudeDelta: 0,
+            }}
+            provider={PROVIDER_GOOGLE}
+          >
+            <Marker
+              title="Xuất phát"
+              coordinate={
+                path[0] || {
+                  latitude: nowLocation.latitude,
+                  longitude: nowLocation.longitude,
+                }
+              }
+            />
+            <Polyline
+              coordinates={path}
+              strokeWidth={6}
+              strokeColor={"orange"}
+            />
+            <Marker
+              title="Hiện tại"
+              pinColor="blue"
+              coordinate={
+                path[path.length - 1] || {
+                  latitude: nowLocation.latitude,
+                  longitude: nowLocation.longitude,
+                }
+              }
+            />
+          </MapView>
+        )}
       </View>
     </View>
   );

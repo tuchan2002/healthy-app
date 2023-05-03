@@ -5,6 +5,7 @@ import { droptTable } from "../../data/user";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { unregisterLocationTask } from "../../utils/locationTask";
 
 export default function Actions() {
   const navigation = useNavigation();
@@ -14,7 +15,11 @@ export default function Actions() {
   const handleSignOut = async () => {
     droptTable("auth_users");
     setAuthUser(null);
-    await GoogleSignin.signOut();
+    if (GoogleSignin.isSignedIn) {
+      await GoogleSignin.signOut();
+    }
+    unregisterLocationTask();
+    droptTable("locations");
     navigation.push("Login");
   };
   return (
