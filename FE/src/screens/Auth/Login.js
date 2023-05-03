@@ -9,7 +9,12 @@ import {
 } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
 import { useContext, useEffect } from "react";
-import { LoginManager, AccessToken } from "react-native-fbsdk-next";
+import {
+  LoginManager,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+} from "react-native-fbsdk-next";
 import { NativeModules } from "react-native";
 import { Settings } from "react-native-fbsdk-next";
 import { handleLogin } from "../../services/user";
@@ -19,50 +24,92 @@ import {
   insertUser,
 } from "../../data/user";
 import { AuthContext } from "../../providers/AuthProvider";
-Settings.initializeSDK();
-console.log(LoginManager);
-async function onFacebookButtonPress() {
-  // Attempt login with permissions
-  const result = await LoginManager.logInWithPermissions([
-    "public_profile",
-    "email",
-  ]);
-
-  if (result.isCancelled) {
-    throw "User cancelled the login process";
-  }
-
-  // Once signed in, get the users AccesToken
-  const data = await AccessToken.getCurrentAccessToken();
-
-  if (!data) {
-    throw "Something went wrong obtaining access token";
-  }
-  console.log(data, result);
-
-  // Create a Firebase credential with the AccessToken
-}
 
 export default function Login({ navigation }) {
-  const { setAuthUser } = useContext(AuthContext);
+  const { setAuthUser, authUser } = useContext(AuthContext);
   useEffect(() => {
     createTableAuthUsers();
+    Settings.initializeSDK();
     GoogleSignin.configure({
       webClientId:
         "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
     });
   }, []);
+  async function onFacebookButtonPress() {
+    try {
+      // Attempt login with permissions
+      const result = await LoginManager.logInWithPermissions([
+        "public_profile",
+        "email",
+      ]);
+
+      if (result.isCancelled) {
+        throw "User cancelled the login process";
+      }
+
+      // Once signed in, get the users AccesToken
+      const data = await AccessToken.getCurrentAccessToken();
+
+      if (!data) {
+        throw "Something went wrong obtaining access token";
+      }
+      const accessToken = data.accessToken.toString();
+      const infoRequest = new GraphRequest(
+        "/me",
+        {
+          accessToken: accessToken,
+          parameters: {
+            fields: {
+              string: "id,name,email,picture.type(large)",
+            },
+          },
+        },
+        async (error, result) => {
+          if (error) {
+            console.log("Error fetching data: " + error.toString());
+          } else {
+            const loginData = {
+              uid: result.id,
+              email: result.email,
+              username: result.name,
+              avatar: result.picture.data.url,
+            };
+            //console.log(loginData);
+            const res = await handleLogin(loginData);
+            if (res.success) {
+              const authUserData = {
+                token: accessToken,
+                id: res.data.id,
+                username: res.data.username,
+                avatar: res.data.avatar,
+              };
+              setAuthUser({ ...authUserData, user_id: authUserData.id });
+              await insertUser(authUserData);
+              if (res.isTheFirst) {
+                navigation.push("BMISetting");
+              } else {
+                navigation.push("Home");
+              }
+            }
+          }
+        }
+      );
+      new GraphRequestManager().addRequest(infoRequest).start();
+      // Create a Firebase credential with the AccessToken
+    } catch (err) {
+      console.log("Error getting access token: " + error.toString());
+    }
+  }
 
   const handleLoginViaFacebook = async () => {
     await onFacebookButtonPress();
-    navigation.push("BMISetting");
   };
-
   async function onGoogleButtonPress() {
     // Check if your device supports Google Play
     //await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     // Get the users ID token
     const user = await GoogleSignin.signIn();
+    console.log(user);
     return user;
     // Create a Google credential with the token
   }
@@ -94,6 +141,7 @@ export default function Login({ navigation }) {
       }
     }
   };
+  console.log(authUser);
   return (
     <Layout isAuth={false}>
       <View style={styles.container}>

@@ -23,7 +23,7 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="Home"
+          initialRouteName="Login"
         >
           <Stack.Screen name="BMISetting" component={BMISetting} />
           <Stack.Screen
