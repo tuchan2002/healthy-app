@@ -1,3 +1,4 @@
+import moment from "moment";
 export const buildLabelsSteps = () => {
   const arr = [];
   for (let i = 0; i < 96; i++) {
@@ -63,4 +64,25 @@ export const buildDayOfMonth = (month) => {
     }
   }
   return arr;
+};
+
+export const buildTimeLabel = (tooltip = { index: 0 }, key = 0) => {
+  if (key === 1) {
+    return (
+      moment(new Date(tooltip.index * 15 * 60 * 1000 + 5 * 3600 * 1000)).format(
+        "hh:mm"
+      ) +
+      " ~ " +
+      moment(
+        new Date(
+          tooltip.index * 15 * 60 * 1000 + 5 * 3600 * 1000 + 15 * 60 * 1000
+        )
+      ).format("hh:mm")
+    );
+  } else if (key === 2) {
+    return tooltip.index + 1 < 10
+      ? "Mùng " + (tooltip.index + 1)
+      : "Ngày " + (tooltip.index + 1);
+  }
+  return "Tháng " + tooltip.index;
 };

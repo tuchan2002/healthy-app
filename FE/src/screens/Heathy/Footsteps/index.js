@@ -4,7 +4,6 @@ import TabsBar from "../../../components/TabsBar";
 import Layout from "../../../layouts/Layout";
 import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
 import DatePicker from "../../../components/screens/Healthy/Footsteps/DatePicker";
-import CustomLineChart from "../../../components/screens/Healthy/Footsteps/CustomLineChart";
 import { CustomLineChart as LineChartClass } from "../../../components/class/CustomLineChart";
 import {
   getStepByDate,
@@ -16,17 +15,21 @@ import {
   buildSteps,
   buildLabelsSteps,
   buildDayOfMonth,
+  buildTimeLabel,
 } from "../../../constants/step";
 import { labelsMonth } from "../../../constants/lablesChart";
 import { SCREEN_WIDTH } from "../../../constants/size";
 import color from "../../../constants/color";
-import { Svg, Line, Rect, Text as TextSvg } from "react-native-svg";
+import { Svg, Line } from "react-native-svg";
+import { useLoading } from "../../../providers/LoadingProvider";
 
 function Footsteps() {
+  const { setLoading } = useLoading();
   const [keyTab, setKeyTab] = useState(1);
   const [chartData, setChartData] = useState(new Array(96).fill(0));
   const [labels, setLabels] = useState(buildLabelsSteps());
   const [date, setDate] = useState(new Date());
+  const labelsDate = buildLabelsSteps();
   const [tooltipPos, setTooltipPos] = useState({
     x: 0,
     y: 0,
@@ -49,37 +52,29 @@ function Footsteps() {
     },
   ];
 
-  const fetchStepsByDate = async (date) => {
+  const fetchSteps = async (date) => {
     const dateBuild = moment(date).format("YYYY-MM-DD");
-    const steps = await getStepByDate(dateBuild);
-    const dataSteps = buildSteps(steps, labels);
-    setChartData(dataSteps);
-  };
-
-  const fetchStepsByMonth = async (date) => {
-    const dateBuild = moment(date).format("YYYY-MM-DD");
-    const steps = await getStepByMonth(dateBuild);
-    const dataSteps = buildSteps(steps, labels);
-    setChartData(dataSteps);
-  };
-
-  const fetchStepsByYear = async (date) => {
-    const dateBuild = moment(date).format("YYYY-MM-DD");
-    const steps = await getStepByYear(dateBuild);
-    const dataSteps = buildSteps(steps, labels);
+    let steps = [];
+    if (keyTab === 1) {
+      steps = await getStepByDate(dateBuild);
+    } else if (keyTab === 2) {
+      steps = await getStepByMonth(dateBuild);
+    } else {
+      steps = await getStepByYear(dateBuild);
+    }
+    const dataSteps = await buildSteps(steps, labels);
     setChartData(dataSteps);
   };
 
   useEffect(() => {
-    let labelSet = [];
+    setLoading(true);
     if (keyTab === 1) {
-      labelSet = buildLabelsSteps();
+      setLabels(labelsDate);
     } else if (keyTab === 2) {
-      labelSet = buildDayOfMonth(date.getMonth());
+      setLabels(buildDayOfMonth(date.getMonth()));
     } else if (keyTab === 3) {
-      labelSet = labelsMonth;
+      setLabels(labelsMonth);
     }
-    setLabels(labelSet);
   }, [keyTab]);
 
   useEffect(() => {
@@ -87,17 +82,10 @@ function Footsteps() {
   }, [date, labels]);
 
   const fetchDataChart = async () => {
-    if (keyTab === 1) {
-      await fetchStepsByDate(date);
-    } else if (keyTab === 2) {
-      await fetchStepsByMonth(date);
-    } else if (keyTab === 3) {
-      await fetchStepsByYear(date);
-    } else {
-      setLabels([]);
-      setChartData([]);
-    }
+    setLoading(true);
+    await fetchSteps(date);
     resetTooltip();
+    setLoading(false);
   };
 
   const resetTooltip = () => {
@@ -110,7 +98,9 @@ function Footsteps() {
   };
 
   const handleChangeTab = (tab) => {
-    setKeyTab(tab);
+    if (tab !== keyTab) {
+      setKeyTab(tab);
+    }
   };
 
   const handleChangeDate = (time) => {
@@ -142,24 +132,12 @@ function Footsteps() {
   }; // end function
 
   const chartConfig = {
-    withShadow: false,
     withOuterLines: false,
-    scrollableInfoSize: {
-      height: 5,
-      width: 5,
-    },
-    decimalPlaces: 10,
     backgroundColor: color.bg,
-    backgroundGradientFrom: color.bg,
-    backgroundGradientTo: color.bg,
-    decimalPlaces: 0, // optional, defaults to 2dp
+    decimalPlaces: 0,
     strokeWidth: 2,
-    fillShadowGradientFromOpacity: 1,
     color: (opacity = 1) => `rgba(231, 85, 85, ${1})`,
     labelColor: (opacity = 1) => `rgba(133, 133, 133, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
     propsForDots: {
       r: "4",
       strokeWidth: "1",
@@ -170,29 +148,6 @@ function Footsteps() {
       strokeDasharray: "",
     },
     useShadowColorFromDataset: true,
-    fillShadowGradientFromOffset: 0.5,
-    fillShadowGradientToOffset: 1,
-  };
-
-  const buildTime = () => {
-    if (keyTab === 1) {
-      return (
-        moment(
-          new Date(tooltipPos.index * 15 * 60 * 1000 + 5 * 3600 * 1000)
-        ).format("hh:mm") +
-        "~" +
-        moment(
-          new Date(
-            tooltipPos.index * 15 * 60 * 1000 + 5 * 3600 * 1000 + 15 * 60 * 1000
-          )
-        ).format("hh:mm")
-      );
-    } else if (keyTab === 2) {
-      return tooltipPos.index + 1 < 10
-        ? "Mùng " + (tooltipPos.index + 1)
-        : "Ngày " + (tooltipPos.index + 1);
-    }
-    return "Tháng " + tooltipPos.index;
   };
 
   return (
@@ -223,6 +178,7 @@ function Footsteps() {
             margin: 0,
             paddingRight: 40,
             backgroundColor: "white",
+            borderRadius: 10,
           }}
           renderHorizontalLines={{
             width: 20,
@@ -244,7 +200,7 @@ function Footsteps() {
                   }}
                 >
                   <View style={{ display: "flex", justifyContent: "center" }}>
-                    <Text>{buildTime()}</Text>
+                    <Text>{buildTimeLabel(tooltipPos, keyTab)}</Text>
                     <Text>{tooltipPos.value + " bước"}</Text>
                   </View>
                 </View>

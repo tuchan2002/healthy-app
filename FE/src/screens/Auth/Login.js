@@ -1,13 +1,11 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import CustomText from "../../components/CustomText";
-import UserButton from "../../components/UserButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
 import Layout from "../../layouts/Layout";
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
-import auth from "@react-native-firebase/auth";
 import { useContext, useEffect } from "react";
 import {
   LoginManager,
@@ -15,14 +13,9 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from "react-native-fbsdk-next";
-import { NativeModules } from "react-native";
 import { Settings } from "react-native-fbsdk-next";
 import { handleLogin } from "../../services/user";
-import {
-  createTableAuthUsers,
-  getAuthUserProperty,
-  insertUser,
-} from "../../data/user";
+import { createTableAuthUsers, insertUser } from "../../data/user";
 import { AuthContext } from "../../providers/AuthProvider";
 import ButtonIcon from "../../components/button/ButtonIcon";
 import { FontAwesome } from "@expo/vector-icons";
