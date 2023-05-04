@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SyncedStep.init({
-    id: DataTypes.INTEGER,
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     user_id: DataTypes.INTEGER,
     date: DataTypes.DATE,
     value: DataTypes.INTEGER,
