@@ -19,7 +19,7 @@ const ButtonIcon = ({ content, onPress, color = "#FFA239", children }) => {
     >
       {children}
       <CustomText
-        style={[{ color: "white", fontSize: 18, fontWeight: "bold" }]}
+        style={[{ color: "#FFA239", fontSize: 18, fontWeight: "bold" }]}
       >
         {content}
       </CustomText>
