@@ -138,7 +138,7 @@ export default Home = memo(() => {
             </TouchableOpacity>
 
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
-              100 bước
+              1.0 Km
             </CustomText>
           </View>
           <View>

@@ -24,9 +24,12 @@ import {
   insertUser,
 } from "../../data/user";
 import { AuthContext } from "../../providers/AuthProvider";
+import ButtonIcon from "../../components/button/ButtonIcon";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
+
   useEffect(() => {
     createTableAuthUsers();
     Settings.initializeSDK();
@@ -35,6 +38,7 @@ export default function Login({ navigation }) {
         "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
     });
   }, []);
+
   async function onFacebookButtonPress() {
     try {
       // Attempt login with permissions
@@ -68,6 +72,7 @@ export default function Login({ navigation }) {
           if (error) {
             console.log("Error fetching data: " + error.toString());
           } else {
+            console.log(result);
             const loginData = {
               uid: result.id,
               email: result.email,
@@ -141,10 +146,16 @@ export default function Login({ navigation }) {
       }
     }
   };
-  console.log(authUser);
+
   return (
     <Layout isAuth={false}>
       <View style={styles.container}>
+        <FontAwesome
+          name="heartbeat"
+          size={100}
+          color={"#FFA239"}
+          style={{ paddingHorizontal: 25, paddingBottom: 40 }}
+        />
         <CustomText
           fontFamily="NunitoSans-Bold"
           style={[{ fontSize: 36, marginBottom: 100 }]}
@@ -152,14 +163,30 @@ export default function Login({ navigation }) {
           ĐĂNG NHẬP
         </CustomText>
         <View style={styles.actions}>
-          <UserButton
+          <ButtonIcon
             onPress={handleLoginViaFacebook}
-            content={"Đăng nhập bằng Facebooke"}
-          />
-          <UserButton
+            content={"Đăng nhập bằng Facebook"}
+            color="#385898"
+          >
+            <FontAwesome
+              name="facebook-f"
+              size={40}
+              color={"white"}
+              style={{ paddingHorizontal: 25 }}
+            />
+          </ButtonIcon>
+          <ButtonIcon
             onPress={handleLoginViaGoogle}
             content={"Đăng nhập bằng Google"}
-          />
+            color="#dd4b39"
+          >
+            <FontAwesome
+              name="google"
+              size={40}
+              color={"white"}
+              style={{ paddingHorizontal: 25 }}
+            />
+          </ButtonIcon>
         </View>
       </View>
     </Layout>
@@ -172,7 +199,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: (SCREEN_HEIGHT / 100) * 40,
+    marginTop: (SCREEN_HEIGHT / 100) * 18,
   },
   actions: {
     height: 160,
