@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import Spinner from "react-native-loading-spinner-overlay";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Detail({ route }) {
+  const navigation = useNavigation();
   const video = React.useRef(null);
   const [data, setData] = useState();
   const [recommend, setRecommend] = useState();
@@ -32,8 +34,17 @@ export default function Detail({ route }) {
     console.log(data.targets);
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.back}>
-          <AntDesign name="leftsquare" size={40} color={"rgba(255, 162, 57, 1)"} />
+        <TouchableOpacity
+          style={styles.back}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <AntDesign
+            name="leftsquare"
+            size={40}
+            color={"rgba(255, 162, 57, 1)"}
+          />
         </TouchableOpacity>
 
         <CustomText
@@ -103,7 +114,7 @@ export default function Detail({ route }) {
           })}
         </View>
         <CustomText
-          style={[styles.header, ]}
+          style={[styles.header]}
         >{`Tiêu Hao: ${data.kalo} kalories`}</CustomText>
       </View>
     );
