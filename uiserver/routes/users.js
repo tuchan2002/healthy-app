@@ -31,9 +31,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-route.post('/sync', async (req, res) => {
+router.post('/sync', async (req, res) => {
   req.steps.map(element => element["user_id"] = req.id);
-  const result = await FootStep.bulkCreate(req.steps, {updateOnDuplicate: true});
+  const result = await SyncedStep.bulkCreate(req.steps, {updateOnDuplicate: true});
   if(result) {
     res.json({success: 1, message: 'data synced'});
   }
