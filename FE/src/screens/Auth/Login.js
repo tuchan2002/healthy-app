@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import CustomText from "../../components/CustomText";
 import UserButton from "../../components/UserButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
@@ -26,6 +26,7 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import ButtonIcon from "../../components/button/ButtonIcon";
 import { FontAwesome } from "@expo/vector-icons";
+import ImageGoogleLogo from "../../assets/images/HomeScreen/th.png";
 
 export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
@@ -150,43 +151,82 @@ export default function Login({ navigation }) {
   return (
     <Layout isAuth={false}>
       <View style={styles.container}>
-        <FontAwesome
-          name="heartbeat"
-          size={100}
-          color={"#FFA239"}
-          style={{ paddingHorizontal: 25, paddingBottom: 40 }}
-        />
+        <View
+          style={{
+            paddingBottom: 200,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FontAwesome
+            name="heartbeat"
+            size={100}
+            color={"white"}
+            style={{ paddingHorizontal: 25 }}
+          />
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 40,
+              fontFamily: "NunitoSans-Bold",
+              color: "white",
+            }}
+          >
+            Heathy App
+          </Text>
+        </View>
         <CustomText
           fontFamily="NunitoSans-Bold"
-          style={[{ fontSize: 36, marginBottom: 100 }]}
+          style={[
+            {
+              fontSize: 20,
+              marginBottom: 10,
+              paddingHorizontal: 20,
+              color: "white",
+            },
+          ]}
         >
           ĐĂNG NHẬP
         </CustomText>
-        <View style={styles.actions}>
-          <ButtonIcon
-            onPress={handleLoginViaFacebook}
-            content={"Đăng nhập bằng Facebook"}
-            color="#385898"
-          >
-            <FontAwesome
-              name="facebook-f"
-              size={40}
-              color={"white"}
-              style={{ paddingHorizontal: 25 }}
-            />
-          </ButtonIcon>
-          <ButtonIcon
-            onPress={handleLoginViaGoogle}
-            content={"Đăng nhập bằng Google"}
-            color="#dd4b39"
-          >
-            <FontAwesome
-              name="google"
-              size={40}
-              color={"white"}
-              style={{ paddingHorizontal: 25 }}
-            />
-          </ButtonIcon>
+
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.actions}>
+            <ButtonIcon
+              onPress={handleLoginViaFacebook}
+              content={"Đăng nhập bằng Facebook"}
+              color="white"
+            >
+              <FontAwesome
+                name="facebook-official"
+                size={60}
+                color={"#385898"}
+                style={{ paddingHorizontal: 5, paddingRight: 20 }}
+              />
+            </ButtonIcon>
+            <ButtonIcon
+              onPress={handleLoginViaGoogle}
+              content={"Đăng nhập bằng Google"}
+              color="white"
+            >
+              <Image
+                source={ImageGoogleLogo}
+                style={{
+                  height: 58,
+                  width: 60,
+                  borderRadius: 10,
+                  marginHorizontal: 3,
+                  marginRight: 10,
+                }}
+              />
+            </ButtonIcon>
+          </View>
         </View>
       </View>
     </Layout>
@@ -198,8 +238,8 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    marginTop: (SCREEN_HEIGHT / 100) * 18,
+    paddingTop: (SCREEN_HEIGHT / 100) * 8,
+    backgroundColor: "#FFA239",
   },
   actions: {
     height: 160,
