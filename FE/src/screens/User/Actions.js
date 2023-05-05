@@ -7,8 +7,10 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { unregisterLocationTask } from "../../utils/locationTask";
 import { StepSync, StepSyncToLocal } from "../../data/lastSync";
+import { useLoading } from "../../providers/LoadingProvider";
 
 export default function Actions() {
+  const { setLoading } = useLoading();
   const navigation = useNavigation();
   const { authUser, setAuthUser } = useContext(AuthContext);
   const handleSync = async () => {
@@ -17,15 +19,18 @@ export default function Actions() {
   };
 
   const handleSignOut = async () => {
-    droptTable("auth_users");
+    setLoading(true);
+    await StepSync(authUser.user_id);
+    await droptTable("auth_users");
     setAuthUser(null);
     if (GoogleSignin.isSignedIn) {
       await GoogleSignin.signOut();
     }
     unregisterLocationTask();
-    droptTable("locations");
-    droptTable("lastSync");
-    droptTable("steps");
+    await droptTable("lastSync");
+    await droptTable("steps");
+    await droptTable("locations");
+    setLoading(false);
     navigation.push("Login");
   };
   return (
