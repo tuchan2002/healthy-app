@@ -8,9 +8,11 @@ import Target from "./NavigationItem/Target";
 import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useStep } from "../../../providers/StepProvider";
+import { useNavigation } from "@react-navigation/native";
 
 export default Home = memo(() => {
   const { steps } = useStep();
+  const navigation = useNavigation();
 
   return (
     <Layout>
