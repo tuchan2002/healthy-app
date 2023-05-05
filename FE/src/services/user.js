@@ -4,4 +4,8 @@ function handleLogin(data) {
   return instance.post("/users/login", data);
 }
 
-export { handleLogin };
+function SyncStepService(data) {
+  return instance.post("/users/sync", data);
+}
+
+export { handleLogin, SyncStepService };
