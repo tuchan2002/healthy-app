@@ -59,7 +59,7 @@ export default function Running() {
   const startBackgroundTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
       accuracy: Location.LocationAccuracy.BestForNavigation,
-      timeInterval: 10000,
+      timeInterval: 1000,
       showsBackgroundLocationIndicator: true,
       foregroundService: {
         notificationTitle: "Title",
@@ -90,7 +90,9 @@ export default function Running() {
   const handleStartRunning = async () => {
     if (!defaultRunningInfo.isStarted) {
       getPermissions();
-      await getNowLocation();
+      if (!nowLocation) {
+        await getNowLocation();
+      }
       setDefaultRunningInfo({
         ...defaultRunningInfo,
         isStarted: true,
