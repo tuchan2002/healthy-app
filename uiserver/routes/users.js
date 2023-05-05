@@ -47,4 +47,18 @@ router.post("/sync", async (req, res) => {
   }
 });
 
+router.get("/synced_data/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const user = await User.findByPk(req.params.id, {include: ["syncedSteps"]});
+    if(user) {
+      res.json({ success: 1, data:user, message: "get synced data" });
+    } else {
+      res.json({ success: 0, error: "not able to get data" });
+    }
+  } catch (err) {
+    res.json({ success: 0, error: err.message });
+  }
+})
+
 module.exports = router;

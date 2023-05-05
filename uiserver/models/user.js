@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(UserTarget, { foreignKey: "user_id" });
       this.hasMany(UserTargetState, { foreignKey: "user_id" });
       this.hasMany(FootStep, { foreignKey: "user_id" });
-      this.hasMany(SyncedStep, { foreignKey: "user_id" });
+      this.hasMany(SyncedStep, { as:"syncedSteps", foreignKey: "user_id" });
     }
   }
   User.init(
