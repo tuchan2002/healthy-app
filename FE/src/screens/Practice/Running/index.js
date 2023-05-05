@@ -4,7 +4,7 @@ import Info from "./Info";
 import runningInfo from "../../../assets/fakeDatas/runningInfo";
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from "react-native-maps";
 import { LinearGradient } from "expo-linear-gradient";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FOOTERBAR_HEIGHT,
   SCREEN_HEIGHT,
@@ -18,25 +18,31 @@ import {
 } from "../../../utils/locationTask";
 import { createTableLocations, getTheLocation } from "../../../data/locations";
 
+export let forceUpdateLocations;
+
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
-  const [path, setPath] = useState([]);
   const [nowLocation, setNowLocation] = useState();
+  const path = useRef(0);
+
+  const getPath = async () => {
+    const theLocation = await getTheLocation();
+    path.current = theLocation;
+  };
+
+  const useForceUpdate = () => {
+    const [, setState] = useState();
+    getPath();
+    return () => setState({});
+  };
+
+  forceUpdateLocations = useForceUpdate();
 
   useEffect(() => {
     createTableLocations();
     getPath();
     getNowLocation();
   }, []);
-
-  setInterval(() => {
-    getPath();
-  }, 10000);
-
-  const getPath = async () => {
-    const theLocation = await getTheLocation();
-    setPath(theLocation);
-  };
 
   const getNowLocation = async () => {
     const location = await Location.getCurrentPositionAsync();
@@ -84,6 +90,7 @@ export default function Running() {
   const handleStartRunning = async () => {
     if (!defaultRunningInfo.isStarted) {
       getPermissions();
+      await getNowLocation();
       setDefaultRunningInfo({
         ...defaultRunningInfo,
         isStarted: true,
@@ -129,23 +136,24 @@ export default function Running() {
           >
             <Marker
               title="Xuất phát"
+              pinColor="blue"
               coordinate={
-                path[0] || {
+                path.current[0] || {
                   latitude: nowLocation.latitude,
                   longitude: nowLocation.longitude,
                 }
               }
             />
             <Polyline
-              coordinates={path}
+              coordinates={path.current}
               strokeWidth={6}
               strokeColor={"orange"}
             />
             <Marker
               title="Hiện tại"
-              pinColor="blue"
+              pinColor="red"
               coordinate={
-                path[path.length - 1] || {
+                path.current[path.current.length - 1] || {
                   latitude: nowLocation.latitude,
                   longitude: nowLocation.longitude,
                 }

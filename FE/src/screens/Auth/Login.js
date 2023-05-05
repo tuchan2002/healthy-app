@@ -108,8 +108,13 @@ export default function Login({ navigation }) {
     // Check if your device supports Google Play
     //await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     // Get the users ID token
-    const user = await GoogleSignin.signIn();
-    console.log(user);
+    let user;
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    if (!isSignedIn) {
+      user = await GoogleSignin.signIn();
+    } else {
+      user = await GoogleSignin.getCurrentUser();
+    }
     return user;
     // Create a Google credential with the token
   }
