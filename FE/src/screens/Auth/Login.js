@@ -20,6 +20,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 import ButtonIcon from "../../components/button/ButtonIcon";
 import { FontAwesome } from "@expo/vector-icons";
 import ImageGoogleLogo from "../../assets/images/HomeScreen/th.png";
+import { StepSyncToLocal, createTableLastSync } from "../../data/lastSync";
+import { createTableSteps } from "../../data/stepCounter";
 
 export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
@@ -135,6 +137,11 @@ export default function Login({ navigation }) {
         username: res.data.username,
         avatar: res.data.avatar,
       };
+
+      await createTableLastSync();
+      //droptTable("lastSync");
+      await createTableSteps();
+      await StepSyncToLocal(authUserData.id);
       setAuthUser({ ...authUserData, user_id: authUserData.id });
       await insertUser(authUserData);
 

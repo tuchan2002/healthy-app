@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { unregisterLocationTask } from "../../utils/locationTask";
-import { StepSync } from "../../data/lastSync";
+import { StepSync, StepSyncToLocal } from "../../data/lastSync";
 
 export default function Actions() {
   const navigation = useNavigation();
@@ -24,6 +24,7 @@ export default function Actions() {
     }
     unregisterLocationTask();
     droptTable("locations");
+    droptTable("lastSync");
     droptTable("steps");
     navigation.push("Login");
   };

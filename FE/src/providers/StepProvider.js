@@ -93,9 +93,6 @@ export const StepProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    createTableLastSync();
-    //droptTable("lastSync");
-    createTableSteps();
     const getResult = async () => {
       const count = await countStepOfDay();
       steps.current = count;

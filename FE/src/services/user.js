@@ -8,4 +8,8 @@ function SyncStepService(data) {
   return instance.post("/users/sync", data);
 }
 
-export { handleLogin, SyncStepService };
+function SyncedStepServiceToLocal(userId) {
+  return instance.get(`/users/synced_data/${userId}`);
+}
+
+export { handleLogin, SyncStepService, SyncedStepServiceToLocal };
