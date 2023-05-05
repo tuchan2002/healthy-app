@@ -10,9 +10,6 @@ import { AuthContext } from "../../providers/AuthProvider";
 export default function User() {
   const { authUser } = useContext(AuthContext);
 
-  console.log("user");
-  console.log(authUser);
-
   return (
     <Layout activeMenu="user">
       <View style={styles.container}>
