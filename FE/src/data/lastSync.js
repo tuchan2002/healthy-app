@@ -33,6 +33,7 @@ export const updateStepIdLastSync = (value) => {
       },
       [],
       () => {
+        console.log("update stepId lastSync success");
         resolve("updateStepIdLastSync success");
       },
       (error) => {
@@ -71,11 +72,11 @@ export const StepSync = async (userId) => {
       steps: stepsSync,
     };
     const resSync = await SyncStepService(data);
+    console.log(resSync);
     if (resSync && resSync.success === 1) {
-      console.log(resSync);
       const lastStepId =
         stepsSync?.length > 0 ? stepsSync[stepsSync.length - 1].id : 0;
-      updateStepIdLastSync(lastStepId);
+      await updateStepIdLastSync(lastStepId);
     }
   } catch (error) {
     console.log(error);

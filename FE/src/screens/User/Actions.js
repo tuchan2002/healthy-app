@@ -24,6 +24,7 @@ export default function Actions() {
     }
     unregisterLocationTask();
     droptTable("locations");
+    droptTable("steps");
     navigation.push("Login");
   };
   return (
