@@ -61,16 +61,20 @@ export const getAuthUserProperty = (property) => {
 };
 
 export const droptTable = (nameTable) => {
-  try {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `DROP TABLE ${nameTable}`,
+        `DROP TABLE IF EXISTS ${nameTable}`,
         [],
-        () => console.log(`drop ${nameTable} success`),
-        (error) => console.log(error)
+        () => {
+          console.log(`drop ${nameTable} success`);
+          resolve(true);
+        },
+        (error) => {
+          console.log(`drop ${nameTable} error`);
+          reject(error);
+        }
       );
     });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };

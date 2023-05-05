@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="sync step to server">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix bug not create steps when logout">
       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +77,7 @@
       <workItem from="1683168398913" duration="2172000" />
       <workItem from="1683176029535" duration="90000" />
       <workItem from="1683200641729" duration="3088000" />
-      <workItem from="1683255327286" duration="2160000" />
+      <workItem from="1683255327286" duration="4237000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -208,7 +205,35 @@
       <option name="project" value="LOCAL" />
       <updated>1683257887780</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="sync step">
+      <created>1683261514746</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1683261514746</updated>
+    </task>
+    <task id="LOCAL-00020" summary="sync step">
+      <created>1683261562854</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1683261562854</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fix bug not create steps when logout">
+      <created>1683262039461</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1683262039461</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix bug not create steps when logout">
+      <created>1683262151132</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1683262151132</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +266,8 @@
     <MESSAGE value="add step provider" />
     <MESSAGE value="fix navigation home" />
     <MESSAGE value="sync step to server" />
-    <option name="LAST_COMMIT_MESSAGE" value="sync step to server" />
+    <MESSAGE value="sync step" />
+    <MESSAGE value="fix bug not create steps when logout" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug not create steps when logout" />
   </component>
 </project>

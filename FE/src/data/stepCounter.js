@@ -6,7 +6,7 @@ const startDay = new Date(
 ).setUTCHours(0, 0, 0, 0);
 
 export const createTableSteps = () => {
-  try {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE table if not EXISTS steps (
@@ -15,16 +15,17 @@ export const createTableSteps = () => {
           value int not NULL,
           type int not null default 0);`,
         [],
-        () => console.log("create table step success"),
+        () => {
+          console.log("create table step success");
+          resolve(true);
+        },
         (error) => {
           console.log("create table step error: ");
-          console.log(error);
+          reject(error);
         }
       );
     });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const insertStep = (value) => {
@@ -168,6 +169,25 @@ export const getStepById = (stepId) => {
         [],
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const insertSyncStep = (date, value, type) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `INSERT INTO steps (date,value,type)
+        VALUES (date(?),?,?);`,
+        [date, value, type],
+        () => {
+          console.log("sync success");
+          resolve(true);
         },
         (error) => {
           reject(error);
