@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { User } = require("../models");
-const SyncedStep = require("../models/syncedstep");
+var { User, SyncedStep } = require("../models");
 
 /* GET user by user_id. */
 router.get("/", function (req, res, next) {
@@ -32,12 +31,19 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/sync", async (req, res) => {
-  req.body.steps.map((element) => (element["user_id"] = req.body.id));
-  const result = await SyncedStep.bulkCreate(req.body.steps, {
-    updateOnDuplicate: true,
-  });
-  if (result) {
-    res.json({ success: 1, message: "data synced" });
+  try {
+    req.body.steps.map((element) => (element["user_id"] = req.body.id));
+    console.log(User);
+    const result = await SyncedStep.bulkCreate(req.body.steps, {
+      updateOnDuplicate: ["value", "date"],
+    });
+    if (result) {
+      res.json({ success: 1, message: "data synced" });
+    } else {
+      res.json({ success: 0, error: "not able to bulkCreate" });
+    }
+  } catch (err) {
+    res.json({ success: 0, error: err.message });
   }
 });
 
