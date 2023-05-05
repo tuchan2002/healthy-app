@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix button icon">
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="add loading provider">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,6 +79,7 @@
       <workItem from="1683134238268" duration="443000" />
       <workItem from="1683168398913" duration="2172000" />
       <workItem from="1683176029535" duration="90000" />
+      <workItem from="1683200641729" duration="3088000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -169,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683176038658</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add loading provider">
+      <created>1683200704849</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683200704849</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +208,7 @@
     <MESSAGE value="fix logo google" />
     <MESSAGE value="ui login version 2" />
     <MESSAGE value="fix button icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix button icon" />
+    <MESSAGE value="add loading provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="add loading provider" />
   </component>
 </project>
