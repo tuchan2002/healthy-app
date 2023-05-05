@@ -5,8 +5,10 @@ import {
   insertStep,
   createTableSteps,
   countStepOfDay,
+  droptTable,
 } from "../data/stepCounter";
 import { AuthContext } from "./AuthProvider";
+import { createTableLastSync } from "../data/lastSync";
 
 export const StepContext = createContext();
 
@@ -91,6 +93,8 @@ export const StepProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    createTableLastSync();
+    //droptTable("lastSync");
     createTableSteps();
     const getResult = async () => {
       const count = await countStepOfDay();

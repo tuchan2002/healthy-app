@@ -70,7 +70,7 @@ export const droptTable = (nameTable) => {
       tx.executeSql(
         `DROP TABLE ${nameTable}`,
         [],
-        () => console.log("drop success"),
+        () => console.log(`drop ${nameTable} success`),
         (error) => console.log(error)
       );
     });
@@ -149,6 +149,24 @@ export const getStepByYear = (month = "2023-04-28") => {
         [month],
         (transact, resultset) => {
           console.log("getStepByYear success");
+          resolve(resultset?.rows?._array);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const getStepById = (stepId) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT * FROM steps
+          WHERE id > ${stepId}`,
+        [],
+        (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
         (error) => {
