@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo, useMemo } from "react";
+import React, { memo } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
@@ -7,115 +7,10 @@ import WorkoutRecord from "./NavigationItem/WorkoutRecord";
 import Target from "./NavigationItem/Target";
 import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
-import { useNavigation } from "@react-navigation/native";
-import { Accelerometer } from "expo-sensors";
-import moment from "moment";
-import {
-  createTableSteps,
-  insertStep,
-  getSteps,
-  droptTable,
-  countStepOfDay,
-  getStepByDate,
-} from "../../../data/stepCounter";
-import * as SQLite from "expo-sqlite";
+import { useStep } from "../../../providers/StepProvider";
 
 export default Home = memo(() => {
-  const navigation = useNavigation();
-  const [subscription, setSubscription] = useState(null);
-
-  const useForceUpdate = () => {
-    const [, setState] = useState();
-    return () => setState({});
-  };
-
-  const forceUpdate = useForceUpdate();
-  const steps = useRef(0);
-
-  const _slow = () => {
-    Accelerometer.setUpdateInterval(30);
-  };
-
-  _slow();
-
-  const _subscribe = async () => {
-    let mArray = [];
-    let start = false;
-    let peak = false;
-    let valuePeak = 9.81;
-    let magnitudePrev = 9.81;
-    let magnitudeMiddle = 9.81;
-    setSubscription(
-      Accelerometer.addListener((data) => {
-        const x = data.x;
-        const y = data.y;
-        const z = data.z;
-        const magnitude = 9.81 * Math.sqrt(x * x + y * y + z * z);
-
-        if (start === false) {
-          if (magnitudePrev + 0.5 < magnitudeMiddle) {
-            start = true;
-            mArray.push(magnitudePrev);
-            mArray.push(magnitudeMiddle);
-          }
-        }
-
-        if (start === true) {
-          mArray.push(magnitude);
-          if (
-            peak === false &&
-            magnitudePrev < magnitudeMiddle &&
-            magnitudeMiddle > magnitude
-          ) {
-            peak = true;
-            valuePeak = magnitudeMiddle;
-          }
-
-          if (peak === true && magnitudeMiddle > magnitude) {
-            start = false;
-            peak = false;
-            if (valuePeak - mArray[0] > 4) {
-              console.log(mArray);
-              steps.current += 1;
-              insertStep(valuePeak - mArray[0]);
-              magnitudePrev = magnitudeMiddle;
-              magnitudeMiddle = magnitude;
-              mArray = [];
-              forceUpdate();
-            } else {
-              start = false;
-              peak = false;
-              valuePeak = 9.81;
-              mArray = [];
-            }
-          }
-        }
-        magnitudePrev = magnitudeMiddle;
-        magnitudeMiddle = magnitude;
-      })
-    );
-  };
-
-  const _unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
-  useEffect(() => {
-    createTableSteps();
-    const getResult = async () => {
-      const count = await countStepOfDay();
-      steps.current = count;
-      forceUpdate();
-    };
-    getResult();
-  }, []);
-
-  useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
-    //getSteps();
-    //droptTable("steps");
-  }, []);
+  const { steps } = useStep();
 
   return (
     <Layout>
