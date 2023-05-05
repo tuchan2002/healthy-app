@@ -5,12 +5,12 @@ import * as SplashScreen from "expo-splash-screen";
 import Fillter from "./Fillter";
 import Item from "./Item";
 import { SCREEN_HEIGHT } from "../../../constants/size";
-import axios from "axios";
 import Spinner from "react-native-loading-spinner-overlay";
 import { AntDesign } from "@expo/vector-icons";
 import { useRef } from "react";
 import CustomText from "../../../components/CustomText";
 import { useNavigation } from "@react-navigation/native";
+import instance from "../../../utils/axios";
 
 export default function Exercises() {
   const navigation = useNavigation();
@@ -26,34 +26,35 @@ export default function Exercises() {
 
   useEffect(() => {
     const getData = async () => {
-      let exercisesData = await axios.get("http://10.0.2.2:5000/videos/all", {
+      let exercisesData = await instance.get("/videos/all", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
-      let targetsData = await axios.get("http://10.0.2.2:5000/targets", {
+      let targetsData = await instance.get("/targets", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
-      let bodypartsData = await axios.get("http://10.0.2.2:5000/bodyparts", {
+      let bodypartsData = await instance.get("/bodyparts", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
-      setTargets(targetsData.data.data);
-      setBodyparts(bodypartsData.data.data);
-      setExercises(exercisesData.data.data);
+      console.log(bodyparts);
+      setTargets(targetsData.data);
+      setBodyparts(bodypartsData.data);
+      setExercises(exercisesData.data);
     };
     getData();
   }, []);
 
   const handleSearch = async () => {
     console.log(input);
-    let results = await axios.get("http://10.0.2.2:5000/videos/all", {
+    let results = await instance.get("/videos/all", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
