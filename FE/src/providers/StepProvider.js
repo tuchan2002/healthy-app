@@ -102,7 +102,7 @@ export const StepProvider = ({ children }) => {
       forceUpdate();
     };
     getResult();
-  }, []);
+  }, [authUser]);
 
   useEffect(() => {
     console.log(authUser);
