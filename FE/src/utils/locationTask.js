@@ -1,7 +1,6 @@
 import * as TaskManager from "expo-task-manager";
 import * as Location from "expo-location";
 import { insertLocation } from "../data/locations";
-import { forceUpdateLocations } from "../screens/Practice/Running";
 
 export const LOCATION_TASK_NAME = "background-location-task";
 
@@ -11,16 +10,13 @@ export const checkRegisteredLocationTask = () => {
   return isDefined;
 };
 
-export const registerLocationTask = async () => {
+export const registerLocationTask = async (forceUpdateLocations) => {
   if (!checkRegisteredLocationTask()) {
-    console.log("Not defined yet!");
-
     TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
       if (data) {
         const { locations } = data;
         // console.log("task data:", locations[0]);
-        const res = await insertLocation(locations[0].coords);
-
+        await insertLocation(locations[0].coords);
         forceUpdateLocations();
         return;
       }

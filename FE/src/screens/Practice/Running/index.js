@@ -18,8 +18,6 @@ import {
 } from "../../../utils/locationTask";
 import { createTableLocations, getTheLocation } from "../../../data/locations";
 
-export let forceUpdateLocations;
-
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
   const [nowLocation, setNowLocation] = useState();
@@ -32,11 +30,13 @@ export default function Running() {
 
   const useForceUpdate = () => {
     const [, setState] = useState();
-    getPath();
     return () => setState({});
   };
-
-  forceUpdateLocations = useForceUpdate();
+  const forceUpdate = useForceUpdate();
+  const forceUpdateLocations = () => {
+    getPath();
+    forceUpdate();
+  };
 
   useEffect(() => {
     createTableLocations();
@@ -51,14 +51,14 @@ export default function Running() {
 
   useEffect(() => {
     if (defaultRunningInfo.isStarted) {
+      registerLocationTask(forceUpdateLocations);
       startBackgroundTracking();
-      registerLocationTask();
     }
   }, [defaultRunningInfo]);
 
   const startBackgroundTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.LocationAccuracy.BestForNavigation,
+      accuracy: Location.LocationAccuracy.Balanced,
       timeInterval: 1000,
       showsBackgroundLocationIndicator: true,
       foregroundService: {
@@ -147,7 +147,7 @@ export default function Running() {
               }
             />
             <Polyline
-              coordinates={path.current}
+              coordinates={path.current || []}
               strokeWidth={6}
               strokeColor={"orange"}
             />
