@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Layout from "../../layouts/Layout";
 import Avatar from "./Avatar";
 import fakeUser from "../../assets/fakeDatas/user";
 import Actions from "./Actions";
 import { StyleSheet, View } from "react-native";
 import { SCREEN_HEIGHT } from "../../constants/size";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function User() {
-  const [user, setUser] = useState(fakeUser);
+  const { authUser } = useContext(AuthContext);
+
+  console.log("user");
+  console.log(authUser);
+
   return (
     <Layout activeMenu="user">
       <View style={styles.container}>
-        <Avatar user={user} />
+        <Avatar user={authUser ? authUser : fakeUser} />
         <Actions />
       </View>
     </Layout>

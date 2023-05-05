@@ -1,29 +1,34 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class BMI extends Model {
+  class SyncedStep extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({User}) {
+    static associate(models) {
       // define association here
-      this.belongsTo(User, {foreignKey: 'user_id', onDelete: 'cascade', onUpdate: 'cascade'});
     }
   }
-  BMI.init(
+  SyncedStep.init(
     {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       user_id: DataTypes.INTEGER,
-      weight: DataTypes.INTEGER,
-      height: DataTypes.INTEGER,
-      value: DataTypes.FLOAT,
+      date: DataTypes.DATE,
+      value: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "BMI",
-      tableName: "bmis",
-    },
+      modelName: "SyncedStep",
+      tableName: "syncedsteps",
+      timestamps: false,
+    }
   );
-  return BMI;
+  return SyncedStep;
 };

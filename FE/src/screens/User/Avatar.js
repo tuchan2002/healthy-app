@@ -13,7 +13,10 @@ export default function Avatar({ user }) {
       }}
     >
       {user.avatar ? (
-        <Image source={user.avatar} />
+        <Image
+          source={{ uri: user?.avatar }}
+          style={{ height: 200, width: 200 }}
+        />
       ) : (
         <FontAwesome5 name="user-circle" size={260} color="black" />
       )}

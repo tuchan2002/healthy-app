@@ -1,13 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import CustomText from "../../components/CustomText";
-import UserButton from "../../components/UserButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
 import Layout from "../../layouts/Layout";
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
-import auth from "@react-native-firebase/auth";
 import { useContext, useEffect } from "react";
 import {
   LoginManager,
@@ -15,18 +13,17 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from "react-native-fbsdk-next";
-import { NativeModules } from "react-native";
 import { Settings } from "react-native-fbsdk-next";
 import { handleLogin } from "../../services/user";
-import {
-  createTableAuthUsers,
-  getAuthUserProperty,
-  insertUser,
-} from "../../data/user";
+import { createTableAuthUsers, insertUser } from "../../data/user";
 import { AuthContext } from "../../providers/AuthProvider";
+import ButtonIcon from "../../components/button/ButtonIcon";
+import { FontAwesome } from "@expo/vector-icons";
+import ImageGoogleLogo from "../../assets/images/HomeScreen/th.png";
 
 export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
+
   useEffect(() => {
     createTableAuthUsers();
     Settings.initializeSDK();
@@ -35,6 +32,7 @@ export default function Login({ navigation }) {
         "398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com",
     });
   }, []);
+
   async function onFacebookButtonPress() {
     try {
       // Attempt login with permissions
@@ -68,6 +66,7 @@ export default function Login({ navigation }) {
           if (error) {
             console.log("Error fetching data: " + error.toString());
           } else {
+            console.log(result);
             const loginData = {
               uid: result.id,
               email: result.email,
@@ -146,25 +145,86 @@ export default function Login({ navigation }) {
       }
     }
   };
-  console.log(authUser);
+
   return (
     <Layout isAuth={false}>
       <View style={styles.container}>
+        <View
+          style={{
+            paddingBottom: 200,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FontAwesome
+            name="heartbeat"
+            size={100}
+            color={"white"}
+            style={{ paddingHorizontal: 25 }}
+          />
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 40,
+              fontFamily: "NunitoSans-Bold",
+              color: "white",
+            }}
+          >
+            Heathy App
+          </Text>
+        </View>
         <CustomText
           fontFamily="NunitoSans-Bold"
-          style={[{ fontSize: 36, marginBottom: 100 }]}
+          style={[
+            {
+              fontSize: 20,
+              marginBottom: 10,
+              paddingHorizontal: 20,
+              color: "white",
+            },
+          ]}
         >
           ĐĂNG NHẬP
         </CustomText>
-        <View style={styles.actions}>
-          <UserButton
-            onPress={handleLoginViaFacebook}
-            content={"Đăng nhập bằng Facebooke"}
-          />
-          <UserButton
-            onPress={handleLoginViaGoogle}
-            content={"Đăng nhập bằng Google"}
-          />
+
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.actions}>
+            <ButtonIcon
+              onPress={handleLoginViaFacebook}
+              content={"Đăng nhập bằng Facebook"}
+              color="white"
+            >
+              <FontAwesome
+                name="facebook-official"
+                size={60}
+                color={"#385898"}
+                style={{ paddingHorizontal: 5, paddingRight: 20 }}
+              />
+            </ButtonIcon>
+            <ButtonIcon
+              onPress={handleLoginViaGoogle}
+              content={"Đăng nhập bằng Google"}
+              color="white"
+            >
+              <Image
+                source={ImageGoogleLogo}
+                style={{
+                  height: 58,
+                  width: 60,
+                  borderRadius: 10,
+                  marginHorizontal: 3,
+                  marginRight: 10,
+                }}
+              />
+            </ButtonIcon>
+          </View>
         </View>
       </View>
     </Layout>
@@ -176,8 +236,8 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    marginTop: (SCREEN_HEIGHT / 100) * 40,
+    paddingTop: (SCREEN_HEIGHT / 100) * 8,
+    backgroundColor: "#FFA239",
   },
   actions: {
     height: 160,

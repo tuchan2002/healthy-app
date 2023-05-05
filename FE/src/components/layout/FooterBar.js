@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import CustomText from "../CustomText";
 import { useNavigation } from "@react-navigation/core";
 import { FOOTERBAR_HEIGHT } from "../../constants/size";
@@ -41,7 +41,7 @@ export default function FooterBar({ activeMenu = "healthy" }) {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.push("User")}>
         <View style={styles.option}>
-          <AntDesign
+          <FontAwesome
             name="user"
             size={30}
             color={activeMenu === "user" ? "#FFA239" : "#848484"}

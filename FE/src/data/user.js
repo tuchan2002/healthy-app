@@ -66,7 +66,7 @@ export const droptTable = (nameTable) => {
       tx.executeSql(
         `DROP TABLE ${nameTable}`,
         [],
-        () => console.log("drop success"),
+        () => console.log(`drop ${nameTable} success`),
         (error) => console.log(error)
       );
     });

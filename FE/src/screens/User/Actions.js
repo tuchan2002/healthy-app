@@ -6,11 +6,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { unregisterLocationTask } from "../../utils/locationTask";
+import { StepSync } from "../../data/lastSync";
 
 export default function Actions() {
   const navigation = useNavigation();
-  const { setAuthUser } = useContext(AuthContext);
-  const handleSync = () => {};
+  const { authUser, setAuthUser } = useContext(AuthContext);
+  const handleSync = async () => {
+    //console.log(authUser);
+    StepSync(authUser.user_id);
+  };
 
   const handleSignOut = async () => {
     droptTable("auth_users");
@@ -20,6 +24,7 @@ export default function Actions() {
     }
     unregisterLocationTask();
     droptTable("locations");
+    droptTable("steps");
     navigation.push("Login");
   };
   return (
