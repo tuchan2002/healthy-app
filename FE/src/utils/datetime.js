@@ -80,3 +80,24 @@ function formatTime(time) {
 
   return time;
 }
+
+/**
+ * Convert time value to format "hh:mm:ss"
+ *
+ * @param {*} time
+ * @returns String
+ */
+export function convertTime(time) {
+  if (time) {
+    const SECOND = 1000;
+    const MINUTE = 60;
+    const HOUR = 60;
+    const h = time / SECOND / MINUTE / HOUR;
+    const H = Math.floor(h);
+    const m = (time - H * (SECOND * MINUTE * HOUR)) / SECOND / MINUTE;
+    const M = Math.floor(m);
+    const s = (time - M * (MINUTE * SECOND)) / SECOND;
+    const S = Math.floor(s);
+    return `${formatTime(H)}:${formatTime(M)}:${formatTime(S)}`;
+  }
+}

@@ -14,73 +14,128 @@ import {
 import * as Location from "expo-location";
 import {
   LOCATION_TASK_NAME,
-  registerLocationTask,
 } from "../../../utils/locationTask";
-import { createTableLocations, getTheLocation } from "../../../data/locations";
+import {
+  createTableLocations,
+  getTheRunningLocation,
+  insertLocation,
+} from "../../../data/locations";
 import {
   createTableRunningInfos,
   getTheLastRunningInfo,
   insertRunningInfo,
 } from "../../../data/runningInfo";
+import { convertTime } from "../../../utils/datetime";
+import * as TaskManager from "expo-task-manager";
+import { handleGetBMI } from "../../../services/bmi";
+import { burnedCalorineByRunning } from "../../../utils/caculateCalorine";
 
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
   const [nowLocation, setNowLocation] = useState();
-  const path = useRef(0);
+  const [bmi, setBmi] = useState();
 
-  const getPath = async () => {
-    const theLocation = await getTheLocation();
-    path.current = theLocation;
-  };
-
+  const [subscription, setSubscription] = useState(null);
   const useForceUpdate = () => {
     const [, setState] = useState();
     return () => setState({});
   };
+
   const forceUpdate = useForceUpdate();
+  const path = useRef(0);
+
+  const _unsubscribe = () => {
+    subscription && subscription.remove();
+    setSubscription(null);
+  };
+
+  const getPath = async () => {
+    if (defaultRunningInfo?.id) {
+      const theLocation = await getTheRunningLocation(defaultRunningInfo.id);
+      if (theLocation.length > 0) {
+        path.current = theLocation;
+
+        const speed =
+          Number.parseFloat(theLocation[theLocation.length - 1].speed).toFixed(
+            3,
+          ) + "m/s";
+        const duration = convertTime(theLocation.length * 1000);
+        const distance = Number.parseFloat(
+          theLocation.reduce((sum, location) => sum + location.speed, 0) / 1000,
+        ).toFixed(2);
+        const calo = Number.parseFloat(
+          burnedCalorineByRunning(
+            bmi?.weight || 50,
+            theLocation.reduce((sum, location) => sum + location.speed, 0) /
+              1000,
+          ),
+        ).toFixed(3);
+        setDefaultRunningInfo((prev) => {
+          return {
+            ...prev,
+            speed,
+            duration,
+            distance,
+            calo,
+          };
+        });
+      }
+    }
+  };
+
   const forceUpdateLocations = () => {
     getPath();
     forceUpdate();
   };
 
+  const _subscribe = async () => {
+    setSubscription(
+      TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
+        if (data) {
+          const { locations } = data;
+
+          if (
+            locations[0].coords.speed >= 0.08333 &&
+            locations[0].coords.speed <= 0.33333
+          ) {
+            await insertLocation({
+              ...locations[0].coords,
+              runningInfoId: defaultRunningInfo.id,
+            });
+            forceUpdateLocations();
+          }
+
+          return;
+        }
+        if (error) {
+          console.log("task error:", error);
+          return;
+        }
+      }),
+    );
+  };
+
   useEffect(() => {
-    createTableRunningInfos();
     createTableLocations();
+    createTableRunningInfos();
     getRunningInfo();
     getPath();
     getNowLocation();
+    getBMI();
   }, []);
-
-  const getRunningInfo = async () => {
-    const res = await getTheLastRunningInfo();
-    const [runningInfo] = res;
-
-    if (runningInfo) {
-      setDefaultRunningInfo({
-        ...defaultRunningInfo,
-        ...runningInfo,
-      });
-    }
-  };
-
-  const getNowLocation = async () => {
-    const currentPermission = await Location.getForegroundPermissionsAsync();
-    if (currentPermission.granted) {
-      const location = await Location.getCurrentPositionAsync();
-      setNowLocation(location.coords);
-    }
-  };
 
   useEffect(() => {
     if (defaultRunningInfo.isStarted) {
-      registerLocationTask(forceUpdateLocations);
+      _subscribe();
       startBackgroundTracking();
     }
+
+    return () => _unsubscribe();
   }, [defaultRunningInfo]);
 
   const startBackgroundTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.LocationAccuracy.Balanced,
+      accuracy: Location.LocationAccuracy.BestForNavigation,
       timeInterval: 1000,
       showsBackgroundLocationIndicator: true,
       foregroundService: {
@@ -102,10 +157,38 @@ export default function Running() {
     }
   };
 
+  const getBMI = async () => {
+    const bmiRes = await handleGetBMI();
+    if (bmiRes.success) {
+      setBmi(bmiRes.data);
+    }
+  };
+
+  const getRunningInfo = async () => {
+    const res = await getTheLastRunningInfo();
+    const [rI] = res;
+    if (rI) {
+      setDefaultRunningInfo({
+        ...defaultRunningInfo,
+        ...rI,
+      });
+    }
+  };
+
+  const getNowLocation = async () => {
+    const currentPermission = await Location.getForegroundPermissionsAsync();
+    if (currentPermission.granted) {
+      const location = await Location.getCurrentPositionAsync();
+      setNowLocation(location.coords);
+    }
+  };
+
   const handleChangeTarget = (newTarget) => {
-    setDefaultRunningInfo({
-      ...defaultRunningInfo,
-      target: newTarget,
+    setDefaultRunningInfo((prev) => {
+      return {
+        ...prev,
+        target: newTarget,
+      };
     });
   };
 
@@ -115,15 +198,20 @@ export default function Running() {
       if (!nowLocation) {
         await getNowLocation();
       }
-      setDefaultRunningInfo({
-        ...defaultRunningInfo,
-        isStarted: true,
-      });
       await insertRunningInfo({
         target: defaultRunningInfo.target,
         isStarted: true,
       });
+      await getRunningInfo();
     }
+  };
+
+  const handleStopRunning = () => {
+    path.current = [];
+    setDefaultRunningInfo({
+      ...runningInfo,
+      isStopped: 0,
+    });
   };
 
   return (
@@ -141,13 +229,14 @@ export default function Running() {
         <Actions
           target={defaultRunningInfo.target}
           isStarted={defaultRunningInfo.isStarted}
+          isStopped={defaultRunningInfo.isStopped}
           onChangeInput={handleChangeTarget}
           onStart={handleStartRunning}
         />
       </LinearGradient>
       <View style={{ zIndex: 3, marginHorizontal: "2%" }}>
         <View style={styles.info}>
-          <Info info={defaultRunningInfo} />
+          <Info info={defaultRunningInfo} onStop={handleStopRunning} />
         </View>
       </View>
       <View style={[styles.content, styles.mapContainer]}>

@@ -8,6 +8,7 @@ export const createTableLocations = () => {
       tx.executeSql(
         `CREATE table if not EXISTS locations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            runningInfoId INTEGER NOT NULL,
             longitude FLOAT NOT NULL,
             latitude FLOAT NOT NULL,
             speed FLOAT NOT NULL,
@@ -27,10 +28,10 @@ export const insertLocation = (location) => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        const query = `INSERT INTO locations (longitude, latitude, speed, createdAt)
-            VALUES (${location.longitude}, ${location.latitude}, ${
-          location.speed
-        }, "${new Date()}");`;
+        const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
+            VALUES (${location.runningInfoId}, ${location.longitude}, ${
+          location.latitude
+        }, ${location.speed}, "${new Date()}");`;
         tx.executeSql(query);
       },
       [],
@@ -60,11 +61,11 @@ export const getTheLastLocation = () => {
   });
 };
 
-export const getTheLocation = () => {
+export const getTheRunningLocation = (runningInfoId) => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}";`;
+    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" AND runningInfoId = ${runningInfoId} AND speed >= 0.08333 AND speed <= 0.33333;`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {

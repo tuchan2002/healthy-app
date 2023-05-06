@@ -10,7 +10,9 @@ export const createTableRunningInfos = () => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             target INTEGER NOT NULL,
             isStarted BOOLEAN DEFAULT(0),
-            createdAt DATE NOT NULL
+            isStopped BOOLEAN DEFAULT(0),
+            createdAt DATE NOT NULL,
+            updatedAt DATE NOT NULL
         );`,
         [],
         () =>
@@ -28,9 +30,8 @@ export const insertRunningInfo = ({ target, isStarted }) => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        const query = `INSERT INTO running_infos (target, isStarted, createdAt)
-            VALUES (${target}, ${isStarted}, "${new Date()}");`;
-        console.log(query);
+        const query = `INSERT INTO running_infos (target, isStarted, createdAt, updatedAt)
+            VALUES (${target}, ${isStarted}, "${new Date()}", "${new Date()}");`;
         tx.executeSql(query);
       },
       [],
@@ -46,11 +47,29 @@ export const insertRunningInfo = ({ target, isStarted }) => {
   });
 };
 
+export const updateRunningInfo = ({ runningInfoId }) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        const query = `UPDATE running_infos SET isStopped = 1 WHERE id = ${runningInfoId};`;
+        tx.executeSql(query);
+      },
+      [],
+      () => {
+        resolve({ success: 1, message: "update running info success" });
+      },
+      (error) => {
+        reject("Error update running_infos:" + error.message);
+      },
+    );
+  });
+};
+
 export const getTheLastRunningInfo = () => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM running_infos WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" ORDER BY createdAt DESC LIMIT 1;`;
+    const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 ORDER BY id DESC LIMIT 1;`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {

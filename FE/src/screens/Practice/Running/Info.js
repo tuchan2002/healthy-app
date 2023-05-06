@@ -2,44 +2,57 @@ import { PermissionsAndroid, StyleSheet, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import { convertDateToString1 } from "../../../utils/datetime";
 import { useEffect, useState } from "react";
-import { Pedometer } from "expo-sensors";
+import UserButton from "../../../components/UserButton";
+import { SCREEN_WIDTH } from "../../../constants/size";
+import { updateRunningInfo } from "../../../data/runningInfo";
+import { unregisterLocationTask } from "../../../utils/locationTask";
 
-export default function Info({ info }) {
-  const [todayStepCount, setTodayStepCount] = useState(info.distance);
-
-  subscribe = (setStepCount) => {
-    Pedometer.isAvailableAsync().then(
-      (result) => {
-        const subsription = Pedometer.watchStepCount((results) => {
-          console.log(results);
-          setTodayStepCount(results.steps);
-        });
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  };
-
+export default function Info({ info, onStop }) {
+  const [runningInfo, setRunningInfo] = useState();
   useEffect(() => {
-    subscribe();
-  }, []);
+    setRunningInfo(info);
+
+    return () => setRunningInfo(null);
+  }, [info]);
+
+  const handleStopRunning = async () => {
+    const res = await updateRunningInfo({ runningInfoId: runningInfo.id });
+    if (res.success) {
+      setRunningInfo({
+        ...runningInfo,
+        isStopped: 1,
+      });
+      unregisterLocationTask();
+    }
+    onStop(true);
+  };
   return (
     <View style={styles.container}>
-      <CustomText style={[styles.distanceText]}>
-        {todayStepCount.toFixed(2)}/
-        <CustomText style={[{ fontSize: 32, fontFamily: "NunitoSans-Bold" }]}>
-          {info.target || "--"}km
+      <View style={styles.title}>
+        <CustomText style={[styles.distanceText]}>
+          {Number.parseFloat(runningInfo?.distance).toFixed(2)}/
+          <CustomText style={[{ fontSize: 32, fontFamily: "NunitoSans-Bold" }]}>
+            {runningInfo?.target || "--"}km
+          </CustomText>
         </CustomText>
-      </CustomText>
+        {!runningInfo?.isStopped && runningInfo?.isStarted ? (
+          <UserButton
+            style={styles.stopBtn}
+            content={"Kết thúc"}
+            onPress={handleStopRunning}
+          />
+        ) : (
+          <></>
+        )}
+      </View>
       <CustomText style={[styles.dateTimeText]}>
-        {convertDateToString1(info.createdAt || new Date())}
+        {convertDateToString1(runningInfo?.createdAt || new Date())}
       </CustomText>
       <View style={styles.extraInfo}>
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>
           <CustomText style={[styles.colValue]}>
-            {info.duration || "00:00:00"}
+            {runningInfo?.duration || "00:00:00"}
           </CustomText>
         </View>
         <View style={styles.col}>
@@ -51,7 +64,7 @@ export default function Info({ info }) {
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Calo</CustomText>
           <CustomText style={[styles.colValue]}>
-            {info.calo || 0}kcal
+            {runningInfo?.calo || 0}kcal
           </CustomText>
         </View>
       </View>
@@ -64,6 +77,17 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     paddingHorizontal: "2%",
+  },
+  title: {
+    width: SCREEN_WIDTH - (SCREEN_WIDTH / 100) * 8,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    maxHeight: 96,
+  },
+  stopBtn: {
+    width: (SCREEN_WIDTH / 100) * 32,
   },
   distanceText: {
     fontSize: 48,
