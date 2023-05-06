@@ -45,7 +45,7 @@ export default function Info({ info }) {
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Tốc độ</CustomText>
           <CustomText style={[styles.colValue]}>
-            {info.speed || "00'00''"}
+            {info.speed || "0m/s"}
           </CustomText>
         </View>
         <View style={styles.col}>

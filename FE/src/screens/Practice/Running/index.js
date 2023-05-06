@@ -17,6 +17,11 @@ import {
   registerLocationTask,
 } from "../../../utils/locationTask";
 import { createTableLocations, getTheLocation } from "../../../data/locations";
+import {
+  createTableRunningInfos,
+  getTheLastRunningInfo,
+  insertRunningInfo,
+} from "../../../data/runningInfo";
 
 export default function Running() {
   const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);
@@ -39,14 +44,31 @@ export default function Running() {
   };
 
   useEffect(() => {
+    createTableRunningInfos();
     createTableLocations();
+    getRunningInfo();
     getPath();
     getNowLocation();
   }, []);
 
+  const getRunningInfo = async () => {
+    const res = await getTheLastRunningInfo();
+    const [runningInfo] = res;
+
+    if (runningInfo) {
+      setDefaultRunningInfo({
+        ...defaultRunningInfo,
+        ...runningInfo,
+      });
+    }
+  };
+
   const getNowLocation = async () => {
-    const location = await Location.getCurrentPositionAsync();
-    setNowLocation(location.coords);
+    const currentPermission = await Location.getForegroundPermissionsAsync();
+    if (currentPermission.granted) {
+      const location = await Location.getCurrentPositionAsync();
+      setNowLocation(location.coords);
+    }
   };
 
   useEffect(() => {
@@ -95,6 +117,10 @@ export default function Running() {
       }
       setDefaultRunningInfo({
         ...defaultRunningInfo,
+        isStarted: true,
+      });
+      await insertRunningInfo({
+        target: defaultRunningInfo.target,
         isStarted: true,
       });
     }
