@@ -12,11 +12,10 @@ import {
   STATUSBAR_HEIGHT,
 } from "../../../constants/size";
 import * as Location from "expo-location";
-import {
-  LOCATION_TASK_NAME,
-} from "../../../utils/locationTask";
+import { LOCATION_TASK_NAME } from "../../../utils/locationTask";
 import {
   createTableLocations,
+  getTheLocation,
   getTheRunningLocation,
   insertLocation,
 } from "../../../data/locations";
@@ -51,34 +50,44 @@ export default function Running() {
 
   const getPath = async () => {
     if (defaultRunningInfo?.id) {
-      const theLocation = await getTheRunningLocation(defaultRunningInfo.id);
+      const theLocation = await getTheLocation(defaultRunningInfo.id);
+      const theRunningLocation = await getTheRunningLocation(
+        defaultRunningInfo.id,
+      );
       if (theLocation.length > 0) {
         path.current = theLocation;
 
-        const speed =
-          Number.parseFloat(theLocation[theLocation.length - 1].speed).toFixed(
-            3,
-          ) + "m/s";
-        const duration = convertTime(theLocation.length * 1000);
-        const distance = Number.parseFloat(
-          theLocation.reduce((sum, location) => sum + location.speed, 0) / 1000,
-        ).toFixed(2);
-        const calo = Number.parseFloat(
-          burnedCalorineByRunning(
-            bmi?.weight || 50,
-            theLocation.reduce((sum, location) => sum + location.speed, 0) /
-              1000,
-          ),
-        ).toFixed(3);
-        setDefaultRunningInfo((prev) => {
-          return {
-            ...prev,
-            speed,
-            duration,
-            distance,
-            calo,
-          };
-        });
+        if (theRunningLocation.length > 0) {
+          const speed =
+            Number.parseFloat(
+              theRunningLocation[theRunningLocation.length - 1].speed,
+            ).toFixed(3) + "m/s";
+          const duration = convertTime(theRunningLocation.length * 1000);
+          const distance = Number.parseFloat(
+            theRunningLocation.reduce(
+              (sum, location) => sum + location.speed,
+              0,
+            ) / 1000,
+          ).toFixed(2);
+          const calo = Number.parseFloat(
+            burnedCalorineByRunning(
+              bmi?.weight || 50,
+              theRunningLocation.reduce(
+                (sum, location) => sum + location.speed,
+                0,
+              ) / 1000,
+            ),
+          ).toFixed(3);
+          setDefaultRunningInfo((prev) => {
+            return {
+              ...prev,
+              speed,
+              duration,
+              distance,
+              calo,
+            };
+          });
+        }
       }
     }
   };
@@ -94,17 +103,11 @@ export default function Running() {
         if (data) {
           const { locations } = data;
 
-          if (
-            locations[0].coords.speed >= 0.08333 &&
-            locations[0].coords.speed <= 0.33333
-          ) {
-            await insertLocation({
-              ...locations[0].coords,
-              runningInfoId: defaultRunningInfo.id,
-            });
-            forceUpdateLocations();
-          }
-
+          await insertLocation({
+            ...locations[0].coords,
+            runningInfoId: defaultRunningInfo.id,
+          });
+          forceUpdateLocations();
           return;
         }
         if (error) {
@@ -116,8 +119,6 @@ export default function Running() {
   };
 
   useEffect(() => {
-    createTableLocations();
-    createTableRunningInfos();
     getRunningInfo();
     getPath();
     getNowLocation();

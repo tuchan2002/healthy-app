@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { unregisterLocationTask } from "../../utils/locationTask";
-import { StepSync, StepSyncToLocal } from "../../data/lastSync";
+import { sync } from "../../data/lastSync";
 import { useLoading } from "../../providers/LoadingProvider";
 
 export default function Actions() {
@@ -20,7 +20,7 @@ export default function Actions() {
 
   const handleSignOut = async () => {
     setLoading(true);
-    await StepSync(authUser.user_id);
+    await sync(authUser.user_id);
     await droptTable("auth_users");
     setAuthUser(null);
     if (GoogleSignin.isSignedIn) {
@@ -30,6 +30,7 @@ export default function Actions() {
     await droptTable("lastSync");
     await droptTable("steps");
     await droptTable("locations");
+    await droptTable("running_infos");
     setLoading(false);
     navigation.push("Login");
   };

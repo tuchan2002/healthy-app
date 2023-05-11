@@ -31,7 +31,7 @@ export const insertLocation = (location) => {
         const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
             VALUES (${location.runningInfoId}, ${location.longitude}, ${
           location.latitude
-        }, ${location.speed}, "${new Date()}");`;
+        }, ${location.speed}, "${location.createdAt || new Date()}");`;
         tx.executeSql(query);
       },
       [],
@@ -74,5 +74,37 @@ export const getTheRunningLocation = (runningInfoId) => {
       },
       (error) => reject(error),
     );
+  });
+};
+
+export const getTheLocation = (runningInfoId) => {
+  return new Promise((resolve, reject) => {
+    const DATE_FROM = new Date();
+    DATE_FROM.setHours(0, 0, 0, 0);
+    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" AND runningInfoId = ${runningInfoId};`;
+    db.transaction(
+      (tx) => {
+        tx.executeSql(query, [], (transact, resultset) => {
+          resolve(resultset?.rows?._array);
+        });
+      },
+      (error) => reject(error),
+    );
+  });
+};
+
+export const getTheLocationsById = (locationId) => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM locations WHERE id > ${locationId || 0};`;
+    db.transaction((tx) => {
+      tx.executeSql(
+        query,
+        [],
+        (transact, resultset) => {
+          resolve(resultset?.rows?._array);
+        },
+        (error) => reject(error),
+      );
+    });
   });
 };

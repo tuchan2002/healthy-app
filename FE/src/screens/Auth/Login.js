@@ -22,6 +22,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import ImageGoogleLogo from "../../assets/images/HomeScreen/th.png";
 import { StepSyncToLocal, createTableLastSync } from "../../data/lastSync";
 import { createTableSteps } from "../../data/stepCounter";
+import { createTableLocations } from "../../data/locations";
+import { createTableRunningInfos } from "../../data/runningInfo";
 
 export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
@@ -142,6 +144,8 @@ export default function Login({ navigation }) {
       //droptTable("lastSync");
       await createTableSteps();
       await StepSyncToLocal(authUserData.id);
+      await createTableLocations();
+      await createTableRunningInfos();
       setAuthUser({ ...authUserData, user_id: authUserData.id });
       await insertUser(authUserData);
 

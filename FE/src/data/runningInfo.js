@@ -26,12 +26,20 @@ export const createTableRunningInfos = () => {
   });
 };
 
-export const insertRunningInfo = ({ target, isStarted }) => {
+export const insertRunningInfo = ({
+  target,
+  isStarted,
+  isStopped = 0,
+  createdAt,
+  updatedAt,
+}) => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         const query = `INSERT INTO running_infos (target, isStarted, createdAt, updatedAt)
-            VALUES (${target}, ${isStarted}, "${new Date()}", "${new Date()}");`;
+            VALUES (${target}, ${isStarted}, "${createdAt || new Date()}", "${
+          updatedAt || new Date()
+        }");`;
         tx.executeSql(query);
       },
       [],
@@ -78,5 +86,24 @@ export const getTheLastRunningInfo = () => {
       },
       (error) => reject(error),
     );
+  });
+};
+
+export const getRunningInfosById = (runningInfoId) => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM running_infos WHERE id > ${
+      runningInfoId || 0
+    };`;
+    console.log(query);
+    db.transaction((tx) => {
+      tx.executeSql(
+        query,
+        [],
+        (transact, resultset) => {
+          resolve(resultset?.rows?._array);
+        },
+        (error) => reject(error),
+      );
+    });
   });
 };
