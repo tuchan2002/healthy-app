@@ -102,10 +102,7 @@ export const getTheLastRunningInfo = () => {
 
 export const getRunningInfosById = (runningInfoId) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM running_infos WHERE id > ${
-      runningInfoId || 0
-    };`;
-    console.log(query);
+    const query = `SELECT * FROM running_infos WHERE id > ${runningInfoId};`;
     db.transaction((tx) => {
       tx.executeSql(
         query,

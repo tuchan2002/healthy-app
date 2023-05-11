@@ -4,12 +4,12 @@ function handleLogin(data) {
   return instance.post("/users/login", data);
 }
 
-function SyncService(data) {
+function SyncStepService(data) {
   return instance.post("/users/sync", data);
 }
 
-function SyncedServiceToLocal(userId) {
+function SynceStepServiceToLocal(userId) {
   return instance.get(`/users/synced_data/${userId}`);
 }
 
-export { handleLogin, SyncService, SyncedServiceToLocal };
+export { handleLogin, SyncStepService, SynceStepServiceToLocal };

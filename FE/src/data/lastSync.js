@@ -1,6 +1,8 @@
 import * as SQLite from "expo-sqlite";
 import { getStepById, insertSyncStep } from "./stepCounter";
-import { SyncStepService, SyncedStepServiceToLocal } from "../services/user";
+import { SyncStepService, SynceStepServiceToLocal } from "../services/user";
+import { getRunningInfosById, insertRunningInfo } from "./runningInfo";
+import { createTableLocations, getTheLocationsById } from "./locations";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -10,7 +12,9 @@ export const createTableLastSync = () => {
       tx.executeSql(
         `CREATE table if not EXISTS lastSync (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            stepId INTEGER NOT NULL
+            stepId INTEGER NOT NULL,
+            runningInfoId INTEGER NOT NULL,
+            locationId INTEGER NOT NULL
         );`,
         [],
         () => {
@@ -26,14 +30,14 @@ export const createTableLastSync = () => {
   });
 };
 
-export const updateStepIdLastSync = (value) => {
+export const updateStepIdLastSync = ({ stepId, runningInfoId, locationId }) => {
   return new Promise((resolve, reject) => {
+    const query = `INSERT INTO lastSync (stepId, runningInfoId, locationId)
+    VALUES (${stepId || 0}, ${runningInfoId || 0}, ${locationId || 0});`;
+    console.log(query);
     db.transaction(
       (tx) => {
-        tx.executeSql(
-          `INSERT INTO lastSync (stepId)
-            VALUES (${value});`,
-        );
+        tx.executeSql(query);
       },
       [],
       () => {
@@ -58,9 +62,9 @@ export const getStepIdLastSync = () => {
         LIMIT 1`,
         [],
         (tx, result) => {
-          const stepId =
-            result?.rows?._array?.length > 0 ? result.rows._array[0].stepId : 0;
-          resolve(stepId);
+          const ids =
+            result?.rows?._array?.length > 0 ? result.rows._array[0] : {};
+          resolve(ids);
         },
         (error) => {
           console.log("getStepIdLastSync error");
@@ -73,21 +77,61 @@ export const getStepIdLastSync = () => {
 
 export const StepSync = async (userId) => {
   try {
-    const stepId = await getStepIdLastSync();
-    const stepsSync = await getStepById(stepId);
-    console.log(stepsSync);
+    const { stepId, runningInfoId, locationId } = await getStepIdLastSync();
+
+    let data = {
+      id: userId,
+      steps: [],
+      runningInfos: [],
+      locations: [],
+    };
+
+    let lastIds = {
+      stepId: null,
+      runningInfoId: null,
+      locationId: null,
+    };
+    // handle sync steps
+    const stepsSync = await getStepById(stepId ? stepId : 0);
     if (stepsSync.length > 0) {
-      const data = {
-        id: userId,
-        steps: stepsSync,
-        runningInfos: [],
-        locations: [],
-      };
+      data.steps = stepsSync;
+      lastIds.stepId =
+        stepsSync?.length > 0 ? stepsSync[stepsSync.length - 1].id : 0;
+    }
+
+    // handle sync runningInfos
+    const runningInfosSync = await getRunningInfosById(
+      runningInfoId ? runningInfoId : 0,
+    );
+    console.log("runningInfos", runningInfosSync);
+    if (runningInfosSync.length > 0) {
+      data.runningInfos = runningInfosSync;
+      lastIds.runningInfoId =
+        runningInfosSync?.length > 0
+          ? runningInfosSync[runningInfosSync.length - 1].id
+          : 0;
+    }
+
+    // // handle sync locations
+    // const locationsSync = await getTheLocationsById(
+    //   locationId ? locationId : 0,
+    // );
+    // if (locationsSync.length > 0) {
+    //   data.locations = locationsSync;
+    //   lastIds.locationId =
+    //     locationsSync?.length > 0
+    //       ? locationsSync[locationsSync.length - 1].id
+    //       : 0;
+    // }
+
+    if (
+      data.steps.length > 0 ||
+      data.runningInfos.length > 0 ||
+      data.locations.length > 0
+    ) {
       const resSync = await SyncStepService(data);
       if (resSync && resSync.success === 1) {
-        const lastStepId =
-          stepsSync?.length > 0 ? stepsSync[stepsSync.length - 1].id : 0;
-        await updateStepIdLastSync(lastStepId);
+        await updateStepIdLastSync(lastIds);
       }
     }
   } catch (error) {
@@ -99,15 +143,48 @@ export const StepSync = async (userId) => {
 
 export const StepSyncToLocal = async (userId) => {
   try {
-    const res = await SyncedStepServiceToLocal(userId);
-    if (res && res.success === 1 && res.data && res.data.syncedSteps) {
-      const lastStepId =
-        res?.data?.syncedSteps?.length > 0 ? res?.data?.syncedSteps.length : 0;
-      console.log(lastStepId);
-      await updateStepIdLastSync(lastStepId);
-      await res?.data?.syncedSteps?.map(async (step) => {
-        await insertSyncStep(step.date, step.value, step.type, step.time);
-      });
+    const res = await SynceStepServiceToLocal(userId);
+    console.log(res);
+    if (res && res.success === 1 && res.data) {
+      const lastIds = {
+        stepId: null,
+        runningInfoId: null,
+        locationId: null,
+      };
+
+      if (res.data.syncedSteps) {
+        const lastStepId =
+          res?.data?.syncedSteps?.length > 0
+            ? res?.data?.syncedSteps.length
+            : 0;
+        console.log(lastStepId);
+        lastIds.stepId = lastStepId;
+
+        await res?.data?.syncedSteps?.map(async (step) => {
+          await insertSyncStep(step.date, step.value, step.type, step.time);
+        });
+      }
+
+      if (res.data.runningInfos) {
+        const lastRunningInfoId =
+          res?.data?.runningInfos?.length > 0
+            ? res?.data?.runningInfos.length
+            : 0;
+        lastIds.runningInfoId = lastRunningInfoId;
+
+        const syncedLocations = await res?.data?.runningInfos?.reduce(
+          async (locations, runningInfo) => {
+            await insertRunningInfo(runningInfo);
+
+            return [...locations, ...runningInfo.locations];
+          },
+          [],
+        );
+
+        console.log("syncedLocations", syncedLocations);
+      }
+
+      await updateStepIdLastSync(lastIds);
     }
   } catch (error) {
     console.log("StepSyncToLocal", error);
