@@ -71,10 +71,13 @@ export const StepSync = async (userId) => {
   try {
     const stepId = await getStepIdLastSync();
     const stepsSync = await getStepById(stepId);
+    console.log(stepsSync);
     if (stepsSync.length > 0) {
       const data = {
         id: userId,
         steps: stepsSync,
+        runningInfos: [],
+        locations: [],
       };
       const resSync = await SyncStepService(data);
       if (resSync && resSync.success === 1) {
@@ -97,7 +100,7 @@ export const StepSyncToLocal = async (userId) => {
       console.log(lastStepId);
       await updateStepIdLastSync(lastStepId);
       await res?.data?.syncedSteps?.map(async (step) => {
-        await insertSyncStep(step.date, step.value, step.type);
+        await insertSyncStep(step.date, step.value, step.type, step.time);
       });
     }
   } catch (error) {

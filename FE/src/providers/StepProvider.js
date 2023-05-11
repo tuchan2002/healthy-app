@@ -6,22 +6,24 @@ import {
   createTableSteps,
   countStepOfDay,
   droptTable,
+  countTotalStepByLengthOfDay,
 } from "../data/stepCounter";
 import { AuthContext } from "./AuthProvider";
-import { createTableLastSync } from "../data/lastSync";
+import { MAGAVG } from "../constants/step";
 
 export const StepContext = createContext();
 
 export const StepProvider = ({ children }) => {
   const { authUser } = useContext(AuthContext);
   const [subscription, setSubscription] = useState(null);
+
   const useForceUpdate = () => {
     const [, setState] = useState();
     return () => setState({});
   };
 
   const forceUpdate = useForceUpdate();
-  const steps = useRef(0);
+  const steps = useRef({ count: 0, lengthTravel: 0, calo: 0 });
 
   const _slow = () => {
     Accelerometer.setUpdateInterval(30);
@@ -65,9 +67,21 @@ export const StepProvider = ({ children }) => {
           if (peak === true && magnitudeMiddle > magnitude) {
             start = false;
             peak = false;
-            if (valuePeak - mArray[0] > 4) {
+            if (valuePeak - mArray[0] > MAGAVG) {
               console.log(mArray);
-              steps.current += 1;
+              steps.current.count += 1;
+              steps.current.lengthTravel +=
+                valuePeak - mArray[0] === 6
+                  ? 0.4
+                  : valuePeak - mArray[0] < 6
+                  ? 0.2
+                  : 0.6;
+              steps.current.calo +=
+                valuePeak - mArray[0] === 6
+                  ? 0.02
+                  : valuePeak - mArray[0] < 6
+                  ? 0.01
+                  : 0.03;
               insertStep(valuePeak - mArray[0]);
               magnitudePrev = magnitudeMiddle;
               magnitudeMiddle = magnitude;
@@ -92,13 +106,29 @@ export const StepProvider = ({ children }) => {
     setSubscription(null);
   };
 
+  const getTravelLength = async () => {
+    const res = await countTotalStepByLengthOfDay();
+
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].length === "avg") {
+        steps.current.lengthTravel += 0.4 * res[i].count;
+        steps.current.count += res[i].count;
+        steps.current.calo += 0.02 * res[i].count;
+      } else if (res[i].length === "small") {
+        steps.current.lengthTravel += 0.2 * res[i].count;
+        steps.current.count += res[i].count;
+        steps.current.calo += 0.01 * res[i].count;
+      } else {
+        steps.current.lengthTravel += 0.6 * res[i].count;
+        steps.current.count += res[i].count;
+        steps.current.calo += 0.03 * res[i].count;
+      }
+    }
+    forceUpdate();
+  };
+
   useEffect(() => {
-    const getResult = async () => {
-      const count = await countStepOfDay();
-      steps.current = count;
-      forceUpdate();
-    };
-    getResult();
+    getTravelLength();
   }, [authUser]);
 
   useEffect(() => {

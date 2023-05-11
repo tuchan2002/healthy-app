@@ -34,7 +34,7 @@ router.post("/sync", async (req, res) => {
   try {
     req.body.steps.map((element) => (element["user_id"] = req.body.id));
     const syncedSteps = await SyncedStep.bulkCreate(req.body.steps, {
-      updateOnDuplicate: ["value", "date"],
+      updateOnDuplicate: ["value", "date", "time"],
     });
 
     req.body.runningInfos.map((element) => (element["user_id"] = req.body.id));
@@ -61,8 +61,17 @@ router.get("/synced_data/:id", async (req, res) => {
     console.log(req.params.id);
     const user = await User.findByPk(req.params.id, {
       include: [
-        {model: SyncedStep, as: "syncedSteps", attributes: {exclude: ["user_id"]}},
-        { model: RunningInfo, as: "runningInfos", attributes: {exclude: ["user_id"]} , include: ["locations"] },
+        {
+          model: SyncedStep,
+          as: "syncedSteps",
+          attributes: { exclude: ["user_id"] },
+        },
+        {
+          model: RunningInfo,
+          as: "runningInfos",
+          attributes: { exclude: ["user_id"] },
+          include: ["locations"],
+        },
       ],
     });
     if (user) {

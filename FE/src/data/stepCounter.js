@@ -12,8 +12,9 @@ export const createTableSteps = () => {
         `CREATE table if not EXISTS steps (
         	id INTEGER PRIMARY KEY AUTOINCREMENT,
           date date NOT NULL DEFAULT (date(current_timestamp,'localtime')),
-          value int not NULL,
-          type int not null default 0);`,
+          value INTEGER not NULL,
+          time INTEGER not NULL,
+          type INTEGER not null default 0);`,
         [],
         () => {
           console.log("create table step success");
@@ -31,12 +32,13 @@ export const createTableSteps = () => {
 export const insertStep = (value) => {
   const time = new Date(new Date().getTime() + 7 * 60 * 60 * 1000).getTime();
   const type = Math.floor((time - startDay) / (1000 * 60 * 15));
+  const seconds = Math.floor((time - startDay) / 1000);
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          `INSERT INTO steps (value,type)
-            VALUES (${value},${type});`
+          `INSERT INTO steps (value,type,time)
+            VALUES (${value},${type},${seconds});`
         );
       },
       [],
@@ -89,6 +91,57 @@ export const countStepOfDay = () => {
         [],
         (tx, result) => {
           resolve(result?.rows?._array[0]?.count);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const countTotalSecondStepOfDay = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT count(DISTINCT time) as count from steps
+          WHERE date = date(CURRENT_timestamp,'localtime')
+        `,
+        [],
+        (tx, result) => {
+          resolve(result?.rows?._array[0]?.count);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+export const countTotalStepByLengthOfDay = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT (CASE 
+            WHEN value = 6 THEN 'avg' 
+            WHEN value < 6 THEN 'small' 
+            ELSE 'big' END) as length, 
+          COUNT(*) AS count 
+        FROM 
+          steps 
+        WHERE 
+          date = date(CURRENT_TIMESTAMP,'localtime') 
+        GROUP BY 
+          CASE 
+            WHEN value = 6 THEN 'avg' 
+            WHEN value < 6 THEN 'small' 
+            ELSE 'big' 
+          END;
+        `,
+        [],
+        (tx, result) => {
+          resolve(result?.rows?._array);
         },
         (error) => {
           reject(error);
@@ -178,13 +231,13 @@ export const getStepById = (stepId) => {
   });
 };
 
-export const insertSyncStep = (date, value, type) => {
+export const insertSyncStep = (date, value, type, time) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO steps (date,value,type)
-        VALUES (date(?),?,?);`,
-        [date, value, type],
+        `INSERT INTO steps (date,value,type,time)
+        VALUES (date(?),?,?,?);`,
+        [date, value, type, time],
         () => {
           console.log("sync success");
           resolve(true);
