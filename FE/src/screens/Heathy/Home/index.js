@@ -60,7 +60,7 @@ export default Home = memo(() => {
               <CustomText style={[{ color: "white" }]}>phút</CustomText>
             </TouchableOpacity>
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
-              {steps.current.calo} kcal
+              {(steps.current.calo / 1000).toFixed(2)} kcal
             </CustomText>
           </View>
         </View>
