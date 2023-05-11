@@ -20,7 +20,10 @@ export const createTableRunningInfos = () => {
             success: 1,
             message: "Create table running_infos success",
           }),
-        (error) => reject({ success: 0, message: error.message }),
+        (error) => {
+          console.log("createTableRunningInfos error");
+          reject({ success: 0, message: error.message });
+        }
       );
     });
   });
@@ -40,9 +43,9 @@ export const insertRunningInfo = ({ target, isStarted }) => {
         resolve("insert success");
       },
       (error) => {
-        console.log("error");
+        console.log("insertRunningInfo error");
         reject("Error insert running_infos:" + error.message);
-      },
+      }
     );
   });
 };
@@ -59,8 +62,10 @@ export const updateRunningInfo = ({ runningInfoId }) => {
         resolve({ success: 1, message: "update running info success" });
       },
       (error) => {
+        console.log("updateRunningInfo error");
+
         reject("Error update running_infos:" + error.message);
-      },
+      }
     );
   });
 };
@@ -76,7 +81,11 @@ export const getTheLastRunningInfo = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => {
+        console.log("getTheLastRunningInfo error");
+
+        reject(error);
+      }
     );
   });
 };
