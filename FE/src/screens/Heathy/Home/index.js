@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import Layout from "../../../layouts/Layout";
@@ -9,10 +9,22 @@ import Sleep from "./NavigationItem/Sleep";
 import IBMIndex from "./NavigationItem/IBMIndex";
 import { useStep } from "../../../providers/StepProvider";
 import { useNavigation } from "@react-navigation/native";
+import { countTotalSecondStepOfDay } from "../../../data/stepCounter";
 
 export default Home = memo(() => {
   const { steps } = useStep();
   const navigation = useNavigation();
+  const [time, setTime] = useState(0);
+
+  const getTotalTime = async () => {
+    const res = await countTotalSecondStepOfDay();
+    console.log(res);
+    setTime(Math.floor(res / 60));
+  };
+
+  useEffect(() => {
+    getTotalTime();
+  }, []);
 
   return (
     <Layout>
@@ -29,13 +41,13 @@ export default Home = memo(() => {
               activeOpacity={1}
             >
               <CustomText style={[{ color: "white" }]}>
-                {steps.current}
+                {steps.current?.count}
               </CustomText>
               <CustomText style={[{ color: "white" }]}>bước</CustomText>
             </TouchableOpacity>
 
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
-              1.0 Km
+              {(steps.current.lengthTravel / 1000).toFixed(2)} Km
             </CustomText>
           </View>
           <View>
@@ -44,11 +56,11 @@ export default Home = memo(() => {
               onPress={() => {}}
               activeOpacity={1}
             >
-              <CustomText style={[{ color: "white" }]}>--</CustomText>
+              <CustomText style={[{ color: "white" }]}>{time}</CustomText>
               <CustomText style={[{ color: "white" }]}>phút</CustomText>
             </TouchableOpacity>
             <CustomText style={[{ color: "white", textAlign: "center" }]}>
-              0 kcal
+              {steps.current.calo} kcal
             </CustomText>
           </View>
         </View>

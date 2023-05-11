@@ -1,4 +1,7 @@
 import moment from "moment";
+
+export const MAGAVG = 4;
+
 export const buildLabelsSteps = () => {
   const arr = [];
   for (let i = 0; i < 96; i++) {
