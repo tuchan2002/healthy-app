@@ -29,7 +29,10 @@ export default function Login({ navigation }) {
   const { setAuthUser, authUser } = useContext(AuthContext);
 
   useEffect(() => {
-    createTableAuthUsers();
+    const getInitialData = async () => {
+      await createTableAuthUsers();
+    };
+    getInitialData();
     Settings.initializeSDK();
     GoogleSignin.configure({
       webClientId:
@@ -95,7 +98,7 @@ export default function Login({ navigation }) {
               }
             }
           }
-        }
+        },
       );
       new GraphRequestManager().addRequest(infoRequest).start();
       // Create a Firebase credential with the AccessToken
@@ -143,9 +146,9 @@ export default function Login({ navigation }) {
       await createTableLastSync();
       //droptTable("lastSync");
       await createTableSteps();
-      await StepSyncToLocal(authUserData.id);
-      await createTableLocations();
       await createTableRunningInfos();
+      // await createTableLocations();
+      await StepSyncToLocal(authUserData.id);
       setAuthUser({ ...authUserData, user_id: authUserData.id });
       await insertUser(authUserData);
 

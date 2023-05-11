@@ -15,12 +15,17 @@ export const createTableRunningInfos = () => {
             updatedAt DATE NOT NULL
         );`,
         [],
-        () =>
+        () => {
+          console.log("create table running_info success");
           resolve({
             success: 1,
             message: "Create table running_infos success",
-          }),
-        (error) => reject({ success: 0, message: error.message }),
+          });
+        },
+        (error) => {
+          console.log("Error create table running_infos: ", error.message);
+          reject({ success: 0, message: error.message })
+        },
       );
     });
   });

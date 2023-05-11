@@ -3,7 +3,7 @@ import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("ui.db");
 
 export const createTableLocations = () => {
-  try {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE table if not EXISTS locations (
@@ -15,13 +15,13 @@ export const createTableLocations = () => {
             createdAt DATE NOT NULL
         );`,
         [],
-        () => console.log("create table locations success"),
+        () => {
+          console.log("create table locations success");
+        },
         (error) => console.log("Error create table locations: ", error),
       );
     });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const insertLocation = (location) => {

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { unregisterLocationTask } from "../../utils/locationTask";
-import { sync } from "../../data/lastSync";
+import { StepSync } from "../../data/lastSync";
 import { useLoading } from "../../providers/LoadingProvider";
 
 export default function Actions() {

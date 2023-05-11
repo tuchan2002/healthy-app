@@ -3,7 +3,7 @@ import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("ui.db");
 
 export const createTableAuthUsers = () => {
-  try {
+  return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE table if not EXISTS auth_users (
@@ -15,12 +15,10 @@ export const createTableAuthUsers = () => {
         );`,
         [],
         () => console.log("create table auth_users success"),
-        (error) => console.log("Error create table user: ", error)
+        (error) => console.log("Error create table user: ", error),
       );
     });
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 export const insertUser = (authUser) => {
@@ -29,7 +27,7 @@ export const insertUser = (authUser) => {
       (tx) => {
         tx.executeSql(
           `INSERT INTO auth_users (token, user_id, username, avatar)
-              VALUES ("${authUser.token}", ${authUser.id}, "${authUser.username}", "${authUser.avatar}");`
+              VALUES ("${authUser.token}", ${authUser.id}, "${authUser.username}", "${authUser.avatar}");`,
         );
       },
       [],
@@ -38,7 +36,7 @@ export const insertUser = (authUser) => {
       },
       (error) => {
         reject("Error insert user:" + error.message);
-      }
+      },
     );
   });
 };
@@ -52,10 +50,10 @@ export const getAuthUserProperty = (property) => {
           [],
           (transact, resultset) => {
             resolve(resultset?.rows?._array);
-          }
+          },
         );
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
@@ -73,7 +71,7 @@ export const droptTable = (nameTable) => {
         (error) => {
           console.log(`drop ${nameTable} error`);
           reject(error);
-        }
+        },
       );
     });
   });

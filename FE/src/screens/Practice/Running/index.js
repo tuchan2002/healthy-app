@@ -20,7 +20,6 @@ import {
   insertLocation,
 } from "../../../data/locations";
 import {
-  createTableRunningInfos,
   getTheLastRunningInfo,
   insertRunningInfo,
 } from "../../../data/runningInfo";
@@ -92,8 +91,8 @@ export default function Running() {
     }
   };
 
-  const forceUpdateLocations = () => {
-    getPath();
+  const forceUpdateLocations = async () => {
+    await getPath();
     forceUpdate();
   };
 
@@ -107,7 +106,7 @@ export default function Running() {
             ...locations[0].coords,
             runningInfoId: defaultRunningInfo.id,
           });
-          forceUpdateLocations();
+          await forceUpdateLocations();
           return;
         }
         if (error) {
@@ -119,10 +118,14 @@ export default function Running() {
   };
 
   useEffect(() => {
-    getRunningInfo();
-    getPath();
-    getNowLocation();
-    getBMI();
+    const getInitialData = async () => {
+      await getRunningInfo();
+      await getPath();
+      await getNowLocation();
+      await getBMI();
+    }
+
+    getInitialData();
   }, []);
 
   useEffect(() => {
@@ -195,7 +198,7 @@ export default function Running() {
 
   const handleStartRunning = async () => {
     if (!defaultRunningInfo.isStarted) {
-      getPermissions();
+      await getPermissions();
       if (!nowLocation) {
         await getNowLocation();
       }
