@@ -46,6 +46,7 @@ export const insertStep = (value) => {
         resolve("insert steps success");
       },
       (error) => {
+        console.log("error insertStep");
         reject(error);
       }
     );
@@ -63,6 +64,7 @@ export const getSteps = () => {
       (error) => console.log(error)
     );
   } catch (error) {
+    console.log("error getSteps");
     console.log(error);
   }
 };
@@ -78,6 +80,7 @@ export const droptTable = (nameTable) => {
       );
     });
   } catch (error) {
+    console.log("error droptTable");
     console.log(error);
   }
 };
@@ -93,6 +96,7 @@ export const countStepOfDay = () => {
           resolve(result?.rows?._array[0]?.count);
         },
         (error) => {
+          console.log("error countStepOfDay");
           reject(error);
         }
       );
@@ -112,6 +116,7 @@ export const countTotalSecondStepOfDay = () => {
           resolve(result?.rows?._array[0]?.count);
         },
         (error) => {
+          console.log("error countTotalSecondStepOfDay");
           reject(error);
         }
       );
@@ -144,6 +149,7 @@ export const countTotalStepByLengthOfDay = () => {
           resolve(result?.rows?._array);
         },
         (error) => {
+          console.log("error countTotalStepByLengthOfDay");
           reject(error);
         }
       );
@@ -206,6 +212,7 @@ export const getStepByYear = (month = "2023-04-28") => {
           resolve(resultset?.rows?._array);
         },
         (error) => {
+          console.log("error getStepByYear");
           reject(error);
         }
       );
@@ -224,6 +231,7 @@ export const getStepById = (stepId) => {
           resolve(resultset?.rows?._array);
         },
         (error) => {
+          console.log("error getStepById");
           reject(error);
         }
       );
@@ -243,6 +251,7 @@ export const insertSyncStep = (date, value, type, time) => {
           resolve(true);
         },
         (error) => {
+          console.log("error insertSyncStep");
           reject(error);
         }
       );

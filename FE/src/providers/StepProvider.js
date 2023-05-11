@@ -1,13 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect, createContext, useContext } from "react";
 import { Accelerometer } from "expo-sensors";
-import {
-  insertStep,
-  createTableSteps,
-  countStepOfDay,
-  droptTable,
-  countTotalStepByLengthOfDay,
-} from "../data/stepCounter";
+import { insertStep, countTotalStepByLengthOfDay } from "../data/stepCounter";
 import { AuthContext } from "./AuthProvider";
 import { MAGAVG } from "../constants/step";
 
@@ -128,6 +122,9 @@ export const StepProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    steps.current.count = 0;
+    steps.current.calo = 0;
+    steps.current.lengthTravel = 0;
     getTravelLength();
   }, [authUser]);
 
