@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="add calo time length in home step" />
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix fixed calo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +80,7 @@
       <workItem from="1683255327286" duration="6102000" />
       <workItem from="1683446776888" duration="13000" />
       <workItem from="1683794504743" duration="1355000" />
+      <workItem from="1683819758623" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -254,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683801777383</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix fixed calo">
+      <created>1683819782315</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1683819782316</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,6 +302,7 @@
     <MESSAGE value="sync step when login" />
     <MESSAGE value="sync step when logout and update last id step" />
     <MESSAGE value="add calo time length in home step" />
-    <option name="LAST_COMMIT_MESSAGE" value="add calo time length in home step" />
+    <MESSAGE value="fix fixed calo" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix fixed calo" />
   </component>
 </project>
