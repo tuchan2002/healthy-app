@@ -101,22 +101,26 @@ export const StepProvider = ({ children }) => {
   };
 
   const getTravelLength = async () => {
-    const res = await countTotalStepByLengthOfDay();
+    try {
+      const res = await countTotalStepByLengthOfDay();
 
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].length === "avg") {
-        steps.current.lengthTravel += 0.4 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.02 * res[i].count;
-      } else if (res[i].length === "small") {
-        steps.current.lengthTravel += 0.2 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.01 * res[i].count;
-      } else {
-        steps.current.lengthTravel += 0.6 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.03 * res[i].count;
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].length === "avg") {
+          steps.current.lengthTravel += 0.4 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.02 * res[i].count;
+        } else if (res[i].length === "small") {
+          steps.current.lengthTravel += 0.2 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.01 * res[i].count;
+        } else {
+          steps.current.lengthTravel += 0.6 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.03 * res[i].count;
+        }
       }
+    } catch (error) {
+      console.log("try catch error getTravelLength");
     }
     forceUpdate();
   };
