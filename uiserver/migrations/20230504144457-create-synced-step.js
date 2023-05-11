@@ -19,6 +19,9 @@ module.exports = {
       },
       type: {
         type: Sequelize.INTEGER
+      },
+      time: {
+        type: Sequelize.INTEGER
       }
     });
   },
