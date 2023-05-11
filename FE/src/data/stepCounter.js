@@ -141,12 +141,12 @@ export const countTotalStepByLengthOfDay = () => {
           CASE 
             WHEN value = 6 THEN 'avg' 
             WHEN value < 6 THEN 'small' 
-            ELSE 'big' 
+            ELSE 'big'
           END;
         `,
         [],
         (tx, result) => {
-          resolve(result?.rows?._array);
+          resolve(result?.rows?._array?.length > 0 ? result?.rows?._array : []);
         },
         (error) => {
           console.log("error countTotalStepByLengthOfDay");
