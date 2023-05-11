@@ -103,7 +103,6 @@ export const StepProvider = ({ children }) => {
   const getTravelLength = async () => {
     try {
       const res = await countTotalStepByLengthOfDay();
-
       for (let i = 0; i < res.length; i++) {
         if (res[i].length === "avg") {
           steps.current.lengthTravel += 0.4 * res[i].count;
@@ -129,7 +128,11 @@ export const StepProvider = ({ children }) => {
     steps.current.count = 0;
     steps.current.calo = 0;
     steps.current.lengthTravel = 0;
-    getTravelLength();
+    if (authUser && authUser.user_id) {
+      getTravelLength();
+    } else {
+      console.log(authUser);
+    }
   }, [authUser]);
 
   useEffect(() => {
