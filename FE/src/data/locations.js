@@ -16,7 +16,7 @@ export const createTableLocations = () => {
         );`,
         [],
         () => console.log("create table locations success"),
-        (error) => console.log("Error create table locations: ", error),
+        (error) => console.log("Error create table locations: ", error)
       );
     });
   } catch (error) {
@@ -40,7 +40,7 @@ export const insertLocation = (location) => {
       },
       (error) => {
         reject("Error insert location:" + error.message);
-      },
+      }
     );
   });
 };
@@ -56,7 +56,7 @@ export const getTheLastLocation = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -72,7 +72,7 @@ export const getTheRunningLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
