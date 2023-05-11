@@ -1,13 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect, createContext, useContext } from "react";
 import { Accelerometer } from "expo-sensors";
-import {
-  insertStep,
-  createTableSteps,
-  countStepOfDay,
-  droptTable,
-  countTotalStepByLengthOfDay,
-} from "../data/stepCounter";
+import { insertStep, countTotalStepByLengthOfDay } from "../data/stepCounter";
 import { AuthContext } from "./AuthProvider";
 import { MAGAVG } from "../constants/step";
 
@@ -107,28 +101,38 @@ export const StepProvider = ({ children }) => {
   };
 
   const getTravelLength = async () => {
-    const res = await countTotalStepByLengthOfDay();
-
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].length === "avg") {
-        steps.current.lengthTravel += 0.4 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.02 * res[i].count;
-      } else if (res[i].length === "small") {
-        steps.current.lengthTravel += 0.2 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.01 * res[i].count;
-      } else {
-        steps.current.lengthTravel += 0.6 * res[i].count;
-        steps.current.count += res[i].count;
-        steps.current.calo += 0.03 * res[i].count;
+    try {
+      const res = await countTotalStepByLengthOfDay();
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].length === "avg") {
+          steps.current.lengthTravel += 0.4 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.02 * res[i].count;
+        } else if (res[i].length === "small") {
+          steps.current.lengthTravel += 0.2 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.01 * res[i].count;
+        } else {
+          steps.current.lengthTravel += 0.6 * res[i].count;
+          steps.current.count += res[i].count;
+          steps.current.calo += 0.03 * res[i].count;
+        }
       }
+    } catch (error) {
+      console.log("try catch error getTravelLength");
     }
     forceUpdate();
   };
 
   useEffect(() => {
-    getTravelLength();
+    steps.current.count = 0;
+    steps.current.calo = 0;
+    steps.current.lengthTravel = 0;
+    if (authUser && authUser.user_id) {
+      getTravelLength();
+    } else {
+      console.log(authUser);
+    }
   }, [authUser]);
 
   useEffect(() => {

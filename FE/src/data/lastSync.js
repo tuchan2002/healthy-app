@@ -18,6 +18,7 @@ export const createTableLastSync = () => {
           resolve(true);
         },
         (error) => {
+          console.log("createTableLastSync error");
           reject(error);
         },
       );
@@ -40,6 +41,8 @@ export const updateStepIdLastSync = (value) => {
         resolve("updateStepIdLastSync success");
       },
       (error) => {
+        console.log("updateStepIdLastSync error");
+
         reject(error);
       },
     );
@@ -60,6 +63,7 @@ export const getStepIdLastSync = () => {
           resolve(stepId);
         },
         (error) => {
+          console.log("getStepIdLastSync error");
           reject(error);
         },
       );
@@ -87,6 +91,8 @@ export const StepSync = async (userId) => {
       }
     }
   } catch (error) {
+    console.log("StepSync error");
+
     console.log(error);
   }
 };

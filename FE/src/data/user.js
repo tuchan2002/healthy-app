@@ -18,7 +18,7 @@ export const createTableAuthUsers = () => {
         (error) => console.log("Error create table user: ", error),
       );
     });
-  });
+  })
 };
 
 export const insertUser = (authUser) => {
@@ -32,9 +32,11 @@ export const insertUser = (authUser) => {
       },
       [],
       () => {
+        console.log("insertUser success");
         resolve("insert success");
       },
       (error) => {
+        console.log("insertUser error");
         reject("Error insert user:" + error.message);
       },
     );
@@ -53,7 +55,10 @@ export const getAuthUserProperty = (property) => {
           },
         );
       },
-      (error) => reject(error),
+      (error) => {
+        console.log("getAuthUserProperty error");
+        reject(error);
+      }
     );
   });
 };
