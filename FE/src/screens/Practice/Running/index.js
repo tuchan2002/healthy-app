@@ -22,6 +22,7 @@ import {
 import {
   getTheLastRunningInfo,
   insertRunningInfo,
+  updateRunningInfo,
 } from "../../../data/runningInfo";
 import { convertTime } from "../../../utils/datetime";
 import * as TaskManager from "expo-task-manager";
@@ -48,6 +49,7 @@ export default function Running() {
   };
 
   const getPath = async () => {
+    console.log("getPath");
     if (defaultRunningInfo?.id) {
       const theLocation = await getTheLocation(defaultRunningInfo.id);
       const theRunningLocation = await getTheRunningLocation(
@@ -91,8 +93,8 @@ export default function Running() {
     }
   };
 
-  const forceUpdateLocations = async () => {
-    await getPath();
+  const forceUpdateLocations = () => {
+    getPath();
     forceUpdate();
   };
 
@@ -106,7 +108,7 @@ export default function Running() {
             ...locations[0].coords,
             runningInfoId: defaultRunningInfo.id,
           });
-          await forceUpdateLocations();
+          forceUpdateLocations();
           return;
         }
         if (error) {
@@ -123,7 +125,7 @@ export default function Running() {
       await getPath();
       await getNowLocation();
       await getBMI();
-    }
+    };
 
     getInitialData();
   }, []);
@@ -210,12 +212,9 @@ export default function Running() {
     }
   };
 
-  const handleStopRunning = () => {
+  const handleStopRunning = async () => {
     path.current = [];
-    setDefaultRunningInfo({
-      ...runningInfo,
-      isStopped: 0,
-    });
+    await getRunningInfo();
   };
 
   return (

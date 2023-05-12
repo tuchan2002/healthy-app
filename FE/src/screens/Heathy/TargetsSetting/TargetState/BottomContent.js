@@ -10,11 +10,13 @@ import StateDetailBox from "../../../../components/screens/Healthy/TargetsSettin
 import { handlePutUserTarget } from "../../../../services/userTarget";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import NotiDialog from "../../../../components/NotiDialog";
+import { useStep } from "../../../../providers/StepProvider";
 
 export default function BottomContent({ targetState, targetDetail: tD }) {
   const [isNow, setIsNow] = useState(false);
   const [targetDetail, setTargetDetail] = useState(tD);
   const { authUser } = useContext(AuthContext);
+  const { steps } = useStep();
   const [openSuccessDialog, setOpenSuccessDialog] = useState("");
   const [openFailDialog, setOpenFailDialog] = useState("");
 
@@ -80,7 +82,7 @@ export default function BottomContent({ targetState, targetDetail: tD }) {
           content={
             <CustomText>
               <CustomText style={[{ fontSize: 20 }]}>
-                {targetState?.footsteps_amount || "0"}
+                {steps.current.count || "0"}
               </CustomText>
               /{targetDetail?.footsteps_amount} bước
             </CustomText>

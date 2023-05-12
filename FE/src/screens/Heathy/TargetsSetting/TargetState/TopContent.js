@@ -4,16 +4,16 @@ import CustomText from "../../../../components/CustomText";
 import CustomProgressChart from "../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart";
 import { useEffect, useState } from "react";
 import { convertDateToString2 } from "../../../../utils/datetime";
+import { useStep } from "../../../../providers/StepProvider";
+import color from "../../../../constants/color";
 
 export default function TopContent({ targetState, targetDetail }) {
   const [chartData, setChartData] = useState({
     data: [0, 0, 0],
-    colors: [
-      "rgba(255, 0, 214, 1)",
-      "rgba(255, 188, 57, 1)",
-      "rgba(96, 207, 255, 1)",
-    ],
+    colors: ["#30b9bd", "#ff8c3d", "#a06ffa"],
   });
+
+  const { steps } = useStep();
 
   useEffect(() => {
     if (targetState && targetDetail) {
@@ -32,7 +32,7 @@ export default function TopContent({ targetState, targetDetail }) {
       }
       const data = [
         timeProgress,
-        targetState.footsteps_amount / targetDetail.footsteps_amount,
+        steps.current.count / targetDetail.footsteps_amount,
         targetState.kcal / targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
@@ -59,13 +59,13 @@ export default function TopContent({ targetState, targetDetail }) {
         </View>
         <View style={styles.topBoxLineText}>
           <View style={styles.dot}>
-            <Dot bgColor="#FFBC39" />
+            <Dot bgColor={color.step} />
           </View>
           <View style={styles.textBox}>
             <CustomText style={[styles.text]}>
               Số bước:{" "}
               <CustomText style={[{ fontSize: 14 }]}>
-                {targetState?.footsteps_amount || 0}
+                {steps.current.count || 0}
               </CustomText>{" "}
               bước
             </CustomText>
@@ -73,7 +73,7 @@ export default function TopContent({ targetState, targetDetail }) {
         </View>
         <View style={styles.topBoxLineText}>
           <View style={styles.dot}>
-            <Dot bgColor="#60CFFF" />
+            <Dot bgColor={color.calo} />
           </View>
           <View style={styles.textBox}>
             <CustomText style={[styles.text]}>

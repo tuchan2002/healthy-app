@@ -1,15 +1,19 @@
 import { ProgressChart } from "react-native-chart-kit";
 
-export default function CustomProgressChart({ data }) {
+export default function CustomProgressChart({
+  data,
+  size = { height: 220, width: 220 },
+  backgroundColor = "#F0EFEF",
+}) {
   return (
     <ProgressChart
       data={data}
-      height={220}
-      width={220}
+      height={size.height}
+      width={size.width}
       chartConfig={{
-        backgroundColor: "#F0EFEF",
-        backgroundGradientFrom: "#F0EFEF",
-        backgroundGradientTo: "#F0EFEF",
+        backgroundColor: backgroundColor,
+        backgroundGradientFrom: backgroundColor,
+        backgroundGradientTo: backgroundColor,
         decimalPlaces: 4,
         color: (opacity = 1, index) => {
           return `rgba(132, 132, 132, ${opacity})`;
