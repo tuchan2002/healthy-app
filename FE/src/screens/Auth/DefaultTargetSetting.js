@@ -2,7 +2,11 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Layout from "../../layouts/Layout";
 import CustomText from "../../components/CustomText";
 import UserButton from "../../components/UserButton";
-import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from "../../constants/size";
+import {
+  FOOTERBAR_HEIGHT,
+  SCREEN_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from "../../constants/size";
 import { useContext, useEffect, useState } from "react";
 import Input from "../../components/Input";
 import TimePicker from "../../components/screens/Healthy/TargetsSetting/TimePicker";
@@ -65,8 +69,15 @@ export default function DefaultTargetSetting({ navigation }) {
     }
   };
 
-  const handleCancel = () => {
-    navigation.push("Home");
+  const handleCancel = async () => {
+    const res = await handlePostUserTarget({
+      ...userTarget,
+      user_id: authUser.user_id,
+    });
+
+    if (res.success) {
+      navigation.push("Home");
+    }
   };
   return (
     <Layout isAuth={false}>
@@ -154,7 +165,7 @@ export default function DefaultTargetSetting({ navigation }) {
                 style={styles.cancelButton}
               >
                 <CustomText style={[{ textAlign: "center" }]}>
-                  Bỏ qua
+                  Mặc định
                 </CustomText>
               </TouchableOpacity>
             </View>
