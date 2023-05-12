@@ -1,0 +1,1085 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]/shelved.patch	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,488 +0,0 @@
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ /dev/null	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]" date="1682572124331" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12:08, 27/04/2023 [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"fix button icon\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2OGNb67oO9I9quEPV5Pf8hcEhLO\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/chung/Android/UI/healthy-app&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/chung/Downloads/ideaIU-2022.3.2/idea-IU-223.8617.56/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"\" />\n      <created>1681183026669</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1681183026669</updated>\n      <workItem from=\"1681183027846\" duration=\"8604000\" />\n      <workItem from=\"1681291726804\" duration=\"18973000\" />\n      <workItem from=\"1681360362872\" duration=\"1534000\" />\n      <workItem from=\"1681394801400\" duration=\"2529000\" />\n      <workItem from=\"1681413012023\" duration=\"603000\" />\n      <workItem from=\"1681414733205\" duration=\"285000\" />\n      <workItem from=\"1681551012774\" duration=\"4000\" />\n      <workItem from=\"1681551074125\" duration=\"3000\" />\n      <workItem from=\"1682150781825\" duration=\"403000\" />\n      <workItem from=\"1682151189052\" duration=\"99000\" />\n      <workItem from=\"1682151291933\" duration=\"2154000\" />\n      <workItem from=\"1682188888863\" duration=\"342000\" />\n      <workItem from=\"1682220199084\" duration=\"23000\" />\n      <workItem from=\"1682572013791\" duration=\"1487000\" />\n      <workItem from=\"1682652510382\" duration=\"4373000\" />\n      <workItem from=\"1682740327166\" duration=\"1894000\" />\n      <workItem from=\"1682760079980\" duration=\"1152000\" />\n      <workItem from=\"1682829626902\" duration=\"676000\" />\n      <workItem from=\"1682939524165\" duration=\"3000\" />\n      <workItem from=\"1683134238268\" duration=\"443000\" />\n      <workItem from=\"1683168398913\" duration=\"2172000\" />\n      <workItem from=\"1683176029535\" duration=\"90000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"particle speed machine\">\n      <created>1681327312222</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681327312222</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"particle speed machine\">\n      <created>1681360389318</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681360389318</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"step counter v1.1\">\n      <created>1682153984132</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682153984132</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"save steps current day sqlite\">\n      <created>1682188941857</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682188941857</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"refactor struct table step sqlite\">\n      <created>1682699935358</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682699935358</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"set timezone table step\">\n      <created>1682741052451</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682741052451</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"set timezone table step\">\n      <created>1682760625503</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682760625503</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"analyst steps by month and year\">\n      <created>1682829651678</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682829651678</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"custom line chart of step\">\n      <created>1683134375945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683134375945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"custom login\">\n      <created>1683172905685</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683172905685</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fix logo google\">\n      <created>1683174460848</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683174460848</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ui login version 2\">\n      <created>1683175734734</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683175734734</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"fix button icon\">\n      <created>1683176038658</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683176038658</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"14\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"particle speed machine\" />\n    <MESSAGE value=\"step counter v1.1\" />\n    <MESSAGE value=\"save steps current day sqlite\" />\n    <MESSAGE value=\"refactor struct table step sqlite\" />\n    <MESSAGE value=\"set timezone table step\" />\n    <MESSAGE value=\"analyst steps by month and year\" />\n    <MESSAGE value=\"custom line chart of step\" />\n    <MESSAGE value=\"custom login\" />\n    <MESSAGE value=\"fix logo google\" />\n    <MESSAGE value=\"ui login version 2\" />\n    <MESSAGE value=\"fix button icon\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fix button icon\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/.idea/workspace.xml	(date 1683221072836)
+-@@ -4,8 +4,10 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix button icon">
+-+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="add loading provider">
+-+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml" beforeDir="false" />
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-@@ -77,6 +79,7 @@
+-       <workItem from="1683134238268" duration="443000" />
+-       <workItem from="1683168398913" duration="2172000" />
+-       <workItem from="1683176029535" duration="90000" />
+-+      <workItem from="1683200641729" duration="3088000" />
+-     </task>
+-     <task id="LOCAL-00001" summary="particle speed machine">
+-       <created>1681327312222</created>
+-@@ -169,7 +172,14 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1683176038658</updated>
+-     </task>
+--    <option name="localTasksCounter" value="14" />
+-+    <task id="LOCAL-00014" summary="add loading provider">
+-+      <created>1683200704849</created>
+-+      <option name="number" value="00014" />
+-+      <option name="presentableId" value="LOCAL-00014" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683200704849</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="15" />
+-     <servers />
+-   </component>
+-   <component name="TypeScriptGeneratedFilesManager">
+-@@ -198,6 +208,7 @@
+-     <MESSAGE value="fix logo google" />
+-     <MESSAGE value="ui login version 2" />
+-     <MESSAGE value="fix button icon" />
+--    <option name="LAST_COMMIT_MESSAGE" value="fix button icon" />
+-+    <MESSAGE value="add loading provider" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="add loading provider" />
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: FE/src/screens/Heathy/Home/index.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import React, { useState, useEffect, useRef, memo, useMemo } from \"react\";\nimport { ScrollView, TouchableOpacity, View } from \"react-native\";\nimport CustomText from \"../../../components/CustomText\";\nimport Layout from \"../../../layouts/Layout\";\nimport styles from \"./styles\";\nimport WorkoutRecord from \"./NavigationItem/WorkoutRecord\";\nimport Target from \"./NavigationItem/Target\";\nimport Sleep from \"./NavigationItem/Sleep\";\nimport IBMIndex from \"./NavigationItem/IBMIndex\";\nimport { useNavigation } from \"@react-navigation/native\";\nimport { Accelerometer } from \"expo-sensors\";\nimport moment from \"moment\";\nimport {\n  createTableSteps,\n  insertStep,\n  getSteps,\n  droptTable,\n  countStepOfDay,\n  getStepByDate,\n} from \"../../../data/stepCounter\";\nimport * as SQLite from \"expo-sqlite\";\n\nexport default Home = memo(() => {\n  const navigation = useNavigation();\n  const [subscription, setSubscription] = useState(null);\n\n  const useForceUpdate = () => {\n    const [, setState] = useState();\n    return () => setState({});\n  };\n\n  const forceUpdate = useForceUpdate();\n  const steps = useRef(0);\n\n  const _slow = () => {\n    Accelerometer.setUpdateInterval(30);\n  };\n\n  _slow();\n\n  const _subscribe = async () => {\n    let mArray = [];\n    let start = false;\n    let peak = false;\n    let valuePeak = 9.81;\n    let magnitudePrev = 9.81;\n    let magnitudeMiddle = 9.81;\n    setSubscription(\n      Accelerometer.addListener((data) => {\n        const x = data.x;\n        const y = data.y;\n        const z = data.z;\n        const magnitude = 9.81 * Math.sqrt(x * x + y * y + z * z);\n\n        if (start === false) {\n          if (magnitudePrev + 0.5 < magnitudeMiddle) {\n            start = true;\n            mArray.push(magnitudePrev);\n            mArray.push(magnitudeMiddle);\n          }\n        }\n\n        if (start === true) {\n          mArray.push(magnitude);\n          if (\n            peak === false &&\n            magnitudePrev < magnitudeMiddle &&\n            magnitudeMiddle > magnitude\n          ) {\n            peak = true;\n            valuePeak = magnitudeMiddle;\n          }\n\n          if (peak === true && magnitudeMiddle > magnitude) {\n            start = false;\n            peak = false;\n            if (valuePeak - mArray[0] > 4) {\n              console.log(mArray);\n              steps.current += 1;\n              insertStep(valuePeak - mArray[0]);\n              magnitudePrev = magnitudeMiddle;\n              magnitudeMiddle = magnitude;\n              mArray = [];\n              forceUpdate();\n            } else {\n              start = false;\n              peak = false;\n              valuePeak = 9.81;\n              mArray = [];\n            }\n          }\n        }\n        magnitudePrev = magnitudeMiddle;\n        magnitudeMiddle = magnitude;\n      })\n    );\n  };\n\n  const _unsubscribe = () => {\n    subscription && subscription.remove();\n    setSubscription(null);\n  };\n  useEffect(() => {\n    createTableSteps();\n    const getResult = async () => {\n      const count = await countStepOfDay();\n      steps.current = count;\n      forceUpdate();\n    };\n    getResult();\n  }, []);\n\n  useEffect(() => {\n    _subscribe();\n    return () => _unsubscribe();\n    //getSteps();\n    //droptTable(\"steps\");\n  }, []);\n\n  return (\n    <Layout>\n      <View style={styles.container}>\n        <CustomText style={[styles.title]} fontFamily=\"NunitoSans-SemiBold\">\n          Sức khỏe\n        </CustomText>\n\n        <View style={styles.topContainer}>\n          <View>\n            <TouchableOpacity\n              style={styles.topCircle}\n              onPress={() => navigation.navigate(\"Footsteps\")}\n              activeOpacity={1}\n            >\n              <CustomText style={[{ color: \"white\" }]}>\n                {steps.current}\n              </CustomText>\n              <CustomText style={[{ color: \"white\" }]}>bước</CustomText>\n            </TouchableOpacity>\n\n            <CustomText style={[{ color: \"white\", textAlign: \"center\" }]}>\n              1.0 Km\n            </CustomText>\n          </View>\n          <View>\n            <TouchableOpacity\n              style={styles.topCircle}\n              onPress={() => {}}\n              activeOpacity={1}\n            >\n              <CustomText style={[{ color: \"white\" }]}>--</CustomText>\n              <CustomText style={[{ color: \"white\" }]}>phút</CustomText>\n            </TouchableOpacity>\n            <CustomText style={[{ color: \"white\", textAlign: \"center\" }]}>\n              0 kcal\n            </CustomText>\n          </View>\n        </View>\n\n        <ScrollView\n          style={{\n            margin: -16,\n          }}\n          showsVerticalScrollIndicator={false}\n          contentContainerStyle={{ padding: 16 }}\n        >\n          <View style={{ marginBottom: 16, flexDirection: \"row\" }}>\n            <WorkoutRecord distance={2.86} />\n            <Target />\n          </View>\n          <View style={{ marginBottom: 16, flexDirection: \"row\" }}>\n            <Sleep />\n            <IBMIndex IBMValue={32.25} IBMDescription=\"Hơi béo\" />\n          </View>\n        </ScrollView>\n      </View>\n    </Layout>\n  );\n});\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/screens/Heathy/Home/index.js b/FE/src/screens/Heathy/Home/index.js
+---- a/FE/src/screens/Heathy/Home/index.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/FE/src/screens/Heathy/Home/index.js	(date 1683254932757)
+-@@ -1,4 +1,4 @@
+--import React, { useState, useEffect, useRef, memo, useMemo } from "react";
+-+import React, { memo } from "react";
+- import { ScrollView, TouchableOpacity, View } from "react-native";
+- import CustomText from "../../../components/CustomText";
+- import Layout from "../../../layouts/Layout";
+-@@ -7,115 +7,10 @@
+- import Target from "./NavigationItem/Target";
+- import Sleep from "./NavigationItem/Sleep";
+- import IBMIndex from "./NavigationItem/IBMIndex";
+--import { useNavigation } from "@react-navigation/native";
+--import { Accelerometer } from "expo-sensors";
+--import moment from "moment";
+--import {
+--  createTableSteps,
+--  insertStep,
+--  getSteps,
+--  droptTable,
+--  countStepOfDay,
+--  getStepByDate,
+--} from "../../../data/stepCounter";
+--import * as SQLite from "expo-sqlite";
+-+import { useStep } from "../../../providers/StepProvider";
+- 
+- export default Home = memo(() => {
+--  const navigation = useNavigation();
+--  const [subscription, setSubscription] = useState(null);
+--
+--  const useForceUpdate = () => {
+--    const [, setState] = useState();
+--    return () => setState({});
+--  };
+--
+--  const forceUpdate = useForceUpdate();
+--  const steps = useRef(0);
+--
+--  const _slow = () => {
+--    Accelerometer.setUpdateInterval(30);
+--  };
+--
+--  _slow();
+--
+--  const _subscribe = async () => {
+--    let mArray = [];
+--    let start = false;
+--    let peak = false;
+--    let valuePeak = 9.81;
+--    let magnitudePrev = 9.81;
+--    let magnitudeMiddle = 9.81;
+--    setSubscription(
+--      Accelerometer.addListener((data) => {
+--        const x = data.x;
+--        const y = data.y;
+--        const z = data.z;
+--        const magnitude = 9.81 * Math.sqrt(x * x + y * y + z * z);
+--
+--        if (start === false) {
+--          if (magnitudePrev + 0.5 < magnitudeMiddle) {
+--            start = true;
+--            mArray.push(magnitudePrev);
+--            mArray.push(magnitudeMiddle);
+--          }
+--        }
+--
+--        if (start === true) {
+--          mArray.push(magnitude);
+--          if (
+--            peak === false &&
+--            magnitudePrev < magnitudeMiddle &&
+--            magnitudeMiddle > magnitude
+--          ) {
+--            peak = true;
+--            valuePeak = magnitudeMiddle;
+--          }
+--
+--          if (peak === true && magnitudeMiddle > magnitude) {
+--            start = false;
+--            peak = false;
+--            if (valuePeak - mArray[0] > 4) {
+--              console.log(mArray);
+--              steps.current += 1;
+--              insertStep(valuePeak - mArray[0]);
+--              magnitudePrev = magnitudeMiddle;
+--              magnitudeMiddle = magnitude;
+--              mArray = [];
+--              forceUpdate();
+--            } else {
+--              start = false;
+--              peak = false;
+--              valuePeak = 9.81;
+--              mArray = [];
+--            }
+--          }
+--        }
+--        magnitudePrev = magnitudeMiddle;
+--        magnitudeMiddle = magnitude;
+--      })
+--    );
+--  };
+--
+--  const _unsubscribe = () => {
+--    subscription && subscription.remove();
+--    setSubscription(null);
+--  };
+--  useEffect(() => {
+--    createTableSteps();
+--    const getResult = async () => {
+--      const count = await countStepOfDay();
+--      steps.current = count;
+--      forceUpdate();
+--    };
+--    getResult();
+--  }, []);
+--
+--  useEffect(() => {
+--    _subscribe();
+--    return () => _unsubscribe();
+--    //getSteps();
+--    //droptTable("steps");
+--  }, []);
+-+  const { steps } = useStep();
+- 
+-   return (
+-     <Layout>
+-Index: uiserver/models/syncedstep.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>'use strict';\nconst {\n  Model\n} = require('sequelize');\nmodule.exports = (sequelize, DataTypes) => {\n  class SyncedStep extends Model {\n    /**\n     * Helper method for defining associations.\n     * This method is not a part of Sequelize lifecycle.\n     * The `models/index` file will call this method automatically.\n     */\n    static associate(models) {\n      // define association here\n    }\n  }\n  SyncedStep.init({\n    id: DataTypes.INTEGER,\n    user_id: DataTypes.INTEGER,\n    date: DataTypes.DATE,\n    value: DataTypes.INTEGER,\n    type: DataTypes.INTEGER,\n  }, {\n    sequelize,\n    modelName: 'SyncedStep',\n    tableName: 'syncedsteps'\n  });\n  return SyncedStep;\n};
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/uiserver/models/syncedstep.js b/uiserver/models/syncedstep.js
+---- a/uiserver/models/syncedstep.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/uiserver/models/syncedstep.js	(date 1683216002075)
+-@@ -1,7 +1,5 @@
+--'use strict';
+--const {
+--  Model
+--} = require('sequelize');
+-+"use strict";
+-+const { Model } = require("sequelize");
+- module.exports = (sequelize, DataTypes) => {
+-   class SyncedStep extends Model {
+-     /**
+-@@ -13,16 +11,23 @@
+-       // define association here
+-     }
+-   }
+--  SyncedStep.init({
+--    id: DataTypes.INTEGER,
+--    user_id: DataTypes.INTEGER,
+--    date: DataTypes.DATE,
+--    value: DataTypes.INTEGER,
+--    type: DataTypes.INTEGER,
+--  }, {
+--    sequelize,
+--    modelName: 'SyncedStep',
+--    tableName: 'syncedsteps'
+--  });
+-+  SyncedStep.init(
+-+    {
+-+      id: {
+-+        allowNull: false,
+-+        primaryKey: true,
+-+        type: DataTypes.INTEGER,
+-+      },
+-+      user_id: DataTypes.INTEGER,
+-+      date: DataTypes.DATE,
+-+      value: DataTypes.INTEGER,
+-+      type: DataTypes.INTEGER,
+-+    },
+-+    {
+-+      sequelize,
+-+      modelName: "SyncedStep",
+-+      tableName: "syncedsteps",
+-+    }
+-+  );
+-   return SyncedStep;
+--};
+-\ No newline at end of file
+-+};
+-Index: FE/src/utils/axios.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import axios from \"axios\";\n\nconst instance = axios.create({\n  baseURL: \"http://10.0.2.2:5000\",\n});\n\ninstance.interceptors.request.use(\n  (config) => {\n    // const token = localStorage.getItem(\"token\");\n    // if (token) {\n    //   config.headers.Authorization = \"Bearer \" + token;\n    // }\n\n    config.headers = {\n      Accept: \"application/json\",\n      \"Content-Type\": \"application/json\",\n    };\n    return config;\n  },\n  (error) => {\n    return Promise.reject(error);\n  },\n);\n\ninstance.interceptors.response.use((response) => {\n  if (response.status === 204) {\n    return true;\n  }\n  return response.data;\n});\n\nexport default instance;\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/utils/axios.js b/FE/src/utils/axios.js
+---- a/FE/src/utils/axios.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/FE/src/utils/axios.js	(date 1683204578358)
+-@@ -1,7 +1,8 @@
+- import axios from "axios";
+- 
+- const instance = axios.create({
+--  baseURL: "http://10.0.2.2:5000",
+-+  baseURL: "http://192.168.1.3:5000",
+-+  // baseURL: "http://10.0.2.2:5000",
+- });
+- 
+- instance.interceptors.request.use(
+-@@ -19,7 +20,7 @@
+-   },
+-   (error) => {
+-     return Promise.reject(error);
+--  },
+-+  }
+- );
+- 
+- instance.interceptors.response.use((response) => {
+-Index: FE/src/screens/User/Actions.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import { StyleSheet, View } from \"react-native\";\nimport UserButton from \"../../components/UserButton\";\nimport { useNavigation } from \"@react-navigation/native\";\nimport { droptTable } from \"../../data/user\";\nimport { useContext } from \"react\";\nimport { AuthContext } from \"../../providers/AuthProvider\";\nimport { GoogleSignin } from \"@react-native-google-signin/google-signin\";\nimport { unregisterLocationTask } from \"../../utils/locationTask\";\n\nexport default function Actions() {\n  const navigation = useNavigation();\n  const { setAuthUser } = useContext(AuthContext);\n  const handleSync = () => {};\n\n  const handleSignOut = async () => {\n    droptTable(\"auth_users\");\n    setAuthUser(null);\n    if (GoogleSignin.isSignedIn) {\n      await GoogleSignin.signOut();\n    }\n    unregisterLocationTask();\n    droptTable(\"locations\");\n    navigation.push(\"Login\");\n  };\n  return (\n    <View style={styles.container}>\n      <UserButton content={\"Đồng bộ\"} onPress={handleSync} />\n      <UserButton content={\"Đăng xuất\"} onPress={handleSignOut} />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    marginHorizontal: \"4%\",\n    height: 160,\n    display: \"flex\",\n    flexDirection: \"column\",\n    justifyContent: \"space-between\",\n  },\n});\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/screens/User/Actions.js b/FE/src/screens/User/Actions.js
+---- a/FE/src/screens/User/Actions.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/FE/src/screens/User/Actions.js	(date 1683254173435)
+-@@ -6,11 +6,14 @@
+- import { AuthContext } from "../../providers/AuthProvider";
+- import { GoogleSignin } from "@react-native-google-signin/google-signin";
+- import { unregisterLocationTask } from "../../utils/locationTask";
+-+import { createTableLocations } from "../../data/lastSync";
+- 
+- export default function Actions() {
+-   const navigation = useNavigation();
+-   const { setAuthUser } = useContext(AuthContext);
+--  const handleSync = () => {};
+-+  const handleSync = () => {
+-+    createTableLocations();
+-+  };
+- 
+-   const handleSignOut = async () => {
+-     droptTable("auth_users");
+-Index: uiserver/routes/users.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>var express = require(\"express\");\nvar router = express.Router();\nvar { User } = require(\"../models\");\nconst SyncedStep = require('../models/syncedstep');\n\n/* GET user by user_id. */\nrouter.get(\"/\", function (req, res, next) {\n  res.send(\"respond with a resource\");\n});\n\nrouter.post(\"/login\", async (req, res) => {\n  try {\n    const reqBody = req.body;\n    let checkUser = await User.findOne({\n      where: {\n        uid: reqBody.uid,\n      },\n    });\n    let isTheFirst = false;\n    if (!checkUser) {\n      checkUser = await User.create({\n        ...reqBody,\n        createdAt: Date.now(),\n        updatedAt: Date.now(),\n      });\n      isTheFirst = true;\n    }\n    res.json({ success: 1, data: checkUser, isTheFirst });\n  } catch (error) {\n    res.json({ success: 0, message: error.message });\n  }\n});\n\nroute.post('/sync', async (req, res) => {\n  req.steps.map(element => element[\"user_id\"] = req.id);\n  const result = await FootStep.bulkCreate(req.steps, {updateOnDuplicate: true});\n  if(result) {\n    res.json({success: 1, message: 'data synced'});\n  }\n})\n\nmodule.exports = router;\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/uiserver/routes/users.js b/uiserver/routes/users.js
+---- a/uiserver/routes/users.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/uiserver/routes/users.js	(date 1683215998251)
+-@@ -1,7 +1,7 @@
+- var express = require("express");
+- var router = express.Router();
+- var { User } = require("../models");
+--const SyncedStep = require('../models/syncedstep');
+-+const SyncedStep = require("../models/syncedstep");
+- 
+- /* GET user by user_id. */
+- router.get("/", function (req, res, next) {
+-@@ -31,12 +31,14 @@
+-   }
+- });
+- 
+--route.post('/sync', async (req, res) => {
+--  req.steps.map(element => element["user_id"] = req.id);
+--  const result = await FootStep.bulkCreate(req.steps, {updateOnDuplicate: true});
+--  if(result) {
+--    res.json({success: 1, message: 'data synced'});
+-+router.post("/sync", async (req, res) => {
+-+  req.steps.map((element) => (element["user_id"] = req.id));
+-+  const result = await FootStep.bulkCreate(req.steps, {
+-+    updateOnDuplicate: true,
+-+  });
+-+  if (result) {
+-+    res.json({ success: 1, message: "data synced" });
+-   }
+--})
+-+});
+- 
+- module.exports = router;
+-Index: FE/App.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import { NavigationContainer } from \"@react-navigation/native\";\nimport { createNativeStackNavigator } from \"@react-navigation/native-stack\";\nimport Home from \"./src/screens/Heathy/Home\";\nimport TargetsSetting from \"./src/screens/Heathy/TargetsSetting\";\nimport WorkoutRecord from \"./src/screens/Heathy/WorkoutRecord\";\nimport Practice from \"./src/screens/Practice\";\nimport User from \"./src/screens/User\";\nimport Login from \"./src/screens/Auth/Login\";\nimport Footsteps from \"./src/screens/Heathy/Footsteps\";\nimport Exercises from \"./src/screens/Practice/Exercises\";\nimport Detail from \"./src/screens/Practice/Exercises/Detail\";\nimport BMISetting from \"./src/screens/Auth/BMISetting\";\nimport DefaultTargetSetting from \"./src/screens/Auth/DefaultTargetSetting\";\nimport AuthProvider from \"./src/providers/AuthProvider\";\nimport { LoadingProvider } from \"./src/providers/LoadingProvider\";\n\nconst Stack = createNativeStackNavigator();\n\nexport default function App() {\n  return (\n    <NavigationContainer>\n      <LoadingProvider>\n        <AuthProvider>\n          <Stack.Navigator\n            screenOptions={{\n              headerShown: false,\n            }}\n            initialRouteName=\"Login\"\n          >\n            <Stack.Screen name=\"BMISetting\" component={BMISetting} />\n            <Stack.Screen\n              name=\"DefaultTargetSetting\"\n              component={DefaultTargetSetting}\n            />\n            <Stack.Screen name=\"Home\" component={Home} />\n            <Stack.Screen name=\"WorkoutRecord\" component={WorkoutRecord} />\n            <Stack.Screen name=\"TargetsSetting\" component={TargetsSetting} />\n            <Stack.Screen name=\"Practice\" component={Practice} />\n            <Stack.Screen name=\"User\" component={User} />\n            <Stack.Screen name=\"Login\" component={Login} />\n            <Stack.Screen name=\"Footsteps\" component={Footsteps} />\n            <Stack.Screen name=\"Exercises\" component={Exercises} />\n            <Stack.Screen name=\"Video\" component={Detail} />\n          </Stack.Navigator>\n        </AuthProvider>\n      </LoadingProvider>\n    </NavigationContainer>\n  );\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/App.js b/FE/App.js
+---- a/FE/App.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/FE/App.js	(date 1683254746085)
+-@@ -13,6 +13,7 @@
+- import DefaultTargetSetting from "./src/screens/Auth/DefaultTargetSetting";
+- import AuthProvider from "./src/providers/AuthProvider";
+- import { LoadingProvider } from "./src/providers/LoadingProvider";
+-+import { StepProvider } from "./src/providers/StepProvider";
+- 
+- const Stack = createNativeStackNavigator();
+- 
+-@@ -21,27 +22,29 @@
+-     <NavigationContainer>
+-       <LoadingProvider>
+-         <AuthProvider>
+--          <Stack.Navigator
+--            screenOptions={{
+--              headerShown: false,
+--            }}
+--            initialRouteName="Login"
+--          >
+--            <Stack.Screen name="BMISetting" component={BMISetting} />
+--            <Stack.Screen
+--              name="DefaultTargetSetting"
+--              component={DefaultTargetSetting}
+--            />
+--            <Stack.Screen name="Home" component={Home} />
+--            <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
+--            <Stack.Screen name="TargetsSetting" component={TargetsSetting} />
+--            <Stack.Screen name="Practice" component={Practice} />
+--            <Stack.Screen name="User" component={User} />
+--            <Stack.Screen name="Login" component={Login} />
+--            <Stack.Screen name="Footsteps" component={Footsteps} />
+--            <Stack.Screen name="Exercises" component={Exercises} />
+--            <Stack.Screen name="Video" component={Detail} />
+--          </Stack.Navigator>
+-+          <StepProvider>
+-+            <Stack.Navigator
+-+              screenOptions={{
+-+                headerShown: false,
+-+              }}
+-+              initialRouteName="Login"
+-+            >
+-+              <Stack.Screen name="BMISetting" component={BMISetting} />
+-+              <Stack.Screen
+-+                name="DefaultTargetSetting"
+-+                component={DefaultTargetSetting}
+-+              />
+-+              <Stack.Screen name="Home" component={Home} />
+-+              <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
+-+              <Stack.Screen name="TargetsSetting" component={TargetsSetting} />
+-+              <Stack.Screen name="Practice" component={Practice} />
+-+              <Stack.Screen name="User" component={User} />
+-+              <Stack.Screen name="Login" component={Login} />
+-+              <Stack.Screen name="Footsteps" component={Footsteps} />
+-+              <Stack.Screen name="Exercises" component={Exercises} />
+-+              <Stack.Screen name="Video" component={Detail} />
+-+            </Stack.Navigator>
+-+          </StepProvider>
+-         </AuthProvider>
+-       </LoadingProvider>
+-     </NavigationContainer>
+-Index: FE/src/screens/Practice/Exercises/Item/index.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import React from \"react\";\nimport { Image, StyleSheet, Text, TextInput, TouchableHighlight } from \"react-native\";\nimport { View } from \"react-native\";\nimport CustomText from \"../../../../components/CustomText\";\nconst Item = ({ data, navigation }) => {\n  return (\n      <View style={styles.container}>\n        <Image\n          style={styles.image}\n          source={{\n            uri: \"https://cdn-icons-png.flaticon.com/512/2554/2554042.png\",\n          }}\n        />\n        <View>\n          <Text numberOfLines={1} style={[styles.title]}>\n            {data.title}\n          </Text>\n          <CustomText style={[{ fontSize: 14 }]}>\n            {`Thời gian: ${data.duration}`}\n          </CustomText>\n          <CustomText style={[{ fontSize: 14 }]}>\n            {`Tiêu thụ: ${data.kalo} kalo`}\n          </CustomText>\n        </View>\n      </View>\n  );\n};\n\nexport default Item;\n\nconst styles = StyleSheet.create({\n  container: {\n    paddingHorizontal: 15,\n    paddingVertical: 5,\n    marginVertical: 6,\n    display: \"flex\",\n    flexDirection: \"row\",\n    alignItems: \"center\",\n    height: 80,\n    backgroundColor: \"white\",\n    borderRadius: 10,\n  },\n  image: {\n    height: \"100%\",\n    width: \"30%\",\n  },\n  title: {\n    fontSize: 18,\n    fontWeight: 500,\n    width: 265,\n    fontFamily: \"NunitoSans-Regular\",\n    color: \"rgba(255, 162, 57, 1)\",\n    marginBottom: 2,\n  },\n});\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/screens/Practice/Exercises/Item/index.js b/FE/src/screens/Practice/Exercises/Item/index.js
+---- a/FE/src/screens/Practice/Exercises/Item/index.js	(revision 23b7d283528d96e41405a7fc2be93931e3e7969c)
+-+++ b/FE/src/screens/Practice/Exercises/Item/index.js	(date 1683204234688)
+-@@ -1,28 +1,34 @@
+- import React from "react";
+--import { Image, StyleSheet, Text, TextInput, TouchableHighlight } from "react-native";
+-+import {
+-+  Image,
+-+  StyleSheet,
+-+  Text,
+-+  TextInput,
+-+  TouchableHighlight,
+-+} from "react-native";
+- import { View } from "react-native";
+- import CustomText from "../../../../components/CustomText";
+- const Item = ({ data, navigation }) => {
+-   return (
+--      <View style={styles.container}>
+--        <Image
+--          style={styles.image}
+--          source={{
+--            uri: "https://cdn-icons-png.flaticon.com/512/2554/2554042.png",
+--          }}
+--        />
+--        <View>
+--          <Text numberOfLines={1} style={[styles.title]}>
+--            {data.title}
+--          </Text>
+--          <CustomText style={[{ fontSize: 14 }]}>
+--            {`Thời gian: ${data.duration}`}
+--          </CustomText>
+--          <CustomText style={[{ fontSize: 14 }]}>
+--            {`Tiêu thụ: ${data.kalo} kalo`}
+--          </CustomText>
+--        </View>
+--      </View>
+-+    <View style={styles.container}>
+-+      <Image
+-+        style={styles.image}
+-+        source={{
+-+          uri: "https://cdn-icons-png.flaticon.com/512/2554/2554042.png",
+-+        }}
+-+      />
+-+      <View>
+-+        <Text numberOfLines={1} style={[styles.title]}>
+-+          {data.title}
+-+        </Text>
+-+        <CustomText style={[{ fontSize: 14 }]}>
+-+          {`Thời gian: ${data.duration}`}
+-+        </CustomText>
+-+        <CustomText style={[{ fontSize: 14 }]}>
+-+          {`Tiêu thụ: ${data.kalo} kalo`}
+-+        </CustomText>
+-+      </View>
+-+    </View>
+-   );
+- };
+- 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_09_56__05_05_2023__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_09_56__05_05_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_09_56__05_05_2023__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_09_56__05_05_2023__Changes_.xml	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]" date="1683255421365" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_56,_05_05_2023_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 09:56, 05/05/2023 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]/shelved.patch	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,122 +0,0 @@
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml	(revision b4b72dec89658f8ccf44bde0ea9b1c987485f84a)
+-+++ /dev/null	(revision b4b72dec89658f8ccf44bde0ea9b1c987485f84a)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]" date="1682572124331" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12:08, 27/04/2023 [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"add loading provider\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2OGNb67oO9I9quEPV5Pf8hcEhLO\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/chung/Android/UI/healthy-app&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/chung/Downloads/ideaIU-2022.3.2/idea-IU-223.8617.56/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"\" />\n      <created>1681183026669</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1681183026669</updated>\n      <workItem from=\"1681183027846\" duration=\"8604000\" />\n      <workItem from=\"1681291726804\" duration=\"18973000\" />\n      <workItem from=\"1681360362872\" duration=\"1534000\" />\n      <workItem from=\"1681394801400\" duration=\"2529000\" />\n      <workItem from=\"1681413012023\" duration=\"603000\" />\n      <workItem from=\"1681414733205\" duration=\"285000\" />\n      <workItem from=\"1681551012774\" duration=\"4000\" />\n      <workItem from=\"1681551074125\" duration=\"3000\" />\n      <workItem from=\"1682150781825\" duration=\"403000\" />\n      <workItem from=\"1682151189052\" duration=\"99000\" />\n      <workItem from=\"1682151291933\" duration=\"2154000\" />\n      <workItem from=\"1682188888863\" duration=\"342000\" />\n      <workItem from=\"1682220199084\" duration=\"23000\" />\n      <workItem from=\"1682572013791\" duration=\"1487000\" />\n      <workItem from=\"1682652510382\" duration=\"4373000\" />\n      <workItem from=\"1682740327166\" duration=\"1894000\" />\n      <workItem from=\"1682760079980\" duration=\"1152000\" />\n      <workItem from=\"1682829626902\" duration=\"676000\" />\n      <workItem from=\"1682939524165\" duration=\"3000\" />\n      <workItem from=\"1683134238268\" duration=\"443000\" />\n      <workItem from=\"1683168398913\" duration=\"2172000\" />\n      <workItem from=\"1683176029535\" duration=\"90000\" />\n      <workItem from=\"1683200641729\" duration=\"3088000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"particle speed machine\">\n      <created>1681327312222</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681327312222</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"particle speed machine\">\n      <created>1681360389318</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681360389318</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"step counter v1.1\">\n      <created>1682153984132</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682153984132</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"save steps current day sqlite\">\n      <created>1682188941857</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682188941857</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"refactor struct table step sqlite\">\n      <created>1682699935358</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682699935358</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"set timezone table step\">\n      <created>1682741052451</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682741052451</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"set timezone table step\">\n      <created>1682760625503</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682760625503</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"analyst steps by month and year\">\n      <created>1682829651678</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682829651678</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"custom line chart of step\">\n      <created>1683134375945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683134375945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"custom login\">\n      <created>1683172905685</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683172905685</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fix logo google\">\n      <created>1683174460848</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683174460848</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ui login version 2\">\n      <created>1683175734734</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683175734734</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"fix button icon\">\n      <created>1683176038658</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683176038658</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"add loading provider\">\n      <created>1683200704849</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683200704849</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"15\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"particle speed machine\" />\n    <MESSAGE value=\"step counter v1.1\" />\n    <MESSAGE value=\"save steps current day sqlite\" />\n    <MESSAGE value=\"refactor struct table step sqlite\" />\n    <MESSAGE value=\"set timezone table step\" />\n    <MESSAGE value=\"analyst steps by month and year\" />\n    <MESSAGE value=\"custom line chart of step\" />\n    <MESSAGE value=\"custom login\" />\n    <MESSAGE value=\"fix logo google\" />\n    <MESSAGE value=\"ui login version 2\" />\n    <MESSAGE value=\"fix button icon\" />\n    <MESSAGE value=\"add loading provider\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add loading provider\" />\n  </component>\n</project>\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision b4b72dec89658f8ccf44bde0ea9b1c987485f84a)
+-+++ b/.idea/workspace.xml	(date 1683259894316)
+-@@ -4,10 +4,10 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="add loading provider">
+-+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="sync step to server">
+-       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml" beforeDir="false" />
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-@@ -80,6 +80,7 @@
+-       <workItem from="1683168398913" duration="2172000" />
+-       <workItem from="1683176029535" duration="90000" />
+-       <workItem from="1683200641729" duration="3088000" />
+-+      <workItem from="1683255327286" duration="2160000" />
+-     </task>
+-     <task id="LOCAL-00001" summary="particle speed machine">
+-       <created>1681327312222</created>
+-@@ -179,7 +180,35 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1683200704849</updated>
+-     </task>
+--    <option name="localTasksCounter" value="15" />
+-+    <task id="LOCAL-00015" summary="add step provider">
+-+      <created>1683255532824</created>
+-+      <option name="number" value="00015" />
+-+      <option name="presentableId" value="LOCAL-00015" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683255532824</updated>
+-+    </task>
+-+    <task id="LOCAL-00016" summary="fix navigation home">
+-+      <created>1683255630084</created>
+-+      <option name="number" value="00016" />
+-+      <option name="presentableId" value="LOCAL-00016" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683255630084</updated>
+-+    </task>
+-+    <task id="LOCAL-00017" summary="sync step to server">
+-+      <created>1683257881717</created>
+-+      <option name="number" value="00017" />
+-+      <option name="presentableId" value="LOCAL-00017" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683257881717</updated>
+-+    </task>
+-+    <task id="LOCAL-00018" summary="sync step to server">
+-+      <created>1683257887780</created>
+-+      <option name="number" value="00018" />
+-+      <option name="presentableId" value="LOCAL-00018" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683257887780</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="19" />
+-     <servers />
+-   </component>
+-   <component name="TypeScriptGeneratedFilesManager">
+-@@ -209,6 +238,9 @@
+-     <MESSAGE value="ui login version 2" />
+-     <MESSAGE value="fix button icon" />
+-     <MESSAGE value="add loading provider" />
+--    <option name="LAST_COMMIT_MESSAGE" value="add loading provider" />
+-+    <MESSAGE value="add step provider" />
+-+    <MESSAGE value="fix navigation home" />
+-+    <MESSAGE value="sync step to server" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="sync step to server" />
+-   </component>
+--</project>
+-+</project>
+-\ No newline at end of file
+-Index: FE/src/utils/axios.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import axios from \"axios\";\n\nconst instance = axios.create({\n  baseURL: \"http://10.0.2.2:5000\",\n});\n\ninstance.interceptors.request.use(\n  (config) => {\n    // const token = localStorage.getItem(\"token\");\n    // if (token) {\n    //   config.headers.Authorization = \"Bearer \" + token;\n    // }\n\n    config.headers = {\n      Accept: \"application/json\",\n      \"Content-Type\": \"application/json\",\n    };\n    return config;\n  },\n  (error) => {\n    return Promise.reject(error);\n  },\n);\n\ninstance.interceptors.response.use((response) => {\n  if (response.status === 204) {\n    return true;\n  }\n  return response.data;\n});\n\nexport default instance;\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/utils/axios.js b/FE/src/utils/axios.js
+---- a/FE/src/utils/axios.js	(revision b4b72dec89658f8ccf44bde0ea9b1c987485f84a)
+-+++ b/FE/src/utils/axios.js	(date 1683259139218)
+-@@ -1,7 +1,8 @@
+- import axios from "axios";
+- 
+- const instance = axios.create({
+--  baseURL: "http://10.0.2.2:5000",
+-+  baseURL: "http://192.168.1.3:5000",
+-+  // baseURL: "http://10.0.2.2:5000",
+- });
+- 
+- instance.interceptors.request.use(
+-@@ -19,7 +20,7 @@
+-   },
+-   (error) => {
+-     return Promise.reject(error);
+--  },
+-+  }
+- );
+- 
+- instance.interceptors.response.use((response) => {
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]/shelved.patch	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,121 +0,0 @@
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml	(revision 1e7dd17851b434b8287d5d8fbfd12308e8cb4b93)
+-+++ /dev/null	(revision 1e7dd17851b434b8287d5d8fbfd12308e8cb4b93)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]" date="1682572124331" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12:08, 27/04/2023 [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"add loading provider\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2OGNb67oO9I9quEPV5Pf8hcEhLO\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/chung/Android/UI/healthy-app&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/chung/Downloads/ideaIU-2022.3.2/idea-IU-223.8617.56/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"\" />\n      <created>1681183026669</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1681183026669</updated>\n      <workItem from=\"1681183027846\" duration=\"8604000\" />\n      <workItem from=\"1681291726804\" duration=\"18973000\" />\n      <workItem from=\"1681360362872\" duration=\"1534000\" />\n      <workItem from=\"1681394801400\" duration=\"2529000\" />\n      <workItem from=\"1681413012023\" duration=\"603000\" />\n      <workItem from=\"1681414733205\" duration=\"285000\" />\n      <workItem from=\"1681551012774\" duration=\"4000\" />\n      <workItem from=\"1681551074125\" duration=\"3000\" />\n      <workItem from=\"1682150781825\" duration=\"403000\" />\n      <workItem from=\"1682151189052\" duration=\"99000\" />\n      <workItem from=\"1682151291933\" duration=\"2154000\" />\n      <workItem from=\"1682188888863\" duration=\"342000\" />\n      <workItem from=\"1682220199084\" duration=\"23000\" />\n      <workItem from=\"1682572013791\" duration=\"1487000\" />\n      <workItem from=\"1682652510382\" duration=\"4373000\" />\n      <workItem from=\"1682740327166\" duration=\"1894000\" />\n      <workItem from=\"1682760079980\" duration=\"1152000\" />\n      <workItem from=\"1682829626902\" duration=\"676000\" />\n      <workItem from=\"1682939524165\" duration=\"3000\" />\n      <workItem from=\"1683134238268\" duration=\"443000\" />\n      <workItem from=\"1683168398913\" duration=\"2172000\" />\n      <workItem from=\"1683176029535\" duration=\"90000\" />\n      <workItem from=\"1683200641729\" duration=\"3088000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"particle speed machine\">\n      <created>1681327312222</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681327312222</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"particle speed machine\">\n      <created>1681360389318</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681360389318</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"step counter v1.1\">\n      <created>1682153984132</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682153984132</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"save steps current day sqlite\">\n      <created>1682188941857</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682188941857</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"refactor struct table step sqlite\">\n      <created>1682699935358</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682699935358</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"set timezone table step\">\n      <created>1682741052451</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682741052451</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"set timezone table step\">\n      <created>1682760625503</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682760625503</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"analyst steps by month and year\">\n      <created>1682829651678</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682829651678</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"custom line chart of step\">\n      <created>1683134375945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683134375945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"custom login\">\n      <created>1683172905685</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683172905685</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fix logo google\">\n      <created>1683174460848</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683174460848</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ui login version 2\">\n      <created>1683175734734</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683175734734</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"fix button icon\">\n      <created>1683176038658</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683176038658</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"add loading provider\">\n      <created>1683200704849</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683200704849</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"15\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"particle speed machine\" />\n    <MESSAGE value=\"step counter v1.1\" />\n    <MESSAGE value=\"save steps current day sqlite\" />\n    <MESSAGE value=\"refactor struct table step sqlite\" />\n    <MESSAGE value=\"set timezone table step\" />\n    <MESSAGE value=\"analyst steps by month and year\" />\n    <MESSAGE value=\"custom line chart of step\" />\n    <MESSAGE value=\"custom login\" />\n    <MESSAGE value=\"fix logo google\" />\n    <MESSAGE value=\"ui login version 2\" />\n    <MESSAGE value=\"fix button icon\" />\n    <MESSAGE value=\"add loading provider\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add loading provider\" />\n  </component>\n</project>\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 1e7dd17851b434b8287d5d8fbfd12308e8cb4b93)
+-+++ b/.idea/workspace.xml	(date 1683259137078)
+-@@ -4,10 +4,8 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="add loading provider">
+-+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="sync step to server">
+-       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Exercises/Item/index.js" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-@@ -80,6 +78,7 @@
+-       <workItem from="1683168398913" duration="2172000" />
+-       <workItem from="1683176029535" duration="90000" />
+-       <workItem from="1683200641729" duration="3088000" />
+-+      <workItem from="1683255327286" duration="1560000" />
+-     </task>
+-     <task id="LOCAL-00001" summary="particle speed machine">
+-       <created>1681327312222</created>
+-@@ -179,7 +178,35 @@
+-       <option name="project" value="LOCAL" />
+-       <updated>1683200704849</updated>
+-     </task>
+--    <option name="localTasksCounter" value="15" />
+-+    <task id="LOCAL-00015" summary="add step provider">
+-+      <created>1683255532824</created>
+-+      <option name="number" value="00015" />
+-+      <option name="presentableId" value="LOCAL-00015" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683255532824</updated>
+-+    </task>
+-+    <task id="LOCAL-00016" summary="fix navigation home">
+-+      <created>1683255630084</created>
+-+      <option name="number" value="00016" />
+-+      <option name="presentableId" value="LOCAL-00016" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683255630084</updated>
+-+    </task>
+-+    <task id="LOCAL-00017" summary="sync step to server">
+-+      <created>1683257881717</created>
+-+      <option name="number" value="00017" />
+-+      <option name="presentableId" value="LOCAL-00017" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683257881717</updated>
+-+    </task>
+-+    <task id="LOCAL-00018" summary="sync step to server">
+-+      <created>1683257887780</created>
+-+      <option name="number" value="00018" />
+-+      <option name="presentableId" value="LOCAL-00018" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1683257887780</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="19" />
+-     <servers />
+-   </component>
+-   <component name="TypeScriptGeneratedFilesManager">
+-@@ -209,6 +236,9 @@
+-     <MESSAGE value="ui login version 2" />
+-     <MESSAGE value="fix button icon" />
+-     <MESSAGE value="add loading provider" />
+--    <option name="LAST_COMMIT_MESSAGE" value="add loading provider" />
+-+    <MESSAGE value="add step provider" />
+-+    <MESSAGE value="fix navigation home" />
+-+    <MESSAGE value="sync step to server" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="sync step to server" />
+-   </component>
+--</project>
+-+</project>
+-\ No newline at end of file
+-Index: FE/src/utils/axios.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import axios from \"axios\";\n\nconst instance = axios.create({\n  baseURL: \"http://10.0.2.2:5000\",\n});\n\ninstance.interceptors.request.use(\n  (config) => {\n    // const token = localStorage.getItem(\"token\");\n    // if (token) {\n    //   config.headers.Authorization = \"Bearer \" + token;\n    // }\n\n    config.headers = {\n      Accept: \"application/json\",\n      \"Content-Type\": \"application/json\",\n    };\n    return config;\n  },\n  (error) => {\n    return Promise.reject(error);\n  },\n);\n\ninstance.interceptors.response.use((response) => {\n  if (response.status === 204) {\n    return true;\n  }\n  return response.data;\n});\n\nexport default instance;\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/utils/axios.js b/FE/src/utils/axios.js
+---- a/FE/src/utils/axios.js	(revision 1e7dd17851b434b8287d5d8fbfd12308e8cb4b93)
+-+++ b/FE/src/utils/axios.js	(date 1683257896349)
+-@@ -1,7 +1,8 @@
+- import axios from "axios";
+- 
+- const instance = axios.create({
+--  baseURL: "http://10.0.2.2:5000",
+-+  baseURL: "http://192.168.1.3:5000",
+-+  // baseURL: "http://10.0.2.2:5000",
+- });
+- 
+- instance.interceptors.request.use(
+-@@ -19,7 +20,7 @@
+-   },
+-   (error) => {
+-     return Promise.reject(error);
+--  },
+-+  }
+- );
+- 
+- instance.interceptors.response.use((response) => {
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_11_11__05_05_2023__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11__05_05_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_11_11__05_05_2023__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_11_11__05_05_2023__Changes_.xml	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]" date="1683259895969" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_11,_05_05_2023_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 11:11, 05/05/2023 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_38__05_05_2023__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_38__05_05_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_10_38__05_05_2023__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_38__05_05_2023__Changes_.xml	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]" date="1683257896381" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10:38, 05/05/2023 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_38,_05_05_2023_[Changes]/shelved.patch	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,58 +0,0 @@
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-===================================================================
+-diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml
+-deleted file mode 100644
+---- a/.idea/shelf/Uncommitted_changes_before_Update_at_12_08__27_04_2023__Changes_.xml	(revision 398299a8787df8448c4caecb44aebee00085689f)
+-+++ /dev/null	(revision 398299a8787df8448c4caecb44aebee00085689f)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]" date="1682572124331" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08,_27_04_2023_[Changes]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12:08, 27/04/2023 [Changes]" />
+--</changelist>
+-\ No newline at end of file
+-Index: uiserver/models/syncedstep.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>'use strict';\nconst {\n  Model\n} = require('sequelize');\nmodule.exports = (sequelize, DataTypes) => {\n  class SyncedStep extends Model {\n    /**\n     * Helper method for defining associations.\n     * This method is not a part of Sequelize lifecycle.\n     * The `models/index` file will call this method automatically.\n     */\n    static associate(models) {\n      // define association here\n    }\n  }\n  SyncedStep.init({\n    id: {\n      allowNull: false,\n      primaryKey: true,\n      type: DataTypes.INTEGER\n    },\n    user_id: DataTypes.INTEGER,\n    date: DataTypes.DATE,\n    value: DataTypes.INTEGER,\n    type: DataTypes.INTEGER,\n  }, {\n    sequelize,\n    modelName: 'SyncedStep',\n    tableName: 'syncedsteps'\n  });\n  return SyncedStep;\n};
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/uiserver/models/syncedstep.js b/uiserver/models/syncedstep.js
+---- a/uiserver/models/syncedstep.js	(revision 398299a8787df8448c4caecb44aebee00085689f)
+-+++ b/uiserver/models/syncedstep.js	(date 1683255512911)
+-@@ -29,4 +29,4 @@
+-     tableName: 'syncedsteps'
+-   });
+-   return SyncedStep;
+--};
+-\ No newline at end of file
+-+};
+-Index: FE/src/utils/axios.js
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>import axios from \"axios\";\n\nconst instance = axios.create({\n  baseURL: \"http://10.0.2.2:5000\",\n});\n\ninstance.interceptors.request.use(\n  (config) => {\n    // const token = localStorage.getItem(\"token\");\n    // if (token) {\n    //   config.headers.Authorization = \"Bearer \" + token;\n    // }\n\n    config.headers = {\n      Accept: \"application/json\",\n      \"Content-Type\": \"application/json\",\n    };\n    return config;\n  },\n  (error) => {\n    return Promise.reject(error);\n  },\n);\n\ninstance.interceptors.response.use((response) => {\n  if (response.status === 204) {\n    return true;\n  }\n  return response.data;\n});\n\nexport default instance;\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/FE/src/utils/axios.js b/FE/src/utils/axios.js
+---- a/FE/src/utils/axios.js	(revision 398299a8787df8448c4caecb44aebee00085689f)
+-+++ b/FE/src/utils/axios.js	(date 1683255404401)
+-@@ -1,7 +1,8 @@
+- import axios from "axios";
+- 
+- const instance = axios.create({
+--  baseURL: "http://10.0.2.2:5000",
+-+  baseURL: "http://192.168.1.3:5000",
+-+  // baseURL: "http://10.0.2.2:5000",
+- });
+- 
+- instance.interceptors.request.use(
+-@@ -19,7 +20,7 @@
+-   },
+-   (error) => {
+-     return Promise.reject(error);
+--  },
+-+  }
+- );
+- 
+- instance.interceptors.response.use((response) => {
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_10_58__05_05_2023__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_10_58__05_05_2023__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_10_58__05_05_2023__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_10_58__05_05_2023__Changes_.xml	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ /dev/null	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]" date="1683259139245" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_58,_05_05_2023_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10:58, 05/05/2023 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"try catch step count length\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/data/lastSync.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/data/lastSync.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/data/locations.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/data/locations.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/data/runningInfo.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/data/runningInfo.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/data/user.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/data/user.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/screens/Auth/Login.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/screens/Auth/Login.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2OGNb67oO9I9quEPV5Pf8hcEhLO\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/chung/Android/UI/healthy-app&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/chung/Downloads/ideaIU-2022.3.2/idea-IU-223.8617.56/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"\" />\n      <created>1681183026669</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1681183026669</updated>\n      <workItem from=\"1681183027846\" duration=\"8604000\" />\n      <workItem from=\"1681291726804\" duration=\"18973000\" />\n      <workItem from=\"1681360362872\" duration=\"1534000\" />\n      <workItem from=\"1681394801400\" duration=\"2529000\" />\n      <workItem from=\"1681413012023\" duration=\"603000\" />\n      <workItem from=\"1681414733205\" duration=\"285000\" />\n      <workItem from=\"1681551012774\" duration=\"4000\" />\n      <workItem from=\"1681551074125\" duration=\"3000\" />\n      <workItem from=\"1682150781825\" duration=\"403000\" />\n      <workItem from=\"1682151189052\" duration=\"99000\" />\n      <workItem from=\"1682151291933\" duration=\"2154000\" />\n      <workItem from=\"1682188888863\" duration=\"342000\" />\n      <workItem from=\"1682220199084\" duration=\"23000\" />\n      <workItem from=\"1682572013791\" duration=\"1487000\" />\n      <workItem from=\"1682652510382\" duration=\"4373000\" />\n      <workItem from=\"1682740327166\" duration=\"1894000\" />\n      <workItem from=\"1682760079980\" duration=\"1152000\" />\n      <workItem from=\"1682829626902\" duration=\"676000\" />\n      <workItem from=\"1682939524165\" duration=\"3000\" />\n      <workItem from=\"1683134238268\" duration=\"443000\" />\n      <workItem from=\"1683168398913\" duration=\"2172000\" />\n      <workItem from=\"1683176029535\" duration=\"90000\" />\n      <workItem from=\"1683200641729\" duration=\"3088000\" />\n      <workItem from=\"1683255327286\" duration=\"6102000\" />\n      <workItem from=\"1683446776888\" duration=\"13000\" />\n      <workItem from=\"1683794504743\" duration=\"1355000\" />\n      <workItem from=\"1683819758623\" duration=\"624000\" />\n      <workItem from=\"1683823863283\" duration=\"1836000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"particle speed machine\">\n      <created>1681327312222</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681327312222</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"particle speed machine\">\n      <created>1681360389318</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681360389318</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"step counter v1.1\">\n      <created>1682153984132</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682153984132</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"save steps current day sqlite\">\n      <created>1682188941857</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682188941857</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"refactor struct table step sqlite\">\n      <created>1682699935358</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682699935358</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"set timezone table step\">\n      <created>1682741052451</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682741052451</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"set timezone table step\">\n      <created>1682760625503</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682760625503</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"analyst steps by month and year\">\n      <created>1682829651678</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682829651678</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"custom line chart of step\">\n      <created>1683134375945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683134375945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"custom login\">\n      <created>1683172905685</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683172905685</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fix logo google\">\n      <created>1683174460848</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683174460848</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ui login version 2\">\n      <created>1683175734734</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683175734734</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"fix button icon\">\n      <created>1683176038658</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683176038658</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"add loading provider\">\n      <created>1683200704849</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683200704849</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"add step provider\">\n      <created>1683255532824</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683255532824</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"fix navigation home\">\n      <created>1683255630084</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683255630084</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"sync step to server\">\n      <created>1683257881717</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683257881717</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"sync step to server\">\n      <created>1683257887780</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683257887780</updated>\n    </task>\n    <task id=\"LOCAL-00019\" summary=\"sync step\">\n      <created>1683261514746</created>\n      <option name=\"number\" value=\"00019\" />\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683261514746</updated>\n    </task>\n    <task id=\"LOCAL-00020\" summary=\"sync step\">\n      <created>1683261562854</created>\n      <option name=\"number\" value=\"00020\" />\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683261562854</updated>\n    </task>\n    <task id=\"LOCAL-00021\" summary=\"fix bug not create steps when logout\">\n      <created>1683262039461</created>\n      <option name=\"number\" value=\"00021\" />\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683262039461</updated>\n    </task>\n    <task id=\"LOCAL-00022\" summary=\"fix bug not create steps when logout\">\n      <created>1683262151132</created>\n      <option name=\"number\" value=\"00022\" />\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683262151132</updated>\n    </task>\n    <task id=\"LOCAL-00023\" summary=\"sync step when login\">\n      <created>1683267668666</created>\n      <option name=\"number\" value=\"00023\" />\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683267668666</updated>\n    </task>\n    <task id=\"LOCAL-00024\" summary=\"sync step when logout and update last id step\">\n      <created>1683270234274</created>\n      <option name=\"number\" value=\"00024\" />\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683270234274</updated>\n    </task>\n    <task id=\"LOCAL-00025\" summary=\"add calo time length in home step\">\n      <created>1683801777383</created>\n      <option name=\"number\" value=\"00025\" />\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683801777383</updated>\n    </task>\n    <task id=\"LOCAL-00026\" summary=\"fix fixed calo\">\n      <created>1683819782315</created>\n      <option name=\"number\" value=\"00026\" />\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683819782316</updated>\n    </task>\n    <task id=\"LOCAL-00027\" summary=\"log warning\">\n      <created>1683824048308</created>\n      <option name=\"number\" value=\"00027\" />\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683824048308</updated>\n    </task>\n    <task id=\"LOCAL-00028\" summary=\"try catch step count length\">\n      <created>1683826249366</created>\n      <option name=\"number\" value=\"00028\" />\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683826249366</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"29\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"particle speed machine\" />\n    <MESSAGE value=\"step counter v1.1\" />\n    <MESSAGE value=\"save steps current day sqlite\" />\n    <MESSAGE value=\"refactor struct table step sqlite\" />\n    <MESSAGE value=\"set timezone table step\" />\n    <MESSAGE value=\"analyst steps by month and year\" />\n    <MESSAGE value=\"custom line chart of step\" />\n    <MESSAGE value=\"custom login\" />\n    <MESSAGE value=\"fix logo google\" />\n    <MESSAGE value=\"ui login version 2\" />\n    <MESSAGE value=\"fix button icon\" />\n    <MESSAGE value=\"add loading provider\" />\n    <MESSAGE value=\"add step provider\" />\n    <MESSAGE value=\"fix navigation home\" />\n    <MESSAGE value=\"sync step to server\" />\n    <MESSAGE value=\"sync step\" />\n    <MESSAGE value=\"fix bug not create steps when logout\" />\n    <MESSAGE value=\"sync step when login\" />\n    <MESSAGE value=\"sync step when logout and update last id step\" />\n    <MESSAGE value=\"add calo time length in home step\" />\n    <MESSAGE value=\"fix fixed calo\" />\n    <MESSAGE value=\"log warning\" />\n    <MESSAGE value=\"try catch step count length\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"try catch step count length\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ b/.idea/workspace.xml	(date 1683835968554)
+@@ -4,14 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="try catch step count length">
++    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="throw error">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/data/locations.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/locations.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/data/runningInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/runningInfo.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/data/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/user.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/screens/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Auth/Login.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -87,7 +81,7 @@
+       <workItem from="1683446776888" duration="13000" />
+       <workItem from="1683794504743" duration="1355000" />
+       <workItem from="1683819758623" duration="624000" />
+-      <workItem from="1683823863283" duration="1836000" />
++      <workItem from="1683823863283" duration="3541000" />
+     </task>
+     <task id="LOCAL-00001" summary="particle speed machine">
+       <created>1681327312222</created>
+@@ -285,7 +279,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1683826249366</updated>
+     </task>
+-    <option name="localTasksCounter" value="29" />
++    <task id="LOCAL-00029" summary="throw error">
++      <created>1683834463115</created>
++      <option name="number" value="00029" />
++      <option name="presentableId" value="LOCAL-00029" />
++      <option name="project" value="LOCAL" />
++      <updated>1683834463115</updated>
++    </task>
++    <task id="LOCAL-00030" summary="throw error">
++      <created>1683834480132</created>
++      <option name="number" value="00030" />
++      <option name="presentableId" value="LOCAL-00030" />
++      <option name="project" value="LOCAL" />
++      <updated>1683834480132</updated>
++    </task>
++    <option name="localTasksCounter" value="31" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -326,6 +334,7 @@
+     <MESSAGE value="fix fixed calo" />
+     <MESSAGE value="log warning" />
+     <MESSAGE value="try catch step count length" />
+-    <option name="LAST_COMMIT_MESSAGE" value="try catch step count length" />
++    <MESSAGE value="throw error" />
++    <option name="LAST_COMMIT_MESSAGE" value="throw error" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: FE/src/data/lastSync.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as SQLite from \"expo-sqlite\";\nimport { getStepById, insertSyncStep } from \"./stepCounter\";\nimport { SyncStepService, SyncedStepServiceToLocal } from \"../services/user\";\n\nconst db = SQLite.openDatabase(\"ui.db\");\n\nexport const createTableLastSync = () => {\n  return new Promise((resolve, reject) => {\n    db.transaction((tx) => {\n      tx.executeSql(\n        `CREATE table if not EXISTS lastSync (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            stepId INTEGER NOT NULL\n        );`,\n        [],\n        () => {\n          console.log(\"create table lastSync success\");\n          resolve(true);\n        },\n        (error) => {\n          console.log(\"createTableLastSync error\");\n          reject(error);\n        },\n      );\n    });\n  });\n};\n\nexport const updateStepIdLastSync = (value) => {\n  return new Promise((resolve, reject) => {\n    db.transaction(\n      (tx) => {\n        tx.executeSql(\n          `INSERT INTO lastSync (stepId)\n            VALUES (${value});`,\n        );\n      },\n      [],\n      () => {\n        console.log(\"update stepId lastSync success\");\n        resolve(\"updateStepIdLastSync success\");\n      },\n      (error) => {\n        console.log(\"updateStepIdLastSync error\");\n\n        reject(error);\n      },\n    );\n  });\n};\n\nexport const getStepIdLastSync = () => {\n  return new Promise((resolve, reject) => {\n    db.transaction((tx) => {\n      tx.executeSql(\n        `SELECT * FROM lastSync\n        ORDER by id DESC\n        LIMIT 1`,\n        [],\n        (tx, result) => {\n          const stepId =\n            result?.rows?._array?.length > 0 ? result.rows._array[0].stepId : 0;\n          resolve(stepId);\n        },\n        (error) => {\n          console.log(\"getStepIdLastSync error\");\n          reject(error);\n        },\n      );\n    });\n  });\n};\n\nexport const StepSync = async (userId) => {\n  try {\n    const stepId = await getStepIdLastSync();\n    const stepsSync = await getStepById(stepId);\n    console.log(stepsSync);\n    if (stepsSync.length > 0) {\n      const data = {\n        id: userId,\n        steps: stepsSync,\n        runningInfos: [],\n        locations: [],\n      };\n      const resSync = await SyncStepService(data);\n      if (resSync && resSync.success === 1) {\n        const lastStepId =\n          stepsSync?.length > 0 ? stepsSync[stepsSync.length - 1].id : 0;\n        await updateStepIdLastSync(lastStepId);\n      }\n    }\n  } catch (error) {\n    console.log(\"StepSync error\");\n\n    console.log(error);\n  }\n};\n\nexport const StepSyncToLocal = async (userId) => {\n  try {\n    const res = await SyncedStepServiceToLocal(userId);\n    if (res && res.success === 1 && res.data && res.data.syncedSteps) {\n      const lastStepId =\n        res?.data?.syncedSteps?.length > 0 ? res?.data?.syncedSteps.length : 0;\n      console.log(lastStepId);\n      await updateStepIdLastSync(lastStepId);\n      await res?.data?.syncedSteps?.map(async (step) => {\n        await insertSyncStep(step.date, step.value, step.type, step.time);\n      });\n    }\n  } catch (error) {\n    console.log(\"StepSyncToLocal\", error);\n  }\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/data/lastSync.js b/FE/src/data/lastSync.js
+--- a/FE/src/data/lastSync.js	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ b/FE/src/data/lastSync.js	(date 1683864739286)
+@@ -1,6 +1,9 @@
+ import * as SQLite from "expo-sqlite";
+ import { getStepById, insertSyncStep } from "./stepCounter";
+-import { SyncStepService, SyncedStepServiceToLocal } from "../services/user";
++import {
++  SyncService as SyncStepService,
++  SyncedStepServiceToLocal,
++} from "../services/user";
+ 
+ const db = SQLite.openDatabase("ui.db");
+ 
+@@ -20,7 +23,7 @@
+         (error) => {
+           console.log("createTableLastSync error");
+           reject(error);
+-        },
++        }
+       );
+     });
+   });
+@@ -32,7 +35,7 @@
+       (tx) => {
+         tx.executeSql(
+           `INSERT INTO lastSync (stepId)
+-            VALUES (${value});`,
++            VALUES (${value});`
+         );
+       },
+       [],
+@@ -44,7 +47,7 @@
+         console.log("updateStepIdLastSync error");
+ 
+         reject(error);
+-      },
++      }
+     );
+   });
+ };
+@@ -65,7 +68,7 @@
+         (error) => {
+           console.log("getStepIdLastSync error");
+           reject(error);
+-        },
++        }
+       );
+     });
+   });
+@@ -92,7 +95,6 @@
+     }
+   } catch (error) {
+     console.log("StepSync error");
+-
+     console.log(error);
+   }
+ };
+Index: FE/src/screens/Auth/Login.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Image, StyleSheet, Text, View } from \"react-native\";\nimport CustomText from \"../../components/CustomText\";\nimport { SCREEN_HEIGHT, SCREEN_WIDTH } from \"../../constants/size\";\nimport Layout from \"../../layouts/Layout\";\nimport {\n  GoogleSignin,\n  GoogleSigninButton,\n} from \"@react-native-google-signin/google-signin\";\nimport { useContext, useEffect } from \"react\";\nimport {\n  LoginManager,\n  AccessToken,\n  GraphRequest,\n  GraphRequestManager,\n} from \"react-native-fbsdk-next\";\nimport { Settings } from \"react-native-fbsdk-next\";\nimport { handleLogin } from \"../../services/user\";\nimport { createTableAuthUsers, insertUser } from \"../../data/user\";\nimport { AuthContext } from \"../../providers/AuthProvider\";\nimport ButtonIcon from \"../../components/button/ButtonIcon\";\nimport { FontAwesome } from \"@expo/vector-icons\";\nimport ImageGoogleLogo from \"../../assets/images/HomeScreen/th.png\";\nimport { StepSyncToLocal, createTableLastSync } from \"../../data/lastSync\";\nimport { createTableSteps } from \"../../data/stepCounter\";\nimport { createTableRunningInfos } from \"../../data/runningInfo\";\nimport { createTableLocations } from \"../../data/locations\";\n\nexport default function Login({ navigation }) {\n  const { setAuthUser, authUser } = useContext(AuthContext);\n\n  useEffect(() => {\n    const getInitialData = async () => {\n      await createTableAuthUsers();\n    };\n    getInitialData();\n    Settings.initializeSDK();\n    GoogleSignin.configure({\n      webClientId:\n        \"398419276498-ieb7kgf5crp40npvuc6pf2ehcu3efja1.apps.googleusercontent.com\",\n    });\n  }, []);\n\n  async function onFacebookButtonPress() {\n    try {\n      // Attempt login with permissions\n      const result = await LoginManager.logInWithPermissions([\n        \"public_profile\",\n        \"email\",\n      ]);\n\n      if (result.isCancelled) {\n        throw \"User cancelled the login process\";\n      }\n\n      // Once signed in, get the users AccesToken\n      const data = await AccessToken.getCurrentAccessToken();\n\n      if (!data) {\n        throw \"Something went wrong obtaining access token\";\n      }\n      const accessToken = data.accessToken.toString();\n      const infoRequest = new GraphRequest(\n        \"/me\",\n        {\n          accessToken: accessToken,\n          parameters: {\n            fields: {\n              string: \"id,name,email,picture.type(large)\",\n            },\n          },\n        },\n        async (error, result) => {\n          if (error) {\n            console.log(\"Error fetching data: \" + error.toString());\n          } else {\n            console.log(result);\n            const loginData = {\n              uid: result.id,\n              email: result.email,\n              username: result.name,\n              avatar: result.picture.data.url,\n            };\n            //console.log(loginData);\n            const res = await handleLogin(loginData);\n            if (res.success) {\n              const authUserData = {\n                token: accessToken,\n                id: res.data.id,\n                username: res.data.username,\n                avatar: res.data.avatar,\n              };\n              setAuthUser({ ...authUserData, user_id: authUserData.id });\n              await insertUser(authUserData);\n              if (res.isTheFirst) {\n                navigation.push(\"BMISetting\");\n              } else {\n                navigation.push(\"Home\");\n              }\n            }\n          }\n        },\n      );\n      new GraphRequestManager().addRequest(infoRequest).start();\n      // Create a Firebase credential with the AccessToken\n    } catch (err) {\n      console.log(\"Error getting access token: \" + error.toString());\n    }\n  }\n\n  const handleLoginViaFacebook = async () => {\n    await onFacebookButtonPress();\n  };\n  async function onGoogleButtonPress() {\n    // Check if your device supports Google Play\n    //await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });\n    // Get the users ID token\n    let user;\n    const isSignedIn = await GoogleSignin.isSignedIn();\n    if (!isSignedIn) {\n      user = await GoogleSignin.signIn();\n    } else {\n      user = await GoogleSignin.getCurrentUser();\n    }\n    return user;\n    // Create a Google credential with the token\n  }\n\n  const handleLoginViaGoogle = async () => {\n    //navigation.push(\"Home\");\n    const user = await onGoogleButtonPress();\n    const loginData = {\n      uid: user.user.id,\n      email: user.user.email,\n      username: user.user.name,\n      avatar: user.user.photo,\n    };\n    const res = await handleLogin(loginData);\n    if (res.success) {\n      const authUserData = {\n        token: user.idToken,\n        id: res.data.id,\n        username: res.data.username,\n        avatar: res.data.avatar,\n      };\n\n      await createTableLastSync();\n      //droptTable(\"lastSync\");\n      await createTableSteps();\n      await createTableRunningInfos();\n      await createTableLocations();\n      await StepSyncToLocal(authUserData.id);\n\n      setAuthUser({ ...authUserData, user_id: authUserData.id });\n      await insertUser(authUserData);\n\n      if (res.isTheFirst) {\n        navigation.push(\"BMISetting\");\n      } else {\n        navigation.push(\"Home\");\n      }\n    }\n  };\n\n  return (\n    <Layout isAuth={false}>\n      <View style={styles.container}>\n        <View\n          style={{\n            paddingBottom: 200,\n            display: \"flex\",\n            justifyContent: \"center\",\n            alignItems: \"center\",\n          }}\n        >\n          <FontAwesome\n            name=\"heartbeat\"\n            size={100}\n            color={\"white\"}\n            style={{ paddingHorizontal: 25 }}\n          />\n          <Text\n            style={{\n              fontWeight: \"bold\",\n              fontSize: 40,\n              fontFamily: \"NunitoSans-Bold\",\n              color: \"white\",\n            }}\n          >\n            Heathy App\n          </Text>\n        </View>\n        <CustomText\n          fontFamily=\"NunitoSans-Bold\"\n          style={[\n            {\n              fontSize: 20,\n              marginBottom: 10,\n              paddingHorizontal: 20,\n              color: \"white\",\n            },\n          ]}\n        >\n          ĐĂNG NHẬP\n        </CustomText>\n\n        <View\n          style={{\n            display: \"flex\",\n            justifyContent: \"center\",\n            alignItems: \"center\",\n          }}\n        >\n          <View style={styles.actions}>\n            <ButtonIcon\n              onPress={handleLoginViaFacebook}\n              content={\"Đăng nhập bằng Facebook\"}\n              color=\"white\"\n            >\n              <FontAwesome\n                name=\"facebook-official\"\n                size={60}\n                color={\"#385898\"}\n                style={{ paddingHorizontal: 5, paddingRight: 20 }}\n              />\n            </ButtonIcon>\n            <ButtonIcon\n              onPress={handleLoginViaGoogle}\n              content={\"Đăng nhập bằng Google\"}\n              color=\"white\"\n            >\n              <Image\n                source={ImageGoogleLogo}\n                style={{\n                  height: 58,\n                  width: 60,\n                  borderRadius: 10,\n                  marginHorizontal: 3,\n                  marginRight: 10,\n                }}\n              />\n            </ButtonIcon>\n          </View>\n        </View>\n      </View>\n    </Layout>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    height: SCREEN_HEIGHT,\n    display: \"flex\",\n    flexDirection: \"column\",\n    paddingTop: (SCREEN_HEIGHT / 100) * 8,\n    backgroundColor: \"#FFA239\",\n  },\n  actions: {\n    height: 160,\n    width: SCREEN_WIDTH - (SCREEN_WIDTH / 100) * 8,\n    display: \"flex\",\n    flexDirection: \"column\",\n    justifyContent: \"space-between\",\n  },\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Auth/Login.js b/FE/src/screens/Auth/Login.js
+--- a/FE/src/screens/Auth/Login.js	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ b/FE/src/screens/Auth/Login.js	(date 1683835511517)
+@@ -98,7 +98,7 @@
+               }
+             }
+           }
+-        },
++        }
+       );
+       new GraphRequestManager().addRequest(infoRequest).start();
+       // Create a Firebase credential with the AccessToken
+Index: FE/src/screens/User/Actions.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { StyleSheet, View } from \"react-native\";\nimport UserButton from \"../../components/UserButton\";\nimport { useNavigation } from \"@react-navigation/native\";\nimport { droptTable } from \"../../data/user\";\nimport { useContext } from \"react\";\nimport { AuthContext } from \"../../providers/AuthProvider\";\nimport { GoogleSignin } from \"@react-native-google-signin/google-signin\";\nimport { unregisterLocationTask } from \"../../utils/locationTask\";\nimport { StepSync } from \"../../data/lastSync\";\nimport { useLoading } from \"../../providers/LoadingProvider\";\nimport { useStep } from \"../../providers/StepProvider\";\n\nexport default function Actions() {\n  const { setLoading } = useLoading();\n  const navigation = useNavigation();\n  const { authUser, setAuthUser } = useContext(AuthContext);\n  const { steps } = useStep();\n  const handleSync = async () => {\n    //console.log(authUser);\n    StepSync(authUser.user_id);\n  };\n\n  const handleSignOut = async () => {\n    setLoading(true);\n    await sync(authUser.user_id);\n    await droptTable(\"auth_users\");\n    steps.current.calo = 0;\n    steps.current.count = 0;\n    steps.current.lengthTravel = 0;\n    setAuthUser(null);\n    if (GoogleSignin.isSignedIn) {\n      await GoogleSignin.signOut();\n    }\n    unregisterLocationTask();\n    await droptTable(\"lastSync\");\n    await droptTable(\"steps\");\n    await droptTable(\"locations\");\n    await droptTable(\"running_infos\");\n    setLoading(false);\n    navigation.push(\"Login\");\n  };\n  return (\n    <View style={styles.container}>\n      <UserButton content={\"Đồng bộ\"} onPress={handleSync} />\n      <UserButton content={\"Đăng xuất\"} onPress={handleSignOut} />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    marginHorizontal: \"4%\",\n    height: 160,\n    display: \"flex\",\n    flexDirection: \"column\",\n    justifyContent: \"space-between\",\n  },\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/User/Actions.js b/FE/src/screens/User/Actions.js
+--- a/FE/src/screens/User/Actions.js	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ b/FE/src/screens/User/Actions.js	(date 1683835426113)
+@@ -17,12 +17,12 @@
+   const { steps } = useStep();
+   const handleSync = async () => {
+     //console.log(authUser);
+-    StepSync(authUser.user_id);
++    await StepSync(authUser.user_id);
+   };
+ 
+   const handleSignOut = async () => {
+     setLoading(true);
+-    await sync(authUser.user_id);
++    await StepSync(authUser.user_id);
+     await droptTable("auth_users");
+     steps.current.calo = 0;
+     steps.current.count = 0;
+Index: FE/src/data/locations.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as SQLite from \"expo-sqlite\";\n\nconst db = SQLite.openDatabase(\"ui.db\");\n\nexport const createTableLocations = () => {\n  return new Promise((resolve, reject) => {\n    db.transaction((tx) => {\n      tx.executeSql(\n        `CREATE table if not EXISTS locations (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            runningInfoId INTEGER NOT NULL,\n            longitude FLOAT NOT NULL,\n            latitude FLOAT NOT NULL,\n            speed FLOAT NOT NULL,\n            createdAt DATE NOT NULL\n        );`,\n        [],\n        () => console.log(\"create table locations success\"),\n        (error) => console.log(\"Error create table locations: \", error)\n      );\n    });\n  });\n};\n\nexport const insertLocation = (location) => {\n  return new Promise((resolve, reject) => {\n    db.transaction(\n      (tx) => {\n        const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)\n            VALUES (${location.runningInfoId}, ${location.longitude}, ${\n          location.latitude\n        }, ${location.speed}, \"${location.createdAt || new Date()}\");`;\n        tx.executeSql(query);\n      },\n      [],\n      () => {\n        resolve(\"insert success\");\n      },\n      (error) => {\n        reject(\"Error insert location:\" + error.message);\n      }\n    );\n  });\n};\n\nexport const getTheLastLocation = () => {\n  return new Promise((resolve, reject) => {\n    const DATE_FROM = new Date();\n    DATE_FROM.setHours(0, 0, 0, 0);\n    const query = `SELECT * FROM locations WHERE createdAt >= \"${DATE_FROM}\" AND createdAt <= \"${new Date()}\" LIMIT 1;`;\n    db.transaction(\n      (tx) => {\n        tx.executeSql(query, [], (transact, resultset) => {\n          resolve(resultset?.rows?._array);\n        });\n      },\n      (error) => reject(error)\n    );\n  });\n};\n\nexport const getTheRunningLocation = (runningInfoId) => {\n  return new Promise((resolve, reject) => {\n    const DATE_FROM = new Date();\n    DATE_FROM.setHours(0, 0, 0, 0);\n    const query = `SELECT * FROM locations WHERE createdAt >= \"${DATE_FROM}\" AND createdAt <= \"${new Date()}\" AND runningInfoId = ${runningInfoId} AND speed >= 0.08333 AND speed <= 0.33333;`;\n    db.transaction(\n      (tx) => {\n        tx.executeSql(query, [], (transact, resultset) => {\n          resolve(resultset?.rows?._array);\n        });\n      },\n      (error) => reject(error)\n    );\n  });\n};\n\nexport const getTheLocation = (runningInfoId) => {\n  return new Promise((resolve, reject) => {\n    const DATE_FROM = new Date();\n    DATE_FROM.setHours(0, 0, 0, 0);\n    const query = `SELECT * FROM locations WHERE createdAt >= \"${DATE_FROM}\" AND createdAt <= \"${new Date()}\" AND runningInfoId = ${runningInfoId};`;\n    db.transaction(\n      (tx) => {\n        tx.executeSql(query, [], (transact, resultset) => {\n          resolve(resultset?.rows?._array);\n        });\n      },\n      (error) => reject(error),\n    );\n  });\n};\n\nexport const getTheLocationsById = (locationId) => {\n  return new Promise((resolve, reject) => {\n    const query = `SELECT * FROM locations WHERE id > ${locationId || 0};`;\n    db.transaction((tx) => {\n      tx.executeSql(\n        query,\n        [],\n        (transact, resultset) => {\n          resolve(resultset?.rows?._array);\n        },\n        (error) => reject(error),\n      );\n    });\n  });\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/data/locations.js b/FE/src/data/locations.js
+--- a/FE/src/data/locations.js	(revision c2e2a0b4bebad94d60464a958e946b205b1dfd0b)
++++ b/FE/src/data/locations.js	(date 1683835528769)
+@@ -15,8 +15,12 @@
+             createdAt DATE NOT NULL
+         );`,
+         [],
+-        () => console.log("create table locations success"),
+-        (error) => console.log("Error create table locations: ", error)
++        () => {
++          console.log("create table locations success");
++        },
++        (error) => {
++          console.log("Error create table locations: ", error);
++        }
+       );
+     });
+   });
+@@ -86,7 +90,7 @@
+           resolve(resultset?.rows?._array);
+         });
+       },
+-      (error) => reject(error),
++      (error) => reject(error)
+     );
+   });
+ };
+@@ -101,7 +105,7 @@
+         (transact, resultset) => {
+           resolve(resultset?.rows?._array);
+         },
+-        (error) => reject(error),
++        (error) => reject(error)
+       );
+     });
+   });

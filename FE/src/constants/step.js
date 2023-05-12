@@ -22,13 +22,13 @@ export const buildLabelsSteps = () => {
   return arr;
 };
 
-export const buildSteps = (arr, arrLabels) => {
+export const buildSteps = (arr, lengthLabel) => {
   // console.log("------------------------------------");
   // console.log(arr);
   // console.log(arrLabels);
   // console.log("------------------------------------");
 
-  const arrSteps = new Array(arrLabels.length).fill(0);
+  const arrSteps = new Array(lengthLabel).fill(0);
   for (let i = 0; i < arr.length; i++) {
     if (Number(arr[i].type) < arrSteps.length) {
       arrSteps[Number(arr[i].type)] = arr[i].stepsCount;

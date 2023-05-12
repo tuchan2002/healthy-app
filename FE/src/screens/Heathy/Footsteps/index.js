@@ -62,7 +62,7 @@ function Footsteps() {
     } else {
       steps = await getStepByYear(dateBuild);
     }
-    const dataSteps = await buildSteps(steps, labels);
+    const dataSteps = await buildSteps(steps, labels.length);
     setChartData(dataSteps);
   };
 

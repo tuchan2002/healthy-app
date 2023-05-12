@@ -1,4 +1,5 @@
 import * as SQLite from "expo-sqlite";
+import { insertSyncStep } from "./stepCounter";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -25,7 +26,7 @@ export const createTableRunningInfos = () => {
         (error) => {
           console.log("createTableRunningInfos error");
           reject({ success: 0, message: error.message });
-        },
+        }
       );
     });
   });
@@ -49,13 +50,13 @@ export const insertRunningInfo = ({
       },
       [],
       () => {
-        console.log("insert success");
-        resolve("insert success");
+        console.log("insert insertRunningInfo");
+        resolve("insert insertRunningInfo");
       },
       (error) => {
         console.log("insertRunningInfo error");
         reject("Error insert running_infos:" + error.message);
-      },
+      }
     );
   });
 };
@@ -75,7 +76,7 @@ export const updateRunningInfo = ({ runningInfoId }) => {
         console.log("updateRunningInfo error");
 
         reject("Error update running_infos:" + error.message);
-      },
+      }
     );
   });
 };
@@ -95,7 +96,7 @@ export const getTheLastRunningInfo = () => {
         console.log("getTheLastRunningInfo error");
 
         reject(error);
-      },
+      }
     );
   });
 };
@@ -110,7 +111,7 @@ export const getRunningInfosById = (runningInfoId) => {
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error),
+        (error) => reject(error)
       );
     });
   });
