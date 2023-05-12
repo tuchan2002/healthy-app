@@ -28,7 +28,7 @@ const Sleep = () => {
   return (
     <TouchableOpacity
       style={[styles.itemContainer, { marginRight: 8 }]}
-      activeOpacity={0.5}
+      activeOpacity={0.85}
       onPress={() => navigation.navigate("Footsteps")}
     >
       <CustomText style={[{ fontSize: 14 }]}>Bước chân</CustomText>
