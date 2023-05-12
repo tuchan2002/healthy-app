@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="try catch step count length">
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="throw error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/locations.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/locations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/runningInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/runningInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/data/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/screens/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Auth/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +81,7 @@
       <workItem from="1683446776888" duration="13000" />
       <workItem from="1683794504743" duration="1355000" />
       <workItem from="1683819758623" duration="624000" />
-      <workItem from="1683823863283" duration="1836000" />
+      <workItem from="1683823863283" duration="3541000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -285,7 +279,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683826249366</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="throw error">
+      <created>1683834463115</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1683834463115</updated>
+    </task>
+    <task id="LOCAL-00030" summary="throw error">
+      <created>1683834480132</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683834480132</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +334,7 @@
     <MESSAGE value="fix fixed calo" />
     <MESSAGE value="log warning" />
     <MESSAGE value="try catch step count length" />
-    <option name="LAST_COMMIT_MESSAGE" value="try catch step count length" />
+    <MESSAGE value="throw error" />
+    <option name="LAST_COMMIT_MESSAGE" value="throw error" />
   </component>
 </project>
