@@ -139,15 +139,15 @@ export default function Running() {
 
   const startBackgroundTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.LocationAccuracy.BestForNavigation,
-      timeInterval: 1000,
+      accuracy: Location.LocationAccuracy.Highest,
+      timeInterval: 10,
       showsBackgroundLocationIndicator: true,
       foregroundService: {
         notificationTitle: "Title",
         notificationBody: "This is body!",
         notificationColor: "#AA1111",
       },
-      deferredUpdatesInterval: 100,
+      deferredUpdatesInterval: 1000,
       activityType: Location.ActivityType.AutomotiveNavigation,
     });
   };

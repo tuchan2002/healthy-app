@@ -65,8 +65,8 @@ export default function Exercises() {
         input: input,
       },
     });
-    console.log(results.data.data.length);
-    setExercises(results.data.data);
+    console.log(results.data.length);
+    setExercises(results.data);
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
