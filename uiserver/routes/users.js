@@ -16,6 +16,7 @@ router.post("/login", async (req, res) => {
       },
     });
     let isTheFirst = false;
+    console.log(checkUser);
     if (!checkUser) {
       checkUser = await User.create({
         ...reqBody,
@@ -26,7 +27,7 @@ router.post("/login", async (req, res) => {
     }
     res.json({ success: 1, data: checkUser, isTheFirst });
   } catch (error) {
-    res.json({ success: 0, message: error.message });
+    res.json({ success: 0, message: error });
   }
 });
 

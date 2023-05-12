@@ -4,7 +4,7 @@ import { Video, ResizeMode } from "expo-av";
 import CustomText from "../../../../components/CustomText";
 import { useEffect, useState } from "react";
 import Spinner from "react-native-loading-spinner-overlay";
-import axios from "axios";
+import instance from "../../../../utils/axios";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -16,8 +16,8 @@ export default function Detail({ route }) {
 
   useEffect(() => {
     const getData = async () => {
-      let exercise = await axios.get(
-        `http://10.0.2.2:5000/videos/info/${route.params.id}`,
+      let exercise = await instance.get(
+        `/videos/info/${route.params.id}`,
         {
           headers: {
             Accept: "application/json",
@@ -25,8 +25,8 @@ export default function Detail({ route }) {
           },
         }
       );
-      setData(exercise.data.data.video);
-      setRecommend(exercise.data.data.recommend);
+      setData(exercise.data.video);
+      setRecommend(exercise.data.recommend);
     };
     getData();
   }, [route.params.id]);

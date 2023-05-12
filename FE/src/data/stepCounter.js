@@ -138,14 +138,15 @@ export const countTotalStepByLengthOfDay = () => {
         WHERE 
           date = date(CURRENT_TIMESTAMP,'localtime') 
         GROUP BY 
-          CASE 
+          (CASE 
             WHEN value = 6 THEN 'avg' 
             WHEN value < 6 THEN 'small' 
             ELSE 'big'
-          END;
+          END);
         `,
         [],
         (tx, result) => {
+          //console.log(result);
           resolve(result?.rows?._array?.length > 0 ? result?.rows?._array : []);
         },
         (error) => {

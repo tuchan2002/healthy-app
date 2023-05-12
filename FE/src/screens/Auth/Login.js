@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import CustomText from "../../components/CustomText";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/size";
 import Layout from "../../layouts/Layout";
+import { droptTable } from "../../data/stepCounter";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -134,7 +135,9 @@ export default function Login({ navigation }) {
       username: user.user.name,
       avatar: user.user.photo,
     };
+    console.log(loginData);
     const res = await handleLogin(loginData);
+    console.log(res);
     if (res.success) {
       const authUserData = {
         token: user.idToken,
