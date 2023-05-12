@@ -247,7 +247,7 @@ export const insertSyncStep = (date, value, type, time) => {
         VALUES (date(?),?,?,?);`,
         [date, value, type, time],
         () => {
-          console.log("sync success");
+          console.log("insertSyncStep success");
           resolve(true);
         },
         (error) => {

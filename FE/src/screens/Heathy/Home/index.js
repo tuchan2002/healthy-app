@@ -14,6 +14,7 @@ import { countTotalSecondStepOfDay } from "../../../data/stepCounter";
 export default Home = memo(() => {
   const { steps } = useStep();
   const navigation = useNavigation();
+
   const [time, setTime] = useState(0);
 
   const getTotalTime = async () => {
