@@ -10,12 +10,43 @@ import IBMIndex from "./NavigationItem/IBMIndex";
 import { useStep } from "../../../providers/StepProvider";
 import { useNavigation } from "@react-navigation/native";
 import { countTotalSecondStepOfDay } from "../../../data/stepCounter";
+import { handleGetBMI } from "../../../services/bmi";
+import bmiValues from "../../../constants/bmiValues";
+import { getAuthUserProperty } from "../../../data/user";
 
 export default Home = memo(() => {
   const { steps } = useStep();
   const navigation = useNavigation();
 
   const [time, setTime] = useState(0);
+  const [bmi, setBmi] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      const ui = await getAuthUserProperty("user_id");
+      setUserId(ui[0].user_id);
+    };
+    getUserId();
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      getBMI();
+    }
+  }, [userId]);
+
+  const getBMI = async () => {
+    const bmiRes = await handleGetBMI(userId);
+    if (bmiRes.success) {
+      const weight = bmiRes.data?.weight == "null" ? "" : bmiRes.data?.weight;
+      const height = bmiRes.data?.height == "null" ? "" : bmiRes.data?.height;
+      setBmi({
+        weight,
+        height,
+      });
+    }
+  };
 
   const getTotalTime = async () => {
     const res = await countTotalSecondStepOfDay();
@@ -26,6 +57,33 @@ export default Home = memo(() => {
   useEffect(() => {
     getTotalTime();
   }, []);
+
+  const checkLevel = () => {
+    if (bmi) {
+      const bmiValue = (
+        bmi.weight /
+        ((bmi.height * bmi.height) / 10000)
+      ).toFixed(2);
+
+      for (key in bmiValues) {
+        if (
+          bmiValue >= bmiValues[key].minValue &&
+          bmiValue <= bmiValues[key].maxValue
+        ) {
+          return (
+            <CustomText
+              fontFamily="NunitoSans-Bold"
+              style={[{ color: bmiValues[key].color }]}
+            >
+              {bmiValues[key].content}
+            </CustomText>
+          );
+        }
+      }
+    } else {
+      return "---";
+    }
+  };
 
   return (
     <Layout>
@@ -74,12 +132,23 @@ export default Home = memo(() => {
           contentContainerStyle={{ padding: 16 }}
         >
           <View style={{ marginBottom: 16, flexDirection: "row" }}>
-            <WorkoutRecord distance={2.86} />
+            <WorkoutRecord
+              distance={(steps.current.lengthTravel / 1000).toFixed(2)}
+            />
             <Target />
           </View>
           <View style={{ marginBottom: 16, flexDirection: "row" }}>
             <Sleep />
-            <IBMIndex IBMValue={32.25} IBMDescription="Hơi béo" />
+            <IBMIndex
+              IBMValue={
+                bmi
+                  ? (bmi.weight / ((bmi.height * bmi.height) / 10000)).toFixed(
+                      2
+                    )
+                  : "---"
+              }
+              IBMDescription={checkLevel()}
+            />
           </View>
         </ScrollView>
       </View>
