@@ -11,10 +11,10 @@ import { useStep } from "../../../providers/StepProvider";
 import { useNavigation } from "@react-navigation/native";
 import { countTotalSecondStepOfDay } from "../../../data/stepCounter";
 import { handleGetBMI } from "../../../services/bmi";
-import bmiValues from "../../../constants/bmiValues";
 import { getAuthUserProperty } from "../../../data/user";
 import { handleGetTargetStates } from "../../../services/userTargetState";
 import * as DateTime from "../../../utils/datetime";
+import { checkLevelBmi } from "../../../utils/bmiLevel";
 
 export default Home = memo(() => {
   const { steps } = useStep();
@@ -71,33 +71,6 @@ export default Home = memo(() => {
     const res = await countTotalSecondStepOfDay();
     console.log(res);
     setTime(Math.floor(res / 60));
-  };
-
-  const checkLevel = () => {
-    if (bmi) {
-      const bmiValue = (
-        bmi.weight /
-        ((bmi.height * bmi.height) / 10000)
-      ).toFixed(2);
-
-      for (key in bmiValues) {
-        if (
-          bmiValue >= bmiValues[key].minValue &&
-          bmiValue <= bmiValues[key].maxValue
-        ) {
-          return (
-            <CustomText
-              fontFamily="NunitoSans-Bold"
-              style={[{ color: bmiValues[key].color }]}
-            >
-              {bmiValues[key].content}
-            </CustomText>
-          );
-        }
-      }
-    } else {
-      return "---";
-    }
   };
 
   return (
@@ -162,7 +135,7 @@ export default Home = memo(() => {
                     )
                   : "---"
               }
-              IBMDescription={checkLevel()}
+              IBMDescription={checkLevelBmi(bmi)}
             />
           </View>
         </ScrollView>

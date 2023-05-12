@@ -5,7 +5,6 @@ import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import UserButton from "../../components/UserButton";
 import { useEffect, useMemo, useState } from "react";
-import bmiValues from "../../constants/bmiValues";
 import {
   FOOTERBAR_HEIGHT,
   SCREEN_HEIGHT,
@@ -14,6 +13,7 @@ import {
 import { handleGetBMI, handlePostBMI } from "../../services/bmi";
 import NotiDialog from "../../components/NotiDialog";
 import { getAuthUserProperty } from "../../data/user";
+import { checkLevelBmi } from "../../utils/bmiLevel";
 
 export default function BMISetting({ navigation }) {
   const [bmi, setBmi] = useState({
@@ -27,7 +27,7 @@ export default function BMISetting({ navigation }) {
   const [openFailDialog, setOpenFailDialog] = useState(false);
   const navigateHistory = useMemo(() => navigation.getState()?.routes);
   const previousScreen = useMemo(
-    () => navigateHistory[navigateHistory.length - 2],
+    () => navigateHistory[navigateHistory.length - 2]
   );
 
   console.log(previousScreen);
@@ -64,7 +64,7 @@ export default function BMISetting({ navigation }) {
     }
     if (bmi.weight && bmi.height) {
       setBmiValue(
-        (bmi.weight / ((bmi.height * bmi.height) / 10000)).toFixed(2),
+        (bmi.weight / ((bmi.height * bmi.height) / 10000)).toFixed(2)
       );
     } else setBmiValue("---");
   }, [bmi.weight, bmi.height]);
@@ -96,30 +96,8 @@ export default function BMISetting({ navigation }) {
     }
   };
 
-  const checkLevel = () => {
-    if (bmiValue !== "---") {
-      for (key in bmiValues) {
-        if (
-          bmiValue >= bmiValues[key].minValue &&
-          bmiValue <= bmiValues[key].maxValue
-        ) {
-          return (
-            <CustomText
-              fontFamily="NunitoSans-Bold"
-              style={[{ color: bmiValues[key].color }]}
-            >
-              {bmiValues[key].content}
-            </CustomText>
-          );
-        }
-      }
-    } else {
-      return "---";
-    }
-  };
-
   const handleCancel = () => {
-    if ((previousScreen.name === "Login")) {
+    if (previousScreen.name === "Login") {
       navigation.push("DefaultTargetSetting");
     } else {
       navigation.push(previousScreen.name);
@@ -160,7 +138,7 @@ export default function BMISetting({ navigation }) {
             </View>
           </View>
           <CustomText>
-            Chỉ số BMI của bạn: {bmiValue} | {checkLevel()}
+            Chỉ số BMI của bạn: {bmiValue} | {checkLevelBmi(bmi)}
           </CustomText>
           <CustomText style={[styles.error]}>{error}</CustomText>
           <View style={styles.buttons}>
