@@ -24,25 +24,16 @@ export default Home = memo(() => {
   const [bmi, setBmi] = useState(null);
   const [userId, setUserId] = useState(null);
   const [targetState, setTargetState] = useState();
-  const [targetStates, setTargetStates] = useState();
 
   useEffect(() => {
     const getInitialData = async () => {
       const ui = await getAuthUserProperty("user_id");
       setUserId(ui[0].user_id);
-      getTargetStates(ui[0].user_id);
+      getTargetState(ui[0].user_id);
       getTotalTime();
     };
     getInitialData();
   }, []);
-
-  useEffect(() => {
-    if (targetStates) {
-      setTargetState(
-        targetStates[DateTime.convertDate(new Date()).day - 2] || {}
-      );
-    }
-  }, [targetStates]);
 
   useEffect(() => {
     if (userId) {
@@ -50,9 +41,11 @@ export default Home = memo(() => {
     }
   }, [userId]);
 
-  const getTargetStates = async (userId) => {
+  const getTargetState = async (userId) => {
     const res = await handleGetTargetStates(userId);
-    setTargetStates(res.data);
+    if (res.data) {
+      setTargetState(res.data[DateTime.convertDate(new Date()).day - 2] || {});
+    }
   };
 
   const getBMI = async () => {
