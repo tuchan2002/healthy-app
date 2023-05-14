@@ -32,7 +32,7 @@ const Option = ({ data, setSelected , selected }) => {
         });
       }}
     >
-      <CustomText style={[{ textAlign: "center", fontSize: 14, color: pressed
+      <CustomText style={[{ textAlign: "center", fontSize: 11, color: pressed
           ? "rgba(255, 255, 255, 1)"
           : "rgba(132, 132, 132, 1)"}]}>{data.content}</CustomText>
     </Pressable>
@@ -43,9 +43,9 @@ export default memo(Option);
 
 const styles = StyleSheet.create({
   button: {
-    marginHorizontal: 2,
+    marginHorizontal: 3,
     paddingVertical: 5,
-    width: 75,
+    paddingHorizontal: 5,
     color: "rgba(132, 132, 132, 1)",
     backgroundColor: "rgba(226, 221, 221, 1)",
     borderRadius: 20,

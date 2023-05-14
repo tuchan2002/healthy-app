@@ -7,6 +7,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import instance from "../../../../utils/axios";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+//import BackButton from "../../../../components/layout/BackButton";
+import HealthyHeaderBar from '../../../../components/layout/HeathyHeaderBar';
 
 export default function Detail({ route }) {
   const navigation = useNavigation();
@@ -33,28 +35,17 @@ export default function Detail({ route }) {
   if (data && recommend) {
     console.log(data.targets);
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.back}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <AntDesign
-            name="leftsquare"
-            size={40}
-            color={"rgba(255, 162, 57, 1)"}
-          />
-        </TouchableOpacity>
+      <View style={[styles.container]}>
+        <HealthyHeaderBar title="Chi tiết bài tập" style={styles.back}/>
 
         <CustomText
           style={[
             {
-              fontSize: 25,
-              marginBottom: "5%",
+              fontSize: 20,
+              marginTop: "10%",
+              marginBottom: "2%",
               fontWeight: "bold",
               marginHorizontal: "5%",
-              color: "rgba(255, 162, 57, 1)",
             },
           ]}
         >
@@ -69,7 +60,7 @@ export default function Detail({ route }) {
               uri: data.link,
             }}
             useNativeControls
-            resizeMode={ResizeMode.CONTAIN}
+            resizeMode={ResizeMode.STRETCH}
             isLooping
           />
         </View>
@@ -115,7 +106,7 @@ export default function Detail({ route }) {
         </View>
         <CustomText
           style={[styles.header]}
-        >{`Tiêu Hao: ${data.kalo} kalories`}</CustomText>
+        >{`Tiêu Hao: ${data.kalo} calories`}</CustomText>
       </View>
     );
   } else {
@@ -137,6 +128,7 @@ export default function Detail({ route }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ecf0f1",
+    fontFamily: "NunitoSans-SemiBold",
   },
   video: {
     alignSelf: "center",
@@ -163,7 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   back: {
-    marginTop: "10%",
+    marginTop: 5,
     marginBottom: "8%",
     marginHorizontal: "3%",
     padding: 6,
