@@ -4,6 +4,11 @@ import CustomText from "../../../CustomText";
 import { FontAwesome5 } from "@expo/vector-icons";
 import color from "../../../../constants/color";
 import { useNavigation } from "@react-navigation/native";
+import moment from "moment";
+import {
+  convertDateToString1,
+  convertDateToString3,
+} from "../../../../utils/datetime";
 
 const WorkoutRecordItem = ({ workoutRecord }) => {
   const navigation = useNavigation();
@@ -20,7 +25,7 @@ const WorkoutRecordItem = ({ workoutRecord }) => {
         style={[{ textTransform: "uppercase" }]}
         fontFamily="NunitoSans-SemiBold"
       >
-        {date}
+        {convertDateToString1(date)}
       </CustomText>
       <View style={{ flexDirection: "row" }}>
         <CustomText
@@ -29,7 +34,7 @@ const WorkoutRecordItem = ({ workoutRecord }) => {
         >
           {`Lần ${times}`}
         </CustomText>
-        <CustomText>{duration}</CustomText>
+        <CustomText>{(duration / 60).toFixed(1)} phút</CustomText>
       </View>
       <CustomText style={[{ marginVertical: 16 }]}>
         Chạy bộ ngoài trời
@@ -42,10 +47,10 @@ const WorkoutRecordItem = ({ workoutRecord }) => {
           style={[{ marginHorizontal: 32 }]}
           fontFamily="NunitoSans-SemiBold"
         >
-          {`${distance} Km`}
+          {`${(distance / 1000).toFixed(3)} Km`}
         </CustomText>
         <CustomText fontFamily="NunitoSans-SemiBold">
-          {`${kcal} kcal`}
+          {`${kcal.toFixed(0)} kcal`}
         </CustomText>
       </View>
     </TouchableOpacity>
