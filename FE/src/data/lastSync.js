@@ -2,7 +2,11 @@ import * as SQLite from "expo-sqlite";
 import { getStepById, insertSyncStep } from "./stepCounter";
 import { SyncStepService, SynceStepServiceToLocal } from "../services/user";
 import { getRunningInfosById, insertRunningInfo } from "./runningInfo";
-import { createTableLocations, getTheLocationsById } from "./locations";
+import {
+  createTableLocations,
+  getTheLocationsById,
+  insertLocation,
+} from "./locations";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -34,7 +38,6 @@ export const updateStepIdLastSync = ({ stepId, runningInfoId, locationId }) => {
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO lastSync (stepId, runningInfoId, locationId)
     VALUES (${stepId || 0}, ${runningInfoId || 0}, ${locationId || 0});`;
-    console.log(query);
     db.transaction(
       (tx) => {
         tx.executeSql(query);
@@ -145,6 +148,7 @@ export const StepSyncToLocal = async (userId) => {
   try {
     const res = await SynceStepServiceToLocal(userId);
     if (res && res.success === 1 && res.data) {
+      inintalData = res.data;
       const lastIds = {
         stepId: null,
         runningInfoId: null,
@@ -171,22 +175,26 @@ export const StepSyncToLocal = async (userId) => {
             : 0;
         lastIds.runningInfoId = lastRunningInfoId;
 
-        await res.data.runningInfos.map(
-          async (runningInfo) => {
+        const syncedLocations = await res.data.runningInfos.reduce(
+          async (promise, runningInfo) => {
             await insertRunningInfo(runningInfo);
+            if (runningInfo.locations) {
+              return promise.then(async (last) => {
+                const l = async () => {
+                  return [...last, ...runningInfo.locations];
+                };
+                return await l();
+              });
+            }
           },
-          //   if (runningInfo.locations) {
-          //     console.log("locations", runningInfo.locations);
-          //     return [...locations, ...runningInfo.locations];
-          //   }
-
-          //   return [...locations];
-          // },
-          // [],
+          Promise.resolve([]),
         );
 
-        // await createTableLocations();
-        // console.log("syncedLocations", syncedLocations);
+        const lastLocationId = syncedLocations.length;
+        lastIds.locationId = lastLocationId;
+        await syncedLocations.map(async (location) => {
+          await insertLocation(location);
+        });
       }
 
       await updateStepIdLastSync(lastIds);

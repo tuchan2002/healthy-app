@@ -22,13 +22,12 @@ export default function Actions() {
 
   const handleSignOut = async () => {
     setLoading(true);
-    await unregisterLocationTask();
     await StepSync(authUser.user_id);
+    await unregisterLocationTask();
     await droptTable("auth_users");
     steps.current.calo = 0;
     steps.current.count = 0;
     steps.current.lengthTravel = 0;
-    setAuthUser(null);
     if (GoogleSignin.isSignedIn) {
       await GoogleSignin.signOut();
     }
@@ -36,6 +35,7 @@ export default function Actions() {
     await droptTable("steps");
     await droptTable("locations");
     await droptTable("running_infos");
+    setAuthUser(null);
     setLoading(false);
     navigation.push("Login");
   };

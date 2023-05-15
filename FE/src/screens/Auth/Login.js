@@ -150,6 +150,7 @@ export default function Login({ navigation }) {
       //droptTable("lastSync");
       await createTableSteps();
       await createTableRunningInfos();
+      await createTableLocations();
       await StepSyncToLocal(authUserData.id);
 
       setAuthUser({ ...authUserData, user_id: authUserData.id });

@@ -30,8 +30,20 @@ export const registerLocationTask = async (forceUpdateLocations) => {
 
 export const unregisterLocationTask = async () => {
   if (checkRegisteredLocationTask()) {
-    await Location.stopLocationUpdatesAsync(LOCATION_TASK_NAME);
+    try {
+      await Location.stopLocationUpdatesAsync(LOCATION_TASK_NAME);
 
-    await TaskManager.unregisterTaskAsync(LOCATION_TASK_NAME);
+      console.log("stop update locations");
+    } catch (error) {
+      console.log("Error stop location update: ", error);
+    }
+
+    try {
+      await TaskManager.unregisterTaskAsync(LOCATION_TASK_NAME);
+
+      console.log("unregister all tasks");
+    } catch (error) {
+      console.log("Error unregister task: ", error);
+    }
   }
 };

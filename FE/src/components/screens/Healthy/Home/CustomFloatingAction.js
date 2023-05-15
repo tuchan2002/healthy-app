@@ -7,7 +7,6 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { convertDateToString2 } from "../../../../utils/datetime";
 
 const CustomFloatingAction = ({ targetState, stepDoneCount }) => {
-  console.log("targetState", targetState);
   const route = useRoute();
 
   const navigation = useNavigation();

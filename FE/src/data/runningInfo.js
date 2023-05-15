@@ -89,13 +89,12 @@ export const getTheLastRunningInfo = () => {
     DATE_FROM.setHours(0, 0, 0, 0);
     const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 AND (createdAt = "${convertDateToString4(
       new Date(),
-    )}" OR (createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" )) ORDER BY id DESC LIMIT 1;`;
+    )}" OR (createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" )) ORDER BY id ASC LIMIT 1;`;
     db.transaction((tx) => {
       tx.executeSql(
         query,
         [],
         (transact, resultset) => {
-          console.log(resultset);
           resolve(resultset?.rows?._array);
         },
         (error) => {

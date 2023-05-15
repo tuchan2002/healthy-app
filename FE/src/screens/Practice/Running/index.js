@@ -12,12 +12,8 @@ import {
   STATUSBAR_HEIGHT,
 } from "../../../constants/size";
 import * as Location from "expo-location";
+import { LOCATION_TASK_NAME } from "../../../utils/locationTask";
 import {
-  LOCATION_TASK_NAME,
-  unregisterLocationTask,
-} from "../../../utils/locationTask";
-import {
-  createTableLocations,
   getTheLocation,
   getTheRunningLocation,
   insertLocation,
@@ -91,12 +87,13 @@ export default function Running() {
           });
         }
       }
+
+      forceUpdate();
     }
   };
 
   const forceUpdateLocations = async () => {
     await getPath();
-    forceUpdate();
   };
 
   const _subscribe = async () => {
@@ -124,8 +121,6 @@ export default function Running() {
       await getRunningInfo();
       await getNowLocation();
       await getBMI();
-
-      await createTableLocations();
       await getPath();
     };
 
@@ -135,14 +130,8 @@ export default function Running() {
   useEffect(() => {
     const handleLocationService = async () => {
       if (defaultRunningInfo.isStarted) {
-        _subscribe();
-        startBackgroundTracking();
-      } else {
-        const isTaskDefined = TaskManager.isTaskDefined(LOCATION_TASK_NAME);
-        if (isTaskDefined) {
-          await unregisterLocationTask();
-          _unsubscribe();
-        }
+        await _subscribe();
+        await startBackgroundTracking();
       }
     };
 
@@ -185,7 +174,6 @@ export default function Running() {
   const getRunningInfo = async () => {
     const res = await getTheLastRunningInfo();
     const [rI] = res;
-    console.log("runningInfo: ", rI);
     if (rI) {
       setDefaultRunningInfo({
         ...defaultRunningInfo,
@@ -201,6 +189,7 @@ export default function Running() {
   const getNowLocation = async () => {
     const currentPermission = await Location.getForegroundPermissionsAsync();
     if (currentPermission.granted) {
+      console.log("nowLocation");
       const location = await Location.getCurrentPositionAsync();
       setNowLocation(location.coords);
     }

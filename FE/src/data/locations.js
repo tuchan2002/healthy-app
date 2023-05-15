@@ -15,8 +15,14 @@ export const createTableLocations = () => {
             createdAt DATE NOT NULL
         );`,
         [],
-        () => console.log("create table locations success"),
-        (error) => console.log("Error create table locations: ", error),
+        () => {
+          console.log("create table locations success");
+          resolve(true);
+        },
+        (error) => {
+          console.log("Error create table locations: ", error);
+          reject(false);
+        },
       );
     });
   });

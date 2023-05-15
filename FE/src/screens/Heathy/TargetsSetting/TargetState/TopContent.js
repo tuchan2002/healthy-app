@@ -8,6 +8,8 @@ import { useStep } from "../../../../providers/StepProvider";
 import color from "../../../../constants/color";
 
 export default function TopContent({ targetState, targetDetail }) {
+  const [_targetState, set_targetState] = useState();
+  const [_targetDetail, set_targetDetail] = useState();
   const [chartData, setChartData] = useState({
     data: [0, 0, 0],
     colors: ["#30b9bd", "#ff8c3d", "#a06ffa"],
@@ -16,28 +18,35 @@ export default function TopContent({ targetState, targetDetail }) {
   const { steps } = useStep();
 
   useEffect(() => {
-    if (targetState && targetDetail) {
+    set_targetDetail(targetDetail);
+    set_targetState(targetState);
+  }, [targetState, targetDetail]);
+
+  useEffect(() => {
+    if (_targetState && _targetDetail) {
       let timeProgress = 0;
-      if (targetState.gotUpAt) {
+      if (_targetState.gotUpAt) {
         timeProgress +=
-          new Date(targetState.gotUpAt) <= new Date(targetDetail.getUpAt)
+          new Date(_targetState.gotUpAt) <= new Date(_targetDetail.getUpAt)
             ? 0.5
             : 0;
       }
-      if (targetState.sleepedAt) {
+      if (_targetState.sleepedAt) {
         timeProgress +=
-          new Date(targetState.sleepedAt) <= new Date(targetDetail.sleepAt)
+          new Date(_targetState.sleepedAt) <= new Date(_targetDetail.sleepAt)
             ? 0.5
             : 0;
       }
       const data = [
         timeProgress,
-        steps.current.count / targetDetail.footsteps_amount,
-        targetState.kcal / targetDetail.kcal,
+        steps.current.count / _targetDetail.footsteps_amount,
+        _targetState.kcal / _targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
     }
-  }, [targetState, targetDetail]);
+  }, [_targetState, _targetDetail]);
+
+  console.log(chartData);
   return (
     <View style={styles.container}>
       <View>
@@ -50,10 +59,10 @@ export default function TopContent({ targetState, targetDetail }) {
           </View>
           <View style={styles.textBox}>
             <CustomText style={[styles.text]}>
-              Thức vào: {convertDateToString2(targetState?.gotUpAt) || "--"}
+              Thức vào: {convertDateToString2(_targetState?.gotUpAt) || "--"}
             </CustomText>
             <CustomText style={[styles.text]}>
-              Ngủ vào: {convertDateToString2(targetState?.sleepedAt) || "--"}{" "}
+              Ngủ vào: {convertDateToString2(_targetState?.sleepedAt) || "--"}{" "}
             </CustomText>
           </View>
         </View>
@@ -77,7 +86,7 @@ export default function TopContent({ targetState, targetDetail }) {
           </View>
           <View style={styles.textBox}>
             <CustomText style={[styles.text]}>
-              Calo: {targetState?.kcal || "--"} calo
+              Calo: {_targetState?.kcal || "--"} calo
             </CustomText>
           </View>
         </View>
