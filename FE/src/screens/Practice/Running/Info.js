@@ -22,9 +22,9 @@ export default function Info({ info, onStop }) {
         ...runningInfo,
         isStopped: 1,
       });
+      onStop(true);
       unregisterLocationTask();
     }
-    onStop(true);
   };
   return (
     <View style={styles.container}>

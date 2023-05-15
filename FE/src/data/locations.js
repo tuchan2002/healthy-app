@@ -16,7 +16,7 @@ export const createTableLocations = () => {
         );`,
         [],
         () => console.log("create table locations success"),
-        (error) => console.log("Error create table locations: ", error)
+        (error) => console.log("Error create table locations: ", error),
       );
     });
   });
@@ -24,22 +24,24 @@ export const createTableLocations = () => {
 
 export const insertLocation = (location) => {
   return new Promise((resolve, reject) => {
-    db.transaction(
-      (tx) => {
-        const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
+    db.transaction((tx) => {
+      const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
             VALUES (${location.runningInfoId}, ${location.longitude}, ${
-          location.latitude
-        }, ${location.speed}, "${location.createdAt || new Date()}");`;
-        tx.executeSql(query);
-      },
-      [],
-      () => {
-        resolve("insert success");
-      },
-      (error) => {
-        reject("Error insert location:" + error.message);
-      }
-    );
+        location.latitude
+      }, ${location.speed}, "${location.createdAt || new Date()}");`;
+      tx.executeSql(
+        query,
+        [],
+        () => {
+          console.log("Insert location success");
+          resolve("insert success");
+        },
+        (error) => {
+          console.log("Error insert location: ", error);
+          reject("Error insert location:" + error.message);
+        },
+      );
+    });
   });
 };
 
@@ -54,7 +56,7 @@ export const getTheLastLocation = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
@@ -70,7 +72,7 @@ export const getTheRunningLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };

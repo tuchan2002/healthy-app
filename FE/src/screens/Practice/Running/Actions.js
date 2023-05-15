@@ -14,12 +14,27 @@ export default function Actions({
 }) {
   const [settingDialogVisible, setSettingDialogVisible] = useState(false);
   const [targetValue, setTargetValue] = useState("");
+  const [state, setState] = useState({
+    isStarted: 0,
+    isStopped: 0,
+  });
 
   useEffect(() => {
     setTargetValue(target);
-  }, [target, isStarted]);
+  }, [target]);
+
+  useEffect(() => {
+    setState((prev) => {
+      return {
+        ...prev,
+        isStarted,
+        isStopped,
+      };
+    });
+  }, [isStarted, isStopped]);
 
   const handleCancelDialog = () => {
+    setTargetValue("");
     setSettingDialogVisible(false);
   };
 
@@ -37,7 +52,7 @@ export default function Actions({
         {!targetValue && (
           <TargetSettingBtn onPress={() => setSettingDialogVisible(true)} />
         )}
-        {!isStarted && !isStopped ? (
+        {!state.isStarted && !state.isStopped ? (
           <StartBtn
             onPress={() => onStart()}
             disabled={target ? false : true}

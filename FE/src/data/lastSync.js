@@ -112,17 +112,17 @@ export const StepSync = async (userId) => {
           : 0;
     }
 
-    // // handle sync locations
-    // const locationsSync = await getTheLocationsById(
-    //   locationId ? locationId : 0,
-    // );
-    // if (locationsSync.length > 0) {
-    //   data.locations = locationsSync;
-    //   lastIds.locationId =
-    //     locationsSync?.length > 0
-    //       ? locationsSync[locationsSync.length - 1].id
-    //       : 0;
-    // }
+    // handle sync locations
+    const locationsSync = await getTheLocationsById(
+      locationId ? locationId : 0,
+    );
+    if (locationsSync.length > 0) {
+      data.locations = locationsSync;
+      lastIds.locationId =
+        locationsSync?.length > 0
+          ? locationsSync[locationsSync.length - 1].id
+          : 0;
+    }
 
     if (
       data.steps.length > 0 ||
@@ -144,7 +144,6 @@ export const StepSync = async (userId) => {
 export const StepSyncToLocal = async (userId) => {
   try {
     const res = await SynceStepServiceToLocal(userId);
-    console.log(res);
     if (res && res.success === 1 && res.data) {
       const lastIds = {
         stepId: null,
@@ -172,21 +171,27 @@ export const StepSyncToLocal = async (userId) => {
             : 0;
         lastIds.runningInfoId = lastRunningInfoId;
 
-        const syncedLocations = await res?.data?.runningInfos?.reduce(
-          async (locations, runningInfo) => {
+        await res.data.runningInfos.map(
+          async (runningInfo) => {
             await insertRunningInfo(runningInfo);
-
-            return [...locations, ...runningInfo.locations];
           },
-          [],
+          //   if (runningInfo.locations) {
+          //     console.log("locations", runningInfo.locations);
+          //     return [...locations, ...runningInfo.locations];
+          //   }
+
+          //   return [...locations];
+          // },
+          // [],
         );
 
-        console.log("syncedLocations", syncedLocations);
+        // await createTableLocations();
+        // console.log("syncedLocations", syncedLocations);
       }
 
       await updateStepIdLastSync(lastIds);
     }
   } catch (error) {
-    console.log("StepSyncToLocal", error);
+    console.log("StepSyncToLocal Error: ", error);
   }
 };

@@ -101,3 +101,19 @@ export function convertTime(time) {
     return `${formatTime(H)}:${formatTime(M)}:${formatTime(S)}`;
   }
 }
+
+/**
+ * Convert Date to String format "yyyy-mm-dd".
+ * 
+ * @param {*} date 
+ * @returns String
+ */
+export function convertDateToString4(date) {
+  if (date) {
+    const convertedDate = convertDate(date);
+
+    return `${formatTime(convertedDate.year)}-${formatTime(
+      convertedDate.month,
+    )}-${formatTime(convertedDate.date)}`;
+  }
+}

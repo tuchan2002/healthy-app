@@ -12,7 +12,10 @@ import {
   STATUSBAR_HEIGHT,
 } from "../../../constants/size";
 import * as Location from "expo-location";
-import { LOCATION_TASK_NAME } from "../../../utils/locationTask";
+import {
+  LOCATION_TASK_NAME,
+  unregisterLocationTask,
+} from "../../../utils/locationTask";
 import {
   createTableLocations,
   getTheLocation,
@@ -22,7 +25,6 @@ import {
 import {
   getTheLastRunningInfo,
   insertRunningInfo,
-  updateRunningInfo,
 } from "../../../data/runningInfo";
 import { convertTime } from "../../../utils/datetime";
 import * as TaskManager from "expo-task-manager";
@@ -49,7 +51,6 @@ export default function Running() {
   };
 
   const getPath = async () => {
-    console.log("getPath");
     if (defaultRunningInfo?.id) {
       const theLocation = await getTheLocation(defaultRunningInfo.id);
       const theRunningLocation = await getTheRunningLocation(
@@ -93,8 +94,8 @@ export default function Running() {
     }
   };
 
-  const forceUpdateLocations = () => {
-    getPath();
+  const forceUpdateLocations = async () => {
+    await getPath();
     forceUpdate();
   };
 
@@ -103,12 +104,11 @@ export default function Running() {
       TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
         if (data) {
           const { locations } = data;
-
-          await insertLocation({
+          const res = await insertLocation({
             ...locations[0].coords,
             runningInfoId: defaultRunningInfo.id,
           });
-          forceUpdateLocations();
+          await forceUpdateLocations();
           return;
         }
         if (error) {
@@ -122,34 +122,46 @@ export default function Running() {
   useEffect(() => {
     const getInitialData = async () => {
       await getRunningInfo();
-      await getPath();
       await getNowLocation();
       await getBMI();
+
+      await createTableLocations();
+      await getPath();
     };
 
     getInitialData();
   }, []);
 
   useEffect(() => {
-    if (defaultRunningInfo.isStarted) {
-      _subscribe();
-      startBackgroundTracking();
-    }
+    const handleLocationService = async () => {
+      if (defaultRunningInfo.isStarted) {
+        _subscribe();
+        startBackgroundTracking();
+      } else {
+        const isTaskDefined = TaskManager.isTaskDefined(LOCATION_TASK_NAME);
+        if (isTaskDefined) {
+          await unregisterLocationTask();
+          _unsubscribe();
+        }
+      }
+    };
+
+    handleLocationService();
 
     return () => _unsubscribe();
   }, [defaultRunningInfo]);
 
   const startBackgroundTracking = async () => {
     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      accuracy: Location.LocationAccuracy.Highest,
-      timeInterval: 10,
+      accuracy: Location.LocationAccuracy.BestForNavigation,
+      timeInterval: 1000,
       showsBackgroundLocationIndicator: true,
       foregroundService: {
         notificationTitle: "Title",
         notificationBody: "This is body!",
         notificationColor: "#AA1111",
       },
-      deferredUpdatesInterval: 1000,
+      deferredUpdatesInterval: 100,
       activityType: Location.ActivityType.AutomotiveNavigation,
     });
   };
@@ -173,10 +185,15 @@ export default function Running() {
   const getRunningInfo = async () => {
     const res = await getTheLastRunningInfo();
     const [rI] = res;
+    console.log("runningInfo: ", rI);
     if (rI) {
       setDefaultRunningInfo({
         ...defaultRunningInfo,
         ...rI,
+      });
+    } else {
+      setDefaultRunningInfo({
+        ...runningInfo,
       });
     }
   };
@@ -206,7 +223,7 @@ export default function Running() {
       }
       await insertRunningInfo({
         target: defaultRunningInfo.target,
-        isStarted: true,
+        isStarted: 1,
       });
       await getRunningInfo();
     }
@@ -214,6 +231,7 @@ export default function Running() {
 
   const handleStopRunning = async () => {
     path.current = [];
+    _unsubscribe();
     await getRunningInfo();
   };
 

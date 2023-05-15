@@ -1,5 +1,6 @@
 import * as SQLite from "expo-sqlite";
 import { insertSyncStep } from "./stepCounter";
+import { convertDateToString4 } from "../utils/datetime";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -26,7 +27,7 @@ export const createTableRunningInfos = () => {
         (error) => {
           console.log("createTableRunningInfos error");
           reject({ success: 0, message: error.message });
-        }
+        },
       );
     });
   });
@@ -40,44 +41,45 @@ export const insertRunningInfo = ({
   updatedAt,
 }) => {
   return new Promise((resolve, reject) => {
-    db.transaction(
-      (tx) => {
-        const query = `INSERT INTO running_infos (target, isStarted, createdAt, updatedAt)
-            VALUES (${target}, ${isStarted}, "${createdAt || new Date()}", "${
-          updatedAt || new Date()
-        }");`;
-        tx.executeSql(query);
-      },
-      [],
-      () => {
-        console.log("insert insertRunningInfo");
-        resolve("insert insertRunningInfo");
-      },
-      (error) => {
-        console.log("insertRunningInfo error");
-        reject("Error insert running_infos:" + error.message);
-      }
-    );
+    db.transaction((tx) => {
+      const query = `INSERT INTO running_infos (target, isStarted, isStopped, createdAt, updatedAt)
+            VALUES (${target}, ${isStarted}, ${isStopped},"${
+        createdAt || new Date()
+      }", "${updatedAt || new Date()}");`;
+      tx.executeSql(
+        query,
+        [],
+        () => {
+          console.log("insert insertRunningInfo");
+          resolve("insert insertRunningInfo");
+        },
+        (error) => {
+          console.log("insertRunningInfo error");
+          reject("Error insert running_infos:" + error.message);
+        },
+      );
+    });
   });
 };
 
 export const updateRunningInfo = ({ runningInfoId }) => {
   return new Promise((resolve, reject) => {
-    db.transaction(
-      (tx) => {
-        const query = `UPDATE running_infos SET isStopped = 1 WHERE id = ${runningInfoId};`;
-        tx.executeSql(query);
-      },
-      [],
-      () => {
-        resolve({ success: 1, message: "update running info success" });
-      },
-      (error) => {
-        console.log("updateRunningInfo error");
+    db.transaction((tx) => {
+      const query = `UPDATE running_infos SET isStopped = 1 WHERE id = ${runningInfoId};`;
+      tx.executeSql(
+        query,
+        [],
+        () => {
+          console.log("Update running info id ", runningInfoId);
+          resolve({ success: 1, message: "update running info success" });
+        },
+        (error) => {
+          console.log("updateRunningInfo error");
 
-        reject("Error update running_infos:" + error.message);
-      }
-    );
+          reject("Error update running_infos:" + error.message);
+        },
+      );
+    });
   });
 };
 
@@ -85,19 +87,24 @@ export const getTheLastRunningInfo = () => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 ORDER BY id DESC LIMIT 1;`;
-    db.transaction(
-      (tx) => {
-        tx.executeSql(query, [], (transact, resultset) => {
+    const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 AND (createdAt = "${convertDateToString4(
+      new Date(),
+    )}" OR (createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" )) ORDER BY id DESC LIMIT 1;`;
+    db.transaction((tx) => {
+      tx.executeSql(
+        query,
+        [],
+        (transact, resultset) => {
+          console.log(resultset);
           resolve(resultset?.rows?._array);
-        });
-      },
-      (error) => {
-        console.log("getTheLastRunningInfo error");
+        },
+        (error) => {
+          console.log("getTheLastRunningInfo error", err);
 
-        reject(error);
-      }
-    );
+          reject(error);
+        },
+      );
+    });
   });
 };
 
@@ -111,7 +118,7 @@ export const getRunningInfosById = (runningInfoId) => {
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error)
+        (error) => reject(error),
       );
     });
   });

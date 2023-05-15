@@ -22,6 +22,7 @@ export default function Actions() {
 
   const handleSignOut = async () => {
     setLoading(true);
+    await unregisterLocationTask();
     await StepSync(authUser.user_id);
     await droptTable("auth_users");
     steps.current.calo = 0;
@@ -31,7 +32,6 @@ export default function Actions() {
     if (GoogleSignin.isSignedIn) {
       await GoogleSignin.signOut();
     }
-    unregisterLocationTask();
     await droptTable("lastSync");
     await droptTable("steps");
     await droptTable("locations");
