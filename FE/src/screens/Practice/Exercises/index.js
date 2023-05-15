@@ -200,8 +200,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   list: {
-    height: SCREEN_HEIGHT - 50 - 48 - 20 - 60 - 140,
+    height: SCREEN_HEIGHT - 50 - 48 - 20 - 60 - 110,
     borderRadius: 10,
+    marginTop: 5,
     paddingHorizontal: 10,
   },
   search: {

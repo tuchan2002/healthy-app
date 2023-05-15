@@ -4,11 +4,6 @@ import { View } from "react-native";
 import Option from "../Option";
 import CustomText from "../../../../components/CustomText";
 
-const prop = {
-  label: "Mục tiêu",
-  data: ["Giảm mỡ", "Tăng cơ", "Định hình", "Dãn cơ"],
-};
-
 const Fillter = ({data, setSelected, selected, label}) => {
   return (
     <View style={styles.container}>

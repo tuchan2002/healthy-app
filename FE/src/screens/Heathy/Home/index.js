@@ -11,8 +11,10 @@ import { useStep } from "../../../providers/StepProvider";
 import { useNavigation } from "@react-navigation/native";
 import { countTotalSecondStepOfDay } from "../../../data/stepCounter";
 import { handleGetBMI } from "../../../services/bmi";
-import bmiValues from "../../../constants/bmiValues";
 import { getAuthUserProperty } from "../../../data/user";
+import { handleGetTargetStates } from "../../../services/userTargetState";
+import * as DateTime from "../../../utils/datetime";
+import { checkLevelBmi } from "../../../utils/bmiLevel";
 
 export default Home = memo(() => {
   const { steps } = useStep();
@@ -21,13 +23,16 @@ export default Home = memo(() => {
   const [time, setTime] = useState(0);
   const [bmi, setBmi] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [targetState, setTargetState] = useState();
 
   useEffect(() => {
-    const getUserId = async () => {
+    const getInitialData = async () => {
       const ui = await getAuthUserProperty("user_id");
       setUserId(ui[0].user_id);
+      getTargetState(ui[0].user_id);
+      getTotalTime();
     };
-    getUserId();
+    getInitialData();
   }, []);
 
   useEffect(() => {
@@ -35,6 +40,13 @@ export default Home = memo(() => {
       getBMI();
     }
   }, [userId]);
+
+  const getTargetState = async (userId) => {
+    const res = await handleGetTargetStates(userId);
+    if (res.data) {
+      setTargetState(res.data[DateTime.convertDate(new Date()).day - 2] || {});
+    }
+  };
 
   const getBMI = async () => {
     const bmiRes = await handleGetBMI(userId);
@@ -54,39 +66,8 @@ export default Home = memo(() => {
     setTime(Math.floor(res / 60));
   };
 
-  useEffect(() => {
-    getTotalTime();
-  }, []);
-
-  const checkLevel = () => {
-    if (bmi) {
-      const bmiValue = (
-        bmi.weight /
-        ((bmi.height * bmi.height) / 10000)
-      ).toFixed(2);
-
-      for (key in bmiValues) {
-        if (
-          bmiValue >= bmiValues[key].minValue &&
-          bmiValue <= bmiValues[key].maxValue
-        ) {
-          return (
-            <CustomText
-              fontFamily="NunitoSans-Bold"
-              style={[{ color: bmiValues[key].color }]}
-            >
-              {bmiValues[key].content}
-            </CustomText>
-          );
-        }
-      }
-    } else {
-      return "---";
-    }
-  };
-
   return (
-    <Layout>
+    <Layout steps={steps} targetState={targetState}>
       <View style={styles.container}>
         <CustomText style={[styles.title]} fontFamily="NunitoSans-SemiBold">
           Sức khỏe
@@ -147,7 +128,7 @@ export default Home = memo(() => {
                     )
                   : "---"
               }
-              IBMDescription={checkLevel()}
+              IBMDescription={checkLevelBmi(bmi)}
             />
           </View>
         </ScrollView>

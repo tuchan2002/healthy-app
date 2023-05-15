@@ -13,13 +13,13 @@ const Item = ({ data, navigation }) => {
         />
         <View>
           <Text numberOfLines={1} style={[styles.title]}>
-            {data.title}
+            {data.title.length > 29 ? `${data.title.substring(0, 26)}...` : data.title}
           </Text>
-          <CustomText style={[{ fontSize: 14 }]}>
+          <CustomText style={[{ fontSize: 12 }]}>
             {`Thời gian: ${data.duration}`}
           </CustomText>
-          <CustomText style={[{ fontSize: 14 }]}>
-            {`Tiêu thụ: ${data.kalo} kalo`}
+          <CustomText style={[{ fontSize: 12 }]}>
+            {`Tiêu thụ: ${data.kalo} calories`}
           </CustomText>
         </View>
       </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    height: 80,
+    height: 100,
     backgroundColor: "white",
     borderRadius: 10,
   },
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 500,
     width: 265,
     fontFamily: "NunitoSans-Regular",

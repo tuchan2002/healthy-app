@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, TouchableOpacity, View } from "react-native";
 import { homeScreenImages } from "../../../../assets/images/HomeScreen";
 import CustomText from "../../../../components/CustomText";
 import styles from "../styles";
@@ -15,11 +15,7 @@ const Target = () => {
   const [targetDetail, setTargetDetail] = useState();
   const [chartData, setChartData] = useState({
     data: [0, 0, 0],
-    colors: [
-      "#30b9bd",
-      "#ff8c3d",
-      "#a06ffa",
-    ],
+    colors: ["#30b9bd", "#ff8c3d", "#a06ffa"],
   });
 
   useEffect(() => {
@@ -67,7 +63,10 @@ const Target = () => {
     >
       <CustomText style={[{ fontSize: 14 }]}>Mục tiêu</CustomText>
       <CustomProgressChart
-        size={{ height: 180, width: 180 }}
+        size={{
+          height: Dimensions.get("window").width / 2 - 54,
+          width: Dimensions.get("window").width / 2 - 54,
+        }}
         data={chartData}
         backgroundColor="white"
       />
