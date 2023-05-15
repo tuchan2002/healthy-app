@@ -16,7 +16,7 @@ export const createTableLocations = () => {
         );`,
         [],
         () => console.log("create table locations success"),
-        (error) => console.log("Error create table locations: ", error),
+        (error) => console.log("Error create table locations: ", error)
       );
     });
   });
@@ -39,7 +39,7 @@ export const insertLocation = (location) => {
         (error) => {
           console.log("Error insert location: ", error);
           reject("Error insert location:" + error.message);
-        },
+        }
       );
     });
   });
@@ -56,7 +56,7 @@ export const getTheLastLocation = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -72,7 +72,7 @@ export const getTheRunningLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -88,7 +88,23 @@ export const getTheLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
+    );
+  });
+};
+
+export const getAllLocations = () => {
+  return new Promise((resolve, reject) => {
+    const DATE_FROM = new Date();
+    DATE_FROM.setHours(0, 0, 0, 0);
+    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}";`;
+    db.transaction(
+      (tx) => {
+        tx.executeSql(query, [], (transact, resultset) => {
+          resolve(resultset?.rows?._array);
+        });
+      },
+      (error) => reject(error)
     );
   });
 };
@@ -103,7 +119,7 @@ export const getTheLocationsById = (locationId) => {
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error),
+        (error) => reject(error)
       );
     });
   });

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
@@ -7,11 +7,32 @@ import WorkoutRecordItem from "../../../components/screens/Healthy/WorkoutRecord
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
 import workoutRecords from "../../../assets/fakeDatas/workoutRecords";
+import { getAllLocations } from "../../../data/locations";
+import { handleGetBMI } from "../../../services/bmi";
+import { getAuthUserProperty } from "../../../data/user";
+import {
+  getFilterDataMethod,
+  getTopData,
+} from "../../../utils/workoutRecordMethod";
 
 const WorkoutRecord = () => {
-  const totalCalories = useMemo(() => {
-    return workoutRecords.reduce((total, wkRecord) => total + wkRecord.kcal, 0);
-  }, [workoutRecords]);
+  const [workoutRecordData, setWorkoutRecordData] = useState([]);
+  const [topData, setTopData] = useState({ duration: 0, times: 0, kcal: 0 });
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      const ui = await getAuthUserProperty("user_id");
+      const bmiRes = await handleGetBMI(ui[0].user_id);
+      const allLocations = await getAllLocations();
+      const filterData = getFilterDataMethod(allLocations, bmiRes.data.weight);
+      const topData = getTopData(filterData);
+      console.log(topData);
+
+      setWorkoutRecordData(filterData);
+      setTopData(topData);
+    };
+    fetchInitialData();
+  }, []);
 
   return (
     <Layout>
@@ -24,24 +45,28 @@ const WorkoutRecord = () => {
           Tổng quan
         </CustomText>
         <View style={styles.overviewContainer}>
-          <OverviewItem overviewValue={9.2} overviewLabel="Thời lượng (giờ)" />
           <OverviewItem
-            overviewValue={workoutRecords.length}
+            overviewValue={(topData.duration / 3600).toFixed(2)}
+            overviewLabel="Thời lượng (giờ)"
+          />
+          <OverviewItem
+            overviewValue={topData.times}
             overviewLabel="Số lần tập"
           />
           <OverviewItem
-            overviewValue={totalCalories}
+            overviewValue={topData.kcal.toFixed(0)}
             overviewLabel="Lượng kcal"
           />
         </View>
 
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-        >
-          {workoutRecords.map((wkRecord) => (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {workoutRecordData.map((wkRecord, index) => (
             <WorkoutRecordItem
               key={wkRecord.id}
-              workoutRecord={{ ...wkRecord, times: wkRecord.id }}
+              workoutRecord={{
+                ...wkRecord,
+                times: workoutRecordData.length - index,
+              }}
             />
           ))}
         </ScrollView>
