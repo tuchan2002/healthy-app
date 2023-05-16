@@ -39,6 +39,7 @@ export default function TargetState({ day }) {
         console.log("date", convertDate(new Date()).day - day);
         const dateBuild = moment(date).format("YYYY-MM-DD");
         const steps = await getStepByDate(dateBuild);
+        console.log(steps);
         setTargetState({
           ...tS,
           steps,

@@ -7,6 +7,7 @@ import styles from "../styles";
 import { handleGetTargetStates } from "../../../../services/userTargetState";
 import CustomProgressChart from "../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart";
 import { AuthContext } from "../../../../providers/AuthProvider";
+import { useStep } from "../../../../providers/StepProvider";
 
 const Target = () => {
   const navigation = useNavigation();
@@ -17,6 +18,8 @@ const Target = () => {
     data: [0, 0, 0],
     colors: ["#30b9bd", "#ff8c3d", "#a06ffa"],
   });
+
+  const { steps } = useStep();
 
   useEffect(() => {
     if (authUser) {
@@ -50,7 +53,7 @@ const Target = () => {
       }
       const data = [
         timeProgress,
-        targetState.footsteps_amount / targetDetail.footsteps_amount,
+        steps.current.count / targetDetail.footsteps_amount,
         targetState.kcal / targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
