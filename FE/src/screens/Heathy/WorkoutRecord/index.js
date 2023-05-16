@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
 import OverviewItem from "../../../components/screens/Healthy/WorkoutRecord/OverviewItem";
 import WorkoutRecordItem from "../../../components/screens/Healthy/WorkoutRecord/WorkoutRecordItem";
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
-import workoutRecords from "../../../assets/fakeDatas/workoutRecords";
 import { getAllLocations } from "../../../data/locations";
 import { handleGetBMI } from "../../../services/bmi";
 import { getAuthUserProperty } from "../../../data/user";
@@ -14,22 +13,26 @@ import {
   getFilterDataMethod,
   getTopData,
 } from "../../../utils/workoutRecordMethod";
+import { useLoading } from "../../../providers/LoadingProvider";
 
 const WorkoutRecord = () => {
+  const { setLoading } = useLoading();
+
   const [workoutRecordData, setWorkoutRecordData] = useState([]);
   const [topData, setTopData] = useState({ duration: 0, times: 0, kcal: 0 });
 
   useEffect(() => {
     const fetchInitialData = async () => {
+      setLoading(true);
       const ui = await getAuthUserProperty("user_id");
       const bmiRes = await handleGetBMI(ui[0].user_id);
       const allLocations = await getAllLocations();
       const filterData = getFilterDataMethod(allLocations, bmiRes.data.weight);
-      const topData = getTopData(filterData);
-      console.log(topData);
-
       setWorkoutRecordData(filterData);
+
+      const topData = getTopData(filterData);
       setTopData(topData);
+      setLoading(false);
     };
     fetchInitialData();
   }, []);
@@ -59,17 +62,36 @@ const WorkoutRecord = () => {
           />
         </View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {workoutRecordData.map((wkRecord, index) => (
-            <WorkoutRecordItem
-              key={wkRecord.id}
-              workoutRecord={{
-                ...wkRecord,
-                times: workoutRecordData.length - index,
+        {workoutRecordData.length > 0 ? (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {workoutRecordData.map((wkRecord, index) => (
+              <WorkoutRecordItem
+                key={wkRecord.id}
+                workoutRecord={{
+                  ...wkRecord,
+                  times: workoutRecordData.length - index,
+                }}
+              />
+            ))}
+          </ScrollView>
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "500",
               }}
-            />
-          ))}
-        </ScrollView>
+            >
+              Bạn chưa có lần tập luyện nào.
+            </Text>
+          </View>
+        )}
       </View>
     </Layout>
   );
