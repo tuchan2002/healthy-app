@@ -277,7 +277,7 @@ export default function Running() {
                   backgroundColor: "white",
                   borderRadius: 50,
                   borderWidth: 4,
-                  borderColor: "blue",
+                  borderColor: "#9bcf1a",
                 }}
               ></View>
             </Marker>
