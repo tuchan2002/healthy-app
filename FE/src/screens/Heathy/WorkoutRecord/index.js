@@ -66,7 +66,7 @@ const WorkoutRecord = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {workoutRecordData.map((wkRecord, index) => (
               <WorkoutRecordItem
-                key={wkRecord.id}
+                key={index}
                 workoutRecord={{
                   ...wkRecord,
                   times: workoutRecordData.length - index,
