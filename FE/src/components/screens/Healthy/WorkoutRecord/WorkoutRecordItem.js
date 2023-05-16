@@ -9,13 +9,18 @@ import { convertDateToString1 } from "../../../../utils/datetime";
 const WorkoutRecordItem = ({ workoutRecord }) => {
   const navigation = useNavigation();
 
-  const { times, date, duration, distance, kcal } = workoutRecord;
+  const { times, date, duration, distance, kcal, path } = workoutRecord;
+  console.log("path", path);
 
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.5}
-      onPress={() => navigation.navigate("WorkoutMap")}
+      onPress={() =>
+        navigation.navigate("WorkoutMap", {
+          dataPass: { path, distance, kcal, duration },
+        })
+      }
     >
       <CustomText
         style={[{ textTransform: "uppercase" }]}
