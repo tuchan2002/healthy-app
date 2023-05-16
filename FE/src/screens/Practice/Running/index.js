@@ -60,7 +60,7 @@ export default function Running() {
             Number.parseFloat(
               theRunningLocation[theRunningLocation.length - 1].speed,
             ).toFixed(3) + "m/s";
-          const duration = convertTime(theRunningLocation.length * 1000);
+          const duration = convertTime(theLocation.length * 1000);
           const distance = Number.parseFloat(
             theRunningLocation.reduce(
               (sum, location) => sum + location.speed,
@@ -273,7 +273,7 @@ export default function Running() {
             <Polyline
               coordinates={path.current || []}
               strokeWidth={6}
-              strokeColor={"orange"}
+              strokeColor={"#80e6f1"}
             />
             <Marker
               title="Hiện tại"

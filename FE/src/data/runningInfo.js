@@ -46,7 +46,7 @@ export const insertRunningInfo = ({
       console.log(updatedAt);
       console.log(createdAt);
       const query = `INSERT INTO running_infos (target, isStarted, isStopped, createdAt, updatedAt)
-            VALUES (?,?,?,date(CURRENT_timestamp),date(CURRENT_timestamp));`; // fix lai created va updatedAt khong null thay cho current_timestamp
+            VALUES (?,?,?,date(CURRENT_timestamp,'localtime'),date(CURRENT_timestamp,'localtime'));`; // fix lai created va updatedAt khong null thay cho current_timestamp
       console.log(query);
       tx.executeSql(
         query,
@@ -67,7 +67,7 @@ export const insertRunningInfo = ({
 export const updateRunningInfo = ({ runningInfoId }) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
-      const query = `UPDATE running_infos SET isStopped = 1, updatedAt = date(CURRENT_timestamp) WHERE id = ${runningInfoId};`;
+      const query = `UPDATE running_infos SET isStopped = 1, updatedAt = date(CURRENT_timestamp,'localtime') WHERE id = ${runningInfoId};`;
       tx.executeSql(
         query,
         [],

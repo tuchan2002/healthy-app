@@ -41,7 +41,7 @@ export const insertLocation = (location) => {
       }, ${location.speed}, date(${
         location.createdAt
           ? moment(location.createdAt).format("YYYY-MM-DD")
-          : "CURRENT_TIMESTAMP"
+          : "CURRENT_TIMESTAMP, 'localtime'"
       }));`;
       console.log(query);
       tx.executeSql(
