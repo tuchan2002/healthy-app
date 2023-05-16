@@ -15,7 +15,7 @@ export default function TopContent({ targetState, targetDetail }) {
     colors: ["#30b9bd", "#ff8c3d", "#a06ffa"],
   });
 
-  const { steps } = useStep();
+  console.log("topcontent", targetState);
 
   useEffect(() => {
     set_targetDetail(targetDetail);
@@ -39,7 +39,7 @@ export default function TopContent({ targetState, targetDetail }) {
       }
       const data = [
         timeProgress,
-        steps.current.count / _targetDetail.footsteps_amount,
+        _targetState?.steps ? (_targetState?.steps / _targetDetail.footsteps_amount) : 0,
         _targetState.kcal / _targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
@@ -74,7 +74,7 @@ export default function TopContent({ targetState, targetDetail }) {
             <CustomText style={[styles.text]}>
               Số bước:{" "}
               <CustomText style={[{ fontSize: 14 }]}>
-                {steps.current.count || 0}
+                {targetState?.steps || 0}
               </CustomText>{" "}
               bước
             </CustomText>

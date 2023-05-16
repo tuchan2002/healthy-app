@@ -5,9 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import { handleGetTargetStates } from "../../../../services/userTargetState";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import moment from "moment";
-import { getStepByDate } from "../../../../data/stepCounter";
+import { getStepByDate, getTotalStepsByDate } from "../../../../data/stepCounter";
 import { convertDate } from "../../../../utils/datetime";
-import { buildSteps } from "../../../../constants/step";
 
 export default function TargetState({ day }) {
   const [targetState, setTargetState] = useState();
@@ -38,7 +37,7 @@ export default function TargetState({ day }) {
         date.setDate(date.getDate() - (convertDate(new Date()).day - day));
         console.log("date", convertDate(new Date()).day - day);
         const dateBuild = moment(date).format("YYYY-MM-DD");
-        const steps = await getStepByDate(dateBuild);
+        const steps = await getTotalStepsByDate(dateBuild);
         console.log(steps);
         setTargetState({
           ...tS,
@@ -50,6 +49,7 @@ export default function TargetState({ day }) {
     getInitialData();
   }, [day, targetStates]);
 
+  console.log(targetState);
   return (
     <View>
       {targetState && (

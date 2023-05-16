@@ -2,7 +2,7 @@ import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase("ui.db");
 const startDay = new Date(
-  new Date().getTime() + 7 * 60 * 60 * 1000
+  new Date().getTime() + 7 * 60 * 60 * 1000,
 ).setUTCHours(0, 0, 0, 0);
 
 export const createTableSteps = () => {
@@ -23,7 +23,7 @@ export const createTableSteps = () => {
         (error) => {
           console.log("create table step error: ");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -38,7 +38,7 @@ export const insertStep = (value) => {
       (tx) => {
         tx.executeSql(
           `INSERT INTO steps (value,type,time)
-            VALUES (${value},${type},${seconds});`
+            VALUES (${value},${type},${seconds});`,
         );
       },
       [],
@@ -48,7 +48,7 @@ export const insertStep = (value) => {
       (error) => {
         console.log("error insertStep");
         reject(error);
-      }
+      },
     );
   });
 };
@@ -61,7 +61,7 @@ export const getSteps = () => {
           console.log(resultset?.rows?._array);
         });
       },
-      (error) => console.log(error)
+      (error) => console.log(error),
     );
   } catch (error) {
     console.log("error getSteps");
@@ -76,7 +76,7 @@ export const droptTable = (nameTable) => {
         `DROP TABLE ${nameTable}`,
         [],
         () => console.log(`drop ${nameTable} success`),
-        (error) => console.log(error)
+        (error) => console.log(error),
       );
     });
   } catch (error) {
@@ -98,7 +98,7 @@ export const countStepOfDay = () => {
         (error) => {
           console.log("error countStepOfDay");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -118,7 +118,7 @@ export const countTotalSecondStepOfDay = () => {
         (error) => {
           console.log("error countTotalSecondStepOfDay");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -152,7 +152,7 @@ export const countTotalStepByLengthOfDay = () => {
         (error) => {
           console.log("error countTotalStepByLengthOfDay");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -173,7 +173,7 @@ export const getStepByDate = (date = "2023-04-28") => {
         (error) => {
           console.log("getStepByDate error");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -194,7 +194,7 @@ export const getStepByMonth = (month = "2023-04-28") => {
         (error) => {
           console.log("getStepByMonth error");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -215,7 +215,7 @@ export const getStepByYear = (month = "2023-04-28") => {
         (error) => {
           console.log("error getStepByYear");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -234,7 +234,7 @@ export const getStepById = (stepId) => {
         (error) => {
           console.log("error getStepById");
           reject(error);
-        }
+        },
       );
     });
   });
@@ -254,8 +254,29 @@ export const insertSyncStep = (date, value, type, time) => {
         (error) => {
           console.log("error insertSyncStep");
           reject(error);
-        }
+        },
       );
     });
+  });
+};
+
+export const getTotalStepsByDate = (date) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          `select count(*) as count from  steps where date(date) = date(?);`,
+          [date],
+          (transact, resultset) => {
+            console.log(resultset?.rows?._array);
+            resolve(resultset?.rows?._array?.[0]?.count);
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+        reject(error);
+      }
+    );
   });
 };

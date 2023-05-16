@@ -87,7 +87,7 @@ export default function BottomContent({
           content={
             <CustomText>
               <CustomText style={[{ fontSize: 20 }]}>
-                {targetState.steps.stepsCount || "0"}
+                {targetState?.steps || "0"}
               </CustomText>
               /{targetDetail?.footsteps_amount} bước
             </CustomText>
