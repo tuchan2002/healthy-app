@@ -60,7 +60,7 @@ const Target = () => {
   return (
     <TouchableOpacity
       style={[styles.itemContainer, { marginLeft: 8 }]}
-      activeOpacity={0.85}
+      activeOpacity={0.88}
       onPress={() => navigation.navigate("TargetsSetting")}
     >
       <CustomText style={[{ fontSize: 14 }]}>Mục tiêu</CustomText>
