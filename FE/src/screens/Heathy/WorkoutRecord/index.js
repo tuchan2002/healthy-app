@@ -6,7 +6,6 @@ import OverviewItem from "../../../components/screens/Healthy/WorkoutRecord/Over
 import WorkoutRecordItem from "../../../components/screens/Healthy/WorkoutRecord/WorkoutRecordItem";
 import Layout from "../../../layouts/Layout";
 import styles from "./styles";
-import workoutRecords from "../../../assets/fakeDatas/workoutRecords";
 import { getAllLocations } from "../../../data/locations";
 import { handleGetBMI } from "../../../services/bmi";
 import { getAuthUserProperty } from "../../../data/user";
@@ -14,13 +13,17 @@ import {
   getFilterDataMethod,
   getTopData,
 } from "../../../utils/workoutRecordMethod";
+import { useLoading } from "../../../providers/LoadingProvider";
 
 const WorkoutRecord = () => {
+  const { setLoading } = useLoading();
+
   const [workoutRecordData, setWorkoutRecordData] = useState([]);
   const [topData, setTopData] = useState({ duration: 0, times: 0, kcal: 0 });
 
   useEffect(() => {
     const fetchInitialData = async () => {
+      setLoading(true);
       const ui = await getAuthUserProperty("user_id");
       const bmiRes = await handleGetBMI(ui[0].user_id);
       const allLocations = await getAllLocations();
@@ -29,7 +32,7 @@ const WorkoutRecord = () => {
 
       const topData = getTopData(filterData);
       setTopData(topData);
-      console.log("ZO");
+      setLoading(false);
     };
     fetchInitialData();
   }, []);
