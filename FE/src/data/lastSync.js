@@ -32,7 +32,7 @@ export const createTableLastSync = () => {
         (error) => {
           console.log("createTableLastSync error");
           reject(error);
-        },
+        }
       );
     });
   });
@@ -55,7 +55,7 @@ export const updateStepIdLastSync = ({ stepId, runningInfoId, locationId }) => {
         console.log("updateStepIdLastSync error");
 
         reject(error);
-      },
+      }
     );
   });
 };
@@ -76,7 +76,7 @@ export const getStepIdLastSync = () => {
         (error) => {
           console.log("getStepIdLastSync error");
           reject(error);
-        },
+        }
       );
     });
   });
@@ -108,7 +108,7 @@ export const StepSync = async (userId) => {
 
     // handle sync runningInfos
     const runningInfosInsertedAfterSync = await getRunningInfosById(
-      runningInfoId ? runningInfoId : 0,
+      runningInfoId ? runningInfoId : 0
     );
     const runningInfosUpdatedAfterSync =
       await getRunningInfosUpdatedAfterSyncById();
@@ -127,7 +127,7 @@ export const StepSync = async (userId) => {
 
     // handle sync locations
     const locationsSync = await getTheLocationsById(
-      locationId ? locationId : 0,
+      locationId ? locationId : 0
     );
     if (locationsSync.length > 0) {
       data.locations = locationsSync;

@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix insert running info and locations">
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix created null">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/src/constants/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/constants/color.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Running/Info.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Running/Info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Running/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Running/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +91,7 @@
       <workItem from="1683864826483" duration="2985000" />
       <workItem from="1683906088544" duration="753000" />
       <workItem from="1684253718115" duration="646000" />
-      <workItem from="1684257875976" duration="1655000" />
+      <workItem from="1684257875976" duration="11695000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -326,7 +331,35 @@
       <option name="project" value="LOCAL" />
       <updated>1684260328325</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="fix created null">
+      <created>1684261309265</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1684261309265</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fix created null">
+      <created>1684261322765</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1684261322765</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix created null">
+      <created>1684261469017</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1684261469017</updated>
+    </task>
+    <task id="LOCAL-00038" summary="fix created null">
+      <created>1684261576855</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1684261576855</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +377,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="save steps current day sqlite" />
     <MESSAGE value="refactor struct table step sqlite" />
     <MESSAGE value="set timezone table step" />
     <MESSAGE value="analyst steps by month and year" />
@@ -369,6 +401,7 @@
     <MESSAGE value="replace sleep graph with pedometer at home" />
     <MESSAGE value="fix insert running info" />
     <MESSAGE value="fix insert running info and locations" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix insert running info and locations" />
+    <MESSAGE value="fix created null" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix created null" />
   </component>
 </project>

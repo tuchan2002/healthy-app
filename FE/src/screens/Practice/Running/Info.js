@@ -45,9 +45,9 @@ export default function Info({ info, onStop }) {
           <></>
         )}
       </View>
-      <CustomText style={[styles.dateTimeText]}>
+      {/* <CustomText style={[styles.dateTimeText]}>
         {convertDateToString1(runningInfo?.createdAt || new Date())}
-      </CustomText>
+      </CustomText> */}
       <View style={styles.extraInfo}>
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>
