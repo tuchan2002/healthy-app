@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="throw error">
+    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="replace sleep graph with pedometer at home">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14,_05_05_2023_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_14__05_05_2023__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/constants/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/constants/color.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +88,10 @@
       <workItem from="1683794504743" duration="1355000" />
       <workItem from="1683819758623" duration="624000" />
       <workItem from="1683823863283" duration="3541000" />
+      <workItem from="1683864826483" duration="2985000" />
+      <workItem from="1683906088544" duration="753000" />
+      <workItem from="1684253718115" duration="646000" />
+      <workItem from="1684257875976" duration="375000" />
     </task>
     <task id="LOCAL-00001" summary="particle speed machine">
       <created>1681327312222</created>
@@ -293,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683834480132</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="replace sleep graph with pedometer at home">
+      <created>1683871773936</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683871773936</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +352,7 @@
     <MESSAGE value="log warning" />
     <MESSAGE value="try catch step count length" />
     <MESSAGE value="throw error" />
-    <option name="LAST_COMMIT_MESSAGE" value="throw error" />
+    <MESSAGE value="replace sleep graph with pedometer at home" />
+    <option name="LAST_COMMIT_MESSAGE" value="replace sleep graph with pedometer at home" />
   </component>
 </project>
