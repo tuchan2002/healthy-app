@@ -42,11 +42,15 @@ export const insertRunningInfo = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
+      updatedAt = updatedAt ? updatedAt : new Date();
+      console.log(updatedAt);
+      console.log(createdAt);
       const query = `INSERT INTO running_infos (target, isStarted, isStopped, createdAt, updatedAt)
-            VALUES (?,?,?,date(?),date(?));`;
+            VALUES (?,?,?,date(CURRENT_timestamp),date(CURRENT_timestamp));`;
+      console.log(query);
       tx.executeSql(
         query,
-        [target, isStarted, isStopped, createdAt, updatedAt],
+        [target, isStarted, isStopped],
         () => {
           console.log("insert insertRunningInfo");
           resolve("insert insertRunningInfo");
