@@ -1,7 +1,11 @@
 import * as SQLite from "expo-sqlite";
 import { getStepById, insertSyncStep } from "./stepCounter";
 import { SyncStepService, SynceStepServiceToLocal } from "../services/user";
-import { getRunningInfosById, insertRunningInfo } from "./runningInfo";
+import {
+  getRunningInfosById,
+  getRunningInfosUpdatedAfterSyncById,
+  insertRunningInfo,
+} from "./runningInfo";
 import {
   createTableLocations,
   getTheLocationsById,
@@ -103,9 +107,15 @@ export const StepSync = async (userId) => {
     }
 
     // handle sync runningInfos
-    const runningInfosSync = await getRunningInfosById(
+    const runningInfosInsertedAfterSync = await getRunningInfosById(
       runningInfoId ? runningInfoId : 0,
     );
+    const runningInfosUpdatedAfterSync =
+      await getRunningInfosUpdatedAfterSyncById();
+    const runningInfosSync = [
+      ...runningInfosUpdatedAfterSync,
+      ...runningInfosInsertedAfterSync,
+    ];
     console.log("runningInfos", runningInfosSync);
     if (runningInfosSync.length > 0) {
       data.runningInfos = runningInfosSync;
@@ -175,8 +185,9 @@ export const StepSyncToLocal = async (userId) => {
             : 0;
         lastIds.runningInfoId = lastRunningInfoId;
 
-        const syncedLocations = await res.data.runningInfos.reduce(
-          async (promise, runningInfo) => {
+        const syncedLocations = await res.data.runningInfos
+          .reverse()
+          .reduce(async (promise, runningInfo) => {
             await insertRunningInfo(runningInfo);
             if (runningInfo.locations) {
               return promise.then(async (last) => {
@@ -186,9 +197,7 @@ export const StepSyncToLocal = async (userId) => {
                 return await l();
               });
             }
-          },
-          Promise.resolve([]),
-        );
+          }, Promise.resolve([]));
 
         const lastLocationId = syncedLocations.length;
         lastIds.locationId = lastLocationId;

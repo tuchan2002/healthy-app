@@ -189,7 +189,6 @@ export default function Running() {
   const getNowLocation = async () => {
     const currentPermission = await Location.getForegroundPermissionsAsync();
     if (currentPermission.granted) {
-      console.log("nowLocation");
       const location = await Location.getCurrentPositionAsync();
       setNowLocation(location.coords);
     }

@@ -1,6 +1,7 @@
 import * as SQLite from "expo-sqlite";
 import { insertSyncStep } from "./stepCounter";
 import { convertDateToString4 } from "../utils/datetime";
+import { getStepIdLastSync } from "./intermediateFunction";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -65,7 +66,7 @@ export const insertRunningInfo = ({
 export const updateRunningInfo = ({ runningInfoId }) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
-      const query = `UPDATE running_infos SET isStopped = 1 WHERE id = ${runningInfoId};`;
+      const query = `UPDATE running_infos SET isStopped = 1, updatedAt = "${new Date()}" WHERE id = ${runningInfoId};`;
       tx.executeSql(
         query,
         [],
@@ -118,6 +119,28 @@ export const getRunningInfosById = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         },
         (error) => reject(error),
+      );
+    });
+  });
+};
+
+export const getRunningInfosUpdatedAfterSyncById = async () => {
+  const { runningInfoId } = await getStepIdLastSync();
+
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM running_infos WHERE id <= ${runningInfoId} AND updatedAt <> createdAt;`;
+    db.transaction((tx) => {
+      tx.executeSql(
+        query,
+        [],
+        (transact, resultset) => {
+          console.log("runningInfoUpdatedAfterSync: ", resultset?.rows?._array);
+          resolve(resultset?.rows?._array);
+        },
+        (error) => {
+          console.log("Error get runningInfoUpdatedAfterSync", error);
+          reject(error);
+        },
       );
     });
   });
