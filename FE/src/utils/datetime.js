@@ -45,7 +45,7 @@ export function convertDateToString2(date) {
     const convertedDate = convertDate(date);
 
     return `${formatTime(convertedDate.hour)}:${formatTime(
-      convertedDate.minute,
+      convertedDate.minute
     )}`;
   }
   return null;
@@ -104,8 +104,8 @@ export function convertTime(time) {
 
 /**
  * Convert Date to String format "yyyy-mm-dd".
- * 
- * @param {*} date 
+ *
+ * @param {*} date
  * @returns String
  */
 export function convertDateToString4(date) {
@@ -113,7 +113,7 @@ export function convertDateToString4(date) {
     const convertedDate = convertDate(date);
 
     return `${formatTime(convertedDate.year)}-${formatTime(
-      convertedDate.month,
+      convertedDate.month
     )}-${formatTime(convertedDate.date)}`;
   }
 }

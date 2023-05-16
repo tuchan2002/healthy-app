@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import CustomText from "../../../components/CustomText";
 import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
 import OverviewItem from "../../../components/screens/Healthy/WorkoutRecord/OverviewItem";
@@ -25,11 +25,11 @@ const WorkoutRecord = () => {
       const bmiRes = await handleGetBMI(ui[0].user_id);
       const allLocations = await getAllLocations();
       const filterData = getFilterDataMethod(allLocations, bmiRes.data.weight);
-      const topData = getTopData(filterData);
-      console.log(topData);
-
       setWorkoutRecordData(filterData);
+
+      const topData = getTopData(filterData);
       setTopData(topData);
+      console.log("ZO");
     };
     fetchInitialData();
   }, []);
@@ -59,17 +59,36 @@ const WorkoutRecord = () => {
           />
         </View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {workoutRecordData.map((wkRecord, index) => (
-            <WorkoutRecordItem
-              key={wkRecord.id}
-              workoutRecord={{
-                ...wkRecord,
-                times: workoutRecordData.length - index,
+        {workoutRecordData.length > 0 ? (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {workoutRecordData.map((wkRecord, index) => (
+              <WorkoutRecordItem
+                key={wkRecord.id}
+                workoutRecord={{
+                  ...wkRecord,
+                  times: workoutRecordData.length - index,
+                }}
+              />
+            ))}
+          </ScrollView>
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "500",
               }}
-            />
-          ))}
-        </ScrollView>
+            >
+              Bạn chưa có lần tập luyện nào.
+            </Text>
+          </View>
+        )}
       </View>
     </Layout>
   );

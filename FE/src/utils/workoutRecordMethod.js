@@ -37,6 +37,10 @@ export const getFilterDataMethod = (allLocations, weight = 0) => {
 };
 
 export const getTopData = (workoutRecordData) => {
+  if (workoutRecordData.length === 0) {
+    return { duration: 0, times: 0, kcal: 0 };
+  }
+
   return {
     duration: workoutRecordData.reduce(
       (total, wkRecord) => total + wkRecord.duration,

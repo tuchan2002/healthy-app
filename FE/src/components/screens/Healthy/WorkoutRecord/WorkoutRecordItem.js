@@ -4,11 +4,7 @@ import CustomText from "../../../CustomText";
 import { FontAwesome5 } from "@expo/vector-icons";
 import color from "../../../../constants/color";
 import { useNavigation } from "@react-navigation/native";
-import moment from "moment";
-import {
-  convertDateToString1,
-  convertDateToString3,
-} from "../../../../utils/datetime";
+import { convertDateToString1 } from "../../../../utils/datetime";
 
 const WorkoutRecordItem = ({ workoutRecord }) => {
   const navigation = useNavigation();

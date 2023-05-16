@@ -97,7 +97,7 @@ export const getAllLocations = () => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}";`;
+    const query = `SELECT * FROM locations;`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {
