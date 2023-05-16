@@ -27,7 +27,7 @@ export const createTableRunningInfos = () => {
         (error) => {
           console.log("createTableRunningInfos error");
           reject({ success: 0, message: error.message });
-        },
+        }
       );
     });
   });
@@ -43,12 +43,10 @@ export const insertRunningInfo = ({
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       const query = `INSERT INTO running_infos (target, isStarted, isStopped, createdAt, updatedAt)
-            VALUES (${target}, ${isStarted}, ${isStopped},"${
-        createdAt || new Date()
-      }", "${updatedAt || new Date()}");`;
+            VALUES (?,?,?,date(?),date(?));`;
       tx.executeSql(
         query,
-        [],
+        [target, isStarted, isStopped, createdAt, updatedAt],
         () => {
           console.log("insert insertRunningInfo");
           resolve("insert insertRunningInfo");
@@ -56,7 +54,7 @@ export const insertRunningInfo = ({
         (error) => {
           console.log("insertRunningInfo error");
           reject("Error insert running_infos:" + error.message);
-        },
+        }
       );
     });
   });
@@ -77,7 +75,7 @@ export const updateRunningInfo = ({ runningInfoId }) => {
           console.log("updateRunningInfo error");
 
           reject("Error update running_infos:" + error.message);
-        },
+        }
       );
     });
   });
@@ -88,7 +86,7 @@ export const getTheLastRunningInfo = () => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
     const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 AND (createdAt = "${convertDateToString4(
-      new Date(),
+      new Date()
     )}" OR (createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" )) ORDER BY id ASC LIMIT 1;`;
     db.transaction((tx) => {
       tx.executeSql(
@@ -101,7 +99,7 @@ export const getTheLastRunningInfo = () => {
           console.log("getTheLastRunningInfo error", err);
 
           reject(error);
-        },
+        }
       );
     });
   });
@@ -117,7 +115,7 @@ export const getRunningInfosById = (runningInfoId) => {
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error),
+        (error) => reject(error)
       );
     });
   });
@@ -139,7 +137,7 @@ export const getRunningInfosUpdatedAfterSyncById = async () => {
         (error) => {
           console.log("Error get runningInfoUpdatedAfterSync", error);
           reject(error);
-        },
+        }
       );
     });
   });
