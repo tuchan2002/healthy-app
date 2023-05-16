@@ -269,7 +269,18 @@ export default function Running() {
                   longitude: nowLocation.longitude,
                 }
               }
-            />
+            >
+              <View
+                style={{
+                  width: 16,
+                  height: 16,
+                  backgroundColor: "white",
+                  borderRadius: 50,
+                  borderWidth: 4,
+                  borderColor: "blue",
+                }}
+              ></View>
+            </Marker>
             <Polyline
               coordinates={path.current || []}
               strokeWidth={6}
