@@ -6,7 +6,6 @@ export const getFilterDataMethod = (allLocations, weight = 0) => {
   let distance = 0;
   let duration = 0;
 
-  console.log(allLocations.length);
   for (let i = 0; i < allLocations.length; i++) {
     if (
       tempId != Number(allLocations[i].runningInfoId) ||
