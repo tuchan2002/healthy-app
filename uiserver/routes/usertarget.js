@@ -47,7 +47,11 @@ router.post("/", async (req, res) => {
 /* PUT user target by user id. */
 router.put("/edit", async (req, res) => {
   try {
-    const reqBody = req.body;
+    console.log("--------------------------------");
+    console.log(req?.body);
+    const reqBody = req?.body;
+    console.log("--------------------------------");
+
     const TODAY_START = new Date().setHours(0, 0, 0, 0);
     const NOW = new Date();
     const userTarget = await UserTarget.findOne({
@@ -55,8 +59,8 @@ router.put("/edit", async (req, res) => {
         user_id: reqBody.user_id,
         createdAt: {
           [Op.gt]: TODAY_START,
-          [Op.lt]: NOW
-        }
+          [Op.lt]: NOW,
+        },
       },
     });
     console.log(NOW, userTarget);

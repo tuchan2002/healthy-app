@@ -17,7 +17,7 @@ const WorkoutRecord = ({ distance }) => {
       <CustomText style={[{ fontSize: 14 }]}>Hồ sơ tập luyện</CustomText>
       <CustomText style={[{ fontSize: 20 }]}>{`${
         distance ? distance : 0
-      }km`}</CustomText>
+      } km`}</CustomText>
       <Image
         style={{
           width: "100%",

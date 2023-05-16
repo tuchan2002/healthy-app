@@ -11,6 +11,7 @@ import { handlePutUserTarget } from "../../../../services/userTarget";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import NotiDialog from "../../../../components/NotiDialog";
 import { useStep } from "../../../../providers/StepProvider";
+import moment from "moment";
 
 export default function BottomContent({
   targetState,
@@ -26,8 +27,7 @@ export default function BottomContent({
 
   useEffect(() => {
     setIsNow(
-      convertDate(targetState?.createdAt)?.date ===
-        convertDate(new Date()).date,
+      convertDate(targetState?.createdAt)?.date === convertDate(new Date()).date
     );
   }, [targetState]);
 
@@ -36,6 +36,7 @@ export default function BottomContent({
       ...targetDetail,
       ...value,
     };
+    console.log(newTargetDetail);
     setTargetDetail(newTargetDetail);
     const res = await handlePutUserTarget({
       ...newTargetDetail,
@@ -68,7 +69,11 @@ export default function BottomContent({
           }
           icon={<Ionicons name="sunny" size={24} color="black" />}
           editable={isNow}
-          onChange={(value) => handleChangeState({ getUpAt: value })}
+          onChange={(value) =>
+            handleChangeState({
+              getUpAt: moment(new Date(value)).format("YYYY-MM-DD"),
+            })
+          }
         >
           <StateDetailBox.TimePickerInput
             defaultValue={targetDetail?.getUpAt}
