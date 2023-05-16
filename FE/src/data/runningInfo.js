@@ -51,7 +51,7 @@ export const insertRunningInfo = ({
           isStarted,
           isStopped,
           createdAt,
-          (updatedAt = updatedAt ? updatedAt : new Date()),
+          (updatedAt = updatedAt ? updatedAt : new Date().toString()),
         ],
         () => {
           console.log("insert insertRunningInfo");
