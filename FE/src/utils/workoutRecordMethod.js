@@ -23,7 +23,7 @@ export const getFilterDataMethod = (allLocations, weight = 0) => {
           distance,
           duration,
           date: allLocations[i - 1].createdAt,
-          kcal: burnedCalorineByRunning(weight, distance),
+          kcal: burnedCalorineByRunning(weight, distance / 1000),
         });
         distance = 0;
         duration = 0;
