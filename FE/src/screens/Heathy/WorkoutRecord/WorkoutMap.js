@@ -11,16 +11,21 @@ import {
 } from "../../../constants/size";
 import CustomText from "../../../components/CustomText";
 import { convertTime } from "../../../utils/datetime";
+import { useLoading } from "../../../providers/LoadingProvider";
 
 export default function WorkoutMap({ route }) {
+  const { setLoading } = useLoading();
+
   const { path, distance, kcal, duration } = route.params.dataPass;
 
   const [nowLocation, setNowLocation] = useState();
 
   useEffect(() => {
     const getInitialData = async () => {
+      setLoading(true);
       await getPermissions();
       await getNowLocation();
+      setLoading(false);
     };
     getInitialData();
   }, []);
@@ -47,21 +52,21 @@ export default function WorkoutMap({ route }) {
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>
           <CustomText style={[styles.colValue]}>
-            {convertTime(duration * 1000)}
+            {convertTime(duration ? duration * 1000 : 0)}
           </CustomText>
         </View>
 
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Quãng đường</CustomText>
           <CustomText style={[styles.colValue]}>
-            {`${(distance / 1000).toFixed(3)} Km`}
+            {`${(distance ? distance / 1000 : 0).toFixed(3)} Km`}
           </CustomText>
         </View>
 
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Calo</CustomText>
           <CustomText style={[styles.colValue]}>
-            {`${kcal.toFixed(1)} kcal`}
+            {`${kcal ? kcal.toFixed(1) : 0} kcal`}
           </CustomText>
         </View>
       </View>
