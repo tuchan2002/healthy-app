@@ -8,6 +8,7 @@ import { handleGetTargetStates } from "../../../../services/userTargetState";
 import CustomProgressChart from "../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useStep } from "../../../../providers/StepProvider";
+import { convertDate } from "../../../../utils/datetime";
 
 const Target = () => {
   const navigation = useNavigation();
@@ -29,10 +30,10 @@ const Target = () => {
 
   const getTargetStates = async () => {
     const res = await handleGetTargetStates(authUser.user_id);
-    // console.log(res);
+    console.log(res);
     if (res.success) {
-      setTargetState(res.data);
-      setTargetDetail(res.data.UserTarget);
+      setTargetState(res.data[convertDate(new Date()).day - 2]);
+      setTargetDetail(res.data[convertDate(new Date()).day - 2].UserTarget);
     }
   };
 
@@ -53,7 +54,7 @@ const Target = () => {
       }
       const data = [
         timeProgress,
-        steps.current.count / targetDetail.footsteps_amount,
+        steps.current.count / targetDetail.footsteps_amount < 1 ? steps.current.count / targetDetail.footsteps_amount : 1,
         targetState.kcal / targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });

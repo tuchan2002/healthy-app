@@ -39,7 +39,11 @@ export default function TopContent({ targetState, targetDetail }) {
       }
       const data = [
         timeProgress,
-        _targetState?.steps ? (_targetState?.steps / _targetDetail.footsteps_amount) : 0,
+        _targetState?.steps
+          ? _targetState?.steps / _targetDetail.footsteps_amount < 1
+            ? _targetState?.steps / _targetDetail.footsteps_amount
+            : 1
+          : 0,
         _targetState.kcal / _targetDetail.kcal,
       ];
       setChartData({ ...chartData, data });
