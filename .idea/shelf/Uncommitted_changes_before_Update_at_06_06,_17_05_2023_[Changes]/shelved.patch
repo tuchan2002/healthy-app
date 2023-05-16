@@ -1,0 +1,352 @@
+Index: FE/src/screens/Practice/Running/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { StyleSheet, View } from \"react-native\";\nimport Actions from \"./Actions\";\nimport Info from \"./Info\";\nimport runningInfo from \"../../../assets/fakeDatas/runningInfo\";\nimport MapView, { Marker, PROVIDER_GOOGLE, Polyline } from \"react-native-maps\";\nimport { LinearGradient } from \"expo-linear-gradient\";\nimport { useEffect, useRef, useState } from \"react\";\nimport {\n  FOOTERBAR_HEIGHT,\n  SCREEN_HEIGHT,\n  SCREEN_WIDTH,\n  STATUSBAR_HEIGHT,\n} from \"../../../constants/size\";\nimport * as Location from \"expo-location\";\nimport { LOCATION_TASK_NAME } from \"../../../utils/locationTask\";\nimport {\n  getTheLocation,\n  getTheRunningLocation,\n  insertLocation,\n} from \"../../../data/locations\";\nimport {\n  getTheLastRunningInfo,\n  insertRunningInfo,\n} from \"../../../data/runningInfo\";\nimport { convertTime } from \"../../../utils/datetime\";\nimport * as TaskManager from \"expo-task-manager\";\nimport { handleGetBMI } from \"../../../services/bmi\";\nimport { burnedCalorineByRunning } from \"../../../utils/caculateCalorine\";\n\nexport default function Running() {\n  const [defaultRunningInfo, setDefaultRunningInfo] = useState(runningInfo);\n  const [nowLocation, setNowLocation] = useState();\n  const [bmi, setBmi] = useState();\n\n  const [subscription, setSubscription] = useState(null);\n  const useForceUpdate = () => {\n    const [, setState] = useState();\n    return () => setState({});\n  };\n\n  const forceUpdate = useForceUpdate();\n  const path = useRef(0);\n\n  const _unsubscribe = () => {\n    subscription && subscription.remove();\n    setSubscription(null);\n  };\n\n  const getPath = async () => {\n    if (defaultRunningInfo?.id) {\n      const theLocation = await getTheLocation(defaultRunningInfo.id);\n      const theRunningLocation = await getTheRunningLocation(\n        defaultRunningInfo.id,\n      );\n      if (theLocation.length > 0) {\n        path.current = theLocation;\n\n        if (theRunningLocation.length > 0) {\n          const speed =\n            Number.parseFloat(\n              theRunningLocation[theRunningLocation.length - 1].speed,\n            ).toFixed(3) + \"m/s\";\n          const duration = convertTime(theLocation.length * 1000);\n          const distance = Number.parseFloat(\n            theRunningLocation.reduce(\n              (sum, location) => sum + location.speed,\n              0,\n            ) / 1000,\n          ).toFixed(2);\n          const calo = Number.parseFloat(\n            burnedCalorineByRunning(\n              bmi?.weight || 50,\n              theRunningLocation.reduce(\n                (sum, location) => sum + location.speed,\n                0,\n              ) / 1000,\n            ),\n          ).toFixed(3);\n          setDefaultRunningInfo((prev) => {\n            return {\n              ...prev,\n              speed,\n              duration,\n              distance,\n              calo,\n            };\n          });\n        }\n      }\n\n      forceUpdate();\n    }\n  };\n\n  const forceUpdateLocations = async () => {\n    await getPath();\n  };\n\n  const _subscribe = async () => {\n    setSubscription(\n      TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {\n        if (data) {\n          const { locations } = data;\n          const res = await insertLocation({\n            ...locations[0].coords,\n            runningInfoId: defaultRunningInfo.id,\n          });\n          await forceUpdateLocations();\n          return;\n        }\n        if (error) {\n          console.log(\"task error:\", error);\n          return;\n        }\n      }),\n    );\n  };\n\n  useEffect(() => {\n    const getInitialData = async () => {\n      await getRunningInfo();\n      await getNowLocation();\n      await getBMI();\n      await getPath();\n    };\n\n    getInitialData();\n  }, []);\n\n  useEffect(() => {\n    const handleLocationService = async () => {\n      if (defaultRunningInfo.isStarted) {\n        await _subscribe();\n        await startBackgroundTracking();\n      }\n    };\n\n    handleLocationService();\n\n    return () => _unsubscribe();\n  }, [defaultRunningInfo]);\n\n  const startBackgroundTracking = async () => {\n    await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {\n      accuracy: Location.LocationAccuracy.BestForNavigation,\n      timeInterval: 1000,\n      showsBackgroundLocationIndicator: true,\n      foregroundService: {\n        notificationTitle: \"Title\",\n        notificationBody: \"This is body!\",\n        notificationColor: \"#AA1111\",\n      },\n      deferredUpdatesInterval: 100,\n      activityType: Location.ActivityType.AutomotiveNavigation,\n    });\n  };\n\n  const getPermissions = async () => {\n    let { status } = await Location.requestForegroundPermissionsAsync();\n\n    if (status !== \"granted\") {\n      console.log(\"Hãy cho phép ứng dụng lấy thông tin vị trí của bạn!\");\n      return;\n    }\n  };\n\n  const getBMI = async () => {\n    const bmiRes = await handleGetBMI();\n    if (bmiRes.success) {\n      setBmi(bmiRes.data);\n    }\n  };\n\n  const getRunningInfo = async () => {\n    const res = await getTheLastRunningInfo();\n    const [rI] = res;\n    if (rI) {\n      setDefaultRunningInfo({\n        ...defaultRunningInfo,\n        ...rI,\n      });\n    } else {\n      setDefaultRunningInfo({\n        ...runningInfo,\n      });\n    }\n  };\n\n  const getNowLocation = async () => {\n    const currentPermission = await Location.getForegroundPermissionsAsync();\n    if (currentPermission.granted) {\n      const location = await Location.getCurrentPositionAsync();\n      setNowLocation(location.coords);\n    }\n  };\n\n  const handleChangeTarget = (newTarget) => {\n    setDefaultRunningInfo((prev) => {\n      return {\n        ...prev,\n        target: newTarget,\n      };\n    });\n  };\n\n  const handleStartRunning = async () => {\n    if (!defaultRunningInfo.isStarted) {\n      await getPermissions();\n      if (!nowLocation) {\n        await getNowLocation();\n      }\n      await insertRunningInfo({\n        target: defaultRunningInfo.target,\n        isStarted: 1,\n      });\n      await getRunningInfo();\n    }\n  };\n\n  const handleStopRunning = async () => {\n    path.current = [];\n    _unsubscribe();\n    await getRunningInfo();\n  };\n\n  return (\n    <View>\n      <LinearGradient\n        colors={[\"rgba(0, 0, 0, 0.4)\", \"transparent\"]}\n        style={[\n          styles.content,\n          {\n            zIndex:\n              defaultRunningInfo.target && defaultRunningInfo.isStarted ? 1 : 2,\n          },\n        ]}\n      >\n        <Actions\n          target={defaultRunningInfo.target}\n          isStarted={defaultRunningInfo.isStarted}\n          isStopped={defaultRunningInfo.isStopped}\n          onChangeInput={handleChangeTarget}\n          onStart={handleStartRunning}\n        />\n      </LinearGradient>\n      <View style={{ zIndex: 3, marginHorizontal: \"2%\" }}>\n        <View style={styles.info}>\n          <Info info={defaultRunningInfo} onStop={handleStopRunning} />\n        </View>\n      </View>\n      <View style={[styles.content, styles.mapContainer]}>\n        {nowLocation && (\n          <MapView\n            style={styles.map}\n            initialRegion={{\n              latitude: nowLocation.latitude,\n              longitude: nowLocation.longitude,\n              latitudeDelta: 0,\n              longitudeDelta: 0,\n            }}\n            provider={PROVIDER_GOOGLE}\n          >\n            <Marker\n              title=\"Xuất phát\"\n              pinColor=\"blue\"\n              coordinate={\n                path.current[0] || {\n                  latitude: nowLocation.latitude,\n                  longitude: nowLocation.longitude,\n                }\n              }\n            >\n              <View\n                style={{\n                  width: 16,\n                  height: 16,\n                  backgroundColor: \"white\",\n                  borderRadius: 50,\n                  borderWidth: 4,\n                  borderColor: \"#9bcf1a\",\n                }}\n              ></View>\n            </Marker>\n            <Polyline\n              coordinates={path.current || []}\n              strokeWidth={6}\n              strokeColor={\"#80e6f1\"}\n            />\n            <Marker\n              title=\"Hiện tại\"\n              pinColor=\"red\"\n              coordinate={\n                path.current[path.current.length - 1] || {\n                  latitude: nowLocation.latitude,\n                  longitude: nowLocation.longitude,\n                }\n              }\n            />\n          </MapView>\n        )}\n      </View>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  content: {\n    height: SCREEN_HEIGHT - STATUSBAR_HEIGHT - 48 - 20 - FOOTERBAR_HEIGHT,\n    display: \"flex\",\n    flexDirection: \"column\",\n    marginTop: 20,\n    marginHorizontal: \"2%\",\n    backgroundColor: \"rgba(0, 0, 0, 0.2)\",\n    borderRadius: 10,\n    position: \"relative\",\n    justifyContent: \"center\",\n  },\n  info: {\n    position: \"absolute\",\n    bottom: 0,\n    width: SCREEN_WIDTH - (SCREEN_WIDTH / 100) * 4,\n  },\n  map: {\n    width: \"100%\",\n    height: \"100%\",\n    borderRadius: 10,\n  },\n  mapContainer: {\n    backgroundColor: \"transparent\",\n    position: \"absolute\",\n    width: SCREEN_WIDTH - (SCREEN_WIDTH / 100) * 4,\n    zIndex: 1,\n  },\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Practice/Running/index.js b/FE/src/screens/Practice/Running/index.js
+--- a/FE/src/screens/Practice/Running/index.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/screens/Practice/Running/index.js	(date 1684278360403)
+@@ -50,7 +50,7 @@
+     if (defaultRunningInfo?.id) {
+       const theLocation = await getTheLocation(defaultRunningInfo.id);
+       const theRunningLocation = await getTheRunningLocation(
+-        defaultRunningInfo.id,
++        defaultRunningInfo.id
+       );
+       if (theLocation.length > 0) {
+         path.current = theLocation;
+@@ -58,23 +58,23 @@
+         if (theRunningLocation.length > 0) {
+           const speed =
+             Number.parseFloat(
+-              theRunningLocation[theRunningLocation.length - 1].speed,
++              theRunningLocation[theRunningLocation.length - 1].speed
+             ).toFixed(3) + "m/s";
+           const duration = convertTime(theLocation.length * 1000);
+           const distance = Number.parseFloat(
+             theRunningLocation.reduce(
+               (sum, location) => sum + location.speed,
+-              0,
+-            ) / 1000,
++              0
++            ) / 1000
+           ).toFixed(2);
+           const calo = Number.parseFloat(
+             burnedCalorineByRunning(
+               bmi?.weight || 50,
+               theRunningLocation.reduce(
+                 (sum, location) => sum + location.speed,
+-                0,
+-              ) / 1000,
+-            ),
++                0
++              ) / 1000
++            )
+           ).toFixed(3);
+           setDefaultRunningInfo((prev) => {
+             return {
+@@ -112,7 +112,7 @@
+           console.log("task error:", error);
+           return;
+         }
+-      }),
++      })
+     );
+   };
+ 
+Index: FE/src/screens/Practice/Running/Info.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { PermissionsAndroid, StyleSheet, View } from \"react-native\";\nimport CustomText from \"../../../components/CustomText\";\nimport { convertDateToString1 } from \"../../../utils/datetime\";\nimport { useEffect, useState } from \"react\";\nimport UserButton from \"../../../components/UserButton\";\nimport { SCREEN_WIDTH } from \"../../../constants/size\";\nimport { updateRunningInfo } from \"../../../data/runningInfo\";\nimport { unregisterLocationTask } from \"../../../utils/locationTask\";\n\nexport default function Info({ info, onStop }) {\n  const [runningInfo, setRunningInfo] = useState();\n  useEffect(() => {\n    setRunningInfo(info);\n\n    return () => setRunningInfo(null);\n  }, [info]);\n\n  const handleStopRunning = async () => {\n    const res = await updateRunningInfo({ runningInfoId: runningInfo.id });\n    if (res.success) {\n      setRunningInfo({\n        ...runningInfo,\n        isStopped: 1,\n      });\n      onStop(true);\n      unregisterLocationTask();\n    }\n  };\n  return (\n    <View style={styles.container}>\n      <View style={styles.title}>\n        <CustomText style={[styles.distanceText]}>\n          {Number.parseFloat(runningInfo?.distance).toFixed(2)}/\n          <CustomText style={[{ fontSize: 32, fontFamily: \"NunitoSans-Bold\" }]}>\n            {runningInfo?.target || \"--\"}km\n          </CustomText>\n        </CustomText>\n        {!runningInfo?.isStopped && runningInfo?.isStarted ? (\n          <UserButton\n            style={styles.stopBtn}\n            content={\"Kết thúc\"}\n            onPress={handleStopRunning}\n          />\n        ) : (\n          <></>\n        )}\n      </View>\n      <CustomText style={[styles.dateTimeText]}>\n        {convertDateToString1(runningInfo?.createdAt || new Date())}\n      </CustomText>\n      <View style={styles.extraInfo}>\n        <View style={styles.col}>\n          <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>\n          <CustomText style={[styles.colValue]}>\n            {runningInfo?.duration || \"00:00:00\"}\n          </CustomText>\n        </View>\n        <View style={styles.col}>\n          <CustomText style={[styles.colLabel]}>Tốc độ</CustomText>\n          <CustomText style={[styles.colValue]}>\n            {info.speed || \"0m/s\"}\n          </CustomText>\n        </View>\n        <View style={styles.col}>\n          <CustomText style={[styles.colLabel]}>Calo</CustomText>\n          <CustomText style={[styles.colValue]}>\n            {runningInfo?.calo || 0}kcal\n          </CustomText>\n        </View>\n      </View>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    paddingHorizontal: \"2%\",\n  },\n  title: {\n    width: SCREEN_WIDTH - (SCREEN_WIDTH / 100) * 8,\n    display: \"flex\",\n    flexDirection: \"row\",\n    justifyContent: \"space-between\",\n    alignItems: \"baseline\",\n    maxHeight: 96,\n  },\n  stopBtn: {\n    width: (SCREEN_WIDTH / 100) * 32,\n  },\n  distanceText: {\n    fontSize: 48,\n    fontFamily: \"NunitoSans-Bold\",\n    paddingBottom: 0,\n    marginBottom: 0,\n  },\n  dateTimeText: {\n    color: \"#717171\",\n    fontSize: 16,\n    paddingTop: 0,\n    marginTop: 0,\n  },\n  extraInfo: {\n    display: \"flex\",\n    flexDirection: \"row\",\n    width: \"100%\",\n    justifyContent: \"space-between\",\n    paddingVertical: 32,\n  },\n  col: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    alignItems: \"center\",\n  },\n  colLabel: {\n    color: \"#717171\",\n  },\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Practice/Running/Info.js b/FE/src/screens/Practice/Running/Info.js
+--- a/FE/src/screens/Practice/Running/Info.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/screens/Practice/Running/Info.js	(date 1684276223518)
+@@ -45,9 +45,9 @@
+           <></>
+         )}
+       </View>
+-      <CustomText style={[styles.dateTimeText]}>
++      {/* <CustomText style={[styles.dateTimeText]}>
+         {convertDateToString1(runningInfo?.createdAt || new Date())}
+-      </CustomText>
++      </CustomText> */}
+       <View style={styles.extraInfo}>
+         <View style={styles.col}>
+           <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>
+Index: FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useNavigation } from \"@react-navigation/native\";\nimport React from \"react\";\nimport { Image, TouchableOpacity, View } from \"react-native\";\nimport { homeScreenImages } from \"../../../../assets/images/HomeScreen\";\nimport CustomText from \"../../../../components/CustomText\";\nimport styles from \"../styles\";\n\nconst WorkoutRecord = ({ distance }) => {\n  const navigation = useNavigation();\n\n  return (\n    <TouchableOpacity\n      style={[styles.itemContainer, { marginRight: 8 }]}\n      activeOpacity={0.88}\n      onPress={() => navigation.push(\"WorkoutRecord\")}\n    >\n      <CustomText style={[{ fontSize: 14 }]}>Hồ sơ tập luyện</CustomText>\n      <CustomText style={[{ fontSize: 20 }]}>{`${\n        distance ? distance : 0\n      }km`}</CustomText>\n      <Image\n        style={{\n          width: \"100%\",\n          resizeMode: \"contain\",\n        }}\n        source={homeScreenImages[\"home1\"]}\n      />\n    </TouchableOpacity>\n  );\n};\n\nexport default WorkoutRecord;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js b/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js
+--- a/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js	(date 1684278360391)
+@@ -17,7 +17,7 @@
+       <CustomText style={[{ fontSize: 14 }]}>Hồ sơ tập luyện</CustomText>
+       <CustomText style={[{ fontSize: 20 }]}>{`${
+         distance ? distance : 0
+-      }km`}</CustomText>
++      } km`}</CustomText>
+       <Image
+         style={{
+           width: "100%",
+Index: FE/src/constants/color.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export default {\n  primary: \"#FFA239\",\n  bg: \"#F0EFEF\",\n  sleep: \"#30b9bd\",\n  step: \"#ff8c3d\",\n  calo: \"#a06ffa\",\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/constants/color.js b/FE/src/constants/color.js
+--- a/FE/src/constants/color.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/constants/color.js	(date 1684276223530)
+@@ -1,5 +1,5 @@
+ export default {
+-  primary: "#FFA239",
++  primary: "#ff932e",
+   bg: "#F0EFEF",
+   sleep: "#30b9bd",
+   step: "#ff8c3d",
+Index: FE/src/utils/axios.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\";\n\nconst instance = axios.create({\n  //baseURL: \"http://10.0.2.2:5000\",\n  baseURL: \"http://192.168.1.28:5000\",\n});\n\ninstance.interceptors.request.use(\n  (config) => {\n    // const token = localStorage.getItem(\"token\");\n    // if (token) {\n    //   config.headers.Authorization = \"Bearer \" + token;\n    // }\n\n    config.headers = {\n      Accept: \"application/json\",\n      \"Content-Type\": \"application/json\",\n    };\n    return config;\n  },\n  (error) => {\n    return Promise.reject(error);\n  }\n);\n\ninstance.interceptors.response.use((response) => {\n  if (response.status === 204) {\n    return true;\n  }\n  return response.data;\n});\n\nexport default instance;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/utils/axios.js b/FE/src/utils/axios.js
+--- a/FE/src/utils/axios.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/utils/axios.js	(date 1684276223546)
+@@ -2,7 +2,7 @@
+ 
+ const instance = axios.create({
+   //baseURL: "http://10.0.2.2:5000",
+-  baseURL: "http://192.168.1.28:5000",
++  baseURL: "http://192.168.1.3:5000",
+ });
+ 
+ instance.interceptors.request.use(
+Index: FE/src/data/lastSync.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as SQLite from \"expo-sqlite\";\nimport { getStepById, insertSyncStep } from \"./stepCounter\";\nimport { SyncStepService, SynceStepServiceToLocal } from \"../services/user\";\nimport {\n  getRunningInfosById,\n  getRunningInfosUpdatedAfterSyncById,\n  insertRunningInfo,\n} from \"./runningInfo\";\nimport {\n  createTableLocations,\n  getTheLocationsById,\n  insertLocation,\n} from \"./locations\";\n\nconst db = SQLite.openDatabase(\"ui.db\");\n\nexport const createTableLastSync = () => {\n  return new Promise((resolve, reject) => {\n    db.transaction((tx) => {\n      tx.executeSql(\n        `CREATE table if not EXISTS lastSync (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            stepId INTEGER NOT NULL,\n            runningInfoId INTEGER NOT NULL,\n            locationId INTEGER NOT NULL\n        );`,\n        [],\n        () => {\n          console.log(\"create table lastSync success\");\n          resolve(true);\n        },\n        (error) => {\n          console.log(\"createTableLastSync error\");\n          reject(error);\n        },\n      );\n    });\n  });\n};\n\nexport const updateStepIdLastSync = ({ stepId, runningInfoId, locationId }) => {\n  return new Promise((resolve, reject) => {\n    const query = `INSERT INTO lastSync (stepId, runningInfoId, locationId)\n    VALUES (${stepId || 0}, ${runningInfoId || 0}, ${locationId || 0});`;\n    db.transaction(\n      (tx) => {\n        tx.executeSql(query);\n      },\n      [],\n      () => {\n        console.log(\"update stepId lastSync success\");\n        resolve(\"updateStepIdLastSync success\");\n      },\n      (error) => {\n        console.log(\"updateStepIdLastSync error\");\n\n        reject(error);\n      },\n    );\n  });\n};\n\nexport const getStepIdLastSync = () => {\n  return new Promise((resolve, reject) => {\n    db.transaction((tx) => {\n      tx.executeSql(\n        `SELECT * FROM lastSync\n        ORDER by id DESC\n        LIMIT 1`,\n        [],\n        (tx, result) => {\n          const ids =\n            result?.rows?._array?.length > 0 ? result.rows._array[0] : {};\n          resolve(ids);\n        },\n        (error) => {\n          console.log(\"getStepIdLastSync error\");\n          reject(error);\n        },\n      );\n    });\n  });\n};\n\nexport const StepSync = async (userId) => {\n  try {\n    const { stepId, runningInfoId, locationId } = await getStepIdLastSync();\n\n    let data = {\n      id: userId,\n      steps: [],\n      runningInfos: [],\n      locations: [],\n    };\n\n    let lastIds = {\n      stepId: null,\n      runningInfoId: null,\n      locationId: null,\n    };\n    // handle sync steps\n    const stepsSync = await getStepById(stepId ? stepId : 0);\n    if (stepsSync.length > 0) {\n      data.steps = stepsSync;\n      lastIds.stepId =\n        stepsSync?.length > 0 ? stepsSync[stepsSync.length - 1].id : 0;\n    }\n\n    // handle sync runningInfos\n    const runningInfosInsertedAfterSync = await getRunningInfosById(\n      runningInfoId ? runningInfoId : 0,\n    );\n    const runningInfosUpdatedAfterSync =\n      await getRunningInfosUpdatedAfterSyncById();\n    const runningInfosSync = [\n      ...runningInfosUpdatedAfterSync,\n      ...runningInfosInsertedAfterSync,\n    ];\n    console.log(\"runningInfos\", runningInfosSync);\n    if (runningInfosSync.length > 0) {\n      data.runningInfos = runningInfosSync;\n      lastIds.runningInfoId =\n        runningInfosSync?.length > 0\n          ? runningInfosSync[runningInfosSync.length - 1].id\n          : 0;\n    }\n\n    // handle sync locations\n    const locationsSync = await getTheLocationsById(\n      locationId ? locationId : 0,\n    );\n    if (locationsSync.length > 0) {\n      data.locations = locationsSync;\n      lastIds.locationId =\n        locationsSync?.length > 0\n          ? locationsSync[locationsSync.length - 1].id\n          : 0;\n    }\n\n    if (\n      data.steps.length > 0 ||\n      data.runningInfos.length > 0 ||\n      data.locations.length > 0\n    ) {\n      const resSync = await SyncStepService(data);\n      if (resSync && resSync.success === 1) {\n        await updateStepIdLastSync(lastIds);\n      }\n    }\n  } catch (error) {\n    console.log(\"StepSync error\");\n\n    console.log(error);\n  }\n};\n\nexport const StepSyncToLocal = async (userId) => {\n  try {\n    const res = await SynceStepServiceToLocal(userId);\n    if (res && res.success === 1 && res.data) {\n      inintalData = res.data;\n      const lastIds = {\n        stepId: null,\n        runningInfoId: null,\n        locationId: null,\n      };\n\n      if (res.data.syncedSteps) {\n        const lastStepId =\n          res?.data?.syncedSteps?.length > 0\n            ? res?.data?.syncedSteps.length\n            : 0;\n        console.log(lastStepId);\n        lastIds.stepId = lastStepId;\n\n        await res?.data?.syncedSteps?.map(async (step) => {\n          await insertSyncStep(step.date, step.value, step.type, step.time);\n        });\n      }\n\n      if (res.data.runningInfos) {\n        const lastRunningInfoId =\n          res?.data?.runningInfos?.length > 0\n            ? res?.data?.runningInfos.length\n            : 0;\n        lastIds.runningInfoId = lastRunningInfoId;\n\n        await res.data.runningInfos.map(async (runningInfo) => {\n          await insertRunningInfo(runningInfo);\n        });\n\n        // const syncedLocations = await res.data.runningInfos\n        //   .reverse()\n        //   .reduce(async (promise, runningInfo) => {\n        //     await insertRunningInfo(runningInfo);\n        //     if (runningInfo.locations) {\n        //       return promise.then(async (last) => {\n        //         const l = async () => {\n        //           return [...last, ...runningInfo.locations];\n        //         };\n        //         return await l();\n        //       });\n        //     }\n        //   }, Promise.resolve([]));\n\n        // const lastLocationId = syncedLocations.length;\n        // lastIds.locationId = lastLocationId;\n        // await syncedLocations.map(async (location) => {\n        //   await insertLocation(location);\n        // });\n      }\n\n      if (res.data.locations) {\n        const lastLocationInfoId =\n          res?.data?.locations?.length > 0 ? res?.data?.locations.length : 0;\n        lastIds.locationId = lastLocationInfoId;\n\n        await res.data.locations.map(async (location) => {\n          await insertLocation(location);\n        });\n      }\n\n      await updateStepIdLastSync(lastIds);\n    }\n  } catch (error) {\n    console.log(\"StepSyncToLocal Error: \", error);\n  }\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/data/lastSync.js b/FE/src/data/lastSync.js
+--- a/FE/src/data/lastSync.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/data/lastSync.js	(date 1684276223550)
+@@ -32,7 +32,7 @@
+         (error) => {
+           console.log("createTableLastSync error");
+           reject(error);
+-        },
++        }
+       );
+     });
+   });
+@@ -55,7 +55,7 @@
+         console.log("updateStepIdLastSync error");
+ 
+         reject(error);
+-      },
++      }
+     );
+   });
+ };
+@@ -76,7 +76,7 @@
+         (error) => {
+           console.log("getStepIdLastSync error");
+           reject(error);
+-        },
++        }
+       );
+     });
+   });
+@@ -108,7 +108,7 @@
+ 
+     // handle sync runningInfos
+     const runningInfosInsertedAfterSync = await getRunningInfosById(
+-      runningInfoId ? runningInfoId : 0,
++      runningInfoId ? runningInfoId : 0
+     );
+     const runningInfosUpdatedAfterSync =
+       await getRunningInfosUpdatedAfterSyncById();
+@@ -127,7 +127,7 @@
+ 
+     // handle sync locations
+     const locationsSync = await getTheLocationsById(
+-      locationId ? locationId : 0,
++      locationId ? locationId : 0
+     );
+     if (locationsSync.length > 0) {
+       data.locations = locationsSync;
+Index: FE/src/screens/Heathy/Home/NavigationItem/Target.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useNavigation } from \"@react-navigation/native\";\nimport React, { useContext, useEffect, useState } from \"react\";\nimport { Dimensions, Image, TouchableOpacity, View } from \"react-native\";\nimport { homeScreenImages } from \"../../../../assets/images/HomeScreen\";\nimport CustomText from \"../../../../components/CustomText\";\nimport styles from \"../styles\";\nimport { handleGetTargetStates } from \"../../../../services/userTargetState\";\nimport CustomProgressChart from \"../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart\";\nimport { AuthContext } from \"../../../../providers/AuthProvider\";\nimport { useStep } from \"../../../../providers/StepProvider\";\n\nconst Target = () => {\n  const navigation = useNavigation();\n  const { authUser } = useContext(AuthContext);\n  const [targetState, setTargetState] = useState();\n  const [targetDetail, setTargetDetail] = useState();\n  const [chartData, setChartData] = useState({\n    data: [0, 0, 0],\n    colors: [\"#30b9bd\", \"#ff8c3d\", \"#a06ffa\"],\n  });\n\n  const { steps } = useStep();\n\n  useEffect(() => {\n    if (authUser) {\n      getTargetStates();\n    }\n  }, [authUser]);\n\n  const getTargetStates = async () => {\n    const res = await handleGetTargetStates(authUser.user_id);\n    // console.log(res);\n    if (res.success) {\n      setTargetState(res.data);\n      setTargetDetail(res.data.UserTarget);\n    }\n  };\n\n  useEffect(() => {\n    if (targetState && targetDetail) {\n      let timeProgress = 0;\n      if (targetState.gotUpAt) {\n        timeProgress +=\n          new Date(targetState.gotUpAt) <= new Date(targetDetail.getUpAt)\n            ? 0.5\n            : 0;\n      }\n      if (targetState.sleepedAt) {\n        timeProgress +=\n          new Date(targetState.sleepedAt) <= new Date(targetDetail.sleepAt)\n            ? 0.5\n            : 0;\n      }\n      const data = [\n        timeProgress,\n        steps.current.count / targetDetail.footsteps_amount,\n        targetState.kcal / targetDetail.kcal,\n      ];\n      setChartData({ ...chartData, data });\n    }\n  }, [targetState, targetDetail]);\n\n  return (\n    <TouchableOpacity\n      style={[styles.itemContainer, { marginLeft: 8 }]}\n      activeOpacity={0.88}\n      onPress={() => navigation.navigate(\"TargetsSetting\")}\n    >\n      <CustomText style={[{ fontSize: 14 }]}>Mục tiêu</CustomText>\n      <CustomProgressChart\n        size={{\n          height: Dimensions.get(\"window\").width / 2 - 54,\n          width: Dimensions.get(\"window\").width / 2 - 54,\n        }}\n        data={chartData}\n        backgroundColor=\"white\"\n      />\n    </TouchableOpacity>\n  );\n};\n\nexport default Target;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Heathy/Home/NavigationItem/Target.js b/FE/src/screens/Heathy/Home/NavigationItem/Target.js
+--- a/FE/src/screens/Heathy/Home/NavigationItem/Target.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/screens/Heathy/Home/NavigationItem/Target.js	(date 1684278116801)
+@@ -1,13 +1,13 @@
+ import { useNavigation } from "@react-navigation/native";
+ import React, { useContext, useEffect, useState } from "react";
+ import { Dimensions, Image, TouchableOpacity, View } from "react-native";
+-import { homeScreenImages } from "../../../../assets/images/HomeScreen";
+ import CustomText from "../../../../components/CustomText";
+ import styles from "../styles";
+ import { handleGetTargetStates } from "../../../../services/userTargetState";
+ import CustomProgressChart from "../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart";
+ import { AuthContext } from "../../../../providers/AuthProvider";
+ import { useStep } from "../../../../providers/StepProvider";
++import { convertDate } from "../../../../utils/datetime";
+ 
+ const Target = () => {
+   const navigation = useNavigation();
+@@ -29,10 +29,10 @@
+ 
+   const getTargetStates = async () => {
+     const res = await handleGetTargetStates(authUser.user_id);
+-    // console.log(res);
++    console.log(res);
+     if (res.success) {
+-      setTargetState(res.data);
+-      setTargetDetail(res.data.UserTarget);
++      setTargetState(res.data[convertDate(new Date()).day - 2]);
++      setTargetDetail(res.data[convertDate(new Date()).day - 2].UserTarget);
+     }
+   };
+ 
+@@ -53,7 +53,9 @@
+       }
+       const data = [
+         timeProgress,
+-        steps.current.count / targetDetail.footsteps_amount,
++        steps.current.count / targetDetail.footsteps_amount > 1
++          ? 1
++          : steps.current.count / targetDetail.footsteps_amount,
+         targetState.kcal / targetDetail.kcal,
+       ];
+       setChartData({ ...chartData, data });
+Index: FE/src/screens/Heathy/TargetsSetting/TargetState/TopContent.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { StyleSheet, View } from \"react-native\";\nimport Dot from \"../../../../components/screens/Healthy/TargetsSetting/Dot\";\nimport CustomText from \"../../../../components/CustomText\";\nimport CustomProgressChart from \"../../../../components/screens/Healthy/TargetsSetting/CustomProgressChart\";\nimport { useEffect, useState } from \"react\";\nimport { convertDateToString2 } from \"../../../../utils/datetime\";\nimport { useStep } from \"../../../../providers/StepProvider\";\nimport color from \"../../../../constants/color\";\n\nexport default function TopContent({ targetState, targetDetail }) {\n  const [_targetState, set_targetState] = useState();\n  const [_targetDetail, set_targetDetail] = useState();\n  const [chartData, setChartData] = useState({\n    data: [0, 0, 0],\n    colors: [\"#30b9bd\", \"#ff8c3d\", \"#a06ffa\"],\n  });\n\n  console.log(\"topcontent\", targetState);\n\n  useEffect(() => {\n    set_targetDetail(targetDetail);\n    set_targetState(targetState);\n  }, [targetState, targetDetail]);\n\n  useEffect(() => {\n    if (_targetState && _targetDetail) {\n      let timeProgress = 0;\n      if (_targetState.gotUpAt) {\n        timeProgress +=\n          new Date(_targetState.gotUpAt) <= new Date(_targetDetail.getUpAt)\n            ? 0.5\n            : 0;\n      }\n      if (_targetState.sleepedAt) {\n        timeProgress +=\n          new Date(_targetState.sleepedAt) <= new Date(_targetDetail.sleepAt)\n            ? 0.5\n            : 0;\n      }\n      const data = [\n        timeProgress,\n        _targetState?.steps ? (_targetState?.steps / _targetDetail.footsteps_amount) : 0,\n        _targetState.kcal / _targetDetail.kcal,\n      ];\n      setChartData({ ...chartData, data });\n    }\n  }, [_targetState, _targetDetail]);\n\n  console.log(chartData);\n  return (\n    <View style={styles.container}>\n      <View>\n        <CustomProgressChart data={chartData} />\n      </View>\n      <View>\n        <View style={styles.topBoxLineText}>\n          <View style={styles.dot}>\n            <Dot />\n          </View>\n          <View style={styles.textBox}>\n            <CustomText style={[styles.text]}>\n              Thức vào: {convertDateToString2(_targetState?.gotUpAt) || \"--\"}\n            </CustomText>\n            <CustomText style={[styles.text]}>\n              Ngủ vào: {convertDateToString2(_targetState?.sleepedAt) || \"--\"}{\" \"}\n            </CustomText>\n          </View>\n        </View>\n        <View style={styles.topBoxLineText}>\n          <View style={styles.dot}>\n            <Dot bgColor={color.step} />\n          </View>\n          <View style={styles.textBox}>\n            <CustomText style={[styles.text]}>\n              Số bước:{\" \"}\n              <CustomText style={[{ fontSize: 14 }]}>\n                {targetState?.steps || 0}\n              </CustomText>{\" \"}\n              bước\n            </CustomText>\n          </View>\n        </View>\n        <View style={styles.topBoxLineText}>\n          <View style={styles.dot}>\n            <Dot bgColor={color.calo} />\n          </View>\n          <View style={styles.textBox}>\n            <CustomText style={[styles.text]}>\n              Calo: {_targetState?.kcal || \"--\"} calo\n            </CustomText>\n          </View>\n        </View>\n      </View>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    display: \"flex\",\n    flexDirection: \"row\",\n    alignItems: \"center\",\n    justifyContent: \"space-evenly\",\n    paddingVertical: 60,\n  },\n  topBoxLineText: {\n    display: \"flex\",\n    flexDirection: \"row\",\n    marginVertical: 4,\n  },\n\n  dot: {\n    marginTop: 8,\n  },\n\n  textBox: {\n    marginLeft: 8,\n  },\n\n  text: {\n    fontSize: 10,\n    lineHeight: 16,\n  },\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FE/src/screens/Heathy/TargetsSetting/TargetState/TopContent.js b/FE/src/screens/Heathy/TargetsSetting/TargetState/TopContent.js
+--- a/FE/src/screens/Heathy/TargetsSetting/TargetState/TopContent.js	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/FE/src/screens/Heathy/TargetsSetting/TargetState/TopContent.js	(date 1684278207267)
+@@ -39,7 +39,11 @@
+       }
+       const data = [
+         timeProgress,
+-        _targetState?.steps ? (_targetState?.steps / _targetDetail.footsteps_amount) : 0,
++        _targetState?.steps
++          ? _targetState?.steps / _targetDetail.footsteps_amount > 1
++            ? _targetState?.steps / _targetDetail.footsteps_amount
++            : 1
++          : 0,
+         _targetState.kcal / _targetDetail.kcal,
+       ];
+       setChartData({ ...chartData, data });
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"fix insert running info and locations\">\n      <change beforePath=\"$PROJECT_DIR$/FE/src/constants/color.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/constants/color.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/FE/src/utils/axios.js\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2OGNb67oO9I9quEPV5Pf8hcEhLO\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/chung/Android/UI/healthy-app&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/chung/Downloads/ideaIU-2022.3.2/idea-IU-223.8617.56/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"9dba3307-80d4-41ec-b1eb-07eb872475c4\" name=\"Changes\" comment=\"\" />\n      <created>1681183026669</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1681183026669</updated>\n      <workItem from=\"1681183027846\" duration=\"8604000\" />\n      <workItem from=\"1681291726804\" duration=\"18973000\" />\n      <workItem from=\"1681360362872\" duration=\"1534000\" />\n      <workItem from=\"1681394801400\" duration=\"2529000\" />\n      <workItem from=\"1681413012023\" duration=\"603000\" />\n      <workItem from=\"1681414733205\" duration=\"285000\" />\n      <workItem from=\"1681551012774\" duration=\"4000\" />\n      <workItem from=\"1681551074125\" duration=\"3000\" />\n      <workItem from=\"1682150781825\" duration=\"403000\" />\n      <workItem from=\"1682151189052\" duration=\"99000\" />\n      <workItem from=\"1682151291933\" duration=\"2154000\" />\n      <workItem from=\"1682188888863\" duration=\"342000\" />\n      <workItem from=\"1682220199084\" duration=\"23000\" />\n      <workItem from=\"1682572013791\" duration=\"1487000\" />\n      <workItem from=\"1682652510382\" duration=\"4373000\" />\n      <workItem from=\"1682740327166\" duration=\"1894000\" />\n      <workItem from=\"1682760079980\" duration=\"1152000\" />\n      <workItem from=\"1682829626902\" duration=\"676000\" />\n      <workItem from=\"1682939524165\" duration=\"3000\" />\n      <workItem from=\"1683134238268\" duration=\"443000\" />\n      <workItem from=\"1683168398913\" duration=\"2172000\" />\n      <workItem from=\"1683176029535\" duration=\"90000\" />\n      <workItem from=\"1683200641729\" duration=\"3088000\" />\n      <workItem from=\"1683255327286\" duration=\"6102000\" />\n      <workItem from=\"1683446776888\" duration=\"13000\" />\n      <workItem from=\"1683794504743\" duration=\"1355000\" />\n      <workItem from=\"1683819758623\" duration=\"624000\" />\n      <workItem from=\"1683823863283\" duration=\"3541000\" />\n      <workItem from=\"1683864826483\" duration=\"2985000\" />\n      <workItem from=\"1683906088544\" duration=\"753000\" />\n      <workItem from=\"1684253718115\" duration=\"646000\" />\n      <workItem from=\"1684257875976\" duration=\"1655000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"particle speed machine\">\n      <created>1681327312222</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681327312222</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"particle speed machine\">\n      <created>1681360389318</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681360389318</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"step counter v1.1\">\n      <created>1682153984132</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682153984132</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"save steps current day sqlite\">\n      <created>1682188941857</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682188941857</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"refactor struct table step sqlite\">\n      <created>1682699935358</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682699935358</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"set timezone table step\">\n      <created>1682741052451</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682741052451</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"set timezone table step\">\n      <created>1682760625503</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682760625503</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"analyst steps by month and year\">\n      <created>1682829651678</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1682829651678</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"custom line chart of step\">\n      <created>1683134375945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683134375945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"custom login\">\n      <created>1683172905685</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683172905685</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fix logo google\">\n      <created>1683174460848</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683174460848</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ui login version 2\">\n      <created>1683175734734</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683175734734</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"fix button icon\">\n      <created>1683176038658</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683176038658</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"add loading provider\">\n      <created>1683200704849</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683200704849</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"add step provider\">\n      <created>1683255532824</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683255532824</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"fix navigation home\">\n      <created>1683255630084</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683255630084</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"sync step to server\">\n      <created>1683257881717</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683257881717</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"sync step to server\">\n      <created>1683257887780</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683257887780</updated>\n    </task>\n    <task id=\"LOCAL-00019\" summary=\"sync step\">\n      <created>1683261514746</created>\n      <option name=\"number\" value=\"00019\" />\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683261514746</updated>\n    </task>\n    <task id=\"LOCAL-00020\" summary=\"sync step\">\n      <created>1683261562854</created>\n      <option name=\"number\" value=\"00020\" />\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683261562854</updated>\n    </task>\n    <task id=\"LOCAL-00021\" summary=\"fix bug not create steps when logout\">\n      <created>1683262039461</created>\n      <option name=\"number\" value=\"00021\" />\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683262039461</updated>\n    </task>\n    <task id=\"LOCAL-00022\" summary=\"fix bug not create steps when logout\">\n      <created>1683262151132</created>\n      <option name=\"number\" value=\"00022\" />\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683262151132</updated>\n    </task>\n    <task id=\"LOCAL-00023\" summary=\"sync step when login\">\n      <created>1683267668666</created>\n      <option name=\"number\" value=\"00023\" />\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683267668666</updated>\n    </task>\n    <task id=\"LOCAL-00024\" summary=\"sync step when logout and update last id step\">\n      <created>1683270234274</created>\n      <option name=\"number\" value=\"00024\" />\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683270234274</updated>\n    </task>\n    <task id=\"LOCAL-00025\" summary=\"add calo time length in home step\">\n      <created>1683801777383</created>\n      <option name=\"number\" value=\"00025\" />\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683801777383</updated>\n    </task>\n    <task id=\"LOCAL-00026\" summary=\"fix fixed calo\">\n      <created>1683819782315</created>\n      <option name=\"number\" value=\"00026\" />\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683819782316</updated>\n    </task>\n    <task id=\"LOCAL-00027\" summary=\"log warning\">\n      <created>1683824048308</created>\n      <option name=\"number\" value=\"00027\" />\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683824048308</updated>\n    </task>\n    <task id=\"LOCAL-00028\" summary=\"try catch step count length\">\n      <created>1683826249366</created>\n      <option name=\"number\" value=\"00028\" />\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683826249366</updated>\n    </task>\n    <task id=\"LOCAL-00029\" summary=\"throw error\">\n      <created>1683834463115</created>\n      <option name=\"number\" value=\"00029\" />\n      <option name=\"presentableId\" value=\"LOCAL-00029\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683834463115</updated>\n    </task>\n    <task id=\"LOCAL-00030\" summary=\"throw error\">\n      <created>1683834480132</created>\n      <option name=\"number\" value=\"00030\" />\n      <option name=\"presentableId\" value=\"LOCAL-00030\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683834480132</updated>\n    </task>\n    <task id=\"LOCAL-00031\" summary=\"replace sleep graph with pedometer at home\">\n      <created>1683871773936</created>\n      <option name=\"number\" value=\"00031\" />\n      <option name=\"presentableId\" value=\"LOCAL-00031\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1683871773936</updated>\n    </task>\n    <task id=\"LOCAL-00032\" summary=\"fix insert running info\">\n      <created>1684259215828</created>\n      <option name=\"number\" value=\"00032\" />\n      <option name=\"presentableId\" value=\"LOCAL-00032\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684259215828</updated>\n    </task>\n    <task id=\"LOCAL-00033\" summary=\"fix insert running info and locations\">\n      <created>1684260315183</created>\n      <option name=\"number\" value=\"00033\" />\n      <option name=\"presentableId\" value=\"LOCAL-00033\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684260315183</updated>\n    </task>\n    <task id=\"LOCAL-00034\" summary=\"fix insert running info and locations\">\n      <created>1684260328325</created>\n      <option name=\"number\" value=\"00034\" />\n      <option name=\"presentableId\" value=\"LOCAL-00034\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1684260328325</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"35\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"save steps current day sqlite\" />\n    <MESSAGE value=\"refactor struct table step sqlite\" />\n    <MESSAGE value=\"set timezone table step\" />\n    <MESSAGE value=\"analyst steps by month and year\" />\n    <MESSAGE value=\"custom line chart of step\" />\n    <MESSAGE value=\"custom login\" />\n    <MESSAGE value=\"fix logo google\" />\n    <MESSAGE value=\"ui login version 2\" />\n    <MESSAGE value=\"fix button icon\" />\n    <MESSAGE value=\"add loading provider\" />\n    <MESSAGE value=\"add step provider\" />\n    <MESSAGE value=\"fix navigation home\" />\n    <MESSAGE value=\"sync step to server\" />\n    <MESSAGE value=\"sync step\" />\n    <MESSAGE value=\"fix bug not create steps when logout\" />\n    <MESSAGE value=\"sync step when login\" />\n    <MESSAGE value=\"sync step when logout and update last id step\" />\n    <MESSAGE value=\"add calo time length in home step\" />\n    <MESSAGE value=\"fix fixed calo\" />\n    <MESSAGE value=\"log warning\" />\n    <MESSAGE value=\"try catch step count length\" />\n    <MESSAGE value=\"throw error\" />\n    <MESSAGE value=\"replace sleep graph with pedometer at home\" />\n    <MESSAGE value=\"fix insert running info\" />\n    <MESSAGE value=\"fix insert running info and locations\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fix insert running info and locations\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 17679ab7bfabf6627c520c942fff7af2d934a10f)
++++ b/.idea/workspace.xml	(date 1684278380455)
+@@ -4,8 +4,13 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix insert running info and locations">
++    <list default="true" id="9dba3307-80d4-41ec-b1eb-07eb872475c4" name="Changes" comment="fix created null">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/FE/src/constants/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/constants/color.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/FE/src/data/lastSync.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/data/lastSync.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Heathy/Home/NavigationItem/WorkoutRecord.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Running/Info.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Running/Info.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/FE/src/screens/Practice/Running/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/screens/Practice/Running/index.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/FE/src/utils/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/FE/src/utils/axios.js" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -86,7 +91,7 @@
+       <workItem from="1683864826483" duration="2985000" />
+       <workItem from="1683906088544" duration="753000" />
+       <workItem from="1684253718115" duration="646000" />
+-      <workItem from="1684257875976" duration="1655000" />
++      <workItem from="1684257875976" duration="11695000" />
+     </task>
+     <task id="LOCAL-00001" summary="particle speed machine">
+       <created>1681327312222</created>
+@@ -326,7 +331,35 @@
+       <option name="project" value="LOCAL" />
+       <updated>1684260328325</updated>
+     </task>
+-    <option name="localTasksCounter" value="35" />
++    <task id="LOCAL-00035" summary="fix created null">
++      <created>1684261309265</created>
++      <option name="number" value="00035" />
++      <option name="presentableId" value="LOCAL-00035" />
++      <option name="project" value="LOCAL" />
++      <updated>1684261309265</updated>
++    </task>
++    <task id="LOCAL-00036" summary="fix created null">
++      <created>1684261322765</created>
++      <option name="number" value="00036" />
++      <option name="presentableId" value="LOCAL-00036" />
++      <option name="project" value="LOCAL" />
++      <updated>1684261322765</updated>
++    </task>
++    <task id="LOCAL-00037" summary="fix created null">
++      <created>1684261469017</created>
++      <option name="number" value="00037" />
++      <option name="presentableId" value="LOCAL-00037" />
++      <option name="project" value="LOCAL" />
++      <updated>1684261469017</updated>
++    </task>
++    <task id="LOCAL-00038" summary="fix created null">
++      <created>1684261576855</created>
++      <option name="number" value="00038" />
++      <option name="presentableId" value="LOCAL-00038" />
++      <option name="project" value="LOCAL" />
++      <updated>1684261576855</updated>
++    </task>
++    <option name="localTasksCounter" value="39" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -344,7 +377,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="save steps current day sqlite" />
+     <MESSAGE value="refactor struct table step sqlite" />
+     <MESSAGE value="set timezone table step" />
+     <MESSAGE value="analyst steps by month and year" />
+@@ -369,6 +401,7 @@
+     <MESSAGE value="replace sleep graph with pedometer at home" />
+     <MESSAGE value="fix insert running info" />
+     <MESSAGE value="fix insert running info and locations" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fix insert running info and locations" />
++    <MESSAGE value="fix created null" />
++    <option name="LAST_COMMIT_MESSAGE" value="fix created null" />
+   </component>
+ </project>
+\ No newline at end of file
