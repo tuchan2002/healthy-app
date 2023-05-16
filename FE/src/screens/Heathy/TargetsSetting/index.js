@@ -6,7 +6,11 @@ import CustomText from "../../../components/CustomText";
 import TabsBar from "../../../components/TabsBar";
 import TargetState from "./TargetState";
 import { useState } from "react";
-import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from "../../../constants/size";
+import {
+  FOOTERBAR_HEIGHT,
+  SCREEN_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from "../../../constants/size";
 
 const tabs = [
   {
