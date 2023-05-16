@@ -1,5 +1,6 @@
 import * as SQLite from "expo-sqlite";
 import { convertDateToString4 } from "../utils/datetime";
+import moment from "moment";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -24,7 +25,7 @@ export const createTableLocations = () => {
         (error) => {
           console.log("Error create table locations: ", error);
           reject(false);
-        }
+        },
       );
     });
   });
@@ -32,9 +33,16 @@ export const createTableLocations = () => {
 
 export const insertLocation = (location) => {
   return new Promise((resolve, reject) => {
+    console.log(location.createdAt, location.updatedAt);
     db.transaction((tx) => {
       const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
-            VALUES (${location.runningInfoId}, ${location.longitude}, ${location.latitude}, ${location.speed}, date(${location.createdAt}));`;
+            VALUES (${location.runningInfoId}, ${location.longitude}, ${
+        location.latitude
+      }, ${location.speed}, date(${
+        location.createdAt
+          ? moment(location.createdAt).format("YYYY-MM-DD")
+          : "CURRENT_TIMESTAMP, 'localtime'"
+      }));`;
       console.log(query);
       tx.executeSql(
         query,
@@ -46,7 +54,7 @@ export const insertLocation = (location) => {
         (error) => {
           console.log("Error insert location: ", error);
           reject("Error insert location:" + error.message);
-        }
+        },
       );
     });
   });
@@ -56,32 +64,28 @@ export const getTheLastLocation = () => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM locations WHERE createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" LIMIT 1;`;
+    const query = `SELECT * FROM locations WHERE createdAt = date(${new Date().toString()}) LIMIT 1;`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
 
 export const getTheRunningLocation = (runningInfoId) => {
   return new Promise((resolve, reject) => {
-    const DATE_FROM = new Date();
-    DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM locations WHERE ((createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}") OR createdAt = "${convertDateToString4(
-      new Date()
-    )}") AND runningInfoId = ${runningInfoId} AND speed >= 0.08333 AND speed <= 0.33333;`;
+    const query = `SELECT * FROM locations WHERE runningInfoId = ${runningInfoId} AND speed >= 0.08333 AND speed <= 0.33333;`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
@@ -90,16 +94,14 @@ export const getTheLocation = (runningInfoId) => {
   return new Promise((resolve, reject) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
-    const query = `SELECT * FROM locations WHERE ((createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}") OR (createdAt = "${convertDateToString4(
-      new Date()
-    )}")) AND runningInfoId = ${runningInfoId};`;
+    const query = `SELECT * FROM locations WHERE runningInfoId = ${runningInfoId};`;
     db.transaction(
       (tx) => {
         tx.executeSql(query, [], (transact, resultset) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
@@ -115,7 +117,7 @@ export const getAllLocations = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 };
@@ -131,7 +133,7 @@ export const getTheLocationsById = (locationId) => {
           console.log("locations: ", resultset?.rows?._array);
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error)
+        (error) => reject(error),
       );
     });
   });
