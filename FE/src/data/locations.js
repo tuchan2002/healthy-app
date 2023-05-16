@@ -36,17 +36,20 @@ export const insertLocation = (location) => {
     console.log(location.createdAt, location.updatedAt);
     db.transaction((tx) => {
       const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
-            VALUES (${location.runningInfoId}, ${location.longitude}, ${
-        location.latitude
-      }, ${location.speed}, date(${
-        location.createdAt
-          ? moment(location.createdAt).format("YYYY-MM-DD")
-          : "CURRENT_TIMESTAMP, 'localtime'"
-      }));`;
+            VALUES (?, ?, ?, ?, date(${
+              location.createdAt
+                ? moment(location.createdAt).format("YYYY-MM-DD")
+                : "CURRENT_TIMESTAMP, 'localtime'"
+            }));`;
       console.log(query);
       tx.executeSql(
         query,
-        [],
+        [
+          location.runningInfoId,
+          location.longitude,
+          location.latitude,
+          location.speed,
+        ],
         () => {
           console.log("Insert location success");
           resolve("insert success");
