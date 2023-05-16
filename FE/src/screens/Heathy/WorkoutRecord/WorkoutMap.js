@@ -12,6 +12,7 @@ import {
 import CustomText from "../../../components/CustomText";
 import { convertTime } from "../../../utils/datetime";
 import { useLoading } from "../../../providers/LoadingProvider";
+import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
 
 export default function WorkoutMap({ route }) {
   const { setLoading } = useLoading();
@@ -48,6 +49,7 @@ export default function WorkoutMap({ route }) {
   };
   return (
     <Layout>
+      <HealthyHeaderBar title="Hồ sơ chi tiết" />
       <View style={styles.extraInfo}>
         <View style={styles.col}>
           <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>

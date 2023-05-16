@@ -121,7 +121,11 @@ export default Home = memo(() => {
         >
           <View style={{ marginBottom: 16, flexDirection: "row" }}>
             <WorkoutRecord
-              distance={(workoutRecordData[0]?.distance / 1000).toFixed(3)}
+              distance={
+                workoutRecordData[0]?.distance
+                  ? (workoutRecordData[0]?.distance / 1000).toFixed(3)
+                  : 0
+              }
             />
             <Target />
           </View>
