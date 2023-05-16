@@ -12,7 +12,11 @@ import { AuthContext } from "../../../../providers/AuthProvider";
 import NotiDialog from "../../../../components/NotiDialog";
 import { useStep } from "../../../../providers/StepProvider";
 
-export default function BottomContent({ targetState, targetDetail: tD }) {
+export default function BottomContent({
+  targetState,
+  targetDetail: tD,
+  onChange,
+}) {
   const [isNow, setIsNow] = useState(false);
   const [targetDetail, setTargetDetail] = useState(tD);
   const { authUser } = useContext(AuthContext);
@@ -39,6 +43,7 @@ export default function BottomContent({ targetState, targetDetail: tD }) {
     });
 
     if (res.success) {
+      onChange({ ...newTargetDetail });
       setOpenSuccessDialog(res.message);
     } else {
       setOpenFailDialog(res.message);
@@ -82,7 +87,7 @@ export default function BottomContent({ targetState, targetDetail: tD }) {
           content={
             <CustomText>
               <CustomText style={[{ fontSize: 20 }]}>
-                {steps.current.count || "0"}
+                {targetState.steps.stepsCount || "0"}
               </CustomText>
               /{targetDetail?.footsteps_amount} bước
             </CustomText>

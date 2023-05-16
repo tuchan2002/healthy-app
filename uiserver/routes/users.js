@@ -43,6 +43,7 @@ router.post("/sync", async (req, res) => {
       updateOnDuplicate: ["target", "isStarted", "isStopped"],
     });
 
+    req.body.locations.map((element) => (element["user_id"] = req.body.id));
     const locations = await Location.bulkCreate(req.body.locations, {
       updateOnDuplicate: ["longitude", "latitude", "speed"],
     });
@@ -71,10 +72,15 @@ router.get("/synced_data/:id", async (req, res) => {
           model: RunningInfo,
           as: "runningInfos",
           attributes: { exclude: ["user_id"] },
-          include: ["locations"],
+        },
+        {
+          model: Location,
+          as: "locations",
+          attributes: { exclude: ["user_id"] },
         },
       ],
     });
+
     if (user) {
       res.json({ success: 1, data: user, message: "get synced data" });
     } else {

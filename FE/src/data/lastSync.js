@@ -185,23 +185,37 @@ export const StepSyncToLocal = async (userId) => {
             : 0;
         lastIds.runningInfoId = lastRunningInfoId;
 
-        const syncedLocations = await res.data.runningInfos
-          .reverse()
-          .reduce(async (promise, runningInfo) => {
-            await insertRunningInfo(runningInfo);
-            if (runningInfo.locations) {
-              return promise.then(async (last) => {
-                const l = async () => {
-                  return [...last, ...runningInfo.locations];
-                };
-                return await l();
-              });
-            }
-          }, Promise.resolve([]));
+        await res.data.runningInfos.map(async (runningInfo) => {
+          await insertRunningInfo(runningInfo);
+        });
 
-        const lastLocationId = syncedLocations.length;
-        lastIds.locationId = lastLocationId;
-        await syncedLocations.map(async (location) => {
+        // const syncedLocations = await res.data.runningInfos
+        //   .reverse()
+        //   .reduce(async (promise, runningInfo) => {
+        //     await insertRunningInfo(runningInfo);
+        //     if (runningInfo.locations) {
+        //       return promise.then(async (last) => {
+        //         const l = async () => {
+        //           return [...last, ...runningInfo.locations];
+        //         };
+        //         return await l();
+        //       });
+        //     }
+        //   }, Promise.resolve([]));
+
+        // const lastLocationId = syncedLocations.length;
+        // lastIds.locationId = lastLocationId;
+        // await syncedLocations.map(async (location) => {
+        //   await insertLocation(location);
+        // });
+      }
+
+      if (res.data.locations) {
+        const lastLocationInfoId =
+          res?.data?.locations?.length > 0 ? res?.data?.locations.length : 0;
+        lastIds.locationId = lastLocationInfoId;
+
+        await res.data.locations.map(async (location) => {
           await insertLocation(location);
         });
       }

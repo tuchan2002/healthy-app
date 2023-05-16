@@ -127,7 +127,8 @@ export const getRunningInfosUpdatedAfterSyncById = async () => {
   const { runningInfoId } = await getStepIdLastSync();
 
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM running_infos WHERE id <= ${runningInfoId} AND updatedAt is not null;`;
+    const query = `SELECT * FROM running_infos WHERE id <= ${runningInfoId || 0} AND updatedAt is not null;`;
+    console.log(query);
     db.transaction((tx) => {
       tx.executeSql(
         query,
