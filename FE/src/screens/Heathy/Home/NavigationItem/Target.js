@@ -19,12 +19,14 @@ const Target = () => {
   });
 
   useEffect(() => {
-    getTargetStates();
+    if (authUser) {
+      getTargetStates();
+    }
   }, [authUser]);
 
   const getTargetStates = async () => {
     const res = await handleGetTargetStates(authUser.user_id);
-    console.log(res);
+    // console.log(res);
     if (res.success) {
       setTargetState(res.data);
       setTargetDetail(res.data.UserTarget);

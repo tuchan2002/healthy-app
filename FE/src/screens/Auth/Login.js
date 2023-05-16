@@ -104,7 +104,7 @@ export default function Login({ navigation }) {
       new GraphRequestManager().addRequest(infoRequest).start();
       // Create a Firebase credential with the AccessToken
     } catch (err) {
-      console.log("Error getting access token: " + error.toString());
+      console.log("Error getting access token: " + err.toString());
     }
   }
 

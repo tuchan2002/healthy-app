@@ -1,5 +1,4 @@
 import * as SQLite from "expo-sqlite";
-import { insertSyncStep } from "./stepCounter";
 import { convertDateToString4 } from "../utils/datetime";
 import { getStepIdLastSync } from "./intermediateFunction";
 
