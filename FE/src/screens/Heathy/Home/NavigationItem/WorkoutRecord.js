@@ -15,7 +15,7 @@ const WorkoutRecord = ({ distance }) => {
       onPress={() => navigation.push("WorkoutRecord")}
     >
       <CustomText style={[{ fontSize: 14 }]}>Hồ sơ tập luyện</CustomText>
-      <CustomText style={[{ fontSize: 20 }]}>{`${distance}km`}</CustomText>
+      <CustomText style={[{ fontSize: 20 }]}>{`${distance || 0}km`}</CustomText>
       <Image
         style={{
           width: "100%",
