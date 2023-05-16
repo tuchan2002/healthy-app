@@ -15,7 +15,7 @@ const WorkoutRecordItem = ({ workoutRecord }) => {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.5}
-      onPress={() => navigation.navigate("Home")}
+      onPress={() => navigation.navigate("WorkoutMap")}
     >
       <CustomText
         style={[{ textTransform: "uppercase" }]}

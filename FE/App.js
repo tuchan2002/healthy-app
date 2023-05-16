@@ -14,6 +14,7 @@ import DefaultTargetSetting from "./src/screens/Auth/DefaultTargetSetting";
 import AuthProvider from "./src/providers/AuthProvider";
 import { LoadingProvider } from "./src/providers/LoadingProvider";
 import { StepProvider } from "./src/providers/StepProvider";
+import WorkoutMap from "./src/screens/Heathy/WorkoutRecord/WorkoutMap";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ export default function App() {
               />
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="WorkoutRecord" component={WorkoutRecord} />
+              <Stack.Screen name="WorkoutMap" component={WorkoutMap} />
               <Stack.Screen name="TargetsSetting" component={TargetsSetting} />
               <Stack.Screen name="Practice" component={Practice} />
               <Stack.Screen name="User" component={User} />

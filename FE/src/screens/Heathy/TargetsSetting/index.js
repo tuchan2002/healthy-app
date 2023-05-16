@@ -6,7 +6,7 @@ import CustomText from "../../../components/CustomText";
 import TabsBar from "../../../components/TabsBar";
 import TargetState from "./TargetState";
 import { useState } from "react";
-import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT } from "../../../constants/size";
+import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT, STATUSBAR_HEIGHT } from "../../../constants/size";
 
 const tabs = [
   {
@@ -66,7 +66,7 @@ export default function TargetsSetting() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - 138,
+            height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - STATUSBAR_HEIGHT - 138,
           }}
         >
           <TargetState day={activeTab} />
