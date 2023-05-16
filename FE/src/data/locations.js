@@ -32,6 +32,7 @@ export const createTableLocations = () => {
 
 export const insertLocation = (location) => {
   return new Promise((resolve, reject) => {
+    console.log(location.createdAt, location.updatedAt);
     db.transaction((tx) => {
       const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
             VALUES (${location.runningInfoId}, ${location.longitude}, ${location.latitude}, ${location.speed}, date(${location.createdAt}));`;

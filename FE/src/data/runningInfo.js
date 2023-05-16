@@ -27,7 +27,7 @@ export const createTableRunningInfos = () => {
         (error) => {
           console.log("createTableRunningInfos error");
           reject({ success: 0, message: error.message });
-        },
+        }
       );
     });
   });
@@ -42,17 +42,15 @@ export const insertRunningInfo = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
+      updatedAt = updatedAt ? updatedAt : new Date();
+      console.log(updatedAt);
+      console.log(createdAt);
       const query = `INSERT INTO running_infos (target, isStarted, isStopped, createdAt, updatedAt)
-            VALUES (?,?,?,date(?),date(?));`;
+            VALUES (?,?,?,date(CURRENT_timestamp),date(CURRENT_timestamp));`; // fix lai created va updatedAt khong null thay cho current_timestamp
+      console.log(query);
       tx.executeSql(
         query,
-        [
-          target,
-          isStarted,
-          isStopped,
-          createdAt,
-          (updatedAt = updatedAt ? updatedAt : new Date().toString()),
-        ],
+        [target, isStarted, isStopped],
         () => {
           console.log("insert insertRunningInfo");
           resolve("insert insertRunningInfo");
@@ -60,7 +58,7 @@ export const insertRunningInfo = ({
         (error) => {
           console.log("insertRunningInfo error");
           reject("Error insert running_infos:" + error.message);
-        },
+        }
       );
     });
   });
@@ -81,7 +79,7 @@ export const updateRunningInfo = ({ runningInfoId }) => {
           console.log("updateRunningInfo error");
 
           reject("Error update running_infos:" + error.message);
-        },
+        }
       );
     });
   });
@@ -92,7 +90,7 @@ export const getTheLastRunningInfo = () => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
     const query = `SELECT * FROM running_infos WHERE isStarted = 1 AND isStopped = 0 AND (createdAt = "${convertDateToString4(
-      new Date(),
+      new Date()
     )}" OR (createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}" )) ORDER BY id ASC LIMIT 1;`;
     db.transaction((tx) => {
       tx.executeSql(
@@ -105,7 +103,7 @@ export const getTheLastRunningInfo = () => {
           console.log("getTheLastRunningInfo error", err);
 
           reject(error);
-        },
+        }
       );
     });
   });
@@ -121,7 +119,7 @@ export const getRunningInfosById = (runningInfoId) => {
         (transact, resultset) => {
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error),
+        (error) => reject(error)
       );
     });
   });
@@ -143,7 +141,7 @@ export const getRunningInfosUpdatedAfterSyncById = async () => {
         (error) => {
           console.log("Error get runningInfoUpdatedAfterSync", error);
           reject(error);
-        },
+        }
       );
     });
   });
