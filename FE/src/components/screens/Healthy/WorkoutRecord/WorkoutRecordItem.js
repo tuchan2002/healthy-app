@@ -46,7 +46,7 @@ const WorkoutRecordItem = ({ workoutRecord }) => {
           {`${(distance / 1000).toFixed(3)} Km`}
         </CustomText>
         <CustomText fontFamily="NunitoSans-SemiBold">
-          {`${kcal.toFixed(0)} kcal`}
+          {`${kcal.toFixed(1)} kcal`}
         </CustomText>
       </View>
     </TouchableOpacity>
