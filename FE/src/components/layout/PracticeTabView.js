@@ -12,13 +12,13 @@ export default function PracticeTabView() {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "running", title: "Chạy bộ" },
-    { key: "cycling", title: "Đạp xe" },
+    // { key: "cycling", title: "Đạp xe" },
     { key: "exercises", title: "Bài tập" },
   ]);
 
   const renderScene = SceneMap({
     running: Running,
-    cycling: Cycling,
+    // cycling: Cycling,
     exercises: Exercises,
   });
 
