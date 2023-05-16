@@ -5,6 +5,7 @@ export const getFilterDataMethod = (allLocations, weight = 0) => {
   let tempId = -1;
   let distance = 0;
   let duration = 0;
+  let path = [];
 
   for (let i = 0; i < allLocations.length; i++) {
     if (
@@ -17,19 +18,30 @@ export const getFilterDataMethod = (allLocations, weight = 0) => {
         if (i === allLocations.length - 1) {
           distance += allLocations[i].speed;
           duration++;
+          path.push({
+            latitude: allLocations[i].latitude,
+            longitude: allLocations[i].longitude,
+          });
         }
         dataArray.push({
           distance,
           duration,
           date: allLocations[i - 1].createdAt,
           kcal: burnedCalorineByRunning(weight, distance / 1000),
+          path,
         });
+
         distance = 0;
         duration = 0;
+        path = [];
       }
     }
     distance += allLocations[i].speed;
     duration++;
+    path.push({
+      latitude: allLocations[i].latitude,
+      longitude: allLocations[i].longitude,
+    });
   }
 
   return dataArray.reverse();

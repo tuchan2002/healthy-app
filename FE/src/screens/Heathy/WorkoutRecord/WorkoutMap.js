@@ -9,8 +9,12 @@ import {
   SCREEN_WIDTH,
   STATUSBAR_HEIGHT,
 } from "../../../constants/size";
+import CustomText from "../../../components/CustomText";
+import { convertTime } from "../../../utils/datetime";
 
-export default function WorkoutMap({ path = [] }) {
+export default function WorkoutMap({ route }) {
+  const { path, distance, kcal, duration } = route.params.dataPass;
+
   const [nowLocation, setNowLocation] = useState();
 
   useEffect(() => {
@@ -39,6 +43,28 @@ export default function WorkoutMap({ path = [] }) {
   };
   return (
     <Layout>
+      <View style={styles.extraInfo}>
+        <View style={styles.col}>
+          <CustomText style={[styles.colLabel]}>Thời lượng</CustomText>
+          <CustomText style={[styles.colValue]}>
+            {convertTime(duration * 1000)}
+          </CustomText>
+        </View>
+
+        <View style={styles.col}>
+          <CustomText style={[styles.colLabel]}>Quãng đường</CustomText>
+          <CustomText style={[styles.colValue]}>
+            {`${(distance / 1000).toFixed(3)} Km`}
+          </CustomText>
+        </View>
+
+        <View style={styles.col}>
+          <CustomText style={[styles.colLabel]}>Calo</CustomText>
+          <CustomText style={[styles.colValue]}>
+            {`${kcal.toFixed(1)} kcal`}
+          </CustomText>
+        </View>
+      </View>
       <View style={[styles.content, styles.mapContainer]}>
         {nowLocation && (
           <MapView
@@ -73,7 +99,7 @@ export default function WorkoutMap({ path = [] }) {
               ></View>
             </Marker>
             <Polyline
-              coordinates={[]}
+              coordinates={path}
               strokeWidth={6}
               strokeColor={"#80e6f1"}
             />
@@ -98,5 +124,22 @@ const styles = StyleSheet.create({
   map: {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT,
+  },
+  extraInfo: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    width: SCREEN_WIDTH,
+  },
+  col: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  colLabel: {
+    color: "#717171",
   },
 });
