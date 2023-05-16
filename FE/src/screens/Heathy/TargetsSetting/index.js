@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import Layout from "../../../layouts/Layout";
 import HealthyHeaderBar from "../../../components/layout/HeathyHeaderBar";
 import * as DateTime from "../../../utils/datetime";
@@ -6,6 +6,7 @@ import CustomText from "../../../components/CustomText";
 import TabsBar from "../../../components/TabsBar";
 import TargetState from "./TargetState";
 import { useState } from "react";
+import { FOOTERBAR_HEIGHT, SCREEN_HEIGHT } from "../../../constants/size";
 
 const tabs = [
   {
@@ -40,7 +41,7 @@ const tabs = [
 
 export default function TargetsSetting() {
   const [activeTab, setActiveTab] = useState(
-    DateTime.convertDate(new Date()).day,
+    DateTime.convertDate(new Date()).day
   );
 
   const handleChangeTab = (tab) => {
@@ -52,7 +53,9 @@ export default function TargetsSetting() {
       <HealthyHeaderBar title="Cài đặt mục tiêu" />
       <View style={styles.container}>
         <CustomText style={[styles.date]}>
-          {DateTime.convertDateToString1(new Date().setDate(new Date().getDate() - (activeTab - 2)))}
+          {DateTime.convertDateToString1(
+            new Date().setDate(new Date().getDate() - (activeTab - 2))
+          )}
         </CustomText>
         <TabsBar
           tabs={tabs}
@@ -60,7 +63,14 @@ export default function TargetsSetting() {
           onChangeTab={handleChangeTab}
           type={"day"}
         />
-        <TargetState day={activeTab} />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            height: SCREEN_HEIGHT - FOOTERBAR_HEIGHT - 138,
+          }}
+        >
+          <TargetState day={activeTab} />
+        </ScrollView>
       </View>
     </Layout>
   );
