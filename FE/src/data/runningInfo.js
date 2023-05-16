@@ -13,8 +13,8 @@ export const createTableRunningInfos = () => {
             target INTEGER NOT NULL,
             isStarted BOOLEAN DEFAULT(0),
             isStopped BOOLEAN DEFAULT(0),
-            createdAt DATE NOT NULL,
-            updatedAt DATE NOT NULL
+            createdAt date NOT NULL DEFAULT (date(current_timestamp,'localtime')),
+            updatedAt date NOT NULL DEFAULT (date(current_timestamp,'localtime'))
         );`,
         [],
         () => {

@@ -13,8 +13,8 @@ export const createTableLocations = () => {
             longitude FLOAT NOT NULL,
             latitude FLOAT NOT NULL,
             speed FLOAT NOT NULL,
-            createdAt DATE NOT NULL,
-            updatedAt DATE NOT NULL
+            createdAt DATE NOT NULL DEFAULT (date(current_timestamp,'localtime')),
+            updatedAt DATE NOT NULL DEFAULT (date(current_timestamp,'localtime'))
         );`,
         [],
         () => {
@@ -24,7 +24,7 @@ export const createTableLocations = () => {
         (error) => {
           console.log("Error create table locations: ", error);
           reject(false);
-        },
+        }
       );
     });
   });
@@ -33,12 +33,9 @@ export const createTableLocations = () => {
 export const insertLocation = (location) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
-      const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt, updatedAt)
-            VALUES (${location.runningInfoId}, ${location.longitude}, ${
-        location.latitude
-      }, ${location.speed}, "${location.createdAt || new Date()}", "${
-        location.updatedAt || new Date()
-      }");`;
+      const query = `INSERT INTO locations (runningInfoId, longitude, latitude, speed, createdAt)
+            VALUES (${location.runningInfoId}, ${location.longitude}, ${location.latitude}, ${location.speed}, date(${location.createdAt}));`;
+      console.log(query);
       tx.executeSql(
         query,
         [],
@@ -49,7 +46,7 @@ export const insertLocation = (location) => {
         (error) => {
           console.log("Error insert location: ", error);
           reject("Error insert location:" + error.message);
-        },
+        }
       );
     });
   });
@@ -66,7 +63,7 @@ export const getTheLastLocation = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -76,7 +73,7 @@ export const getTheRunningLocation = (runningInfoId) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
     const query = `SELECT * FROM locations WHERE ((createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}") OR createdAt = "${convertDateToString4(
-      new Date(),
+      new Date()
     )}") AND runningInfoId = ${runningInfoId} AND speed >= 0.08333 AND speed <= 0.33333;`;
     db.transaction(
       (tx) => {
@@ -84,7 +81,7 @@ export const getTheRunningLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -94,7 +91,7 @@ export const getTheLocation = (runningInfoId) => {
     const DATE_FROM = new Date();
     DATE_FROM.setHours(0, 0, 0, 0);
     const query = `SELECT * FROM locations WHERE ((createdAt >= "${DATE_FROM}" AND createdAt <= "${new Date()}") OR (createdAt = "${convertDateToString4(
-      new Date(),
+      new Date()
     )}")) AND runningInfoId = ${runningInfoId};`;
     db.transaction(
       (tx) => {
@@ -102,7 +99,7 @@ export const getTheLocation = (runningInfoId) => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -118,7 +115,7 @@ export const getAllLocations = () => {
           resolve(resultset?.rows?._array);
         });
       },
-      (error) => reject(error),
+      (error) => reject(error)
     );
   });
 };
@@ -134,7 +131,7 @@ export const getTheLocationsById = (locationId) => {
           console.log("locations: ", resultset?.rows?._array);
           resolve(resultset?.rows?._array);
         },
-        (error) => reject(error),
+        (error) => reject(error)
       );
     });
   });
