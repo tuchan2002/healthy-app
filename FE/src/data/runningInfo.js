@@ -14,7 +14,7 @@ export const createTableRunningInfos = () => {
             isStarted BOOLEAN DEFAULT(0),
             isStopped BOOLEAN DEFAULT(0),
             createdAt date NOT NULL DEFAULT (date(current_timestamp,'localtime')),
-            updatedAt date NOT NULL DEFAULT (date(current_timestamp,'localtime'))
+            updatedAt date
         );`,
         [],
         () => {
@@ -127,7 +127,7 @@ export const getRunningInfosUpdatedAfterSyncById = async () => {
   const { runningInfoId } = await getStepIdLastSync();
 
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM running_infos WHERE id <= ${runningInfoId} AND updatedAt <> createdAt;`;
+    const query = `SELECT * FROM running_infos WHERE id <= ${runningInfoId} AND updatedAt is not null;`;
     db.transaction((tx) => {
       tx.executeSql(
         query,
