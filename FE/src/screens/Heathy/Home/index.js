@@ -15,6 +15,8 @@ import { getAuthUserProperty } from "../../../data/user";
 import { handleGetTargetStates } from "../../../services/userTargetState";
 import * as DateTime from "../../../utils/datetime";
 import { checkLevelBmi } from "../../../utils/bmiLevel";
+import { getAllLocations } from "../../../data/locations";
+import { getFilterDataMethod } from "../../../utils/workoutRecordMethod";
 
 export default Home = memo(() => {
   const { steps } = useStep();
@@ -24,6 +26,7 @@ export default Home = memo(() => {
   const [bmi, setBmi] = useState(null);
   const [userId, setUserId] = useState(null);
   const [targetState, setTargetState] = useState();
+  const [workoutRecordData, setWorkoutRecordData] = useState([]);
 
   useEffect(() => {
     const getInitialData = async () => {
@@ -37,7 +40,7 @@ export default Home = memo(() => {
 
   useEffect(() => {
     if (userId) {
-      getBMI();
+      getBMIAndWorkoutRecord();
     }
   }, [userId]);
 
@@ -48,7 +51,7 @@ export default Home = memo(() => {
     }
   };
 
-  const getBMI = async () => {
+  const getBMIAndWorkoutRecord = async () => {
     const bmiRes = await handleGetBMI(userId);
     if (bmiRes.success) {
       const weight = bmiRes.data?.weight == "null" ? "" : bmiRes.data?.weight;
@@ -57,6 +60,10 @@ export default Home = memo(() => {
         weight,
         height,
       });
+
+      const allLocations = await getAllLocations();
+      const filterData = getFilterDataMethod(allLocations, bmiRes.data.weight);
+      setWorkoutRecordData(filterData);
     }
   };
 
@@ -114,7 +121,7 @@ export default Home = memo(() => {
         >
           <View style={{ marginBottom: 16, flexDirection: "row" }}>
             <WorkoutRecord
-              distance={(steps.current.lengthTravel / 1000).toFixed(2)}
+              distance={(workoutRecordData[0]?.distance / 1000).toFixed(3)}
             />
             <Target />
           </View>
