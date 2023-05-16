@@ -1,5 +1,6 @@
 import * as SQLite from "expo-sqlite";
 import { convertDateToString4 } from "../utils/datetime";
+import moment from "moment";
 
 const db = SQLite.openDatabase("ui.db");
 
@@ -38,7 +39,9 @@ export const insertLocation = (location) => {
             VALUES (${location.runningInfoId}, ${location.longitude}, ${
         location.latitude
       }, ${location.speed}, date(${
-        location.createdAt || convertDateToString4(new Date())
+        location.createdAt
+          ? moment(location.createdAt).format("YYYY-MM-DD")
+          : "CURRENT_TIMESTAMP"
       }));`;
       console.log(query);
       tx.executeSql(
